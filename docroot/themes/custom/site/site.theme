@@ -206,11 +206,11 @@ function site_preprocess_node(array &$variables) {
     $end_course_date = '';
     foreach ($node->field_vih_course_periods->referencedEntities() as $period) {
 
-      if (is_array($period->field_vih_cp_start_date->getValue()[0])) {
+      if (isset($period->field_vih_cp_start_date) && is_array($period->field_vih_cp_start_date->getValue()[0])) {
         $curr_start_date = array_pop($period->field_vih_cp_start_date->getValue()[0]);
       }
 
-      if (is_array($period->field_vih_cp_end_date->getValue()[0])) {
+      if (isset($period->field_vih_cp_end_date) && is_array($period->field_vih_cp_end_date->getValue()[0])) {
         $curr_end_date = array_pop($period->field_vih_cp_end_date->getValue()[0]);
       }
 
