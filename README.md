@@ -43,18 +43,11 @@ When you set up the project, Composer will create a file called ```composer.lock
 In order to update to Drupal 8.5.x from minor version the following procedures must be done:
 
 1. drush pm-uninstall workbench_moderation
-2. drush cex
 3. drush pm-uninstall lightning_scheduled_updates, entity
-4. composer require acquia/lightning:~3.0.0 --no-update
-5. composer update acquia/lightning --with-dependencies
-6. composer require drupal/scheduled_updates drupal/media_entity_actions
 7. composer self-update
-8. composer require acquia/lightning:~3.1.1 --no-update
-9. composer update
-10. composer update
-11. drush en media_entity_actions, scheduled_updates
+9. composer install
+11. drush en media_entity_actions
 12. drush updb
-13. composer require drupal/wbm2cm
-14. drush en wbm2cm
-15. drush wbm2cm-migrate
+13. drush en wbm2cm
+14. drush wbm2cm-migrate
 16. drush entity-updates
