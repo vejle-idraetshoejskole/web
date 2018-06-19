@@ -6,8 +6,6 @@ dependencies:
     - field.field.paragraph.vih_single_class_group.field_vih_scg_classes
     - field.field.paragraph.vih_single_class_group.field_vih_scg_group_title
     - paragraphs.paragraphs_type.vih_single_class_group
-  module:
-    - workbench_moderation
 id: paragraph.vih_single_class_group.default
 targetEntityType: paragraph
 bundle: vih_single_class_group

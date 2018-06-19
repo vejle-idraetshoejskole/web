@@ -7,8 +7,6 @@ dependencies:
     - field.field.paragraph.vih_ordered_event_person.field_vih_oe_first_name
     - field.field.paragraph.vih_ordered_event_person.field_vih_oe_last_name
     - paragraphs.paragraphs_type.vih_ordered_event_person
-  module:
-    - workbench_moderation
 id: paragraph.vih_ordered_event_person.default
 targetEntityType: paragraph
 bundle: vih_ordered_event_person

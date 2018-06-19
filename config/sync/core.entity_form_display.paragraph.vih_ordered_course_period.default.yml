@@ -8,7 +8,6 @@ dependencies:
     - paragraphs.paragraphs_type.vih_ordered_course_period
   module:
     - paragraphs
-    - workbench_moderation
 id: paragraph.vih_ordered_course_period.default
 targetEntityType: paragraph
 bundle: vih_ordered_course_period

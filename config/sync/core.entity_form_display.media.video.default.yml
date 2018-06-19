@@ -8,7 +8,6 @@ dependencies:
     - media.type.video
   module:
     - video_embed_field
-    - workbench_moderation
 _core:
   default_config_hash: OUea_b_jf81XjPvIY9J8KrRUckqz2APuLv4bkxYfdT4
 id: media.video.default

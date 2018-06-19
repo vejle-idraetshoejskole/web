@@ -11,7 +11,6 @@ dependencies:
   module:
     - entity_browser
     - link
-    - workbench_moderation
 id: paragraph.vih_banner_slide.default
 targetEntityType: paragraph
 bundle: vih_banner_slide
