@@ -17,8 +17,12 @@ blacklist:
   - taxonomy.vocabulary.valuation_statuses
   - 'node.type.vies_application_form*'
   - 'paragraphs.paragraphs_type.parent*'
+  - 'taxonomy.vocabulary.questions*'
   - 'taxonomy.vocabulary.valuation_labels*'
   - 'taxonomy.vocabulary.valuation_statuses*'
+  - 'field.field.taxonomy_term.vih_class.field_questions*'
+  - 'field.storage.node.field_vies_class_questions*'
+  - 'paragraphs.paragraphs_type.app_answer*'
 graylist: {  }
 graylist_dependents: true
 graylist_skip_equal: true
