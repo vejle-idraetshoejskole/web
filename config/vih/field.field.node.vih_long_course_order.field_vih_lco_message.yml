@@ -9,7 +9,7 @@ id: node.vih_long_course_order.field_vih_lco_message
 field_name: field_vih_lco_message
 entity_type: node
 bundle: vih_long_course_order
-label: Message
+label: Besked
 description: ''
 required: false
 translatable: false

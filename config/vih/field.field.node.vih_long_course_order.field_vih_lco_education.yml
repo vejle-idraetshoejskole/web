@@ -9,7 +9,7 @@ id: node.vih_long_course_order.field_vih_lco_education
 field_name: field_vih_lco_education
 entity_type: node
 bundle: vih_long_course_order
-label: Education
+label: Uddannelse
 description: ''
 required: false
 translatable: false
