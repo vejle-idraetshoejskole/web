@@ -51,6 +51,8 @@ class LongCourseOrderForm extends FormBase {
       }
     }
 
+    $form['#title'] = $course->getTitle();
+
     //composing available classes selection per CourseSlot for each CoursePeriod
     foreach ($course->field_vih_course_periods->referencedEntities() as $periodDelta => $coursePeriod) {
       //coursePeriods render helping array
