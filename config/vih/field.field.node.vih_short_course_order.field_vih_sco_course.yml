@@ -10,7 +10,7 @@ id: node.vih_short_course_order.field_vih_sco_course
 field_name: field_vih_sco_course
 entity_type: node
 bundle: vih_short_course_order
-label: Course
+label: Kursus
 description: ''
 required: false
 translatable: false
