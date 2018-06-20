@@ -14,7 +14,6 @@ dependencies:
     - entity_browser
     - field_group
     - link
-    - workbench_moderation
 third_party_settings:
   field_group:
     group_appearance:

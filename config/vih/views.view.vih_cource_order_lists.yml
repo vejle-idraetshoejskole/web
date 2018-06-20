@@ -1883,7 +1883,7 @@ display:
           1: AND
       group_by: false
     cache_metadata:
-      max-age: 0
+      max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
@@ -2239,7 +2239,7 @@ display:
           1: AND
       arguments: {  }
     cache_metadata:
-      max-age: 0
+      max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
@@ -2272,7 +2272,7 @@ display:
         description: ''
         weight: 0
     cache_metadata:
-      max-age: 0
+      max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
@@ -2404,6 +2404,7 @@ display:
               administrator: '0'
               media_creator: '0'
               media_manager: '0'
+            placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -2860,7 +2861,7 @@ display:
             format: rich_text
           plugin_id: text
     cache_metadata:
-      max-age: 0
+      max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'

@@ -9,7 +9,6 @@ dependencies:
   module:
     - datetime
     - text
-    - workbench_moderation
 _core:
   default_config_hash: GAd7hovzsOttC5L0PaiDTGKalT2YHmbSm3Adn3aYl2M
 id: block_content.basic.default

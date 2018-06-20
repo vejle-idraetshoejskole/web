@@ -8,8 +8,6 @@ dependencies:
     - field.field.paragraph.vih_course_slot.field_vih_cs_title
     - field.field.paragraph.vih_course_slot.field_vih_cs_travel
     - paragraphs.paragraphs_type.vih_course_slot
-  module:
-    - workbench_moderation
 id: paragraph.vih_course_slot.default
 targetEntityType: paragraph
 bundle: vih_course_slot

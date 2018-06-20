@@ -948,7 +948,7 @@ display:
           1: AND
       group_by: false
     cache_metadata:
-      max-age: 0
+      max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
@@ -1226,7 +1226,7 @@ display:
           1: AND
       arguments: {  }
     cache_metadata:
-      max-age: 0
+      max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
@@ -1495,7 +1495,7 @@ display:
           1: AND
       arguments: {  }
     cache_metadata:
-      max-age: 0
+      max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
@@ -1603,6 +1603,9 @@ display:
               administrator: '0'
               media_creator: '0'
               media_manager: '0'
+            placeholder: ''
+            min_placeholder: ''
+            max_placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -1693,6 +1696,9 @@ display:
               administrator: '0'
               media_creator: '0'
               media_manager: '0'
+            placeholder: ''
+            min_placeholder: ''
+            max_placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -1713,7 +1719,7 @@ display:
         groups:
           1: AND
     cache_metadata:
-      max-age: 0
+      max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
@@ -1832,6 +1838,9 @@ display:
               administrator: '0'
               media_creator: '0'
               media_manager: '0'
+            placeholder: ''
+            min_placeholder: ''
+            max_placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -1922,6 +1931,9 @@ display:
               administrator: '0'
               media_creator: '0'
               media_manager: '0'
+            placeholder: ''
+            min_placeholder: ''
+            max_placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -1981,7 +1993,7 @@ display:
           entity_field: nid
           plugin_id: node_nid
     cache_metadata:
-      max-age: 0
+      max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'

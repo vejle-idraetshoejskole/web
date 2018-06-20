@@ -9,7 +9,6 @@ dependencies:
     - media.type.facebook
   module:
     - path
-    - workbench_moderation
 id: media.facebook.media_browser
 targetEntityType: media
 bundle: facebook

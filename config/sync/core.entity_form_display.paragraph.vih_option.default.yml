@@ -8,8 +8,6 @@ dependencies:
     - field.field.paragraph.vih_option.field_vih_option_suboptions
     - field.field.paragraph.vih_option.field_vih_option_title
     - paragraphs.paragraphs_type.vih_option
-  module:
-    - workbench_moderation
 id: paragraph.vih_option.default
 targetEntityType: paragraph
 bundle: vih_option

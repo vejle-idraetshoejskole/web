@@ -32,7 +32,7 @@ $modal-inner-spacing: 70px;
   }
 
   .field--name-field-vih-paragraphs {
-    margin-bottom: 0 - $modal-inner-spacing;
+    //margin-bottom: 0 - $modal-inner-spacing;
   }
 
   .field--item {
@@ -49,10 +49,7 @@ $modal-inner-spacing: 70px;
       }
 
       .sectioned__inner {
-        padding-top: ($grid-gutter-width / 2) !important;
-        padding-bottom: ($grid-gutter-width / 2) !important;
-        padding-left: $modal-inner-spacing;
-        padding-right: $modal-inner-spacing;
+        padding: $grid-gutter-width $modal-inner-spacing !important;
       }
 
       .sectioned--skewed-angle-top {

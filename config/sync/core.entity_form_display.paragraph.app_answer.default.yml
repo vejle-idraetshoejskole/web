@@ -7,8 +7,6 @@ dependencies:
     - field.field.paragraph.app_answer.field_question
     - field.field.paragraph.app_answer.field_question_reference
     - paragraphs.paragraphs_type.app_answer
-  module:
-    - workbench_moderation
 id: paragraph.app_answer.default
 targetEntityType: paragraph
 bundle: app_answer

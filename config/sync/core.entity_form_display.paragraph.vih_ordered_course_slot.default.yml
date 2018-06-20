@@ -6,8 +6,6 @@ dependencies:
     - field.field.paragraph.vih_ordered_course_slot.field_vih_ocs_class
     - field.field.paragraph.vih_ordered_course_slot.field_vih_ocs_title
     - paragraphs.paragraphs_type.vih_ordered_course_slot
-  module:
-    - workbench_moderation
 id: paragraph.vih_ordered_course_slot.default
 targetEntityType: paragraph
 bundle: vih_ordered_course_slot
