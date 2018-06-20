@@ -71,7 +71,8 @@ class VihSubscriptionUtils {
   }
 
   /**
-   * Returns a boolean if more people can suscribe to that subject
+   * Returns a boolean if more people can subscribe to that subject.
+   * And if the subject is still actual (did not expire).
    *
    * @param NodeInterface $subject
    *
@@ -79,6 +80,26 @@ class VihSubscriptionUtils {
    */
   public static function acceptsMoreSubscriptions(NodeInterface $subject) {
     if ($subject->getType() == 'vih_long_cource') {
+      //Is outdated
+      $end_course_date = '';
+      foreach ($subject->field_vih_course_periods->referencedEntities() as $period) {
+        if ($period->field_vih_cp_end_date->value) {
+          $curr_end_date = $period->field_vih_cp_end_date;
+        }
+
+        if ($end_course_date) {
+          if ($curr_end_date->date->getTimestamp() > $end_course_date->date->getTimestamp()) {
+            $end_course_date = $curr_end_date;
+          }
+        }
+        else {
+          $end_course_date = $curr_end_date;
+        }
+      }
+      if ($end_course_date->date->getTimestamp() < time()) {
+        return FALSE;
+      }
+
       //0 for unlimited
       if ($subject->field_vih_course_persons_limit->value == 0) {
         return TRUE;
@@ -88,6 +109,11 @@ class VihSubscriptionUtils {
       }
     }
     elseif ($subject->getType() == 'vih_short_course') {
+      // Is outdated
+      if ($subject->field_vih_sc_end_date->date->getTimestamp() < time()) {
+        return FALSE;
+      }
+
       //0 for unlimited
       if ($subject->field_vih_sc_persons_limit->value == 0) {
         return TRUE;
@@ -97,6 +123,11 @@ class VihSubscriptionUtils {
       }
     }
     elseif ($subject->getType() == 'event') {
+      // Is outdated
+      if ($subject->field_vih_event_end_date->date->getTimestamp() < time()) {
+        return FALSE;
+      }
+
       //0 for unlimited
       if ($subject->field_vih_event_persons_limit->value == 0) {
         return TRUE;

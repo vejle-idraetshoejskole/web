@@ -208,15 +208,15 @@ function site_preprocess_node(array &$variables) {
     foreach ($node->field_vih_course_periods->referencedEntities() as $period) {
 
       if ($period->field_vih_cp_start_date->value) {
-        $curr_start_date = $period->field_vih_cp_start_date->value;
+        $curr_start_date = $period->field_vih_cp_start_date;
       }
 
       if ($period->field_vih_cp_end_date->value) {
-        $curr_end_date = $period->field_vih_cp_end_date->value;
+        $curr_end_date = $period->field_vih_cp_end_date;
       }
 
       if ($start_course_date) {
-        if (strtotime($curr_start_date) < strtotime($start_course_date)) {
+        if ($curr_start_date->date->getTimestamp() < $start_course_date->date->getTimestamp()) {
           $start_course_date = $curr_start_date;
         }
       }
@@ -224,7 +224,7 @@ function site_preprocess_node(array &$variables) {
         $start_course_date = $curr_start_date;
       }
       if ($end_course_date) {
-        if (strtotime($curr_end_date) > strtotime($end_course_date)) {
+        if ($curr_end_date->date->getTimestamp() > $end_course_date->date->getTimestamp()) {
           $end_course_date = $curr_end_date;
         }
       }
@@ -308,11 +308,11 @@ function site_preprocess_node(array &$variables) {
     $variables['content']['travel_price'] = $course_travel_price;
 
     if ($start_course_date) {
-      $variables['content']['course_period_start'] = strtotime($start_course_date);
+      $variables['content']['course_period_start'] = $start_course_date->date->getTimestamp();
     }
 
     if ($end_course_date) {
-      $variables['content']['course_period_end'] = strtotime($end_course_date);
+      $variables['content']['course_period_end'] = $end_course_date->date->getTimestamp();
     }
   } elseif ($node->getType() === 'vih_course_period') {
     foreach ($node->field_vih_cp_course_slots->referencedEntities() as $slot) {
