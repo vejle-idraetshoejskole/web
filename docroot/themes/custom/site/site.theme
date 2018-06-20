@@ -366,6 +366,12 @@ function site_preprocess_paragraph(&$variables) {
         $variables['attributes']['class'][] = 'sectioned--skewed--background-color-white';
       }
     }
+  } elseif ($variables['paragraph']->getType() == 'vih_ordered_course_period' and $variables['view_mode'] === 'email_teaser') {
+    foreach($variables['paragraph']->field_vih_ocp_order_course_slots->referencedEntities() as $key_order_course_slot => $value_order_course_slot){
+      if( stripos($value_order_course_slot->field_vih_ocs_title->getValue()[0]['value'], '- mandatory' )){
+        unset($variables['content']['field_vih_ocp_order_course_slots'][$key_order_course_slot]);
+      }
+    }
   }
 }
 
