@@ -9,7 +9,6 @@ dependencies:
   module:
     - datetime
     - paragraphs
-    - workbench_moderation
 id: block_content.banner.default
 targetEntityType: block_content
 bundle: banner

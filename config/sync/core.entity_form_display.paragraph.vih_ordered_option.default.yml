@@ -3,13 +3,12 @@ langcode: da
 status: true
 dependencies:
   config:
+    - field.field.paragraph.vih_ordered_option.field_vih_oo_amount
     - field.field.paragraph.vih_ordered_option.field_vih_oo_group_name
     - field.field.paragraph.vih_ordered_option.field_vih_oo_option_name
     - field.field.paragraph.vih_ordered_option.field_vih_oo_price_addition
     - field.field.paragraph.vih_ordered_option.field_vih_oo_suboption
     - paragraphs.paragraphs_type.vih_ordered_option
-  module:
-    - workbench_moderation
 id: paragraph.vih_ordered_option.default
 targetEntityType: paragraph
 bundle: vih_ordered_option

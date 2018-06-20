@@ -16,7 +16,6 @@ dependencies:
     - field_group
     - link
     - text
-    - workbench_moderation
 third_party_settings:
   field_group:
     group_appearance:
@@ -99,6 +98,9 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
+  translation:
+    weight: 10
+    region: content
 hidden:
   created: true
   uid: true

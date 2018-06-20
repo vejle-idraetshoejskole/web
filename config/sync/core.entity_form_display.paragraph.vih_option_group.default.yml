@@ -8,7 +8,6 @@ dependencies:
     - paragraphs.paragraphs_type.vih_option_group
   module:
     - paragraphs
-    - workbench_moderation
 id: paragraph.vih_option_group.default
 targetEntityType: paragraph
 bundle: vih_option_group

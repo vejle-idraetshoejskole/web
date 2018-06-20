@@ -38,3 +38,16 @@ If you peek at the ```.gitignore``` we provide, you'll see that certain director
 
 When you set up the project, Composer will create a file called ```composer.lock```, which is a list of which dependencies were installed, and in which versions. **Commit ```composer.lock``` to source control!** Then, when your colleagues want to spin up their own copies of the project, all they'll have to do is run ```composer install```, which will install the correct versions of everything in ```composer.lock```.
 
+
+## Task VI-466
+In order to update to Drupal 8.5.x from minor version the following procedures must be done:
+
+1. drush pm-uninstall workbench_moderation
+3. drush pm-uninstall lightning_scheduled_updates, entity
+7. composer self-update
+9. composer install
+11. drush en media_entity_actions
+12. drush updb
+13. drush en wbm2cm
+14. drush wbm2cm-migrate
+16. drush entity-updates

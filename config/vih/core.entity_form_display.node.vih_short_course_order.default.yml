@@ -14,7 +14,6 @@ dependencies:
     - paragraphs
     - path
     - text
-    - workbench_moderation
 id: node.vih_short_course_order.default
 targetEntityType: node
 bundle: vih_short_course_order
@@ -127,5 +126,8 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+    region: content
+  url_redirects:
+    weight: 50
     region: content
 hidden: {  }

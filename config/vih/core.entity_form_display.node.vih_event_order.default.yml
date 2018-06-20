@@ -11,7 +11,6 @@ dependencies:
   module:
     - paragraphs
     - path
-    - workbench_moderation
 id: node.vih_event_order.default
 targetEntityType: node
 bundle: vih_event_order
@@ -120,4 +119,7 @@ content:
       placeholder: ''
     region: content
     third_party_settings: {  }
+  url_redirects:
+    weight: 50
+    region: content
 hidden: {  }

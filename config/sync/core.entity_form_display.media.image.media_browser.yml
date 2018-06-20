@@ -11,7 +11,6 @@ dependencies:
   module:
     - focal_point
     - lightning_media
-    - workbench_moderation
 _core:
   default_config_hash: iVmRBD7y3Gmddt29sSx9DwwH6Q4UaROqMu7FLyy_bvQ
 id: media.image.media_browser
