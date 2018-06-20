@@ -81,7 +81,7 @@ class SubscriptionSuccessfulController extends ControllerBase {
     $logo = '<div style="background-color:#009bec; width:100%; text-align:center">'
       . '<img src="'
       . \Drupal::request()->getSchemeAndHttpHost()
-      . '/themes/custom/site/dist/images/layout-header-logo.png" alt="VIH" />'
+      . '/themes/custom/site/dist/images/layout-header-logo-vih.png" alt="VIH" />'
       . '</div><br>';
 
     $token = ['@subject_name', '@person_name', '@date', '@url', '@order'];
