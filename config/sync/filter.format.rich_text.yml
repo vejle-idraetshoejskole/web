@@ -91,13 +91,6 @@ filters:
     status: true
     weight: 0
     settings: {  }
-  url_embed_convert_links:
-    id: url_embed_convert_links
-    provider: url_embed
-    status: true
-    weight: 0
-    settings:
-      url_prefix: ''
   filter_pathologic:
     id: filter_pathologic
     provider: pathologic
