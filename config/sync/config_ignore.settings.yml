@@ -1278,6 +1278,9 @@ ignored_config_entities:
   2552: ~views.view.watchdog
   2554: ~views.view.who_s_new
   2556: ~views.view.who_s_online
+  2558: '# No ignore config split'
+  2560: ~config_split.config_split.vih_functionality
+  2562: ~config_split.config_split.vies_functionality
 _core:
   default_config_hash: UVH1aJ4b44UM-VdPVN7hNNuuVqfReJxwfVeDQH1Hvsk
 langcode: da
