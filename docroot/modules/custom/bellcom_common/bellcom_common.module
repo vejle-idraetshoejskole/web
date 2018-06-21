@@ -104,4 +104,7 @@ function bellcom_common_preprocess_breadcrumb(&$variables){
 
   // Making last item active.
   $breadcrumb[count($breadcrumb)-1]['attributes'] = new \Drupal\Core\Template\Attribute(['class' => ['active']]);
+
+  // Making breadcrumbs not being cached.
+  $variables['#cache']['contexts'][] = 'url';
 }
