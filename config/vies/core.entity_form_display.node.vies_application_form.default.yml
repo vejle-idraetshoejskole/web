@@ -27,7 +27,6 @@ dependencies:
     - node.type.vies_application_form
   module:
     - inline_entity_form
-    - workbench_moderation
 id: node.vies_application_form.default
 targetEntityType: node
 bundle: vies_application_form
@@ -218,6 +217,9 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
+    region: content
+  url_redirects:
+    weight: 50
     region: content
 hidden:
   created: true
