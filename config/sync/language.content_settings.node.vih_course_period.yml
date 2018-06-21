@@ -8,7 +8,7 @@ dependencies:
     - content_translation
 third_party_settings:
   content_translation:
-    enabled: false
+    enabled: true
 id: node.vih_course_period
 target_entity_type_id: node
 target_bundle: vih_course_period
