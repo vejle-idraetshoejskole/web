@@ -6,6 +6,7 @@ dependencies:
     - core.entity_view_mode.media.vih_banner_smal
     - field.field.media.image.field_media_in_library
     - field.field.media.image.image
+    - image.style.banner_small
     - media.type.image
   module:
     - image
@@ -21,7 +22,7 @@ content:
     weight: 0
     label: hidden
     settings:
-      image_style: ''
+      image_style: banner_small
       image_link: ''
     third_party_settings: {  }
     region: content
