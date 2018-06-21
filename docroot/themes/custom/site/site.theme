@@ -662,6 +662,22 @@ function site_preprocess_paragraph__vih_content_grid(&$variables) {
 }
 
 /**
+ * Implements hook_preprocess_hook().
+ *
+ * Removes the nodes references that do not have the selected language translation.
+ */
+function site_preprocess_paragraph__vih_single_class_group(&$variables) {
+  $paragraph = $variables['elements']['#paragraph'];
+
+  $currentLang = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  foreach ($paragraph->field_vih_scg_classes->referencedEntities() as $delta => $refTerm) {
+    if (!$refTerm->hasTranslation($currentLang)) {
+      unset($variables['content']['field_vih_scg_classes'][$delta]);
+    }
+  }
+}
+
+/**
  * Implements hook_theme_suggestions_views_view_alter().
  */
 function site_theme_suggestions_views_view_alter(
