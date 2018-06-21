@@ -467,6 +467,23 @@ class LongCourseOrderForm extends FormBase {
 
     //checking if we need to create a new order or edit the existing
     if ($this->courseOrder == NULL) {
+      
+      $address_array = array();
+      array_push($address_array, $form_state->getValue('address'));
+      array_push($address_array, $form_state->getValue('houseNumber'));
+      array_push($address_array, $form_state->getValue('houseLetter'));
+      array_push($address_array, $form_state->getValue('houseFloor'));
+      // We do not need empty elements on the array.
+      $address_array = array_diff($address_array, array(''));
+      
+      $address_adult_array = array();
+      array_push($address_adult_array, $form_state->getValue('adultAddress'));
+      array_push($address_adult_array, $form_state->getValue('adultHouseNumber'));
+      array_push($address_adult_array, $form_state->getValue('adultHouseLetter'));
+      array_push($address_adult_array, $form_state->getValue('adultHouseFloor'));
+      // We do not need empty elements on the array.
+      $address_adult_array = array_diff($address_adult_array, array(''));
+      
       $this->courseOrder = Node::create(array(
         'type' => 'vih_long_course_order',
         'status' => 1, //We restrict direct access to the node in site_preprocess_node hook
@@ -480,12 +497,7 @@ class LongCourseOrderForm extends FormBase {
         'field_vih_lco_email' => $form_state->getValue('email'),
         'field_vih_lco_nationality' => CourseOrderOptionsList::getNationalityList($form_state->getValue('nationality')),
         'field_vih_lco_newsletter' => $form_state->getValue('newsletter'),
-        'field_vih_lco_address' => implode('; ', array(
-          $form_state->getValue('address'),
-          $form_state->getValue('houseNumber'),
-          $form_state->getValue('houseLetter'),
-          $form_state->getValue('houseFloor')
-        )),
+        'field_vih_lco_address' => implode('; ', $address_array),
         'field_vih_lco_city' => $form_state->getValue('city'),
         'field_vih_lco_municipality' => $form_state->getValue('municipality'),
         'field_vih_lco_zip' => $form_state->getValue('zip'),
@@ -501,12 +513,7 @@ class LongCourseOrderForm extends FormBase {
         'field_vih_lco_adult_telefon' => $form_state->getValue('adultTelefon'),
         'field_vih_lco_adult_email' => $form_state->getValue('adultEmail'),
         'field_vih_lco_adult_nationality' => CourseOrderOptionsList::getNationalityList($form_state->getValue('adultNationality')),
-        'field_vih_lco_adult_address' => implode('; ', array(
-          $form_state->getValue('adultAddress'),
-          $form_state->getValue('adultHouseNumber'),
-          $form_state->getValue('adultHouseLetter'),
-          $form_state->getValue('adultHouseFloor')
-        )),
+        'field_vih_lco_adult_address' => implode('; ', $address_adult_array),
         'field_vih_lco_adult_city' => $form_state->getValue('adultCity'),
         'field_vih_lco_adult_zip' => $form_state->getValue('adultZip'),
         'field_vih_lco_adult_newsletter' => $form_state->getValue('adultNewsletter'),
