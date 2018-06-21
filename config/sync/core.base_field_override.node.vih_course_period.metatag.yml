@@ -1,18 +1,18 @@
-uuid: 0d9f4e56-3ffa-4481-b19d-2a5e314542b0
+uuid: b2fe3ac7-5cc1-4795-9c03-ca6f325fc529
 langcode: da
 status: true
 dependencies:
   config:
     - node.type.vih_course_period
-id: node.vih_course_period.created
-field_name: created
+id: node.vih_course_period.metatag
+field_name: metatag
 entity_type: node
 bundle: vih_course_period
-label: 'Authored on'
-description: 'The time that the node was created.'
+label: Metatags
+description: 'The metatags for the entity.'
 required: false
 translatable: true
 default_value: {  }
 default_value_callback: ''
 settings: {  }
-field_type: created
+field_type: map
