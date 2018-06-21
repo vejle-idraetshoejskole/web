@@ -142,4 +142,4 @@ vih_subscription.vih_node_modal:
     _controller: '\Drupal\vih_subscription\Controller\SubscriptionModalController::vih_node_modal'
     _title: 'System'
   requirements:
-    _permission: 'access administration pages'
+    _permission: 'access content'
