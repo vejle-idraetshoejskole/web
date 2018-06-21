@@ -14,8 +14,6 @@ dependencies:
     - field.field.paragraph.parent.field_parent_type
     - field.field.paragraph.parent.field_parent_zip
     - paragraphs.paragraphs_type.parent
-  module:
-    - workbench_moderation
 id: paragraph.parent.default
 targetEntityType: paragraph
 bundle: parent
