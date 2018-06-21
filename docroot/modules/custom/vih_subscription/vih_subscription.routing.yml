@@ -131,7 +131,7 @@ vih_subscription.vih_cs_classes_modal:
     _controller: '\Drupal\vih_subscription\Controller\SubscriptionModalController::vih_cs_classes'
     _title: 'System'
   requirements:
-    _permission: 'access administration pages'
+    _permission: 'access content'
 vih_subscription.vih_node_modal:
   path: '/vih_node_modal/{node}'
   options:
