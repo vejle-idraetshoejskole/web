@@ -16,8 +16,13 @@
 
                 {# Begin - course status #}
                 {% if content.is_active %}
-
-                    {% if not content.can_be_subscribed %}
+                    {% if content.is_outdated %}
+                      <div class="boxy boxy--event-status">
+                        <div class="boxy__body">
+                          {{ 'You are looking at a past course' | trans }}
+                        </div>
+                      </div>
+                    {% elseif not content.can_be_subscribed %}
                         <div class="boxy boxy--course-status">
                             <div class="boxy__body">
                                 {{ 'No more available slots on this course' | trans }}
@@ -303,7 +308,7 @@
                     </div>
 
                     {# Begin - action button #}
-                    {% if content.is_active and content.can_be_subscribed %}
+                    {% if content.is_active and content.can_be_subscribed and not content.is_outdated %}
                         <div class="partial partial--action-button">
                             <div class="partial__body">
                                 <a href="{{ url('vih_subscription.long_course_order_create', {'course': node.id}) }}"

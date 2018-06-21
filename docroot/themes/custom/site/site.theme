@@ -157,9 +157,10 @@ function site_preprocess_node(array &$variables) {
   // Event
   if ($node->getType() == 'event') {
     $variables['content']['can_be_subscribed'] = \Drupal\vih_subscription\Misc\VihSubscriptionUtils::acceptsMoreSubscriptions($node);
+    $variables['content']['is_outdated'] = \Drupal\vih_subscription\Misc\VihSubscriptionUtils::isOutdated($node);
     $variables['content']['is_active'] = ($node->field_vih_event_status->value == 'active');
     $variables['content']['is_closed'] = ($node->field_vih_event_status->value == 'closed');
-   
+
     if($node->field_vih_event_start_date->date->format('Y-m-d') == $node->field_vih_event_end_date->date->format('Y-m-d')){
       $start_date_str = $node->field_vih_event_start_date->date->format('d. M Y') . ' ' . $node->field_vih_event_start_date->date->format('H:i');
       $end_date_str = $node->field_vih_event_end_date->date->format('H:i');
@@ -186,6 +187,7 @@ function site_preprocess_node(array &$variables) {
   // Short course
   elseif ($node->getType() == 'vih_short_course') {
     $variables['content']['can_be_subscribed'] = \Drupal\vih_subscription\Misc\VihSubscriptionUtils::acceptsMoreSubscriptions($node);
+    $variables['content']['is_outdated'] = \Drupal\vih_subscription\Misc\VihSubscriptionUtils::isOutdated($node);
     $variables['content']['is_active'] = ($node->field_vih_sc_status->value == 'active');
     $variables['content']['is_closed'] = ($node->field_vih_sc_status->value == 'closed');
   }
@@ -193,6 +195,7 @@ function site_preprocess_node(array &$variables) {
   // Long course
   elseif ($node->getType() == 'vih_long_cource') {
     $variables['content']['can_be_subscribed'] = \Drupal\vih_subscription\Misc\VihSubscriptionUtils::acceptsMoreSubscriptions($node);
+    $variables['content']['is_outdated'] = \Drupal\vih_subscription\Misc\VihSubscriptionUtils::isOutdated($node);
     $variables['content']['is_active'] = ($node->field_vih_course_status->value == 'active');
     $variables['content']['is_closed'] = ($node->field_vih_course_status->value == 'closed');
 

@@ -72,13 +72,49 @@ class VihSubscriptionUtils {
 
   /**
    * Returns a boolean if more people can subscribe to that subject.
-   * And if the subject is still actual (did not expire).
    *
    * @param NodeInterface $subject
    *
    * @return boolean
    */
   public static function acceptsMoreSubscriptions(NodeInterface $subject) {
+    if ($subject->getType() == 'vih_long_cource') {
+      //0 for unlimited
+      if ($subject->field_vih_course_persons_limit->value == 0) {
+        return TRUE;
+      }
+      else {
+        return ($subject->field_vih_course_persons_limit->value > VihSubscriptionUtils::calculateSubscribedPeopleNumber($subject));
+      }
+    }
+    elseif ($subject->getType() == 'vih_short_course') {
+      //0 for unlimited
+      if ($subject->field_vih_sc_persons_limit->value == 0) {
+        return TRUE;
+      }
+      else {
+        return ($subject->field_vih_sc_persons_limit->value > VihSubscriptionUtils::calculateSubscribedPeopleNumber($subject));
+      }
+    }
+    elseif ($subject->getType() == 'event') {
+      //0 for unlimited
+      if ($subject->field_vih_event_persons_limit->value == 0) {
+        return TRUE;
+      }
+      else {
+        return ($subject->field_vih_event_persons_limit->value > VihSubscriptionUtils::calculateSubscribedPeopleNumber($subject));
+      }
+    }
+  }
+
+  /**
+   * Returns if the subject is outdated (is expired).
+   *
+   * @param NodeInterface $subject
+   *
+   * @return boolean
+   */
+  public static function isOutdated(NodeInterface $subject) {
     if ($subject->getType() == 'vih_long_cource') {
       //Is outdated
       $end_course_date = '';
@@ -97,44 +133,23 @@ class VihSubscriptionUtils {
         }
       }
       if ($end_course_date->date->getTimestamp() < time()) {
-        return FALSE;
-      }
-
-      //0 for unlimited
-      if ($subject->field_vih_course_persons_limit->value == 0) {
         return TRUE;
       }
-      else {
-        return ($subject->field_vih_course_persons_limit->value > VihSubscriptionUtils::calculateSubscribedPeopleNumber($subject));
-      }
+      return FALSE;
     }
     elseif ($subject->getType() == 'vih_short_course') {
       // Is outdated
       if ($subject->field_vih_sc_end_date->date->getTimestamp() < time()) {
-        return FALSE;
-      }
-
-      //0 for unlimited
-      if ($subject->field_vih_sc_persons_limit->value == 0) {
         return TRUE;
       }
-      else {
-        return ($subject->field_vih_sc_persons_limit->value > VihSubscriptionUtils::calculateSubscribedPeopleNumber($subject));
-      }
+      return FALSE;
     }
     elseif ($subject->getType() == 'event') {
       // Is outdated
       if ($subject->field_vih_event_end_date->date->getTimestamp() < time()) {
-        return FALSE;
-      }
-
-      //0 for unlimited
-      if ($subject->field_vih_event_persons_limit->value == 0) {
         return TRUE;
       }
-      else {
-        return ($subject->field_vih_event_persons_limit->value > VihSubscriptionUtils::calculateSubscribedPeopleNumber($subject));
-      }
+      return FALSE;
     }
   }
 
