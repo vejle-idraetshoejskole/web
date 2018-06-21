@@ -5,8 +5,14 @@
 <section class="sectioned sectioned--content" {{ content_attributes.addClass('content') }}>
     <div class="sectioned__inner">
         <div class="container">
+          <div class="sectioned__heading">
+            <h2 class="sectioned__heading__title">
+              {{ form['#title'] }}
+            </h2>
+          </div>
 
-            {# Introduction information START #}
+
+          {# Introduction information START #}
             <div class="partial">
                 <div class="partial__body">
                     <p>{{ form['#registration_text'] }}</p>
