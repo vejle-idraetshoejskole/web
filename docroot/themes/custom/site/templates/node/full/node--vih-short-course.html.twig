@@ -124,7 +124,26 @@ view_mode ? view_mode|clean_class,
                                     </div>
                                 {% endif %}
                                 {# End - price #}
-
+                                
+                                {# Begin - price addition #}
+                                {% for vih_sc_option in node.field_vih_sc_option_groups %}
+                                    <div class="boxy boxy--price">
+                                      <div class="boxy__heading">
+                                        <h2 class="boxy__heading__title heading-h4">
+                                         {{ vih_sc_option.entity.field_vih_og_title.value }}
+                                        </h2>
+                                        <div class="boxy__body">
+                                          <div class="field-vih-og-price-addition-container">
+                                            {% for vih_og_option in vih_sc_option.entity.field_vih_og_options %}
+                                              {{ vih_og_option.entity.field_vih_option_title.value }}&nbsp;-&nbsp; 
+                                              DKK&nbsp;{{ vih_og_option.entity.field_vih_option_price_addition.value | number_format(2, ',', '.') }}     
+                                            </div>
+                                          {% endfor %}
+                                        </div>
+                                      </div>
+                                    {% endfor %}
+                                  {# End - price addition #}
+                                  
                             </div>
                         </div>
                     </div>
