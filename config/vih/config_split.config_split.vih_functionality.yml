@@ -15,6 +15,7 @@ blacklist:
   - 'node.type.vih_long_course_order*'
   - 'node.type.vih_short_course*'
   - 'node.type.vih_short_course_order*'
+  - 'taxonomy.vocabulary.news_tags*'
 graylist: {  }
 graylist_dependents: true
 graylist_skip_equal: true
