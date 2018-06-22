@@ -125,7 +125,7 @@ class ValuationForm extends FormBase {
     ];
 
     $headers = ['Navn'];
-    $questions = $class->field_questions->referencedEntities();
+    $questions = $class->field_vies_questions->referencedEntities();
 
     foreach ($questions as $question) {
       $headers[] = $question->getName();
@@ -291,7 +291,7 @@ class ValuationForm extends FormBase {
     $headers = ['Navn'];
 
     // Use first question as label.
-    $questions = $class->field_questions->referencedEntities();
+    $questions = $class->field_vies_questions->referencedEntities();
     $question = array_shift($questions);
     $headers[] = $question->getName();
 

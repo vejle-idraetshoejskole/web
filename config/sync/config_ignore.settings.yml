@@ -853,7 +853,7 @@ ignored_config_entities:
   1702: ~field.field.taxonomy_term.questions.field_vies_answer
   1704: ~field.field.taxonomy_term.questions.field_vies_question_type
   1706: ~field.field.taxonomy_term.vih_class.field_metatag
-  1708: ~field.field.taxonomy_term.vih_class.field_questions
+  1708: ~field.field.taxonomy_term.vih_class.field_vies_questions
   1710: ~field.field.taxonomy_term.vih_class.field_short_description
   1712: ~field.field.taxonomy_term.vih_class.field_vih_class_class_packages
   1714: ~field.field.taxonomy_term.vih_class.field_vih_class_color
@@ -1072,7 +1072,7 @@ ignored_config_entities:
   2140: ~field.storage.scheduled_update.field_status
   2142: ~field.storage.scheduled_update.field_vih_usu_status
   2144: ~field.storage.taxonomy_term.field_metatag
-  2146: ~field.storage.taxonomy_term.field_questions
+  2146: ~field.storage.taxonomy_term.field_vies_questions
   2148: ~field.storage.taxonomy_term.field_short_description
   2150: ~field.storage.taxonomy_term.field_vies_answer
   2152: ~field.storage.taxonomy_term.field_vies_question_type

@@ -1,13 +1,13 @@
-uuid: a2660aa1-7bd0-4f2e-b488-8e829585bd10
+uuid: ab6d9b38-9fe0-417a-83fb-0a065c940519
 langcode: da
 status: true
 dependencies:
   config:
-    - field.storage.taxonomy_term.field_questions
+    - field.storage.taxonomy_term.field_vies_questions
     - taxonomy.vocabulary.questions
     - taxonomy.vocabulary.vih_class
-id: taxonomy_term.vih_class.field_questions
-field_name: field_questions
+id: taxonomy_term.vih_class.field_vies_questions
+field_name: field_vies_questions
 entity_type: taxonomy_term
 bundle: vih_class
 label: Spørgsmål
@@ -24,6 +24,6 @@ settings:
     sort:
       field: name
       direction: asc
-    auto_create: true
+    auto_create: false
     auto_create_bundle: ''
 field_type: entity_reference

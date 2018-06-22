@@ -178,7 +178,7 @@ class ApplicationForm extends FormBase {
           continue;
         }
         $class = Term::load($values[$radio_key]);
-        $class_questions = $class->field_questions->referencedEntities();
+        $class_questions = $class->field_vies_questions->referencedEntities();
         $questions = $this->buildApplicationQuestions($class_questions);
         if (!empty($questions)) {
           $form['periodsWrapper']['coursePeriods']['questions'][$class->id()] = [

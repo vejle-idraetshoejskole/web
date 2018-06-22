@@ -2,15 +2,15 @@ uuid: 5a63c5bc-b097-440d-bb37-bccc50d5267f
 langcode: da
 status: true
 dependencies: {  }
-id: vies_fucntionality
-label: 'VIES fucntionality'
+id: vies_functionality
+label: 'VIES functionality'
 folder: ../config/vies
 module:
   vies_application: 0
   vies_valuation: 0
 theme: {  }
 blacklist:
-  - config_split.config_split.vies_fucntionality
+  - config_split.config_split.vies_functionality
   - node.type.vies_application_form
   - paragraphs.paragraphs_type.parent
   - taxonomy.vocabulary.valuation_labels
@@ -20,7 +20,7 @@ blacklist:
   - 'taxonomy.vocabulary.questions*'
   - 'taxonomy.vocabulary.valuation_labels*'
   - 'taxonomy.vocabulary.valuation_statuses*'
-  - 'field.field.taxonomy_term.vih_class.field_questions*'
+  - 'field.field.taxonomy_term.vih_class.field_vies_questions*'
   - 'field.storage.node.field_vies_class_questions*'
   - 'paragraphs.paragraphs_type.app_answer*'
   - 'field.storage.node.field_vies*'

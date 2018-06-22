@@ -1,11 +1,11 @@
-uuid: 57a65af5-9176-4ea6-8bbf-55621865d2e4
+uuid: a2698046-d8bd-4255-8d48-62222db9be2a
 langcode: da
 status: true
 dependencies:
   module:
     - taxonomy
-id: taxonomy_term.field_questions
-field_name: field_questions
+id: taxonomy_term.field_vies_questions
+field_name: field_vies_questions
 entity_type: taxonomy_term
 type: entity_reference
 settings:
