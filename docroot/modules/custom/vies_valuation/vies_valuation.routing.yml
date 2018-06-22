@@ -1,7 +1,7 @@
 vies_valuation:
   path: 'taxonomy/term/{taxonomy_term}/valuation'
   defaults:
-    _controller: '\Drupal\vies_valuation\Controller\ValuationController::page'
+    _form: '\Drupal\vies_valuation\Form\ValuationForm'
     _title: 'Vurdering'
   requirements:
     _permission: 'access valuation'

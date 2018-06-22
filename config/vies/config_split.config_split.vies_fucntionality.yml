@@ -17,9 +17,22 @@ blacklist:
   - taxonomy.vocabulary.valuation_statuses
   - 'node.type.vies_application_form*'
   - 'paragraphs.paragraphs_type.parent*'
+  - 'taxonomy.vocabulary.questions*'
   - 'taxonomy.vocabulary.valuation_labels*'
   - 'taxonomy.vocabulary.valuation_statuses*'
-graylist: {  }
-graylist_dependents: true
-graylist_skip_equal: true
+  - 'field.field.taxonomy_term.vih_class.field_questions*'
+  - 'field.storage.node.field_vies_class_questions*'
+  - 'paragraphs.paragraphs_type.app_answer*'
+  - 'field.storage.node.field_vies*'
+  - 'field.storage.paragraph.field_answer*'
+  - 'field.storage.paragraph.field_parent*'
+  - 'field.storage.paragraph.field_question*'
+  - 'field.storage.taxonomy_term.field_questions*'
+  - 'field.storage.taxonomy_term.field_vies*'
+graylist:
+  - block.block.bartik_content
+  - 'core.entity_form_display.taxonomy_term.vih_class.*'
+  - 'core.entity_view_display.taxonomy_term.vih_class.*'
+graylist_dependents: false
+graylist_skip_equal: false
 weight: 0

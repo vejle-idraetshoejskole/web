@@ -116,3 +116,4 @@ mailchimp.settings.yml
 !config/*/user.*
 !config/*/views_send.settings.yml
 !config/*/views.*
+!config/*/metatag.settings.yml

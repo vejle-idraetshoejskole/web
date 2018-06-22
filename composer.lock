@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d2748c545407e68bde8870a6af148e35",
+    "content-hash": "a8d71f3e198fd237c9df8d76d7489682",
     "packages": [
         {
             "name": "acquia/lightning",
@@ -5260,7 +5260,7 @@
                 },
                 "drupal": {
                     "version": "8.x-4.0",
-                    "datestamp": "1523670784",
+                    "datestamp": "1493427125",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -6699,6 +6699,48 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/video_embed_field"
             }
+        },
+        {
+            "name": "drupal/views_arg_order_sort",
+            "version": "dev-1.x",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/views_arg_order_sort",
+                "reference": "5d13cfca5749294d127ebc06348827f775342b37"
+            },
+            "require": {
+                "drupal/core": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.x-dev",
+                    "datestamp": "1460465041",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "soyarma",
+                    "homepage": "https://www.drupal.org/user/286273"
+                }
+            ],
+            "description": "Sort a view by the order of its arguments.",
+            "homepage": "https://www.drupal.org/project/views_arg_order_sort",
+            "support": {
+                "source": "http://cgit.drupalcode.org/views_arg_order_sort"
+            },
+            "time": "2016-04-12T12:37:29+00:00"
         },
         {
             "name": "drupal/views_infinite_scroll",
@@ -14458,7 +14500,8 @@
         "drupal/scheduled_updates": 15,
         "drupal/media_entity_actions": 15,
         "drupal/wbm2cm": 10,
-        "drupal/smtp": 10
+        "drupal/smtp": 10,
+        "drupal/views_arg_order_sort": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

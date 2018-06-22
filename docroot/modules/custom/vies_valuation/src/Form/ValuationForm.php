@@ -7,6 +7,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\node\Entity\Node;
 use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Core\Url;
+use Drupal\taxonomy\Entity\Term;
 use Drupal\taxonomy\TermInterface;
 use Drupal\vies_application\ApplicationHandler;
 
@@ -25,15 +26,14 @@ class ValuationForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, TermInterface $class = NULL) {
+  public function buildForm(array $form, FormStateInterface $form_state, TermInterface $taxonomy_term = NULL) {
     $form['#prefix'] = '<div id="valuation-form-wrapper">';
     $form['#suffix'] = '</div>';
-
+    $form['#theme'] = 'region_sectioned_fluid';
+    $class = $taxonomy_term;
     $applications = \Drupal::entityQuery('node')
       ->condition('type', 'vies_application_form')
       ->condition('field_vies_class', $class->id())
-      ->notExists('field_vies_label')
-      ->notExists('field_vies_status')
       ->execute();
 
     if (empty($class) || empty($applications)) {
@@ -78,6 +78,8 @@ class ValuationForm extends FormBase {
     // Reset form when course has been changed.
     if ($form_state->get('course') != $course_default_value) {
       $this->removeInputValue('period', $form_state);
+      $this->removeInputValue('labels', $form_state);
+      $this->removeInputValue('statuses', $form_state);
     }
     $form_state->set('course', $course_default_value);
 
@@ -130,6 +132,7 @@ class ValuationForm extends FormBase {
     }
     $rows = [];
 
+    $valuated = [];
     foreach (Node::loadMultiple($applications) as $application) {
       if (!empty($course_default_value)
         && $course_default_value !=
@@ -144,6 +147,12 @@ class ValuationForm extends FormBase {
 
       if (!empty($gender_default_value)
         && $gender_default_value != $application->field_vies_gender->getValue()[0]['value']) {
+        continue;
+      }
+
+      if (!empty($application->field_vies_label->getValue())
+        || !empty($application->field_vies_status->getValue())) {
+        $valuated[] = $application;
         continue;
       }
 
@@ -182,12 +191,182 @@ class ValuationForm extends FormBase {
     $headers[] = 'Handlinger';
 
     $form['applications'] = [
-      '#type' => 'table',
+      '#type' => 'container',
       '#attributes' => ['id' => 'studentsWrapper'],
+      0 => ['#markup' => 'Der er ingen ansøgning til denne klasse'],
+    ];
+
+    if (!empty($rows)) {
+      $form['applications'] = [
+        '#type' => 'table',
+        '#attributes' => ['id' => 'studentsWrapper'],
+        '#header' => $headers,
+        '#rows' => $rows,
+      ];
+    }
+
+    // Valuated applications.
+    // Used to show checkboxes options.
+    $available_labels = [];
+    $available_statuses = [];
+
+    // Used for filter applications.
+    $availability_labels = [];
+    $availability_statuses = [];
+    foreach ($valuated as $application) {
+      $labels = $application->field_vies_label->getValue();
+      foreach ($labels as $val) {
+        $availability_labels[$val['target_id']][] = $application->id();
+        if (isset($available_labels[$val['target_id']])) {
+          continue;
+        }
+        $term = Term::load($val['target_id']);
+        $available_labels[$term->id()] = $term->getName();
+
+      }
+
+      $statuses = $application->field_vies_status->getValue();
+      foreach ($statuses as $val) {
+        $availability_statuses[$val['target_id']][] = $application->id();
+        if (isset($available_statuses[$val['target_id']])) {
+          continue;
+        }
+        $term = Term::load($val['target_id']);
+        $available_statuses[$term->id()] = $term->getName();
+      }
+    }
+
+    $form['valuated'] = [
+      '#type' => 'container',
+      '#prefix' => '<div id="valuated-application-form-wrapper">',
+      '#suffix' => '</div>',
+    ];
+
+    $form['valuated']['applications'] = [
+      '#markup' => 'Der er ingen værdiansatte ansøgninger at vise',
+    ];
+
+    if (empty($valuated)) {
+      return $form;
+    }
+
+    $form['valuated']['filters'] = [
+      '#type' => 'container',
+      '#attributes' => ['class' => ['row', 'container-inline']],
+      '#weight' => -10,
+    ];
+
+    $labels_default_value = $form_state->getValue('labels');
+    if (count($available_labels) > 1) {
+      $form['valuated']['filters']['labels'] = [
+        '#type' => 'checkboxes',
+        '#title' => 'Labels',
+        '#options' => $available_labels,
+        '#default_value' => empty($labels_default_value) ? [] : $labels_default_value,
+        '#ajax' => [
+          'callback' => '::ajaxValuatedUpdate',
+          'wrapper' => 'valuated-application-form-wrapper',
+        ],
+        '#prefix' => '<div class="col-md-4">',
+        '#suffix' => '</div>',
+      ];
+    }
+
+    $statuses_default_value = $form_state->getValue('statuses');
+    if (count($available_statuses) > 1) {
+      $form['valuated']['filters']['statuses'] = [
+        '#type' => 'checkboxes',
+        '#title' => 'Statuses',
+        '#options' => $available_statuses,
+        '#default_value' => empty($statuses_default_value) ? [] : $statuses_default_value,
+        '#ajax' => [
+          'callback' => '::ajaxValuatedUpdate',
+          'wrapper' => 'valuated-application-form-wrapper',
+        ],
+        '#prefix' => '<div class="col-md-4">',
+        '#suffix' => '</div>',
+      ];
+    }
+
+    $headers = ['Navn'];
+
+    // Use first question as label.
+    $questions = $class->field_questions->referencedEntities();
+    $question = array_shift($questions);
+    $headers[] = $question->getName();
+
+    $headers[] = 'Labels';
+    $headers[] = 'Status';
+    $headers[] = 'Handlinger';
+
+    $rows = [];
+
+    foreach ($valuated as $application) {
+      $excluded = FALSE;
+      if (!empty($labels_default_value)) {
+        foreach ($labels_default_value as $label) {
+          if ($label !== 0 && !in_array($application->id(), $availability_labels[$label])) {
+            $excluded = TRUE;
+          }
+        }
+      }
+
+      if (!empty($statuses_default_value)) {
+        foreach ($statuses_default_value as $status) {
+          if ($status !== 0 && !in_array($application->id(), $availability_statuses[$status])) {
+            $excluded = TRUE;
+          }
+        }
+      }
+
+      if ($excluded) {
+        continue;
+      }
+
+      $row = [];
+      $row[] = new FormattableMarkup('@firstname @lastname', [
+        '@firstname' => $application->field_vies_first_name->getValue()[0]['value'],
+        '@lastname' => $application->field_vies_last_name->getValue()[0]['value'],
+      ]);
+
+      $answer = '';
+      foreach ($application->field_vies_class_questions->referencedEntities() as $class_questions) {
+        $question_reference = $class_questions->field_question_reference->getValue();
+        if (empty($question_reference[0]['target_id']) || $question_reference[0]['target_id'] != $question->id()) {
+          continue;
+        }
+        $answer = $class_questions->field_answer->getValue()[0]['value'];
+      }
+      $row[] = $answer;
+
+      $labels = [];
+      foreach ($application->field_vies_label->getValue() as $val) {
+        $labels[] = $available_labels[$val['target_id']];
+      }
+      $row[] = implode(', ', $labels);
+
+      $statuses = [];
+      foreach ($application->field_vies_status->getValue() as $val) {
+        $statuses[] = $available_statuses[$val['target_id']];
+      }
+      $row[] = implode(', ', $statuses);
+      $row[] = \Drupal::l($this->t('Edit'), Url::fromRoute(
+        'entity.node.edit_form',
+        ['node' => $application->id()],
+        ['query' => ['destination' => '/taxonomy/term/' . $class->id(). '/valuation']]
+      ));
+
+      $rows[] = $row;
+
+    }
+
+    $form['valuated']['applications'] = [
+      '#type' => 'table',
+      '#attributes' => ['class' => ['valuated-applications']],
       '#header' => $headers,
       '#rows' => $rows,
-      '#empty' => 'Der er ingen ansøgning til denne klasse',
     ];
+
     return $form;
   }
 
@@ -196,6 +375,13 @@ class ValuationForm extends FormBase {
    */
   public function ajaxUpdate(array $form, FormStateInterface $form_state) {
     return $form;
+  }
+
+  /**
+   * Ajax valuated callback.
+   */
+  public function ajaxValuatedUpdate(array $form, FormStateInterface $form_state) {
+    return $form['valuated'];
   }
 
 
