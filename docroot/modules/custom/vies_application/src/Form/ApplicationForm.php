@@ -237,6 +237,11 @@ class ApplicationForm extends FormBase {
         $form_state->setErrorByName($radio_key, 'Venligst foretag et valg i linjefag.');
       }
     }
+
+    $parents = $form_state->get('parents');
+    if (empty($values['parents']['current']) && empty($parents)) {
+      $form_state->setErrorByName('parents', 'Du skal tilføje mindst en forælder.');
+    }
   }
 
   /**
@@ -246,9 +251,11 @@ class ApplicationForm extends FormBase {
     $values = $form_state->getValues();
 
     // Collect parent data.
-    $current_parent = $values['parents']['current'];
     $parents = $form_state->get('parents');
-    $parents[] = $current_parent['left'] + $current_parent['right'];
+    if (isset($values['parents']['current'])) {
+      $current_parent = $values['parents']['current'];
+      $parents[] = $current_parent['left'] + $current_parent['right'];
+    }
     $values['parents'] = $parents;
 
     if (empty($values['questions'])) {
@@ -284,19 +291,52 @@ class ApplicationForm extends FormBase {
     $parents[$parent_index] = $parent['left'] + $parent['right'];
     ksort($parents);
     $form_state->set('parents', $parents);
-    $form_state->set('parent_index', max(array_keys($parents)) + 1);
+    $form_state->set('parent_index', NULL);
+    $form_state->set('parent_current', NULL);
     $this->removeInputValue('parents', $form_state);
     $form_state->setRebuild();
   }
 
   /**
-   * Submit handler for the "edit-more" button.
+   * Submit handler for the hide parent form button.
    */
-  public function editParent(array &$form, FormStateInterface $form_state) {
+  public function hideParentForm(array &$form, FormStateInterface $form_state) {
+    $parent_index = $form_state->get('parent_index');
+    $parent_current = $form_state->get('parent_current');
+    // For editing mode restore current parent data.
+    if (!empty($parent_current)) {
+      $parents = $form_state->get('parents');
+      $parents[$parent_index] = $parent_current;
+      ksort($parents);
+      $form_state->set('parents', $parents);
+      $form_state->set('parent_current', NULL);
+    }
+    $form_state->set('parent_index', NULL);
+    $form_state->setRebuild();
+  }
+
+  /**
+   * Submit handler for the show parent form action.
+   */
+  public function showParentForm(array &$form, FormStateInterface $form_state) {
+    $parents = $form_state->get('parents');
     $triggering_element = $form_state->getTriggeringElement();
-    $parent_index = $triggering_element['#parent_index'];
+    if (isset($triggering_element['#parent_index'])) {
+      $parent_index = $triggering_element['#parent_index'];
+      $form_state->set('parent_current', $parents[$parent_index]);
+    }
+    else {
+      $parent_index = 1;
+      if (!empty($parents)) {
+        $parent_index = max(array_keys($parents)) + 1;
+      }
+
+      $values = $form_state->getValues();
+      if (!empty($values['same_address'])) {
+        $form_state->set('parent_same_address', TRUE);
+      }
+    }
     $form_state->set('parent_index', $parent_index);
-    $this->removeInputValue('parents', $form_state);
     $form_state->setRebuild();
   }
 
@@ -306,7 +346,6 @@ class ApplicationForm extends FormBase {
   public function removeParent(array &$form, FormStateInterface $form_state) {
     $triggering_element = $form_state->getTriggeringElement();
     $parent_index = $triggering_element['#parent_index'];
-    $form_state->set('parent_index', $parent_index);
     $parents = $form_state->get('parents');
     unset($parents[$parent_index]);
     $form_state->set('parents', $parents);
@@ -388,10 +427,6 @@ class ApplicationForm extends FormBase {
 
     // Gather the number of parents in the form already.
     $parent_index = $form_state->get('parent_index');
-    // We have to ensure that there is at least one name field.
-    if ($parent_index === NULL) {
-      $form_state->set('parent_index', 1);
-    }
 
     $parents = $form_state->get('parents');
     $default_values = [];
@@ -401,6 +436,15 @@ class ApplicationForm extends FormBase {
       $form_state->set('parents', $parents);
     }
 
+    // Use existing address for new parent.
+    $parent_same_address = $form_state->get('parent_same_address');
+    if ($parent_same_address && !empty($parents)) {
+      $parent = end($parents);
+      foreach (['address', 'houseNumber', 'houseLetter', 'houseFloor', 'city', 'municipality', 'zip', 'country'] as $key) {
+        $default_values[$key] = $parent[$key];
+      }
+      $form_state->set('parent_same_address', NULL);
+    }
     $form['parentsWrapper']['parents'] = [
       '#type' => 'container',
       '#tree' => TRUE,
@@ -418,6 +462,7 @@ class ApplicationForm extends FormBase {
       $form['parentsWrapper']['parents']['added'] = [
         '#type' => 'container',
         '#theme' => 'vies_added_parents',
+        '#weight' => -2,
       ];
 
       foreach ($parents as $key => $parent) {
@@ -426,7 +471,7 @@ class ApplicationForm extends FormBase {
             '#id' => 'edit-parents-' . $key,
             '#name' => 'edit-parents-' . $key,
             '#value' => $this->t('Edit'),
-            '#submit' => ['::editParent'],
+            '#submit' => ['::showParentForm'],
             '#attributes' => ['class' => ['btn-sm']],
             '#parent_index' => $key,
           ] + $ajax_parent_button,
@@ -444,30 +489,51 @@ class ApplicationForm extends FormBase {
       $form['parentsWrapper']['parents']['added']['#list'] = $parents;
     }
 
-    $form['parentsWrapper']['parents']['current'] = $this->getPersonalDataForm($default_values) + [
-      '#attributes' => ['class' => ['clearfix']],
-    ];
-
-    $form['parentsWrapper']['parents']['current']['left']['type'] = [
-      '#type' => 'radios',
-      '#title' => 'Type af Vokse',
-      '#options' => ApplicationHandler::$adultType,
-      '#required' => TRUE,
-      '#default_value' => isset($default_values['type']) ? $default_values['type'] : NULL,
-      '#prefix' => '<div class="form-inline parents-top">',
-      '#weight' => -1,
-      '#suffix' => '</div>',
-    ];
-
     $form['parentsWrapper']['actions'] = [
       '#type' => 'actions',
       '#attributes' => ['class' => ['col-md-12']],
     ];
-    $form['parentsWrapper']['actions']['add_parent'] = [
-      '#value' => empty($default_values) ? $this->t('Add') : $this->t('Edit'),
-      '#submit' => ['::submitParent'],
-      '#limit_validation_errors' => array(['parents']),
-    ] + $ajax_parent_button;
+    if ($parent_index) {
+      $form['parentsWrapper']['parents']['current'] = $this->getPersonalDataForm($default_values) + [
+          '#attributes' => ['class' => ['clearfix']],
+          '#weight' => -1,
+        ];
+
+      $form['parentsWrapper']['parents']['current']['left']['type'] = [
+        '#type' => 'radios',
+        '#title' => 'Type af Vokse',
+        '#options' => ApplicationHandler::$adultType,
+        '#required' => TRUE,
+        '#default_value' => isset($default_values['type']) ? $default_values['type'] : NULL,
+        '#prefix' => '<div class="form-inline parents-top">',
+        '#weight' => -1,
+        '#suffix' => '</div>',
+      ];
+      $form['parentsWrapper']['actions']['add_parent'] = [
+          '#value' => $this->t('Submit'),
+          '#submit' => ['::submitParent'],
+          '#limit_validation_errors' => [['parents']],
+      ] + $ajax_parent_button;
+      $form['parentsWrapper']['actions']['hide_add_parent_form'] = [
+          '#value' => $this->t('Candel'),
+          '#submit' => ['::hideParentForm'],
+      ] + $ajax_parent_button;
+    }
+    else {
+      $form['parentsWrapper']['actions']['show_add_parent_form'] = [
+          '#value' => 'Tilføj lorældren',
+          '#submit' => ['::showParentForm'],
+          '#limit_validation_errors' => [['same_address']],
+      ] + $ajax_parent_button;
+
+      if (!empty($parents)) {
+        $form['parentsWrapper']['actions']['same_address'] = [
+          '#type' => 'checkbox',
+          '#title' => 'Brug samme adresse',
+          '#default_value' => TRUE,
+        ];
+      }
+    }
 
     $after_school_questions = ApplicationHandler::$afterSchool;
     $after_school = [];
@@ -561,15 +627,15 @@ class ApplicationForm extends FormBase {
     ];
     $personal_data['right']['houseNumber'] = [
       '#type' => 'textfield',
-      '#title' => 'Bygning no.',
-      '#placeholder' => 'Bygning no.',
+      '#title' => 'Nr',
+      '#placeholder' => 'Nr',
       '#required' => $required,
       '#default_value' => isset($default_values['houseNumber']) ? $default_values['houseNumber'] : NULL,
     ];
     $personal_data['right']['houseLetter'] = [
       '#type' => 'textfield',
-      '#title' => 'Bygning brev',
-      '#placeholder' => 'Bygning brev',
+      '#title' => 'Bogstav',
+      '#placeholder' => 'Bogstav',
       '#default_value' => isset($default_values['houseLetter']) ? $default_values['houseLetter'] : NULL,
     ];
     $personal_data['right']['houseFloor'] = [
@@ -594,8 +660,8 @@ class ApplicationForm extends FormBase {
     ];
     $personal_data['right']['zip'] = [
       '#type' => 'textfield',
-      '#title' => 'Zipcode',
-      '#placeholder' => 'Zipcode',
+      '#title' => 'Postnummer',
+      '#placeholder' => 'Postnummer',
       '#required' => $required,
       '#default_value' => isset($default_values['zip']) ? $default_values['zip'] : NULL,
     ];

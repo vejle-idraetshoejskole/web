@@ -16,14 +16,7 @@ class ApplicationController extends ControllerBase {
   public function success() {
     $build = [
       '#theme' => 'vies_application_submit_message',
-      '#title' => 'Tak for din tilmelding!
-',
-      '#backlink' => [
-        '#title' => 'Tilbage til ansøgningsskema',
-        '#type' => 'link',
-        '#url' => Url::fromRoute('vies_application.application_form'),
-        '#attributes' => ['class' => ['btn', 'btn-primary']],
-      ],
+      '#title' => 'Tak for din tilmelding!',
     ];
 
     return $build;
@@ -37,12 +30,6 @@ class ApplicationController extends ControllerBase {
       '#theme' => 'vies_application_submit_message',
       '#title' => 'Åh - en fejl opstod!',
       '#message' => 'Send venligst din ansøgning til os via mail',
-      '#backlink' => [
-        '#title' => 'Tilbage til ansøgningsskema',
-        '#type' => 'link',
-        '#url' => Url::fromRoute('vies_application.application_form'),
-        '#attributes' => ['class' => ['btn', 'btn-primary']],
-      ],
     ];
 
     return $build;

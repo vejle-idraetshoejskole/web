@@ -175,7 +175,7 @@ class ApplicationHandler {
   }
 
   /**
-   * Helper function to prepare data,.
+   * Helper function to prepare data.
    */
   private function getFullAddress($raw_data) {
     $address = empty($raw_data['address']) ? '' : $raw_data['address'];
