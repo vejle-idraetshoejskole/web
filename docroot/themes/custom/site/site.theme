@@ -24,18 +24,35 @@ function site_preprocess_html(&$variables) {
  * Implements hook_preprocess_page() for page.html.twig.
  */
 function site_preprocess_page(array &$variables) {
-  $tid = \Drupal::routeMatch()->getRawParameter('taxonomy_term');
-  $uid = \Drupal::routeMatch()->getRawParameter('user');
-
-  if ($tid) {
-    $variables['term'] = \Drupal\taxonomy\Entity\Term::load($tid);
+  $banner_entity = isset($variables['node']) ? $variables['node'] : NULL;
+  if ($uid = \Drupal::routeMatch()->getRawParameter('user')) {
+    $banner_entity = User::load($uid);
+  }
+  if ($tid = \Drupal::routeMatch()->getRawParameter('taxonomy_term')) {
+    $banner_entity = \Drupal\taxonomy\Entity\Term::load($tid);
   }
 
-  if ($uid) {
-    $variables['user_displayed'] = User::load($uid);
+  $route = \Drupal::routeMatch()->getRouteName();
+  if ($route == 'vies_valuation') {
+    $banner_entity = NULL;
   }
 
-  // Theme settings
+  $banner = [];
+  if (isset($banner_entity->field_vih_top_banner) && !empty($banner_entity->field_vih_top_banner->getValue())) {
+    $references = $banner_entity->field_vih_top_banner->referencedEntities();
+    $banner['#background_image'] = reset($references);
+    $banner['#title'] = $variables['page']['#title'];
+    if (!empty($banner_entity->field_vih_top_banner_text->getValue())) {
+      $banner['#title'] = $banner_entity->field_vih_top_banner_text->getValue()[0]['value'];
+    }
+  }
+
+  if (!empty($banner)) {
+    $banner['#theme'] = 'header_banner';
+    $variables['header_banner'] = $banner;
+  }
+
+  // Theme settings.
   $variables['theme_settings']['copyright_interval'] = '';
   $variables['theme_settings'] = _site_collect_theme_settings();
 }
@@ -850,6 +867,9 @@ function site_theme() {
     ],
     'region_sectioned_fluid' => [
       'render element' => 'content',
+    ],
+    'header_banner' => [
+      'render element' => 'banner',
     ],
   ];
 }

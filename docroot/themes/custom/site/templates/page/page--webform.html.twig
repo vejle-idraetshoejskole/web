@@ -29,39 +29,7 @@
                 {% endif %}
 
             {% else %}
-
-                {% if node.field_vih_top_banner.value or user_displayed.field_vih_top_banner.value or term.field_vih_top_banner.value %}
-
-                    {# Begin - image #}
-                    {% if node.field_vih_top_banner.value %}
-                        {% set banner_background_image = node.field_vih_top_banner.entity.image.entity.fileuri | image_style('banner_small') %}
-                    {% elseif user_displayed.field_vih_top_banner.value %}
-                        {% set banner_background_image = user_displayed.field_vih_top_banner.entity.image.entity.fileuri | image_style('banner_small') %}
-                    {% elseif term.field_vih_top_banner.value %}
-                        {% set banner_background_image = term.field_vih_top_banner.entity.image.entity.fileuri | image_style('banner_small') %}
-                    {% endif %}
-                    {# End - image #}
-
-                    <div class="banner banner--small" style="background-image: url({{ banner_background_image }})">
-                        <div class="banner__inner">
-                            <div class="container">
-                                <div class="banner__heading">
-
-                                    {% if node.field_vih_top_banner_text.value %}
-                                        <h1 class="banner__heading__title">{{ node.field_vih_top_banner_text.value }}</h1>
-                                    {% elseif user_displayed.field_vih_top_banner_text.value %}
-                                        <h1 class="banner__heading__title">{{ user_displayed.field_vih_top_banner_text.value }}</h1>
-                                    {% elseif term.field_vih_top_banner_text.value %}
-                                        <h1 class="banner__heading__title">{{ term.field_vih_top_banner_text.value }}</h1>
-                                    {% elseif page['#title'] %}
-                                        <h1 class="banner__heading__title">{{ page['#title'] | raw }}</h1>
-                                    {% endif %}
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endif %}
+              {{ header_banner }}
             {% endif %}
             {# End - banner #}
 
