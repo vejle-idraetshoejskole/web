@@ -17,16 +17,8 @@ targetEntityType: paragraph
 bundle: long_course_list_
 mode: default
 content:
-  field_vih_course_id:
-    weight: 2
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
   field_vih_empty_message:
-    weight: 3
+    weight: 2
     label: hidden
     settings: {  }
     third_party_settings: {  }
@@ -55,3 +47,4 @@ content:
 hidden:
   field_vih_background_color: true
   field_vih_background_img: true
+  field_vih_course_id: true
