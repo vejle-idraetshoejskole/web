@@ -39,6 +39,8 @@ function site_preprocess_page(array &$variables) {
 
   $banner = [];
   if (isset($banner_entity->field_vih_top_banner) && !empty($banner_entity->field_vih_top_banner->getValue())) {
+    // Retrieve the translated entity in current language with fallback to default language if translation not exists.
+    $banner_entity = \Drupal::service('entity.repository')->getTranslationFromContext($banner_entity, \Drupal::languageManager()->getCurrentLanguage()->getId());
     $references = $banner_entity->field_vih_top_banner->referencedEntities();
     $banner['#background_image'] = reset($references);
     $banner['#title'] = $variables['page']['#title'];
