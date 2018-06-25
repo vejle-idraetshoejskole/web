@@ -141,7 +141,7 @@
                 "2894797 - Multiple galleries: opens the wrong image" : "https://www.drupal.org/files/issues/fix-image-index-2894797.patch"
             },
             "drupal/eu_cookie_compliance": {
-                "2979295 - Add a option to open privacy policy link in a modal window" : "https://www.drupal.org/files/issues/2018-06-13/eu_cookie_compliance_privacy_policy_link_in_modal_window.patch"
+                "2979295 - Add a option to open privacy policy link in a modal window" : "https://www.drupal.org/files/issues/2018-06-25/eu_cookie_compliance_privacy_policy_link_in_modal_window-2.patch"
             },
             "drupal/metatag": {
                 "2691313 - Metatag performance poor": "https://www.drupal.org/files/issues/2018-06-13/metatag-poor-performance-2691313-22.patch"
