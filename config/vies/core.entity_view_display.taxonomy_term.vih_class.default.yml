@@ -104,6 +104,7 @@ content:
     region: content
 hidden:
   field_metatag: true
+  field_questions: true
   field_short_description: true
   field_vies_questions: true
   field_vih_class_color: true

@@ -5,6 +5,7 @@ dependencies:
   config:
     - entity_browser.browser.media_browser
     - field.field.taxonomy_term.vih_class.field_metatag
+    - field.field.taxonomy_term.vih_class.field_questions
     - field.field.taxonomy_term.vih_class.field_short_description
     - field.field.taxonomy_term.vih_class.field_vies_questions
     - field.field.taxonomy_term.vih_class.field_vih_class_class_packages
@@ -154,12 +155,12 @@ content:
     region: content
     settings:
       form_mode: default
-      label_singular: ''
-      label_plural: ''
+      override_labels: true
+      label_singular: spørgsmål
+      label_plural: spørgsmål
       allow_new: true
       allow_existing: true
       match_operator: CONTAINS
-      override_labels: false
       collapsible: false
       collapsed: false
       allow_duplicate: false
@@ -280,4 +281,5 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  field_questions: true
