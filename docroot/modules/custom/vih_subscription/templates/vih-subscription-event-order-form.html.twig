@@ -22,7 +22,13 @@
                 </div>
             </div>
             {# Introduction information END #}
-
+            <!-- Begin - participants -->
+            <div class="partial partial--participants">
+              <div class="partial__body">
+                {{ form['addedParticipantsContainer'] }}
+              </div>
+            </div>
+            <!-- End - participants -->
             <hr>
 
             <div class="row">
@@ -74,30 +80,21 @@
                       </div>
                     </div>
                     <!-- End - form controls -->
-
-                    <!-- Begin - participants -->
-                    <div class="partial partial--participants">
-                      <div class="partial__body">
-                        {{ form['addedParticipantsContainer'] }}
-                      </div>
+                </div>
+            </div>
+            <div id="form-bottom-wrapper"{% if  form['#addedParticipants'] %} class="hidden"{% endif %}>
+                <hr>
+                <div class="terms_and_conditions">
+                  {{ form['terms_and_conditions'] }}
+                </div>
+                <!-- Begin - form controls -->
+                <div class="partial partial--form-controls">
+                    <div class="partial__body">
+                        {{ form['actions'] }}
                     </div>
-                    <!-- End - participants -->
-
                 </div>
+                <!-- End - form controls -->
             </div>
-
-            <hr>
-            <div class="terms_and_conditions">
-              {{ form['terms_and_conditions'] }}
-            </div>
-            <!-- Begin - form controls -->
-            <div class="partial partial--form-controls">
-                <div class="partial__body">
-                    {{ form['actions'] }}
-                </div>
-            </div>
-            <!-- End - form controls -->
-
         </div>
     </div>
 </section>

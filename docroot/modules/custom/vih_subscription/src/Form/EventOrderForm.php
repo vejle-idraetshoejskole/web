@@ -108,50 +108,73 @@ class EventOrderForm extends FormBase {
       '#tree' => TRUE
     ];
 
-    if (count($addedParticipants) + $personsSubscribed < $personsLimit) { //not allowing to have more fieldsets that the event have capacity for
-      $form['newParticipantContainer']['newParticipantFieldset'] = [
-        '#type' => 'container',
-      ];
-      $form['newParticipantContainer']['newParticipantFieldset']['firstName'] = array(
-        '#type' => 'textfield',
-        '#title' => $this->t('Firstname'),
-        '#placeholder' => $this->t('Firstname'),
-        '#required' => TRUE,
-        '#prefix' => '<div class="row"><div class="col-xs-12 col-sm-6">',
-        '#suffix' => '</div>',
-      );
-      $form['newParticipantContainer']['newParticipantFieldset']['lastName'] = array(
-        '#type' => 'textfield',
-        '#title' => $this->t('Lastname'),
-        '#placeholder' => $this->t('Lastname'),
-        '#required' => TRUE,
-        '#prefix' => '<div class="col-xs-12 col-sm-6">',
-        '#suffix' => '</div></div>',
-      );
-      $form['newParticipantContainer']['newParticipantFieldset']['email'] = array(
-        '#type' => 'textfield',
-        '#title' => $this->t('E-mail address'),
-        '#placeholder' => $this->t('E-mail address'),
-        '#required' => TRUE,
-      );
+    $participant_form = $form_state->get('participantForm');
+    // Show participant form if no participant added.
+    if (empty($addedParticipants)) {
+      $participant_form = TRUE;
+    }
 
-      $form['newParticipantContainer']['addParticipant'] = array(
-        '#id' => 'add-participant',
-        '#name' => 'add-participant',
+    if ($participant_form) {
+      if (count($addedParticipants) + $personsSubscribed < $personsLimit) { //not allowing to have more fieldsets that the event have capacity for
+        $form['newParticipantContainer']['newParticipantFieldset'] = [
+          '#type' => 'container',
+        ];
+        $form['newParticipantContainer']['newParticipantFieldset']['firstName'] = array(
+          '#type' => 'textfield',
+          '#title' => $this->t('Firstname'),
+          '#placeholder' => $this->t('Firstname'),
+          '#required' => TRUE,
+          '#prefix' => '<div class="row"><div class="col-xs-12 col-sm-6">',
+          '#suffix' => '</div>',
+        );
+        $form['newParticipantContainer']['newParticipantFieldset']['lastName'] = array(
+          '#type' => 'textfield',
+          '#title' => $this->t('Lastname'),
+          '#placeholder' => $this->t('Lastname'),
+          '#required' => TRUE,
+          '#prefix' => '<div class="col-xs-12 col-sm-6">',
+          '#suffix' => '</div></div>',
+        );
+        $form['newParticipantContainer']['newParticipantFieldset']['email'] = array(
+          '#type' => 'textfield',
+          '#title' => $this->t('E-mail address'),
+          '#placeholder' => $this->t('E-mail address'),
+          '#required' => TRUE,
+        );
+
+        $form['newParticipantContainer']['addParticipant'] = array(
+          '#id' => 'add-participant',
+          '#name' => 'add-participant',
+          '#type' => 'submit',
+          '#value' => $this->t('Submit'),
+          '#submit' => array('::addParticipant'),
+          '#ajax' => [
+            'callback' => '::ajaxAddRemoveParticipantCallback',
+            'progress' => array(
+              'type' => 'none'
+            )
+          ],
+        );
+      }
+      else {
+        $form['newParticipantContainer']['message'] = array(
+          '#markup' => $this->t('Denne begivenhed kan ikke allokere flere deltagere')
+        );
+      }
+    }
+    else {
+      $form['newParticipantContainer']['addParticipant'] = [
         '#type' => 'submit',
         '#value' => $this->t('Add'),
-        '#submit' => array('::addParticipant'),
+        '#submit' => ['::editParticipant'],
         '#ajax' => [
           'callback' => '::ajaxAddRemoveParticipantCallback',
-          'progress' => array(
+          'progress' => [
             'type' => 'none'
-          )
+          ]
         ],
-      );
-    } else {
-      $form['newParticipantContainer']['message'] = array(
-        '#markup' => $this->t('Denne begivenhed kan ikke allokere flere deltagere')
-      );
+        '#limit_validation_errors' => [],
+      ];
     }
     //END ADD NEW PARTICIPANT CONTAINER //
 
@@ -265,7 +288,9 @@ class EventOrderForm extends FormBase {
         '#title' => $this->t('Terms and conditions'),
       );
     }
-    
+
+    $form['#addedParticipants'] = empty($addedParticipants);
+
     return $form;
   }
 
@@ -306,6 +331,7 @@ class EventOrderForm extends FormBase {
       }
     }
 
+    $form_state->set('participantForm', NULL);
     $form_state->setUserInput($userInput);
     $form_state->setRebuild();
   }
@@ -319,22 +345,25 @@ class EventOrderForm extends FormBase {
   function editParticipant(array &$form, FormStateInterface $form_state) {
     $userInput = $form_state->getUserInput();
 
-    //getting triggering element
+    // Getting triggering element.
     $triggeringElement = $form_state->getTriggeringElement();
     $addedParticipants = $form_state->get('addedParticipants');
+    if (isset($triggeringElement['#participantDelta'])) {
+      $participantToEdit = $addedParticipants[$triggeringElement['#participantDelta']];
 
-    $participantToEdit = $addedParticipants[$triggeringElement['#participantDelta']];
+      // Unsetting the participant.
+      unset($addedParticipants[$triggeringElement['#participantDelta']]);
+      $form_state->set('addedParticipants', $addedParticipants);
 
-    //unsetting the participant
-    unset($addedParticipants[$triggeringElement['#participantDelta']]);
-    $form_state->set('addedParticipants', $addedParticipants);
+      //filling personal information
+      $userInput['newParticipantContainer']['newParticipantFieldset']['firstName'] = $participantToEdit['firstName'];
+      $userInput['newParticipantContainer']['newParticipantFieldset']['lastName'] = $participantToEdit['lastName'];
+      $userInput['newParticipantContainer']['newParticipantFieldset']['email'] = $participantToEdit['email'];
 
-    //filling personal information
-    $userInput['newParticipantContainer']['newParticipantFieldset']['firstName'] = $participantToEdit['firstName'];
-    $userInput['newParticipantContainer']['newParticipantFieldset']['lastName'] = $participantToEdit['lastName'];
-    $userInput['newParticipantContainer']['newParticipantFieldset']['email'] = $participantToEdit['email'];
+      $form_state->setUserInput($userInput);
+    }
 
-    $form_state->setUserInput($userInput);
+    $form_state->set('participantForm', TRUE);
     $form_state->setRebuild();
   }
 
@@ -391,11 +420,13 @@ class EventOrderForm extends FormBase {
     if (!empty($form['addedParticipantsContainer']['#addedParticipants'])) {
       $response->addCommand(new InvokeCommand('#vih-event-submit-extra', 'removeClass', ['hidden']));
       $response->addCommand(new InvokeCommand('#vih-event-submit', 'removeClass', ['disabled']));
+      $response->addCommand(new InvokeCommand('#form-bottom-wrapper', 'removeClass', ['hidden']));
     }
     else {
       //Disable submit button and hide extra submit button if no participants added
       $response->addCommand(new InvokeCommand('#vih-event-submit-extra', 'addClass', ['hidden']));
       $response->addCommand(new InvokeCommand('#vih-event-submit', 'addClass', ['disabled']));
+      $response->addCommand(new InvokeCommand('#form-bottom-wrapper', 'addClass', ['hidden']));
     }
 
     return $response;

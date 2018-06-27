@@ -89,7 +89,6 @@ class ShortCourseOrderForm extends FormBase {
     $form_state->set('optionGroupSuboptions', $optionGroupSuboptions);
 
     $addedParticipants = $form_state->get('addedParticipants');
-    $form['#addedParticipants'] = empty($addedParticipants);
 
     if ($order != NULL) {
       if (Crypt::hashEquals($checksum, VihSubscriptionUtils::generateChecksum($course, $order))) {
@@ -488,6 +487,8 @@ class ShortCourseOrderForm extends FormBase {
 
     $form['#theme'] = 'vih_subscription_short_course_order_form';
     $form_state->setCached(FALSE);
+
+    $form['#addedParticipants'] = empty($addedParticipants);
 
     return $form;
   }
