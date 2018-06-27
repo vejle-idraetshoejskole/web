@@ -89,6 +89,7 @@ class ShortCourseOrderForm extends FormBase {
     $form_state->set('optionGroupSuboptions', $optionGroupSuboptions);
 
     $addedParticipants = $form_state->get('addedParticipants');
+    $form['#addedParticipants'] = empty($addedParticipants);
 
     if ($order != NULL) {
       if (Crypt::hashEquals($checksum, VihSubscriptionUtils::generateChecksum($course, $order))) {
@@ -144,198 +145,219 @@ class ShortCourseOrderForm extends FormBase {
       '#tree' => TRUE
     ];
 
-    if (count($addedParticipants) + $personsSubscribed < $personsLimit) { //not allowing to have more fieldsets that the event have capacity for
-      $form['newParticipantContainer']['newParticipantFieldset'] = [
-        '#type' => 'container',
-      ];
-      $form['newParticipantContainer']['newParticipantFieldset']['firstName'] = array(
-        '#type' => 'textfield',
-        '#title' => $this->t('Firstname'),
-        '#placeholder' => $this->t('Firstname'),
-        '#required' => TRUE,
-        '#prefix' => '<div class="row"><div class="col-xs-12 col-sm-6">',
-        '#suffix' => '</div>',
-      );
-      $form['newParticipantContainer']['newParticipantFieldset']['lastName'] = array(
-        '#type' => 'textfield',
-        '#title' => $this->t('Lastname'),
-        '#placeholder' => $this->t('Lastname'),
-        '#required' => TRUE,
-        '#prefix' => '<div class="col-xs-12 col-sm-6">',
-        '#suffix' => '</div></div>',
-      );
-      $form['newParticipantContainer']['newParticipantFieldset']['cpr'] = array(
-        '#type' => 'textfield',
-        '#title' => $this->t('CPR'),
-        '#placeholder' => $this->t('CPR'),
-        '#required' => TRUE,
-        '#pattern' => '[0-9]{10}',
-      );
+    $form['availableOptionsContainer'] = array(
+      '#type' => 'container',
+      '#prefix' => '<div id="available-options-container-wrapper">',
+      '#suffix' => '</div>',
+      '#tree' => TRUE
+    );
 
+    $participant_form = $form_state->get('participantForm');
+    // Show participant form if no participant added.
     if (empty($addedParticipants)) {
-        //Do not collapse form if no participants added
-        $collapse_toggle_class = 'class = "hidden"';
-        $collapsed_elements_class = 'class = "collapse in"';
-        //Disable submit button and hide extra submit button if no participants added
-        $form['actions']['submit']['#attributes']['class'][] = 'disabled';
-        $form['extra_actions']['submit']['#attributes']['class'][] = 'hidden';
-      }
-      else {
-        //Collapse form if any participants added
-        $collapse_toggle_class = NULL;
-        $collapsed_elements_class = 'class = "collapse"';
-      }
-      $form['newParticipantContainer']['newParticipantFieldset']['email'] = array(
-        '#type' => 'textfield',
-        '#title' => $this->t('E-mail address'),
-        '#placeholder' => $this->t('E-mail address'),
-        '#required' => TRUE,
-        '#prefix' => '<a data-toggle="collapse" data-target="#participant-form-collapse" id="participant-form-collapse-switch" ' .
-        $collapse_toggle_class . ' >' . t('Change address or email') .
-        '</a><div id="participant-form-collapse" '  . $collapsed_elements_class . ' >',
-      );
-      $form['newParticipantContainer']['newParticipantFieldset']['newsletter'] = array(
-        '#type' => 'checkbox',
-        '#title' => $this->t('Get updates from the school'),
-      );
-      $form['newParticipantContainer']['newParticipantFieldset']['address'] = array(
-        '#type' => 'textfield',
-        '#title' => $this->t('Address'),
-        '#placeholder' => $this->t('Address'),
-        '#required' => TRUE,
-      );
-      $form['newParticipantContainer']['newParticipantFieldset']['house']['houseNumber'] = array(
-        '#type' => 'textfield',
-        '#title' => $this->t('House no.'),
-        '#placeholder' => $this->t('House no.'),
-        '#required' => TRUE,
-        '#prefix' => '<div class="row"><div class="col-xs-4">',
-        '#suffix' => '</div>',
-      );
-      $form['newParticipantContainer']['newParticipantFieldset']['house']['houseLetter'] = array(
-        '#type' => 'textfield',
-        '#title' => $this->t('House letter'),
-        '#placeholder' => $this->t('House letter'),
-        '#prefix' => '<div class="col-xs-4">',
-        '#suffix' => '</div>',
-      );
-      $form['newParticipantContainer']['newParticipantFieldset']['house']['houseFloor'] = array(
-        '#type' => 'textfield',
-        '#title' => $this->t('Floor'),
-        '#placeholder' => $this->t('Floor'),
-        '#prefix' => '<div class="col-xs-4">',
-        '#suffix' => '</div></div>',
-      );
-      $form['newParticipantContainer']['newParticipantFieldset']['zip'] = array(
-        '#type' => 'textfield',
-        '#title' => $this->t('Zipcode'),
-        '#placeholder' => $this->t('Zipcode'),
-        '#required' => TRUE,
-        '#prefix' => '<div class="row"><div class="col-xs-12 col-sm-4">',
-        '#suffix' => '</div>',
-      );
-      $form['newParticipantContainer']['newParticipantFieldset']['city'] = array(
-        '#type' => 'textfield',
-        '#title' => $this->t('City'),
-        '#placeholder' => $this->t('City'),
-        '#required' => TRUE,
-        '#prefix' => '<div class="col-xs-12 col-sm-8">',
-        '#suffix' => '</div></div>',
-      );
-      $form['newParticipantContainer']['newParticipantFieldset']['country'] = array(
-        '#type' => 'select',
-        '#title' => $this->t('Country'),
-        '#options' => CourseOrderOptionsList::getNationalityList(),
-        '#default_value' => 'DK',
-        '#required' => TRUE,
-      );
-      $form['newParticipantContainer']['newParticipantFieldset']['comment'] = array(
-        '#type' => 'textarea',
-        '#title' => $this->t('Comment'),
-        '#placeholder' => $this->t('Comment'),
-        '#rows' => 3,
-        '#suffix' => '</div>',
-      );
+      $participant_form = TRUE;
+    }
 
-      //START AVAILABLE OPTIONS CONTAINER //
-      $form['availableOptionsContainer'] = array(
-        '#type' => 'markup',
-        '#prefix' => '<div id="available-options-container-wrapper">',
-        '#suffix' => '</div>',
-        '#tree' => TRUE
-      );
-
-      foreach ($optionGroups as $optionGroupDelta => $optionGroupName) {
-        $form['availableOptionsContainer']['optionGroups'][$optionGroupDelta]['option'] = array(
-          '#title' => $optionGroupName,
-          '#type' => 'radios',
-          '#options' => $this->getOptionGroupOptionsWithPrice($form_state, $optionGroupDelta),
-          '#empty_value' => -1,
-          '#required' => TRUE
+    if ($participant_form) {
+      if (count($addedParticipants) + $personsSubscribed < $personsLimit) {
+        $form['newParticipantContainer']['newParticipantFieldset']['firstName'] = array(
+          '#type' => 'textfield',
+          '#title' => $this->t('Firstname'),
+          '#placeholder' => $this->t('Firstname'),
+          '#required' => TRUE,
+          '#prefix' => '<div class="row"><div class="col-xs-12 col-sm-6">',
+          '#suffix' => '</div>',
+        );
+        $form['newParticipantContainer']['newParticipantFieldset']['lastName'] = array(
+          '#type' => 'textfield',
+          '#title' => $this->t('Lastname'),
+          '#placeholder' => $this->t('Lastname'),
+          '#required' => TRUE,
+          '#prefix' => '<div class="col-xs-12 col-sm-6">',
+          '#suffix' => '</div></div>',
+        );
+        $form['newParticipantContainer']['newParticipantFieldset']['cpr'] = array(
+          '#type' => 'textfield',
+          '#title' => $this->t('CPR'),
+          '#placeholder' => $this->t('CPR'),
+          '#required' => TRUE,
+          '#pattern' => '[0-9]{10}',
         );
 
-        // Disabled options which reached the limit.
-        foreach($this->getOptionGroupOptionsDisabled($form_state, $optionGroupDelta) as $disabledOption) {
-          $form['availableOptionsContainer']['optionGroups'][$optionGroupDelta]['option'][$disabledOption]['#disabled'] = TRUE;
+        if (empty($addedParticipants)) {
+          //Do not collapse form if no participants added
+          $collapse_toggle_class = 'class = "hidden"';
+          $collapsed_elements_class = 'class = "collapse in"';
+          //Disable submit button and hide extra submit button if no participants added
+          $form['actions']['submit']['#attributes']['class'][] = 'disabled';
+          $form['extra_actions']['submit']['#attributes']['class'][] = 'hidden';
         }
+        else {
+          // Collapse form if any participants added.
+          $collapse_toggle_class = NULL;
+          $collapsed_elements_class = 'class = "collapse"';
+        }
+        $form['newParticipantContainer']['newParticipantFieldset']['email'] = array(
+          '#type' => 'textfield',
+          '#title' => $this->t('E-mail address'),
+          '#placeholder' => $this->t('E-mail address'),
+          '#required' => TRUE,
+          '#prefix' => '<a data-toggle="collapse" data-target="#participant-form-collapse" id="participant-form-collapse-switch" ' .
+            $collapse_toggle_class . ' >' . t('Change address or email') .
+            '</a><div id="participant-form-collapse" ' . $collapsed_elements_class . ' >',
+        );
+        $form['newParticipantContainer']['newParticipantFieldset']['newsletter'] = array(
+          '#type' => 'checkbox',
+          '#title' => $this->t('Get updates from the school'),
+        );
+        $form['newParticipantContainer']['newParticipantFieldset']['address'] = array(
+          '#type' => 'textfield',
+          '#title' => $this->t('Address'),
+          '#placeholder' => $this->t('Address'),
+          '#required' => TRUE,
+        );
+        $form['newParticipantContainer']['newParticipantFieldset']['house']['houseNumber'] = array(
+          '#type' => 'textfield',
+          '#title' => $this->t('House no.'),
+          '#placeholder' => $this->t('House no.'),
+          '#required' => TRUE,
+          '#prefix' => '<div class="row"><div class="col-xs-4">',
+          '#suffix' => '</div>',
+        );
+        $form['newParticipantContainer']['newParticipantFieldset']['house']['houseLetter'] = array(
+          '#type' => 'textfield',
+          '#title' => $this->t('House letter'),
+          '#placeholder' => $this->t('House letter'),
+          '#prefix' => '<div class="col-xs-4">',
+          '#suffix' => '</div>',
+        );
+        $form['newParticipantContainer']['newParticipantFieldset']['house']['houseFloor'] = array(
+          '#type' => 'textfield',
+          '#title' => $this->t('Floor'),
+          '#placeholder' => $this->t('Floor'),
+          '#prefix' => '<div class="col-xs-4">',
+          '#suffix' => '</div></div>',
+        );
+        $form['newParticipantContainer']['newParticipantFieldset']['zip'] = array(
+          '#type' => 'textfield',
+          '#title' => $this->t('Zipcode'),
+          '#placeholder' => $this->t('Zipcode'),
+          '#required' => TRUE,
+          '#prefix' => '<div class="row"><div class="col-xs-12 col-sm-4">',
+          '#suffix' => '</div>',
+        );
+        $form['newParticipantContainer']['newParticipantFieldset']['city'] = array(
+          '#type' => 'textfield',
+          '#title' => $this->t('City'),
+          '#placeholder' => $this->t('City'),
+          '#required' => TRUE,
+          '#prefix' => '<div class="col-xs-12 col-sm-8">',
+          '#suffix' => '</div></div>',
+        );
+        $form['newParticipantContainer']['newParticipantFieldset']['country'] = array(
+          '#type' => 'select',
+          '#title' => $this->t('Country'),
+          '#options' => CourseOrderOptionsList::getNationalityList(),
+          '#default_value' => 'DK',
+          '#required' => TRUE,
+        );
+        $form['newParticipantContainer']['newParticipantFieldset']['comment'] = array(
+          '#type' => 'textarea',
+          '#title' => $this->t('Comment'),
+          '#placeholder' => $this->t('Comment'),
+          '#rows' => 3,
+          '#suffix' => '</div>',
+        );
 
-        //adding suboptions, if any
-        foreach ($optionGroupOptions[$optionGroupDelta] as $optionDelta => $optionName) {
-          if (isset($optionGroupSuboptions[$optionGroupDelta][$optionDelta])) {
-            $form['availableOptionsContainer']['optionGroups'][$optionGroupDelta]['options'][$optionDelta]['suboptions-container'] = array(
-              '#type' => 'container',
-              '#states' => array(
-                'visible' => array(
-                  ':input[name="availableOptionsContainer[optionGroups][' . $optionGroupDelta . '][option]"]' => array('value' => $optionDelta),
+        //START AVAILABLE OPTIONS CONTAINER //
+        $form['availableOptionsContainer'] = array(
+          '#type' => 'markup',
+          '#prefix' => '<div id="available-options-container-wrapper">',
+          '#suffix' => '</div>',
+          '#tree' => TRUE
+        );
+
+        foreach ($optionGroups as $optionGroupDelta => $optionGroupName) {
+          $form['availableOptionsContainer']['optionGroups'][$optionGroupDelta]['option'] = array(
+            '#title' => $optionGroupName,
+            '#type' => 'radios',
+            '#options' => $this->getOptionGroupOptionsWithPrice($form_state, $optionGroupDelta),
+            '#empty_value' => -1,
+            '#required' => TRUE
+          );
+
+          // Disabled options which reached the limit.
+          foreach ($this->getOptionGroupOptionsDisabled($form_state, $optionGroupDelta) as $disabledOption) {
+            $form['availableOptionsContainer']['optionGroups'][$optionGroupDelta]['option'][$disabledOption]['#disabled'] = TRUE;
+          }
+
+          //adding suboptions, if any
+          foreach ($optionGroupOptions[$optionGroupDelta] as $optionDelta => $optionName) {
+            if (isset($optionGroupSuboptions[$optionGroupDelta][$optionDelta])) {
+              $form['availableOptionsContainer']['optionGroups'][$optionGroupDelta]['options'][$optionDelta]['suboptions-container'] = array(
+                '#type' => 'container',
+                '#states' => array(
+                  'visible' => array(
+                    ':input[name="availableOptionsContainer[optionGroups][' . $optionGroupDelta . '][option]"]' => array('value' => $optionDelta),
+                  ),
                 ),
-              ),
-              '#attributes' => array(
-                'class' => array('vih-suboptions-container'),
-                'data-option-group-delta' => $optionGroupDelta,
-                'data-option-delta' => $optionDelta,
-              ),
-            );
+                '#attributes' => array(
+                  'class' => array('vih-suboptions-container'),
+                  'data-option-group-delta' => $optionGroupDelta,
+                  'data-option-delta' => $optionDelta,
+                ),
+              );
 
-            $form['availableOptionsContainer']['optionGroups'][$optionGroupDelta]['options'][$optionDelta]['suboptions-container']['suboption'] = array(
-              '#type' => 'radios',
-              '#title' => $optionName,
-              '#options' => $optionGroupSuboptions[$optionGroupDelta][$optionDelta],
-              '#empty_value' => -1,
-              '#default_value' => 0
-            );
+              $form['availableOptionsContainer']['optionGroups'][$optionGroupDelta]['options'][$optionDelta]['suboptions-container']['suboption'] = array(
+                '#type' => 'radios',
+                '#title' => $optionName,
+                '#options' => $optionGroupSuboptions[$optionGroupDelta][$optionDelta],
+                '#empty_value' => -1,
+                '#default_value' => 0
+              );
+            }
           }
         }
-      }
 
-      $form['availableOptionsContainer']['addParticipantOptions'] = array(
+        $form['availableOptionsContainer']['addParticipantOptions'] = array(
+          '#id' => 'add-participant-options',
+          '#name' => 'add-participant-options',
+          '#type' => 'submit',
+          '#value' => $this->t('Submit'),
+          '#submit' => array('::addParticipantOptions'),
+          '#ajax' => [
+            'callback' => '::ajaxAddRemoveParticipantOptionsCallback',
+            'progress' => array(
+              'type' => 'none'
+            )
+          ],
+          '#limit_validation_errors' => array(
+            ['newParticipantContainer', 'newParticipantFieldset'],
+            ['availableOptionsContainer']
+          ),
+        );
+      }
+      else {
+        $form['newParticipantContainer']['message'] = array(
+          '#markup' => $this->t('Denne begivenhed kan ikke allokere flere deltagere')
+        );
+      }
+    }
+    else {
+      $form['availableOptionsContainer']['addParticipantOptions'] = [
         '#id' => 'add-participant-options',
         '#name' => 'add-participant-options',
         '#type' => 'submit',
         '#value' => $this->t('Add'),
-        '#submit' => array('::addParticipantOptions'),
+        '#submit' => ['::editParticipantOptions'],
         '#ajax' => [
           'callback' => '::ajaxAddRemoveParticipantOptionsCallback',
-          'progress' => array(
+          'progress' => [
             'type' => 'none'
-          )
+          ]
         ],
-        '#limit_validation_errors' => array(
-          ['newParticipantContainer', 'newParticipantFieldset'],
-          ['availableOptionsContainer']
-        ),
-      );
-    }
-    else {
-      $form['availableOptionsContainer'] = array(
-        '#type' => 'container',
-        '#prefix' => '<div id="available-options-container-wrapper">',
-        '#suffix' => '</div>',
-        '#tree' => TRUE
-      );
-
-      $form['newParticipantContainer']['message'] = array(
-        '#markup' => $this->t('Denne begivenhed kan ikke allokere flere deltagere')
-      );
+        '#limit_validation_errors' => [],
+      ];
     }
     //END AVAILABLE OPTIONS CONTAINER //
     //END ADD NEW PARTICIPANT CONTAINER //
@@ -456,6 +478,7 @@ class ShortCourseOrderForm extends FormBase {
       ),
       '#submit' => array('::submitForm')
     );
+
     //Disable submit button and hide extra submit button if no participants added
     if(empty($addedParticipants)){
       $form['actions']['submit']['#attributes']['class'][] = 'disabled';
@@ -560,24 +583,8 @@ class ShortCourseOrderForm extends FormBase {
         unset($userInput[$key]);
       }
     }
-    // Setting data from first (main) participant as a default values for new participant
-    $main_participant = array();
-    if (count($addedParticipants) >= 1) {
-      $main_participant = array_shift($addedParticipants);
-    }
-    if (!empty($main_participant)) {
-      $userInput['newParticipantContainer']['newParticipantFieldset']['email'] = $main_participant['email'];
-      $userInput['newParticipantContainer']['newParticipantFieldset']['newsletter'] = $main_participant['newsletter'];
-      $userInput['newParticipantContainer']['newParticipantFieldset']['address'] = $main_participant['address'];
-      $userInput['newParticipantContainer']['newParticipantFieldset']['house']['houseNumber'] = $main_participant['house']['houseNumber'];
-      $userInput['newParticipantContainer']['newParticipantFieldset']['house']['houseLetter'] = $main_participant['house']['houseLetter'];
-      $userInput['newParticipantContainer']['newParticipantFieldset']['house']['houseFloor'] = $main_participant['house']['houseFloor'];
-      $userInput['newParticipantContainer']['newParticipantFieldset']['city'] = $main_participant['city'];
-      $userInput['newParticipantContainer']['newParticipantFieldset']['zip'] = $main_participant['zip'];
-      $userInput['newParticipantContainer']['newParticipantFieldset']['country'] = $main_participant['country'];
-      $userInput['newParticipantContainer']['newParticipantFieldset']['comment'] = $main_participant['comment'];
-    }
 
+    $form_state->set('participantForm', NULL);
     $form_state->setUserInput($userInput);
     $form_state->setRebuild();
   }
@@ -595,48 +602,72 @@ class ShortCourseOrderForm extends FormBase {
     $triggeringElement = $form_state->getTriggeringElement();
     $addedParticipants = $form_state->get('addedParticipants');
 
-    $participantToEdit = $addedParticipants[$triggeringElement['#participantOptionsDelta']];
+    if (isset($triggeringElement['#participantOptionsDelta'])) {
+      $participantToEdit = $addedParticipants[$triggeringElement['#participantOptionsDelta']];
+      //unsetting the participant
+      unset($addedParticipants[$triggeringElement['#participantOptionsDelta']]);
+      $form_state->set('addedParticipants', $addedParticipants);
 
-    //unsetting the participant
-    unset($addedParticipants[$triggeringElement['#participantOptionsDelta']]);
-    $form_state->set('addedParticipants', $addedParticipants);
+      //filling personal information
+      $userInput['newParticipantContainer']['newParticipantFieldset']['firstName'] = $participantToEdit['firstName'];
+      $userInput['newParticipantContainer']['newParticipantFieldset']['lastName'] = $participantToEdit['lastName'];
+      $userInput['newParticipantContainer']['newParticipantFieldset']['email'] = $participantToEdit['email'];
+      $userInput['newParticipantContainer']['newParticipantFieldset']['cpr'] = $participantToEdit['cpr'];
+      $userInput['newParticipantContainer']['newParticipantFieldset']['address'] = $participantToEdit['address'];
+      $userInput['newParticipantContainer']['newParticipantFieldset']['house']['houseNumber'] = $participantToEdit['house']['houseNumber'];
+      $userInput['newParticipantContainer']['newParticipantFieldset']['house']['houseLetter'] = $participantToEdit['house']['houseLetter'];
+      $userInput['newParticipantContainer']['newParticipantFieldset']['house']['houseFloor'] = $participantToEdit['house']['houseFloor'];
+      $userInput['newParticipantContainer']['newParticipantFieldset']['city'] = $participantToEdit['city'];
+      $userInput['newParticipantContainer']['newParticipantFieldset']['zip'] = $participantToEdit['zip'];
+      $userInput['newParticipantContainer']['newParticipantFieldset']['country'] = $participantToEdit['country'];
+      $userInput['newParticipantContainer']['newParticipantFieldset']['newsletter'] = $participantToEdit['newsletter'];
+      $userInput['newParticipantContainer']['newParticipantFieldset']['comment'] = $participantToEdit['comment'];
 
-    //filling personal information
-    $userInput['newParticipantContainer']['newParticipantFieldset']['firstName'] = $participantToEdit['firstName'];
-    $userInput['newParticipantContainer']['newParticipantFieldset']['lastName'] = $participantToEdit['lastName'];
-    $userInput['newParticipantContainer']['newParticipantFieldset']['email'] = $participantToEdit['email'];
-    $userInput['newParticipantContainer']['newParticipantFieldset']['cpr'] = $participantToEdit['cpr'];
-    $userInput['newParticipantContainer']['newParticipantFieldset']['address'] = $participantToEdit['address'];
-    $userInput['newParticipantContainer']['newParticipantFieldset']['house']['houseNumber'] = $participantToEdit['house']['houseNumber'];
-    $userInput['newParticipantContainer']['newParticipantFieldset']['house']['houseLetter'] = $participantToEdit['house']['houseLetter'];
-    $userInput['newParticipantContainer']['newParticipantFieldset']['house']['houseFloor'] = $participantToEdit['house']['houseFloor'];
-    $userInput['newParticipantContainer']['newParticipantFieldset']['city'] = $participantToEdit['city'];
-    $userInput['newParticipantContainer']['newParticipantFieldset']['zip'] = $participantToEdit['zip'];
-    $userInput['newParticipantContainer']['newParticipantFieldset']['country'] = $participantToEdit['country'];
-    $userInput['newParticipantContainer']['newParticipantFieldset']['newsletter'] = $participantToEdit['newsletter'];
-    $userInput['newParticipantContainer']['newParticipantFieldset']['comment'] = $participantToEdit['comment'];
+      //filling options
+      foreach ($participantToEdit['orderedOptions'] as $optionGroupDelta => $orderedOption) {
+        $optionDelta = $orderedOption['option']['delta'];
+        $subOptionDelta = NULL;
+        if (isset($orderedOption['suboption']['delta'])) {
+          $subOptionDelta = $orderedOption['suboption']['delta'];
+        }
 
-    //filling options
-    foreach ($participantToEdit['orderedOptions'] as $optionGroupDelta => $orderedOption) {
-      $optionDelta = $orderedOption['option']['delta'];
-      $subOptionDelta = NULL;
-      if (isset($orderedOption['suboption']['delta'])) {
-        $subOptionDelta = $orderedOption['suboption']['delta'];
-      }
-
-      $userInput['availableOptionsContainer']['optionGroups'][$optionGroupDelta] = [
-        'option' => $optionDelta,
-        'options' => [
-          $optionDelta => [
-            'suboptions-container' => [
-              'suboption' => $subOptionDelta
+        $userInput['availableOptionsContainer']['optionGroups'][$optionGroupDelta] = [
+          'option' => $optionDelta,
+          'options' => [
+            $optionDelta => [
+              'suboptions-container' => [
+                'suboption' => $subOptionDelta
+              ]
             ]
           ]
-        ]
-      ];
+        ];
+      }
+
+      $form_state->setUserInput($userInput);
+    }
+    else {
+      // Setting data from first (main) participant as a default values for
+      // new participant.
+      $main_participant = array();
+      if (count($addedParticipants) >= 1) {
+        $main_participant = array_shift($addedParticipants);
+      }
+      if (!empty($main_participant)) {
+        $userInput['newParticipantContainer']['newParticipantFieldset']['email'] = $main_participant['email'];
+        $userInput['newParticipantContainer']['newParticipantFieldset']['address'] = $main_participant['address'];
+        $userInput['newParticipantContainer']['newParticipantFieldset']['house']['houseNumber'] = $main_participant['house']['houseNumber'];
+        $userInput['newParticipantContainer']['newParticipantFieldset']['house']['houseLetter'] = $main_participant['house']['houseLetter'];
+        $userInput['newParticipantContainer']['newParticipantFieldset']['house']['houseFloor'] = $main_participant['house']['houseFloor'];
+        $userInput['newParticipantContainer']['newParticipantFieldset']['city'] = $main_participant['city'];
+        $userInput['newParticipantContainer']['newParticipantFieldset']['zip'] = $main_participant['zip'];
+        $userInput['newParticipantContainer']['newParticipantFieldset']['country'] = $main_participant['country'];
+        $userInput['newParticipantContainer']['newParticipantFieldset']['newsletter'] = $main_participant['newsletter'];
+        $userInput['newParticipantContainer']['newParticipantFieldset']['comment'] = $main_participant['comment'];
+        $form_state->setUserInput($userInput);
+      }
     }
 
-    $form_state->setUserInput($userInput);
+    $form_state->set('participantForm', TRUE);
     $form_state->setRebuild();
   }
 
@@ -691,12 +722,6 @@ class ShortCourseOrderForm extends FormBase {
     //resetting the error, if any
     $response->addCommand(new HtmlCommand('#status_messages', $form['status_messages']));
     
-    //collapse email and address fields of participant form
-    $response->addCommand(new InvokeCommand('#participant-form-collapse', 'removeClass', ['in']));
-    
-    //show participant form collapse switch
-    $response->addCommand(new InvokeCommand('#participant-form-collapse-switch', 'removeClass', ['hidden']));
-
     //move suboptions containers to the right places in DOM
     $response->addCommand(new InvokeCommand(NULL, 'moveSuboptionsContainer'));
     
@@ -704,10 +729,12 @@ class ShortCourseOrderForm extends FormBase {
     if (!empty($form['addedParticipantsContainer']['#addedParticipants'])) {
       $response->addCommand(new InvokeCommand('#vih-course-submit-extra', 'removeClass', ['hidden']));
       $response->addCommand(new InvokeCommand('#vih-course-submit', 'removeClass', ['disabled']));
+      $response->addCommand(new InvokeCommand('#form-bottom-wrapper', 'removeClass', ['hidden']));
     }
     else {
       //Disable submit button and hide extra submit button if no participants added
       $response->addCommand(new InvokeCommand('#vih-course-submit-extra', 'addClass', ['hidden']));
+      $response->addCommand(new InvokeCommand('#form-bottom-wrapper', 'addClass', ['hidden']));
       $response->addCommand(new InvokeCommand('#vih-course-submit', 'addClass', ['disabled']));
     }
 
@@ -807,13 +834,17 @@ class ShortCourseOrderForm extends FormBase {
 
         $birthdate = substr($addedParticipant['cpr'], 0, 4) . $birthdate_year->format('Y');
         $birthdate = \DateTime::createFromFormat('dmY', $birthdate)->format('Y-m-d');
-
-        $address = implode('; ', array(
+        $adress_arr = [];
+        foreach ([
           $addedParticipant['address'],
           $addedParticipant['house']['houseNumber'],
           $addedParticipant['house']['houseLetter'],
           $addedParticipant['house']['houseFloor'],
-        ));
+                 ] as $val) {
+          if (!empty($val)) {
+            $adress_arr[] = $val;
+          }
+        }
 
         //creating participant paragraph
         $subscribedParticipant = Paragraph::create([
@@ -823,7 +854,7 @@ class ShortCourseOrderForm extends FormBase {
           'field_vih_ocp_email' => $addedParticipant['email'],
           'field_vih_ocp_cpr' => $addedParticipant['cpr'],
           //CPR will be deleted from database immediately, after order is confirmed
-          'field_vih_ocp_address' => $address,
+          'field_vih_ocp_address' => implode('; ', $adress_arr),
           'field_vih_ocp_city' => $addedParticipant['city'],
           'field_vih_ocp_zip' => $addedParticipant['zip'],
           'field_vih_ocp_country' => $addedParticipant['country'],
@@ -965,9 +996,9 @@ class ShortCourseOrderForm extends FormBase {
       $participant['email'] = $subscribedPerson->field_vih_ocp_email->value;
       $participant['cpr'] = $subscribedPerson->field_vih_ocp_cpr->value;
       $participant['address'] = $address_parts[0];
-      $participant['house']['houseNumber'] = $address_parts[1];
-      $participant['house']['houseLetter'] = $address_parts[2];
-      $participant['house']['houseFloor'] = $address_parts[3];
+      $participant['house']['houseNumber'] = !empty($address_parts[1]) ? $address_parts[1] : '';
+      $participant['house']['houseLetter'] = !empty($address_parts[2]) ? $address_parts[2] : '';
+      $participant['house']['houseFloor'] = !empty($address_parts[3]) ? $address_parts[3] : '';
       $participant['city'] = $subscribedPerson->field_vih_ocp_city->value;
       $participant['zip'] = $subscribedPerson->field_vih_ocp_zip->value;
       $participant['country'] = $subscribedPerson->field_vih_ocp_country->value;

@@ -20,9 +20,14 @@
                     </a>
                 </div>
             </div>
-
+            <!-- Begin - participants -->
+            <div class="partial partial--participants">
+                <div class="partial__body">
+                  {{ form['addedParticipantsContainer'] }}
+                </div>
+            </div>
+            <!-- End - participants -->
             <hr>
-
             <div class="row">
                 <div class="col-xs-12 col-sm-6">
                     {# Participant container START #}
@@ -72,36 +77,27 @@
                       </div>
                     </div>
                     <!-- End - form controls -->
+                </div>
+            </div>
+            <div id="form-bottom-wrapper"{% if  form['#addedParticipants'] %} class="hidden"{% endif %}>
+                <hr>
 
-                    <!-- Begin - participants -->
-                    <div class="partial partial--participants">
-                      <div class="partial__body">
-                        {{ form['addedParticipantsContainer'] }}
-                      </div>
+                {{ form['order_comment'] }}
+
+                <hr>
+
+                <div class="terms_and_conditions">
+                  {{ form['terms_and_conditions'] }}
+                </div>
+
+                <!-- Begin - form controls -->
+                <div class="partial partial--form-controls">
+                    <div class="partial__body">
+                      {{ form['actions'] }}
                     </div>
-                    <!-- End - participants -->
-
                 </div>
+                <!-- End - form controls -->
             </div>
-
-            <hr>
-
-            {{ form['order_comment'] }}
-
-            <hr>
-
-            <div class="terms_and_conditions">
-              {{ form['terms_and_conditions'] }}
-            </div>
-
-            <!-- Begin - form controls -->
-            <div class="partial partial--form-controls">
-                <div class="partial__body">
-                  {{ form['actions'] }}
-                </div>
-            </div>
-            <!-- End - form controls -->
-
         </div>
     </div>
 </section>

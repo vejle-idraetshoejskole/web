@@ -13,12 +13,7 @@
             {{ paragraph.field_vih_ocp_first_name.value }} {{ paragraph.field_vih_ocp_last_name.value }}
         </h4>
         {# End - name #}
-        {# Begin - CPR #}
-        <div>
-          {{ "CPR"|t }}: {{ paragraph.field_vih_ocp_cpr.value }}
-        </div>
-        {# End - email #}
-        {# Begin - email #}
+         {# Begin - email #}
         <div>
           {{ "Email"|t }}: {{ paragraph.field_vih_ocp_email.value }}
         </div>
@@ -52,17 +47,6 @@
           </div>
         {% endif %}
         {# End - comement #}
-
-        {# Begin - newsletter #}
-        <div>
-          {{ "Newsletter"|t }}:
-          {% if paragraph.field_vih_ocp_newsletter.value %}
-            {{ "yes"|t }}
-          {% else %}
-            {{ "no"|t }}
-          {% endif %}
-        </div>
-        {# End - newsletter #}
 
     </div>
 </div>

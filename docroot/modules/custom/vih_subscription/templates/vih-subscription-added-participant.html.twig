@@ -7,47 +7,6 @@
         </div>
         <div class="boxy__body">
             <h5>{{ addedParticipant['firstName'] }} {{ addedParticipant['lastName'] }}</h5>
-            {% if addedParticipant['cpr'] %}
-              <div>
-                {{ "CPR"|t }}: {{ addedParticipant['cpr'] }}
-              </div>
-            {% endif %}
-            {% if addedParticipant['email'] %}
-              <div>
-                {{ "Email"|t }}: {{ addedParticipant['email'] }}
-              </div>
-            {% endif %}
-            {% if addedParticipant['address'] %}
-              <div>
-                {{ "Address"|t }}: {{ addedParticipant['address'] }}
-                {% if addedParticipant['house'] %}
-                  {% if addedParticipant['house']['houseNumber'] %}
-                    {{ addedParticipant['house']['houseNumber'] }},
-                  {% endif %}
-                  {% if addedParticipant['house']['houseLetter'] %}
-                    {{ addedParticipant['house']['houseLetter'] }},
-                  {% endif %}
-                  {% if addedParticipant['house']['houseFloor'] %}
-                    {{ addedParticipant['house']['houseFloor'] }}
-                  {% endif %}
-                {% endif %}
-              </div>
-            {% endif %}
-            {% if addedParticipant['city'] %}
-              <div>
-                {{ "City"|t }}:
-                {% if addedParticipant['zip'] %}
-                    {{ addedParticipant['zip'] }}
-                {% endif %}
-                {{ addedParticipant['city'] }}
-              </div>
-            {% endif %}
-            {% if addedParticipant['country'] %}
-              <div>
-                {{ "Country"|t }}:
-                {{ addedParticipant['country'] }}
-              </div>
-            {% endif %}
             <ul>
                 {% for addedParticipantOption in addedParticipant['orderedOptions'] %}
                     {% if addedParticipantOption['option']['name'] %}
@@ -64,22 +23,6 @@
                     {% endif %}
                 {% endfor %}
             </ul>
-
-            {% if (addedParticipant['comment']) %}
-              <div>
-                {{ "Comment"|t }}: {{ addedParticipant['comment'] }}
-              </div>
-            {% endif %}
-
-            <div>
-              {{ "Newsletter"|t }}:
-              {% if addedParticipant['newsletter'] %}
-                {{ "yes"|t }}
-              {% else %}
-                {{ "no"|t }}
-              {% endif %}
-            </div>
-
             <hr>
 
             {{ container['controlButtons']["editButton-#{addedParticipantKey}"] }}
