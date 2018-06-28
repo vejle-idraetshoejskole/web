@@ -853,7 +853,7 @@ ignored_config_entities:
   1702: ~field.field.taxonomy_term.questions.field_vies_answer
   1704: ~field.field.taxonomy_term.questions.field_vies_question_type
   1706: ~field.field.taxonomy_term.vih_class.field_metatag
-  1708: ~field.field.taxonomy_term.vih_class.field_vies_questions
+  1708: ~field.field.taxonomy_term.vih_class.field_questions
   1710: ~field.field.taxonomy_term.vih_class.field_short_description
   1712: ~field.field.taxonomy_term.vih_class.field_vih_class_class_packages
   1714: ~field.field.taxonomy_term.vih_class.field_vih_class_color
@@ -1072,7 +1072,7 @@ ignored_config_entities:
   2140: ~field.storage.scheduled_update.field_status
   2142: ~field.storage.scheduled_update.field_vih_usu_status
   2144: ~field.storage.taxonomy_term.field_metatag
-  2146: ~field.storage.taxonomy_term.field_vies_questions
+  2146: ~field.storage.taxonomy_term.field_questions
   2148: ~field.storage.taxonomy_term.field_short_description
   2150: ~field.storage.taxonomy_term.field_vies_answer
   2152: ~field.storage.taxonomy_term.field_vies_question_type
@@ -1274,15 +1274,16 @@ ignored_config_entities:
   2544: ~views.view.vih_my_classes_terms
   2546: ~views.view.vih_news_list_advanced
   2548: ~views.view.vih_news_teaser
-  2550: ~views.view.vih_search
-  2552: ~views.view.vih_short_course_list
-  2554: ~views.view.vih_short_courses
-  2556: ~views.view.watchdog
-  2558: ~views.view.who_s_new
-  2560: ~views.view.who_s_online
-  2562: '# No ignore config split'
-  2564: ~config_split.config_split.vih_functionality
-  2566: ~config_split.config_split.vies_functionality
+  2550: ~views.view.vih_content_grid
+  2552: ~views.view.vih_search
+  2554: ~views.view.vih_short_course_list
+  2556: ~views.view.vih_short_courses
+  2558: ~views.view.watchdog
+  2560: ~views.view.who_s_new
+  2562: ~views.view.who_s_online
+  2564: '# No ignore config split'
+  2566: ~config_split.config_split.vih_functionality
+  2568: ~config_split.config_split.vies_functionality
 _core:
   default_config_hash: UVH1aJ4b44UM-VdPVN7hNNuuVqfReJxwfVeDQH1Hvsk
 langcode: da
