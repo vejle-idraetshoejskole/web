@@ -70,6 +70,17 @@ $md-page-layout-content-inner-padding-bottom: 60px;
     }
   }
 
+  .form-type-date {
+
+    &.form-inline {
+      width: 200px;
+
+      .form-control {
+        width: 100%;
+      }
+    }
+  }
+
   .form-type-tel {
 
     &.form-inline {
