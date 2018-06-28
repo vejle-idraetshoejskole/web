@@ -18,6 +18,6 @@ default_value_callback: ''
 settings:
   min: null
   max: null
-  prefix: DKK
+  prefix: 'DKK '
   suffix: ''
 field_type: decimal

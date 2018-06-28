@@ -48,7 +48,7 @@ content:
     region: content
     label: above
     settings:
-      link: true
+      link: false
     third_party_settings: {  }
   field_vih_sco_persons:
     type: entity_reference_revisions_entity_view
