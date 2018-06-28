@@ -505,7 +505,7 @@ display:
   embed_teaser:
     display_plugin: embed
     id: embed_teaser
-    display_title: 'Embed - list advanced'
+    display_title: 'Embed - teaser'
     position: 2
     display_options:
       display_extenders:
