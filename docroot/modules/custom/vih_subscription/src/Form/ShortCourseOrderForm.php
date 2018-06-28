@@ -11,6 +11,7 @@ use Drupal\Component\Utility\Crypt;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\HtmlCommand;
 use Drupal\Core\Ajax\InvokeCommand;
+use Drupal\Core\Ajax\RemoveCommand;
 use Drupal\Core\Ajax\ReplaceCommand;
 use Drupal\Core\Field\Plugin\Field\FieldFormatter;
 use Drupal\Core\Form\FormBase;
@@ -454,7 +455,7 @@ class ShortCourseOrderForm extends FormBase {
     $form['actions']['submit'] = array(
       '#type' => 'submit',
       '#id' => 'vih-course-submit',
-      '#value' => $this->t('Continue'),
+      '#value' => $this->t('Continue registration'),
       '#attributes' => array('class' => array('btn-success')),
       '#limit_validation_errors' => array(
         ['newParticipantContainer', 'newParticipantFieldset', 'firstName'],
@@ -691,6 +692,7 @@ class ShortCourseOrderForm extends FormBase {
 
     //checking for any errors
     if ($form_state->hasAnyErrors()) {
+      $response->addCommand(new RemoveCommand('#messages'));
       $response->addCommand(new HtmlCommand('#status_messages', $form['status_messages']));
       //redrawing elements
       $response->addCommand(new ReplaceCommand('#new-participant-container-wrapper', $form['newParticipantContainer']));
@@ -710,7 +712,7 @@ class ShortCourseOrderForm extends FormBase {
 
     //resetting the error, if any
     $response->addCommand(new HtmlCommand('#status_messages', $form['status_messages']));
-    
+
     //move suboptions containers to the right places in DOM
     $response->addCommand(new InvokeCommand(NULL, 'moveSuboptionsContainer'));
     

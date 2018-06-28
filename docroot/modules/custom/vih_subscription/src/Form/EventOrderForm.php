@@ -90,7 +90,7 @@ class EventOrderForm extends FormBase {
     $form['status_messages'] = [
       '#type' => 'status_messages',
       '#weight' => -10,
-      '#prefix' => '<div id="messages">',
+      '#prefix' => '<div id="status_messages">',
       '#suffix' => '</div>'
     ];
 
@@ -239,7 +239,7 @@ class EventOrderForm extends FormBase {
     $form['actions']['submit'] = array(
       '#type' => 'submit',
       '#id' => 'vih-event-submit',
-      '#value' => $this->t('Continue'),
+      '#value' => $this->t('Continue registration'),
       '#attributes' => array('class' => array('btn-success')),
       '#limit_validation_errors' => array(
         ['newParticipantContainer', 'newParticipantFieldset', 'firstName'],
