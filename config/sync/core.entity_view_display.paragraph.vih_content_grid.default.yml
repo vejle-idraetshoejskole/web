@@ -16,15 +16,6 @@ targetEntityType: paragraph
 bundle: vih_content_grid
 mode: default
 content:
-  field_vih_cg_node_ref:
-    weight: 1
-    label: hidden
-    settings:
-      view_mode: teaser
-      link: false
-    third_party_settings: {  }
-    type: entity_reference_entity_view
-    region: content
   field_vih_heading:
     weight: 0
     label: hidden
@@ -34,7 +25,7 @@ content:
     type: string
     region: content
   field_vih_link:
-    weight: 2
+    weight: 1
     label: hidden
     settings:
       trim_length: null
@@ -48,3 +39,4 @@ content:
 hidden:
   field_vih_background_color: true
   field_vih_background_img: true
+  field_vih_cg_node_ref: true

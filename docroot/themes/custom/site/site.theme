@@ -670,18 +670,22 @@ function site_preprocess_paragraph__class_package_accordion(&$variables) {
  * Removes the nodes references that do not have the selected language translation.
  */
 function site_preprocess_paragraph__vih_content_grid(&$variables) {
-  
-  $paragraph = $variables['elements']['#paragraph'];
-  $currentLang = \Drupal::languageManager()->getCurrentLanguage()->getId();
-  $translated_items = array();
-  foreach ($paragraph->field_vih_cg_node_ref->referencedEntities() as $delta => $refNode) {
-    if (!$refNode->hasTranslation($currentLang)) {
-      $translated_items[] = $variables['content']['field_vih_cg_node_ref'][$delta];
+  $paragraph = $variables['paragraph'];
+  $ids = [];
+
+  if ($fields = $paragraph->get('field_vih_cg_node_ref')->getValue()) {
+
+    foreach($fields as $field) {
+      $ids[] = $field['target_id'];
     }
-    unset($variables['content']['field_vih_cg_node_ref'][$delta]);
-  }
-  foreach($translated_items as $key => $translated_item){
-    $variables['content']['field_vih_scg_classes'][$key] = $translated_item;
+
+    $contextual_filter = implode('+', $ids);
+
+    if (!empty(views_get_view_result('vih_content_grid', 'embed_teaser', $contextual_filter))) {
+      // Result not empty, unsetting the empty message.
+      unset($variables['content']['field_vih_empty_message']);
+      $variables['content']['embedded_view'] = views_embed_view('vih_content_grid', 'embed_teaser', $contextual_filter);
+    }
   }
 }
 
