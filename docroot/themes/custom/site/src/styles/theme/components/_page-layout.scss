@@ -23,6 +23,75 @@ $md-page-layout-content-inner-padding-bottom: 60px;
 // Styling
 // --------------------------------------------------
 
+.icon.glyphicon {
+  font-family: 'Glyphicons Halflings' !important;
+}
+
+// Webforms
+.webform-submission-form {
+
+  .table {
+
+    td {
+      vertical-align: middle;
+
+      > .form-item {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .btn {
+
+    + .form-item,
+    + .btn {
+      margin-left: 10px;
+    }
+  }
+
+  .webform-multiple-table {
+
+    thead {
+      display: none;
+    }
+  }
+
+  .webform-multiple-table--operations {
+    padding-left: floor( ($grid-gutter-width / 2) );
+    padding-right: floor( ($grid-gutter-width / 2) );
+
+    .btn {
+      padding-left: $padding-base-horizontal;
+
+      &:after,
+      &:before {
+        display: none;
+      }
+    }
+  }
+
+  .form-type-tel {
+
+    &.form-inline {
+
+      .control-label {
+        margin-bottom: 5px;
+      }
+    }
+
+    .intl-tel-input {
+      display: block;
+    }
+  }
+
+  .form-group {
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
 .region-header {
 
   .alert {
