@@ -12,17 +12,30 @@ view_mode ? view_mode|clean_class,
         <div class="partial__body">
             <div class="row">
                 <div class="col-xs-12 col-sm-6">
+                  {# Begin - event #}
+                  {{ content.field_vih_eo_event }}
+                  {# End - event #}
+                </div>
+                <div class="col-xs-12 col-sm-6">
 
-                    <div class="partial">
-                        <div class="partial__body">
+                  {# Begin - price #}
+                  {% if content.field_vih_eo_price %}
+                      <!-- Begin - price -->
+                      <div class="boxy boxy--price">
+                          <div class="boxy__heading">
+                              <h2 class="boxy__heading__title heading-h4">{{ "Total price" | trans }}</h2>
+                          </div>
 
-                            {# Begin - event #}
-                            {{ content.field_vih_eo_event }}
-                            {# End - event #}
+                          <div class="boxy__body">
+                            {{ content.field_vih_eo_price }}
+                          </div>
+                      </div>
+                      <!-- End - price -->
+                  {% endif %}
+                  {# End - price #}
 
-                        </div>
-                    </div>
-
+                </div>
+                <div class="col-xs-12 ">
                     {# Begin - participants #}
                     {% if node.field_vih_eo_persons.value %}
                         <div class="partial partial--participants">
@@ -37,25 +50,6 @@ view_mode ? view_mode|clean_class,
                         </div>
                     {% endif %}
                     {# End - participants #}
-
-                </div>
-                <div class="col-xs-12 col-sm-6">
-
-                    {# Begin - price #}
-                    {% if content.field_vih_eo_price %}
-                        <!-- Begin - price -->
-                        <div class="boxy boxy--price">
-                            <div class="boxy__heading">
-                                <h2 class="boxy__heading__title heading-h4">{{ "Total price" | trans }}</h2>
-                            </div>
-
-                            <div class="boxy__body">
-                                {{ content.field_vih_eo_price }}
-                            </div>
-                        </div>
-                        <!-- End - price -->
-                    {% endif %}
-                    {# End - price #}
 
                 </div>
             </div>

@@ -159,6 +159,11 @@ class ShortCourseOrderForm extends FormBase {
 
     if ($participant_form) {
       if (count($addedParticipants) + $personsSubscribed < $personsLimit) {
+        $form['newParticipantContainer']['newParticipantFieldset'] = [
+          '#type' => 'container',
+          '#attributes' => ['class' => ['partial__body']],
+          '#prefix' => '<div class="partial__heading"><h4 class="partial__heading__title">' . $this->t('Personlige oplysninger') . '</h4></div>',
+        ];
         $form['newParticipantContainer']['newParticipantFieldset']['firstName'] = array(
           '#type' => 'textfield',
           '#title' => $this->t('Firstname'),
@@ -184,12 +189,11 @@ class ShortCourseOrderForm extends FormBase {
         );
 
         if (empty($addedParticipants)) {
-          //Do not collapse form if no participants added
+          // Do not collapse form if no participants added.
           $collapse_toggle_class = 'class = "hidden"';
           $collapsed_elements_class = 'class = "collapse in"';
-          //Disable submit button and hide extra submit button if no participants added
+          // Disable submit button if no participants added.
           $form['actions']['submit']['#attributes']['class'][] = 'disabled';
-          $form['extra_actions']['submit']['#attributes']['class'][] = 'hidden';
         }
         else {
           // Collapse form if any participants added.
@@ -322,7 +326,7 @@ class ShortCourseOrderForm extends FormBase {
           '#id' => 'add-participant-options',
           '#name' => 'add-participant-options',
           '#type' => 'submit',
-          '#value' => $this->t('Submit'),
+          '#value' => $this->t('Add'),
           '#submit' => array('::addParticipantOptions'),
           '#ajax' => [
             'callback' => '::ajaxAddRemoveParticipantOptionsCallback',
@@ -347,8 +351,9 @@ class ShortCourseOrderForm extends FormBase {
         '#id' => 'add-participant-options',
         '#name' => 'add-participant-options',
         '#type' => 'submit',
-        '#value' => $this->t('Add'),
+        '#value' => $this->t('Add more'),
         '#submit' => ['::editParticipantOptions'],
+        '#attributes' => ['class' => ['btn-success']],
         '#ajax' => [
           'callback' => '::ajaxAddRemoveParticipantOptionsCallback',
           'progress' => [
@@ -462,26 +467,9 @@ class ShortCourseOrderForm extends FormBase {
       '#submit' => array('::submitForm')
     );
     
-    $form['extra_actions']['submit'] = array(
-      '#type' => 'submit',
-      '#id' => 'vih-course-submit-extra',
-      '#value' => $this->t('Continue'),
-      '#attributes' => array('class' => array('btn-success')),
-      '#limit_validation_errors' => array(
-        ['newParticipantContainer', 'newParticipantFieldset', 'firstName'],
-        ['newParticipantContainer', 'newParticipantFieldset', 'lastName'],
-        ['newParticipantContainer', 'newParticipantFieldset', 'email'],
-        ['newParticipantContainer', 'newParticipantFieldset', 'cpr'],
-        ['terms_and_conditions'],
-        ['order_comment']
-      ),
-      '#submit' => array('::submitForm')
-    );
-
-    //Disable submit button and hide extra submit button if no participants added
+    // Disable submit button if no participants added.
     if(empty($addedParticipants)){
       $form['actions']['submit']['#attributes']['class'][] = 'disabled';
-      $form['extra_actions']['submit']['#attributes']['class'][] = 'hidden';
     }
     //END FORM CONTROLS //
 
@@ -726,15 +714,13 @@ class ShortCourseOrderForm extends FormBase {
     //move suboptions containers to the right places in DOM
     $response->addCommand(new InvokeCommand(NULL, 'moveSuboptionsContainer'));
     
-    //Enable submit button and show extra submit button if participants added
+    // Enable submit button if participants added.
     if (!empty($form['addedParticipantsContainer']['#addedParticipants'])) {
-      $response->addCommand(new InvokeCommand('#vih-course-submit-extra', 'removeClass', ['hidden']));
       $response->addCommand(new InvokeCommand('#vih-course-submit', 'removeClass', ['disabled']));
       $response->addCommand(new InvokeCommand('#form-bottom-wrapper', 'removeClass', ['hidden']));
     }
     else {
-      //Disable submit button and hide extra submit button if no participants added
-      $response->addCommand(new InvokeCommand('#vih-course-submit-extra', 'addClass', ['hidden']));
+      // Disable submit button if no participants added.
       $response->addCommand(new InvokeCommand('#form-bottom-wrapper', 'addClass', ['hidden']));
       $response->addCommand(new InvokeCommand('#vih-course-submit', 'addClass', ['disabled']));
     }
@@ -763,7 +749,7 @@ class ShortCourseOrderForm extends FormBase {
     }
 
     //submit button
-    if ($triggeringElement['#id'] == 'vih-course-submit' or $triggeringElement['#id'] == 'vih-course-submit-extra') {
+    if ($triggeringElement['#id'] == 'vih-course-submit') {
       $form_state->clearErrors();
 
       $addedParticipants = $form_state->get('addedParticipants');

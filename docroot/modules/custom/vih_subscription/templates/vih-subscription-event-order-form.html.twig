@@ -5,6 +5,7 @@
 <section class="sectioned sectioned--content" {{ content_attributes.addClass('content') }}>
     <div class="sectioned__inner">
         <div class="container">
+            <div id="status_messages"></div>
             <div class="sectioned__heading">
                 <h2 class="sectioned__heading__title">
                     {{ "Sign up for @title"|t({ '@title': form['#event']['title'] }) }}
@@ -35,14 +36,7 @@
                 <div class="col-xs-12 col-sm-6">
                   {# Participant container START #}
                   <div class="partial">
-                    <div class="partial__heading">
-                      <h4 class="partial__heading__title">
-                        {{ "Personlige oplysninger" | t }}
-                      </h4>
-                    </div>
-                    <div class="partial__body">
-                      {{ form['newParticipantContainer'] }}
-                    </div>
+                    {{ form['newParticipantContainer'] }}
                   </div>
 
                   {# Options START #}

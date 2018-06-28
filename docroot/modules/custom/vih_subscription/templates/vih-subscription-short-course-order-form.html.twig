@@ -5,7 +5,7 @@
 <section class="sectioned sectioned--content">
     <div class="sectioned__inner">
         <div class="container">
-
+            <div id="status_messages"></div>
             <div class="partial">
                 <div class="partial__heading">
                     <h2 class="partial__heading__title">
@@ -21,25 +21,14 @@
                 </div>
             </div>
             <!-- Begin - participants -->
-            <div class="partial partial--participants">
-                <div class="partial__body">
-                  {{ form['addedParticipantsContainer'] }}
-                </div>
-            </div>
+            {{ form['addedParticipantsContainer'] }}
             <!-- End - participants -->
             <hr>
             <div class="row">
                 <div class="col-xs-12 col-sm-6">
                     {# Participant container START #}
                     <div class="partial">
-                      <div class="partial__heading">
-                        <h4 class="partial__heading__title">
-                          {{ "Personlige oplysninger" | t }}
-                        </h4>
-                      </div>
-                      <div class="partial__body">
-                        {{ form['newParticipantContainer'] }}
-                      </div>
+                      {{ form['newParticipantContainer'] }}
                     </div>
 
                     {# Options START #}

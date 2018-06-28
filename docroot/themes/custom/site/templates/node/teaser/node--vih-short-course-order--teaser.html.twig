@@ -12,17 +12,26 @@
         <div class="partial__body">
             <div class="row">
                 <div class="col-xs-12 col-sm-6">
+                    {# Begin - course #}
+                    {{ content.field_vih_sco_course }}
+                    {# End - course #}
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                  {# Begin - price #}
+                  {% if node.field_vih_sco_price.value %}
+                      <div class="boxy boxy--price">
+                          <div class="boxy__heading">
+                              <h2 class="boxy__heading__title heading-h4">{{ "Total price" | trans }}</h2>
+                          </div>
 
-                    <div class="partial">
-                        <div class="partial__body">
-
-                            {# Begin - course #}
-                            {{ content.field_vih_sco_course }}
-                            {# End - course #}
-
-                        </div>
-                    </div>
-
+                          <div class="boxy__body">
+                            {{ content.field_vih_sco_price }}
+                          </div>
+                      </div>
+                  {% endif %}
+                  {# End - price #}
+                </div>
+                <div class="col-xs-12">
                     {# Begin - ordered options #}
                     {% if node.field_vih_sco_ordered_options.value %}
                         <div class="partial partial--ordered-options">
@@ -37,6 +46,8 @@
                         </div>
                     {% endif %}
                     {# End - ordered options #}
+                </div>
+                <div class="col-xs-12">
 
                     {# Begin - persons #}
                     {% if node.field_vih_sco_persons.value %}
@@ -52,39 +63,21 @@
                         </div>
                     {% endif %}
                     {# End - persons #}
-
                 </div>
-                <div class="col-xs-12 col-sm-6">
-
-                    {# Begin - price #}
-                    {% if node.field_vih_sco_price.value %}
-                        <div class="boxy boxy--price">
-                            <div class="boxy__heading">
-                                <h2 class="boxy__heading__title heading-h4">{{ "Total price" | trans }}</h2>
-                            </div>
-
-                            <div class="boxy__body">
-                                {{ content.field_vih_sco_price }}
-                            </div>
-                        </div>
-                    {% endif %}
-                    {# End - price #}
-
-                    {% if node.field_vih_sco_comment.value %}
+                {% if node.field_vih_sco_comment.value %}
+                    <div class="col-xs-12">
                         <!-- Begin - comment -->
                         <div class="boxy">
                             <div class="boxy__heading">
                                 <h2 class="boxy__heading__title heading-h4">{{ "Comment" | trans }}</h2>
                             </div>
-
                             <div class="boxy__body">
                                 {{ content.field_vih_sco_comment }}
                             </div>
                         </div>
                         <!-- End - comment -->
-                    {% endif %}
-
-                </div>
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>

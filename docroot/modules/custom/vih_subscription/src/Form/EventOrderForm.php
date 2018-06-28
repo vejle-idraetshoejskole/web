@@ -118,6 +118,8 @@ class EventOrderForm extends FormBase {
       if (count($addedParticipants) + $personsSubscribed < $personsLimit) { //not allowing to have more fieldsets that the event have capacity for
         $form['newParticipantContainer']['newParticipantFieldset'] = [
           '#type' => 'container',
+          '#attributes' => ['class' => ['partial__body']],
+          '#prefix' => '<div class="partial__heading"><h4 class="partial__heading__title">' . $this->t('Personlige oplysninger') . '</h4></div>',
         ];
         $form['newParticipantContainer']['newParticipantFieldset']['firstName'] = array(
           '#type' => 'textfield',
@@ -146,13 +148,13 @@ class EventOrderForm extends FormBase {
           '#id' => 'add-participant',
           '#name' => 'add-participant',
           '#type' => 'submit',
-          '#value' => $this->t('Submit'),
+          '#value' => $this->t('Add'),
           '#submit' => array('::addParticipant'),
           '#ajax' => [
             'callback' => '::ajaxAddRemoveParticipantCallback',
-            'progress' => array(
-              'type' => 'none'
-            )
+            'progress' => [
+              'type' => 'none',
+            ],
           ],
         );
       }
@@ -165,8 +167,9 @@ class EventOrderForm extends FormBase {
     else {
       $form['newParticipantContainer']['addParticipant'] = [
         '#type' => 'submit',
-        '#value' => $this->t('Add'),
+        '#value' => $this->t('Add more'),
         '#submit' => ['::editParticipant'],
+        '#attributes' => ['class' => ['btn-success']],
         '#ajax' => [
           'callback' => '::ajaxAddRemoveParticipantCallback',
           'progress' => [
@@ -246,29 +249,10 @@ class EventOrderForm extends FormBase {
       ),
       '#submit' => array('::submitForm')
     );
-    
-    //Extra action button
-    $form['extra_actions'] = [
-      '#type' => 'actions',
-    ];
-    
-    $form['extra_actions']['submit'] = array(
-      '#type' => 'submit',
-      '#id' => 'vih-event-submit-extra',
-      '#value' => $this->t('Continue'),
-      '#attributes' => array('class' => array('btn-success' )),
-      '#limit_validation_errors' => array(
-        ['newParticipantContainer', 'newParticipantFieldset', 'firstName'],
-        ['newParticipantContainer', 'newParticipantFieldset', 'lastName'],
-        ['newParticipantContainer', 'newParticipantFieldset', 'email'],
-        ['terms_and_conditions'],
-      ),
-      '#submit' => array('::submitForm'),
-    );
-    //Disable submit and hide extra submit button if no participants added
+
+    // Disable submit if no participants added.
     if(empty($addedParticipants)){
       $form['actions']['submit']['#attributes']['class'][] = 'disabled';
-      $form['extra_actions']['submit']['#attributes']['class'][] = 'hidden';
     }
     //END FORM CONTROLS //
 
@@ -416,15 +400,13 @@ class EventOrderForm extends FormBase {
     //resetting the error, if any
     $response->addCommand(new HtmlCommand('#status_messages', $form['status_messages']));
     
-    //Enable submit button and show extra submit button if participants added
+    // Enable submit button if participants added.
     if (!empty($form['addedParticipantsContainer']['#addedParticipants'])) {
-      $response->addCommand(new InvokeCommand('#vih-event-submit-extra', 'removeClass', ['hidden']));
       $response->addCommand(new InvokeCommand('#vih-event-submit', 'removeClass', ['disabled']));
       $response->addCommand(new InvokeCommand('#form-bottom-wrapper', 'removeClass', ['hidden']));
     }
     else {
-      //Disable submit button and hide extra submit button if no participants added
-      $response->addCommand(new InvokeCommand('#vih-event-submit-extra', 'addClass', ['hidden']));
+      // Disable submit button if no participants added.
       $response->addCommand(new InvokeCommand('#vih-event-submit', 'addClass', ['disabled']));
       $response->addCommand(new InvokeCommand('#form-bottom-wrapper', 'addClass', ['hidden']));
     }
@@ -439,7 +421,7 @@ class EventOrderForm extends FormBase {
     $triggeringElement = $form_state->getTriggeringElement();
 
     //submit button
-    if ($triggeringElement['#id'] == 'vih-event-submit' or $triggeringElement['#id'] == 'vih-event-submit-extra') {
+    if ($triggeringElement['#id'] == 'vih-event-submit') {
       $form_state->clearErrors();
 
       $addedParticipants = $form_state->get('addedParticipants');

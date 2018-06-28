@@ -1,0 +1,51 @@
+{#
+/**
+ * @file
+ * Theme override for a person fields on vih_subscription confirmation page.
+ *
+ * @see docroot/themes/contrib/bootstrap/templates/field/field.html.twig
+ */
+#}
+{%
+  set classes = [
+  'field',
+  'field--name-' ~ field_name|clean_class,
+  'field--type-' ~ field_type|clean_class,
+  'field--label-' ~ label_display,
+  'row',
+]
+%}
+{%
+  set title_classes = [
+  'field--label',
+  label_display == 'visually_hidden' ? 'sr-only',
+]
+%}
+
+{% if label_hidden %}
+  {% if multiple %}
+    <div{{ attributes.addClass(classes, 'field--items') }}>
+      {% for item in items %}
+        <div{{ item.attributes.addClass('field--item', 'col-xs-12', 'col-md-6') }}>{{ item.content }}</div>
+      {% endfor %}
+    </div>
+  {% else %}
+    {% for item in items %}
+      <div{{ attributes.addClass(classes, 'field--item', 'col-xs-12') }}>{{ item.content }}</div>
+    {% endfor %}
+  {% endif %}
+{% else %}
+  <div{{ attributes.addClass(classes) }}>
+    <div{{ title_attributes.addClass(title_classes) }}>{{ label }}</div>
+    {% if multiple %}
+    <div class="field--items">
+      {% endif %}
+      {% for item in items %}
+        <div{{ item.attributes.addClass('field--item', 'col-xs-12', 'col-md-6')}}>{{ item.content
+          }}</div>
+      {% endfor %}
+      {% if multiple %}
+    </div>
+    {% endif %}
+  </div>
+{% endif %}

@@ -1,32 +1,35 @@
-{% for addedParticipantKey, addedParticipant in container['#addedParticipants'] %}
-    <div class="boxy boxy--added-participant">
-        <div class="boxy__heading">
-            <h4 class="boxy__heading__title">
-                {{ 'Participant' | trans }}
-            </h4>
-        </div>
-        <div class="boxy__body">
-            <h5>{{ addedParticipant['firstName'] }} {{ addedParticipant['lastName'] }}</h5>
-            <ul>
-                {% for addedParticipantOption in addedParticipant['orderedOptions'] %}
-                    {% if addedParticipantOption['option']['name'] %}
-                        <li>
-                            <b>{{ addedParticipantOption['optionGroup']['name'] }}</b><br/>
-                            {{ addedParticipantOption['option']['name'] }}
-                            {% if addedParticipantOption['suboption']['name'] %}
-                                / {{ addedParticipantOption['suboption']['name'] }}
-                            {% endif %}
-                            {% if (addedParticipantOption['option']['additionalPrice']) %}
-                              (+ kr. {{ addedParticipantOption['option']['additionalPrice'] }})
-                            {% endif %}
-                        </li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
-            <hr>
-
-            {{ container['controlButtons']["editButton-#{addedParticipantKey}"] }}
-            {{ container['controlButtons']["removeButton-#{addedParticipantKey}"] }}
-        </div>
+<div class="partial partial--participants">
+    {% if (container['#addedParticipants']) %}
+    <div class="partial__heading">
+        <h3 class="partial__heading__title">{{ 'Participant' | trans }}</h3>
     </div>
-{% endfor %}
+    {% endif %}
+    <div class="partial__body">
+        {% for addedParticipantKey, addedParticipant in container['#addedParticipants'] %}
+            <div class="boxy boxy--added-participant">
+                <div class="boxy__body">
+                    {{ container['controlButtons']["editButton-#{addedParticipantKey}"] }}
+                    {{ container['controlButtons']["removeButton-#{addedParticipantKey}"] }}
+                    <hr>
+                    <h5>{{ addedParticipant['firstName'] }} {{ addedParticipant['lastName'] }}</h5>
+                    <ul>
+                        {% for addedParticipantOption in addedParticipant['orderedOptions'] %}
+                            {% if addedParticipantOption['option']['name'] %}
+                                <li>
+                                    <b>{{ addedParticipantOption['optionGroup']['name'] }}</b><br/>
+                                    {{ addedParticipantOption['option']['name'] }}
+                                    {% if addedParticipantOption['suboption']['name'] %}
+                                        / {{ addedParticipantOption['suboption']['name'] }}
+                                    {% endif %}
+                                    {% if (addedParticipantOption['option']['additionalPrice']) %}
+                                      (+ kr. {{ addedParticipantOption['option']['additionalPrice'] }})
+                                    {% endif %}
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
