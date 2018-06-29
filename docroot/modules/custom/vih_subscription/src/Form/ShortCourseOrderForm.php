@@ -352,7 +352,7 @@ class ShortCourseOrderForm extends FormBase {
         '#id' => 'add-participant-options',
         '#name' => 'add-participant-options',
         '#type' => 'submit',
-        '#value' => $this->t('Add more'),
+        '#value' => $this->t('Add another'),
         '#submit' => ['::editParticipantOptions'],
         '#attributes' => ['class' => ['btn-success']],
         '#ajax' => [
