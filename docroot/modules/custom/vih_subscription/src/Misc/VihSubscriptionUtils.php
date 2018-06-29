@@ -40,7 +40,7 @@ class VihSubscriptionUtils {
       'content-type' => 'text/html; charset=UTF-8; format=flowed; delsp=yes',
       'MIME-Version' => '1.0',
       'reply-to' => $message['from'],
-      'from' => $message['sender'] . ' <' . $message['from'] . '>'
+      'from' => $message['sender']
     );
 
     if (isset($message['Cc'])) {
