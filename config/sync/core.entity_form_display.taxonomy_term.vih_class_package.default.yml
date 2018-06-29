@@ -122,7 +122,7 @@ content:
     type: entity_browser_entity_reference
     weight: 22
     settings:
-      entity_browser: image_browser
+      entity_browser: media_browser
       field_widget_display: rendered_entity
       field_widget_edit: true
       field_widget_remove: true
@@ -143,6 +143,9 @@ content:
       add_mode: modal
       form_display_mode: default
       default_paragraph_type: _none
+      features:
+        duplicate: duplicate
+        collapse_edit_all: collapse_edit_all
     third_party_settings: {  }
     type: paragraphs
     region: content
