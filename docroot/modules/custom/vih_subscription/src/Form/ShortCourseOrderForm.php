@@ -1116,7 +1116,12 @@ class ShortCourseOrderForm extends FormBase {
         $optionCurrentUsageCount = $this->calculateOptionCurrentUsageCount($form_state, $optionGroupDelta, $optionGroup, $optionDelta, $option);
         $remainingAmount = $stockAmount - $optionCurrentUsageCount;
 
-        $optionGroupOptionsWithPrice[$optionDelta] .= ' ' . $this->t("@remaining available", ['@remaining' => $remainingAmount]);
+        if ($remainingAmount === 0) {
+          $optionGroupOptionsWithPrice[$optionDelta] .= ' - ' . $this->t('Sold out');
+        }
+        else {
+          $optionGroupOptionsWithPrice[$optionDelta] .= ' - ' . $this->t("@remaining available", ['@remaining' => $remainingAmount]);
+        }
       }
     }
 
