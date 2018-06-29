@@ -1079,7 +1079,7 @@ class ShortCourseOrderForm extends FormBase {
       $option = \Drupal::service('entity.repository')->getTranslationFromContext($option);
 
       $stockAmount = $option->field_vih_option_stock_amount->value;
-      if ($stockAmount) {
+      if (isset($stockAmount)) {
         $optionCurrentUsageCount = $this->calculateOptionCurrentUsageCount($form_state, $optionGroupDelta, $optionGroup, $optionDelta, $option);
         if ($optionCurrentUsageCount >= $stockAmount) {
           $optionGroupOptionsDisabled[$optionDelta] = $optionDelta;
@@ -1112,7 +1112,7 @@ class ShortCourseOrderForm extends FormBase {
       }
 
       $stockAmount = $option->field_vih_option_stock_amount->value;
-      if ($stockAmount) {
+      if (isset($stockAmount)) {
         $optionCurrentUsageCount = $this->calculateOptionCurrentUsageCount($form_state, $optionGroupDelta, $optionGroup, $optionDelta, $option);
         $remainingAmount = $stockAmount - $optionCurrentUsageCount;
 
