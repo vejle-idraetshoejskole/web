@@ -117,3 +117,4 @@ mailchimp.settings.yml
 !config/*/views_send.settings.yml
 !config/*/views.*
 !config/*/metatag.settings.yml
+!config/*/linkit.*

@@ -148,7 +148,11 @@
             },
             "acquia/lightning": {
                 "2972058 - Profile version number typo": "https://www.drupal.org/files/issues/2018-05-14/fix-version-string-2972058-4.patch"
+            },
+            "drupal/linkit": {
+                "2946234 - Webform entity missing": "https://www.drupal.org/files/issues/2018-05-09/linkit--webform-matcher.patch"
             }
+
         }
     }
 }
