@@ -1,0 +1,48 @@
+uuid: 79a7e66b-3d0a-4537-83be-8de332ff33da
+langcode: da
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+    - webform
+id: internal
+label: Intern
+description: ''
+matchers:
+  138d2504-44f8-4746-8510-cca952981003:
+    uuid: 138d2504-44f8-4746-8510-cca952981003
+    id: 'entity:node'
+    weight: 0
+    settings:
+      bundles:
+        event: event
+        news: news
+        page: page
+        vih_course_period: vih_course_period
+        vih_long_cource: vih_long_cource
+        vih_short_course: vih_short_course
+      group_by_bundle: false
+      include_unpublished: false
+      substitution_type: canonical
+      metadata: ''
+  9859665a-78e6-4a31-b6b1-ad018bdbb00b:
+    uuid: 9859665a-78e6-4a31-b6b1-ad018bdbb00b
+    id: 'entity:taxonomy_term'
+    weight: 0
+    settings:
+      bundles:
+        vih_class: vih_class
+        vih_class_package: vih_class_package
+      group_by_bundle: false
+      substitution_type: canonical
+      metadata: ''
+  d860375e-6135-4f9a-b990-cf8bd4398210:
+    uuid: d860375e-6135-4f9a-b990-cf8bd4398210
+    id: 'entity:webform'
+    weight: 0
+    settings:
+      metadata: ''
+      bundles: null
+      group_by_bundle: null
+      substitution_type: canonical
