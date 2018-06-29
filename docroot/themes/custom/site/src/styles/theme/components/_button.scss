@@ -170,6 +170,7 @@ $button-danger-icon-background: lighten($btn-danger-bg, 14%);
 
   // White
   &.btn-white {
+    @include button-variant($btn-default-color, $btn-default-bg, $btn-default-border);
 
     &:before {
       color: $btn-primary-color;
@@ -276,13 +277,12 @@ $button-danger-icon-background: lighten($btn-danger-bg, 14%);
     }
   }
 }
-.eu-cookie-compliance-default-button, .eu-cookie-withdraw-button{
+.eu-cookie-compliance-default-button,
+
+.eu-cookie-withdraw-button{
   font-family: unset;
   text-shadow: unset;
-  @extend .btn;
-  @extend .btn-white;
-}
-.btn-white {
+  @include button();
   @include button-variant($btn-default-color, $btn-default-bg, $btn-default-border);
 }
 
