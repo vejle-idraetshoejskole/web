@@ -43,6 +43,11 @@ class VihSubscriptionUtils {
       'from' => $message['sender'] . ' <' . $message['from'] . '>'
     );
 
+    if (isset($message['Cc'])) {
+      $message['headers']['Cc'] = $message['Cc'];
+      unset($message['Cc']);
+    }
+
     return $send_mail->mail($message);
   }
 

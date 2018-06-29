@@ -319,6 +319,13 @@ class SubscriptionSuccessfulController extends ControllerBase {
 
     // Add logo to message body.
     $message['body'] = $logo . $message['body'];
+
+    // Adding site-email as CC.
+    $system_site_config = \Drupal::config('system.site');
+    $site_email = $system_site_config->get('mail');
+
+    $message['Cc'] = $site_email;
+
     if (!empty($message)) {
       VihSubscriptionUtils::makeReplacements($message, $token, $replacement);
       VihSubscriptionUtils::sendMail($message);
