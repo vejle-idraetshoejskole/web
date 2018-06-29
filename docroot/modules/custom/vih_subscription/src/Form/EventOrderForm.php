@@ -167,7 +167,7 @@ class EventOrderForm extends FormBase {
     else {
       $form['newParticipantContainer']['addParticipant'] = [
         '#type' => 'submit',
-        '#value' => $this->t('Add more'),
+        '#value' => $this->t('Add another'),
         '#submit' => ['::editParticipant'],
         '#attributes' => ['class' => ['btn-success']],
         '#ajax' => [
