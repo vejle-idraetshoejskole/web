@@ -1,3 +1,166 @@
-@mixin button() {
-  @extend .btn;
+// |--------------------------------------------------------------------------
+// | Button
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .btn
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+$button-icon-wrapper-width: 45px;
+$button-arrow-width: 26px;
+
+// Variants
+$button-primary-icon-background: lighten($brand-primary, 10%);
+$button-secondary-icon-background: darken($btn-secondary-bg, 14%);
+$button-info-icon-background: lighten($brand-primary, 10%);
+$button-success-icon-background: lighten($btn-success-bg, 14%);
+$button-danger-icon-background: lighten($btn-danger-bg, 14%);
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin vih-button() {
+  display: inline-block;
+  margin-bottom: 0; // For input.btn
+  font-weight: $btn-font-weight;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
+  border: 1px solid transparent;
+  white-space: nowrap;
+  @include button-size($padding-base-vertical, $padding-base-horizontal, $font-size-base, $line-height-base, $btn-border-radius-base);
+  @include user-select(none);
+
+  &,
+  &:active,
+  &.active {
+    &:focus,
+    &.focus {
+      @include tab-focus;
+    }
+  }
+
+  &:hover,
+  &:focus,
+  &.focus {
+    color: $btn-default-color;
+    text-decoration: none;
+  }
+
+  &:active,
+  &.active {
+    outline: 0;
+    background-image: none;
+    @include box-shadow(inset 0 3px 5px rgba(0,0,0,.125));
+  }
+
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    cursor: $cursor-disabled;
+    @include opacity(.65);
+    @include box-shadow(none);
+  }
+
+  // The above is from bootstrap - below we override .btn
+  display: inline-block;
+
+  font-weight: $font-weight-bold;
+  text-transform: uppercase;
+
+  max-width: 100%;
+
+  white-space: normal;
+}
+
+// Arrow
+@mixin vih-button-arrow($color, $bg) {
+  position: relative;
+
+  overflow: hidden;
+  border: 0;
+
+  padding-left: floor(($button-icon-wrapper-width + $button-arrow-width + $padding-base-horizontal));
+
+  .icon {
+    display: none;
+  }
+
+  &:before {
+    @extend .icon;
+
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    width: $button-icon-wrapper-width;
+
+    content: unicode($icon-arrow-right);
+
+    font-size: 30px;
+  }
+
+  // The arrow
+  &:after {
+    position: absolute;
+
+    top: 50%;
+    left: $button-icon-wrapper-width;
+
+    z-index: 1;
+
+    content: "";
+
+    margin-top: floor( ( 0 - $button-arrow-width ) );
+
+    height: 0;
+    width: 0;
+    pointer-events: none;
+
+    border-style: solid;
+    border-color: rgba(136, 183, 213, 0);
+    border-width: $button-arrow-width;
+  }
+
+  &:before {
+    color: $color;
+    background-color: $bg;
+  }
+
+  &:after {
+    border-left-color: $bg;
+  }
+}
+
+// White
+@mixin vih-button-white() {
+  @include vih-button();
+  @include button-variant($btn-default-color, $btn-default-bg, $btn-default-border);
+  @include vih-button-arrow($btn-primary-color, $button-primary-icon-background);
+}
+
+// Primary
+@mixin vih-button-primary() {
+  @include vih-button();
+  @include button-variant($btn-primary-color, $btn-primary-bg, $btn-primary-border);
+  @include vih-button-arrow($btn-primary-color, $button-primary-icon-background);
+}
+
+// Secondary
+@mixin vih-button-secondary() {
+  @include vih-button();
+  @include button-variant($btn-secondary-color, $btn-secondary-bg, $btn-secondary-border);
+  @include vih-button-arrow($btn-secondary-color, $button-secondary-icon-background);
 }

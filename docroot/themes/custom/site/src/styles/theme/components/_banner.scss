@@ -60,9 +60,7 @@ $lg-banner-title-font-size: 46px;
     text-align: center;
 
     a {
-      @include button();
-
-      @include button-variant($btn-primary-color, $btn-primary-bg, $btn-primary-border);
+      @include vih-button-primary();
     }
   }
 }

@@ -17,13 +17,6 @@ $button-arrow-width: 26px;
 $button-sm-icon-wrapper-width: 30px;
 $button-sm-arrow-width: 14px;
 
-// Variants
-$button-primary-icon-background: lighten($brand-primary, 10%);
-$button-secondary-icon-background: darken($btn-secondary-bg, 14%);
-$button-info-icon-background: lighten($brand-primary, 10%);
-$button-success-icon-background: lighten($btn-success-bg, 14%);
-$button-danger-icon-background: lighten($btn-danger-bg, 14%);
-
 // --------------------------------------------------
 // Styling
 // --------------------------------------------------
@@ -282,8 +275,8 @@ $button-danger-icon-background: lighten($btn-danger-bg, 14%);
 .eu-cookie-withdraw-button{
   font-family: unset;
   text-shadow: unset;
-  @include button();
-  @include button-variant($btn-default-color, $btn-default-bg, $btn-default-border);
+
+  @include vih-button-white();
 }
 
 .text-right {

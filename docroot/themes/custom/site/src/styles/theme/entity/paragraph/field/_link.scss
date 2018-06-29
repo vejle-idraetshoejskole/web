@@ -20,7 +20,7 @@
     text-align: center;
 
     a {
-      @include button();
+      @include vih-button();
     }
   }
 }
@@ -37,7 +37,7 @@
     .field--name-field-vih-link {
 
       a {
-        @include button-variant($btn-primary-color, $btn-primary-bg, $btn-primary-border);
+        @include vih-button-primary();
       }
     }
   }
@@ -48,7 +48,7 @@
     .field--name-field-vih-link {
 
       a {
-        @include button-variant($btn-primary-color, $btn-primary-bg, $btn-primary-border);
+        @include vih-button-primary();
       }
     }
   }
@@ -59,7 +59,7 @@
     .field--name-field-vih-link {
 
       a {
-        @include button-variant($btn-primary-color, $btn-primary-bg, $btn-primary-border);
+        @include vih-button-primary();
       }
     }
   }
@@ -70,7 +70,7 @@
     .field--name-field-vih-link {
 
       a {
-        @include button-variant($btn-primary-color, $btn-primary-bg, $btn-primary-border);
+        @include vih-button-primary();
       }
     }
   }
@@ -81,7 +81,7 @@
     .field--name-field-vih-link {
 
       a {
-        @include button-variant($btn-default-color, $btn-default-bg, $btn-default-border);
+        @include vih-button-white();
       }
     }
   }
@@ -92,7 +92,7 @@
     .field--name-field-vih-link {
 
       a {
-        @include button-variant($btn-primary-color, $btn-primary-bg, $btn-primary-border);
+        @include vih-button-primary();
       }
     }
   }
