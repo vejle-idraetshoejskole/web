@@ -36,11 +36,13 @@ class VihSubscriptionUtils {
       $message['sender'] = \Drupal::config('system.site')->get('name');
     }
 
+    $message['sender'] = '=?UTF-8?B?' . base64_encode($message['sender']) . '?=';
+
     $message['headers'] = array(
       'content-type' => 'text/html; charset=UTF-8; format=flowed; delsp=yes',
       'MIME-Version' => '1.0',
       'reply-to' => $message['from'],
-      'from' => $message['sender']
+      'from' => $message['sender'] . ' <' . $message['from'] . '>'
     );
 
     if (isset($message['Cc'])) {
