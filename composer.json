@@ -151,8 +151,10 @@
             },
             "drupal/linkit": {
                 "2946234 - Webform entity missing": "https://www.drupal.org/files/issues/2018-05-09/linkit--webform-matcher.patch"
+            },
+            "drupal/entity_clone": {
+                "2945192 - Fatal error: Maximum function nesting level of '256' reached, aborting! With Support for sub-entity cloning patch": "https://www.drupal.org/files/issues/2018-07-02/max-nesting-level-2945192-10_0.patch"
             }
-
         }
     }
 }
