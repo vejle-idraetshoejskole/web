@@ -13,7 +13,7 @@ disabled: false
 conditions:
   request_path:
     id: request_path
-    pages: "/user/login\r\n/user/password"
+    pages: "/user/login\r\n/user/password\r\n/user/reset/*"
     negate: 0
     uuid: d2dc7172-7331-416f-b817-58ed161dc827
     context_mapping: {  }
