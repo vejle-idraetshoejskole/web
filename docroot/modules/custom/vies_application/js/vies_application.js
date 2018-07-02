@@ -8,7 +8,8 @@
         var $answer_container = _this.parents('.questions-inline-form').find('.field--name-field-vies-answer');
         console.log(_this.val());
         console.log($answer_container);
-        if (_this.val() == 'textfield') {
+        if (_this.val() == 'textfield'
+          || _this.val() == 'textarea') {
           $answer_container.hide();
         }
         else {
