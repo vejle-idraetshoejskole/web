@@ -45,7 +45,7 @@ class SubscriptionSuccessfulController extends ControllerBase {
       if (!empty($redirection_page_id)) {
         $redirect_url = Url::fromRoute('entity.node.canonical', array('node' => $redirection_page_id));
         $response = new RedirectResponse($redirect_url->toString());
-        $response->send();
+        return $response->send();
       }
       else {
         //the actual content comes from template file: templates/vih_subscription_thank_you_page.html.twig
