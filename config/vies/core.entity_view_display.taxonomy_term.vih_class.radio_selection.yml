@@ -69,6 +69,7 @@ content:
 hidden:
   description: true
   field_metatag: true
+  field_vies_questions: true
   field_vih_class_class_packages: true
   field_vih_class_color: true
   field_vih_paragraphs: true

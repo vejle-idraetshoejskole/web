@@ -50,8 +50,23 @@ function vies_application_theme() {
         'backlink' => NULL,
       ],
     ],
-    'vies_added_parents' => array(
+    'vies_added_parents' => [
       'render element' => 'container',
-    )
+    ],
   ];
 }
+
+/**
+ * Implements hook_inline_entity_form_entity_form_alter().
+ */
+function vies_application_inline_entity_form_entity_form_alter(&$entity_form,
+                                                   &$form_state) {
+  if ($entity_form['#entity_type'] == 'taxonomy_term'
+    && $entity_form['#bundle'] == 'questions') {
+    $i = 4;
+    $entity_form['#attributes']['class'] = ['questions-inline-form'];
+    $entity_form['field_vies_question_type']['widget']['#attributes']['class'] = ['questions-inline-form-type'];
+    $entity_form['#attached']['library'][] = 'vies_application/vies-application';
+  }
+}
+

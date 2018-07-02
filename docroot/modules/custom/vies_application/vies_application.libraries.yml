@@ -1,0 +1,7 @@
+vies-application:
+  version: 1.x
+  js:
+    js/vies_application.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
