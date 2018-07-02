@@ -118,3 +118,4 @@ mailchimp.settings.yml
 !config/*/views.*
 !config/*/metatag.settings.yml
 !config/*/linkit.*
+!config/*/context.*

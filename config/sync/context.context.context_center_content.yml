@@ -1,0 +1,25 @@
+uuid: cd0274d2-2a0c-4078-a12e-989773d93d05
+langcode: da
+status: true
+dependencies:
+  module:
+    - system
+name: context_center_content
+label: 'Center content w. body class'
+group: null
+description: ''
+requireAllConditions: false
+disabled: false
+conditions:
+  request_path:
+    id: request_path
+    pages: "/user/login\r\n/user/password\r\n/media/*"
+    negate: 0
+    uuid: 5684391f-79e7-4c50-bfbb-6c1971dd5778
+    context_mapping: {  }
+reactions:
+  body_class:
+    id: body_class
+    body_class: context-center-content
+    saved: false
+weight: 0

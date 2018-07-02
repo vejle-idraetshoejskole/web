@@ -1,0 +1,25 @@
+uuid: e6421073-5543-4358-8e3c-280e2b8cfb3e
+langcode: da
+status: true
+dependencies:
+  module:
+    - system
+name: page_title
+label: 'Page title'
+group: null
+description: 'Only displays the page header block on /user/login and /user/password'
+requireAllConditions: false
+disabled: false
+conditions:
+  request_path:
+    id: request_path
+    pages: "/user/login\r\n/user/password"
+    negate: 0
+    uuid: d2dc7172-7331-416f-b817-58ed161dc827
+    context_mapping: {  }
+reactions:
+  body_class:
+    id: body_class
+    body_class: display-block-page-title
+    saved: false
+weight: 0
