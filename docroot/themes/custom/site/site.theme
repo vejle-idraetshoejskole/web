@@ -761,8 +761,15 @@ function site_preprocess_select(array &$variables) {
  * Implements hook_preprocess_field().
  */
 function site_preprocess_field(array &$variables, $hook) {
-  /*switch ($variables['element']['#field_name']) {
-  }*/
+  switch ($variables['element']['#field_name']) {
+    // Unsetting unpublished paragraphs.
+    case 'field_vih_paragraphs':
+      foreach($variables['items'] as $delta => $paragraphItem) {
+        if (!$paragraphItem['content']['#paragraph']->isPublished()) {
+          unset($variables['items'][$delta]);
+        }
+      }
+  }
 }
 
 /**
