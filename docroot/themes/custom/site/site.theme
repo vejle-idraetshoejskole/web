@@ -209,6 +209,29 @@ function site_preprocess_node(array &$variables) {
     $variables['content']['is_outdated'] = \Drupal\vih_subscription\Misc\VihSubscriptionUtils::isOutdated($node);
     $variables['content']['is_active'] = ($node->field_vih_sc_status->value == 'active');
     $variables['content']['is_closed'] = ($node->field_vih_sc_status->value == 'closed');
+
+    foreach ($node->field_vih_sc_option_groups->referencedEntities() as $optionGroupDelta => $optionGroup) {
+      $allOptionsSold = TRUE;
+      foreach ($optionGroup->field_vih_og_options->referencedEntities() as $optionDelta => $option) {
+        $stockAmount = $option->field_vih_option_stock_amount->value;
+        if (isset($stockAmount)) {
+          $optionCurrentUsageCount = \Drupal\vih_subscription\Misc\VihSubscriptionUtils::calculateOptionUsageCount($node, $optionGroup, $option);
+          $remainingAmount = $stockAmount - $optionCurrentUsageCount;
+
+          // Saving old option to use in the template.
+          if ($remainingAmount <= 0) {
+            $variables['content']['sold_options'][$optionGroupDelta][$optionDelta] = 1;
+          } else {
+            $allOptionsSold = FALSE;
+          }
+        }
+      }
+
+      // If all options in a group is sold, mark option group as sold as well.
+      if ($allOptionsSold) {
+        $variables['content']['sold_optionsGroups'][$optionGroupDelta] = 1;
+      }
+    }
   }
 
   // Long course

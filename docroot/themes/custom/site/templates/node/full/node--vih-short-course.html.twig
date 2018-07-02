@@ -129,10 +129,14 @@
 
                                 {# Begin - price addition #}
                                 {% for vih_sc_option in node.field_vih_sc_option_groups %}
+                                {%  set optionGroupDelta = loop.index0 %}
                                 <div class="boxy boxy--price">
                                     <div class="boxy__heading">
                                         <h2 class="boxy__heading__title heading-h4">
                                             {{ vih_sc_option.entity.field_vih_og_title.value }}
+                                            {% if loop.index0 in content.sold_optionsGroups|keys %}
+                                              - {{ 'Sold out' | trans }}
+                                            {% endif %}
                                         </h2>
                                     </div>
                                     <div class="boxy__body">
@@ -140,6 +144,10 @@
                                             <div class="field-vih-og-price-addition-container">
                                                 {{ vih_og_option.entity.field_vih_option_title.value }}&nbsp;-&nbsp;
                                                 DKK&nbsp;{{ vih_og_option.entity.field_vih_option_price_addition.value | number_format(2, ',', '.') }}
+
+                                              {% if loop.index0 in content.sold_options[optionGroupDelta]|keys %}
+                                                - {{ 'Sold out' | trans }}
+                                              {% endif %}
                                             </div>
                                         {% endfor %}
                                     </div>
