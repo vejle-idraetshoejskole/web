@@ -27,7 +27,6 @@ blacklist:
   - 'field.storage.paragraph.field_answer*'
   - 'field.storage.paragraph.field_parent*'
   - 'field.storage.paragraph.field_question*'
-  - 'field.storage.taxonomy_term.field_questions*'
   - 'field.storage.taxonomy_term.field_vies*'
 graylist:
   - block.block.bartik_content

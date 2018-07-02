@@ -65,7 +65,6 @@ content:
     third_party_settings: {  }
 hidden:
   field_metatag: true
-  field_questions: true
   field_vih_class_class_packages: true
   field_vih_class_color: true
   field_vih_class_material_price: true
