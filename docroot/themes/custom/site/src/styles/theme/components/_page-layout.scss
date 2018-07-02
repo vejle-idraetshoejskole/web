@@ -23,6 +23,11 @@ $md-page-layout-content-inner-padding-bottom: 60px;
 // Styling
 // --------------------------------------------------
 
+.sliding-popup-bottom,
+.sliding-popup-top {
+  z-index: $zindex-modal - 30;
+}
+
 h1.page-header {
   display: none;
 
