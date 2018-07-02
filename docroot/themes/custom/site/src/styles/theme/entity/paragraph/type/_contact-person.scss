@@ -92,7 +92,21 @@
 @media #{$breakpoint-mobile-and-up} {}
 
 // Mobile - only
-@media #{$breakpoint-mobile-only} {}
+@media #{$breakpoint-mobile-only} {
+
+  .paragraph--type--vih-contact-person {
+
+    table {
+
+      td {
+
+        &.user-image {
+          height: 250px;
+        }
+      }
+    }
+  }
+}
 
 // Tablet - and up
 @media #{$breakpoint-tablet-and-up} {
