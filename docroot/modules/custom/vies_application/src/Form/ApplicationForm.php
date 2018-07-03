@@ -510,21 +510,26 @@ class ApplicationForm extends FormBase {
         '#suffix' => '</div>',
       ];
       $form['parentsWrapper']['actions']['add_parent'] = [
-          '#value' => $this->t('Submit'),
+          '#value' => $this->t('Add'),
           '#submit' => ['::submitParent'],
           '#limit_validation_errors' => [['parents']],
       ] + $ajax_parent_button;
-      $form['parentsWrapper']['actions']['hide_add_parent_form'] = [
-          '#value' => $this->t('Candel'),
-          '#submit' => ['::hideParentForm'],
-      ] + $ajax_parent_button;
+
+      // First parent can not be skipped.
+      if (!empty($parents)) {
+        $form['parentsWrapper']['actions']['hide_add_parent_form'] = [
+            '#value' => $this->t('Cancel'),
+            '#submit' => ['::hideParentForm'],
+          ] + $ajax_parent_button;
+      }
     }
     else {
       $form['parentsWrapper']['actions']['show_add_parent_form'] = [
-          '#value' => 'Tilføj lorældren',
+          '#value' => empty($parents) ? $this->t('Add parent or guardian') : $this->t('Add another parent or guardian') ,
           '#submit' => ['::showParentForm'],
           '#limit_validation_errors' => [['same_address']],
-      ] + $ajax_parent_button;
+          '#attributes' => ['class' => ['btn-success']],
+        ] + $ajax_parent_button;
 
       if (!empty($parents)) {
         $form['parentsWrapper']['actions']['same_address'] = [

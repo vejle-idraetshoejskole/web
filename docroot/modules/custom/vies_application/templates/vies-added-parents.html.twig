@@ -8,49 +8,15 @@
     {% for key, parent in container['#list'] %}
       <div class="parent">
         <h5>{{ parent['type_value'] }}: {{ parent['firstName'] }} {{ parent['lastName'] }}</h5>
-        {% if parent['cpr'] %}
-          <div>
-            {{ "CPR"|t }}: {{ parent['cpr'] }}
-          </div>
-        {% endif %}
         {% if parent['email'] %}
           <div>
-            {{ "Email"|t }}: {{ parent['email'] }}
+            {{ parent['email'] }}
           </div>
         {% endif %}
-        {% if parent['address'] %}
-          <div>
-            {{ "Address"|t }}: {{ parent['address'] }}
-            {% if parent['house'] %}
-              {% if parent['house']['houseNumber'] %}
-                {{ parent['house']['houseNumber'] }},
-              {% endif %}
-              {% if parent['house']['houseLetter'] %}
-                {{ parent['house']['houseLetter'] }},
-              {% endif %}
-              {% if parent['house']['houseFloor'] %}
-                {{ parent['house']['houseFloor'] }}
-              {% endif %}
-            {% endif %}
-          </div>
-        {% endif %}
-        {% if parent['city'] %}
-          <div>
-            {{ "City"|t }}:
-            {% if parent['zip'] %}
-                {{ parent['zip'] }}
-            {% endif %}
-            {{ parent['city'] }}
-          </div>
-        {% endif %}
-
         <div>
-          {{ "Newsletter"|t }}:
-          {% if parent['newsletter'] %}
-            {{ "yes"|t }}
-          {% else %}
-            {{ "no"|t }}
-          {% endif %}
+          <span>{{ parent['address'] }}</span>
+          <span>{{ parent['houseNumber'] }}</span>{% if parent['houseLetter'] %}{{ parent['houseLetter'] }}{% endif %},{% if parent['houseFloor'] %} {{ parent['houseFloor'] }},{% endif %}
+          <span> {{ parent['zip'] }} {{ parent['city'] }}</span>
         </div>
         <div class="actions">
           {{ container['control-buttons'][key] }}

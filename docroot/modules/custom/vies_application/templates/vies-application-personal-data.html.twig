@@ -1,8 +1,8 @@
 <div class="col-md-12">
-  {{ form['top'] }}
+  {{ form['left']['type'] }}
 </div>
 <div class="col-md-6">
-  {{ form['left'] }}
+  {{ form['left']|without('type') }}
 </div>
 
 <div class="col-md-6">
@@ -20,6 +20,14 @@
       {{ form['right']['houseFloor'] }}
     </div>
   </div>
-
-  {{ form['right']|without('land','address','houseNumber','houseLetter', 'houseFloor') }}
+  <div class="row">
+    <div class="col-xs-4">
+      {{ form['right']['zip'] }}
+    </div>
+    <div class="col-xs-8">
+      {{ form['right']['city'] }}
+    </div>
+  </div>
+  {{ form['right']['municipality'] }}
+  {{ form['right']['country'] }}
 </div>
