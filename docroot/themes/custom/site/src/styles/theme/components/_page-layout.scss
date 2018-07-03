@@ -1437,3 +1437,11 @@ ul.layout-navigation {
     margin-top: 40px;
   }
 }
+
+@media print {
+
+  .region-notify,
+  .layout__footer {
+    display: none;
+  }
+}
