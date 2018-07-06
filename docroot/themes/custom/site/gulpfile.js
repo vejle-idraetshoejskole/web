@@ -22,6 +22,7 @@ const styles = require('gulp-sass');
 const cleanCSS = require('gulp-clean-css');
 const del = require('del');
 const modernizr = require('gulp-modernizr');
+const minify = require('gulp-minify');
 const autoprefixer = require('gulp-autoprefixer');
 const imagemin = require('gulp-imagemin');
 const concat = require('gulp-concat');
@@ -97,6 +98,11 @@ gulp.task('process:javascripts', () => {
             presets: ['env']
         }))
         .pipe(concat('app.js'))
+        .pipe(minify({
+            ext:{
+                min:'.min.js'
+            }
+        }))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest('dist/javascripts'));
 });

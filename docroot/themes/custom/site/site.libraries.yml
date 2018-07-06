@@ -23,7 +23,7 @@ styles:
 javascripts:
   js:
     dist/javascripts/modernizr.js: {}
-    dist/javascripts/app.js: {}
+    dist/javascripts/app.min.js: {}
     dist/jasny-bootstrap/js/jasny-bootstrap.js: {}
     /core/misc/dialog/dialog.ajax.js: {}
   dependencies:
