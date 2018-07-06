@@ -19,6 +19,7 @@ const gulp = require('gulp');
 const bless = require('gulp-bless');
 const babel = require('gulp-babel');
 const styles = require('gulp-sass');
+const cleanCSS = require('gulp-clean-css');
 const del = require('del');
 const modernizr = require('gulp-modernizr');
 const autoprefixer = require('gulp-autoprefixer');
@@ -72,6 +73,7 @@ gulp.task('process:styles_vih', () => {
       .pipe(styles().on('error', swallowError))
       .pipe(autoprefixer('last 2 version'))
       .pipe(bless())
+      .pipe(cleanCSS({inline: false}))
       .pipe(sourcemaps.write())
       .pipe(gulp.dest('dist/stylesheets'))
       .pipe(browserSync.stream({match: '**/*.css'}));
@@ -82,6 +84,7 @@ gulp.task('process:styles_vies', () => {
       .pipe(styles().on('error', swallowError))
       .pipe(autoprefixer('last 2 version'))
       .pipe(bless())
+      .pipe(cleanCSS({inline: false}))
       .pipe(sourcemaps.write())
       .pipe(gulp.dest('dist/stylesheets'))
       .pipe(browserSync.stream({match: '**/*.css'}));
