@@ -66,6 +66,11 @@ gulp.task('process:modernizr', () => {
                 'hidden'
             ]
         }))
+        .pipe(minify({
+            ext:{
+                min:'.min.js'
+            }
+        }))
         .pipe(gulp.dest('dist/javascripts'));
 });
 gulp.task('process:styles_vih', () => {
@@ -98,12 +103,12 @@ gulp.task('process:javascripts', () => {
             presets: ['env']
         }))
         .pipe(concat('app.js'))
+        .pipe(sourcemaps.write())
         .pipe(minify({
             ext:{
                 min:'.min.js'
             }
         }))
-        .pipe(sourcemaps.write())
         .pipe(gulp.dest('dist/javascripts'));
 });
 gulp.task('process:fonts', () => {
