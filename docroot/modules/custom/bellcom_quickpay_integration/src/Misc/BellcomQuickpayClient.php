@@ -70,7 +70,8 @@ class BellcomQuickpayClient {
         [
           'amount' => number_format($price, 2, "", ""),
           'continue_url' => $successUrl,
-          'cancel_url' => $cancelUrl
+          'cancel_url' => $cancelUrl,
+          'auto_capture' => TRUE
         ]);
 
       return $link->asArray()['url'];
