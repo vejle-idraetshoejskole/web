@@ -501,7 +501,7 @@ class ApplicationForm extends FormBase {
 
       $form['parentsWrapper']['parents']['current']['left']['type'] = [
         '#type' => 'radios',
-        '#title' => 'Type af Vokse',
+        '#title' => $this->t('Type of adult'),
         '#options' => ApplicationHandler::$adultType,
         '#required' => TRUE,
         '#default_value' => isset($default_values['type']) ? $default_values['type'] : NULL,
