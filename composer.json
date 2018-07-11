@@ -75,7 +75,8 @@
         "drupal/media_entity_actions": "^1.0@alpha",
         "drupal/wbm2cm": "^2.0@beta",
         "drupal/smtp": "^1.0@beta",
-        "drupal/views_arg_order_sort": "1.x-dev"
+        "drupal/views_arg_order_sort": "1.x-dev",
+        "drupal/date_popup": "^1.0"
     },
     "repositories": [
         {
