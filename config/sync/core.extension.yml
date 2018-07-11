@@ -26,6 +26,7 @@ module:
   crop: 0
   ctools: 0
   ctools_block: 0
+  date_popup: 0
   datetime: 0
   datetime_tweaks: 0
   dblog: 0
