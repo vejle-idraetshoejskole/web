@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Render\Element;
 
 /**
  * Implements hook_help().
@@ -59,14 +60,39 @@ function vies_application_theme() {
 /**
  * Implements hook_inline_entity_form_entity_form_alter().
  */
-function vies_application_inline_entity_form_entity_form_alter(&$entity_form,
-                                                   &$form_state) {
+function vies_application_inline_entity_form_entity_form_alter(&$entity_form, &$form_state) {
   if ($entity_form['#entity_type'] == 'taxonomy_term'
     && $entity_form['#bundle'] == 'questions') {
-    $i = 4;
     $entity_form['#attributes']['class'] = ['questions-inline-form'];
     $entity_form['field_vies_question_type']['widget']['#attributes']['class'] = ['questions-inline-form-type'];
     $entity_form['#attached']['library'][] = 'vies_application/vies-application';
   }
 }
 
+/**
+ * Implements hook_form_alter().
+ */
+function vies_application_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  if (!in_array($form['#form_id'], [
+    'node_vies_application_form_edit_form',
+    'node_vies_application_form_form',
+  ])) {
+    return;
+  }
+  foreach ([
+    'field_vies_about_school',
+    'field_vies_afterschool',
+    'field_vies_class_questions',
+  ] as $field) {
+    if (empty($form[$field]['widget']['entities'])) {
+      continue;
+    }
+    $entities = &$form[$field]['widget']['entities'];
+    foreach (Element::children($entities) as $key) {
+      if (!empty($entities[$key]['#entity']->field_question->value)) {
+        $entities[$key]['#label'] = $entities[$key]['#entity']->field_question->value;
+      }
+    }
+
+  }
+}
