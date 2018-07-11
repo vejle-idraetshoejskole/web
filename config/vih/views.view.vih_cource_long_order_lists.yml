@@ -16,6 +16,7 @@ dependencies:
     - node.type.vih_course_period
     - node.type.vih_long_cource
     - node.type.vih_long_course_order
+    - system.menu.admin
     - taxonomy.vocabulary.vih_class
   module:
     - entity_reference_revisions
@@ -1056,7 +1057,7 @@ display:
             alter_text: false
             text: ''
             make_link: true
-            path: 'admin/content/orders-long-courses/{{ nid }}'
+            path: 'admin/ordrer/orders-long-courses/{{ nid }}'
             absolute: false
             external: false
             replace_spaces: false
@@ -1325,7 +1326,7 @@ display:
             alter_text: false
             text: ''
             make_link: true
-            path: 'admin/content/orders-long-courses-periods/{{ nid }}'
+            path: 'admin/ordrer/orders-long-courses-periods/{{ nid }}'
             absolute: false
             external: false
             replace_spaces: false
@@ -1510,14 +1511,15 @@ display:
     display_title: Page
     position: 1
     display_options:
-      display_extenders: {  }
-      path: admin/content/orders-long-courses
+      display_extenders:
+        metatag_display_extender: {  }
+      path: admin/ordrer/orders-long-courses
       menu:
-        type: tab
+        type: normal
         title: 'Ordrer - Lange kurser'
         description: ''
         expanded: false
-        parent: system.admin_content
+        parent: 'menu_link_content:066c53ba-8634-4ca5-bf97-4337b50ef8aa'
         weight: 0
         context: '0'
         menu_name: admin
@@ -1744,14 +1746,15 @@ display:
     display_title: 'Page (Periods)'
     position: 1
     display_options:
-      display_extenders: {  }
-      path: admin/content/orders-long-courses-periods
+      display_extenders:
+        metatag_display_extender: {  }
+      path: admin/ordrer/orders-long-courses-periods
       menu:
-        type: tab
+        type: normal
         title: 'Ordrer - Lange kurser (Perioder)'
         description: ''
         expanded: false
-        parent: system.admin_content
+        parent: 'menu_link_content:066c53ba-8634-4ca5-bf97-4337b50ef8aa'
         weight: 0
         context: '0'
         menu_name: admin
