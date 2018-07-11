@@ -10,19 +10,11 @@ dependencies:
     - field.storage.node.field_vih_lco_email
     - field.storage.node.field_vih_lco_first_name
     - field.storage.node.field_vih_lco_last_name
-    - field.storage.node.field_vih_lco_order_course_perio
-    - field.storage.paragraph.field_vih_ocp_course_period
-    - field.storage.paragraph.field_vih_ocp_order_course_slots
-    - node.type.vih_course_period
     - node.type.vih_long_cource
     - node.type.vih_long_course_order
     - system.menu.admin
-    - taxonomy.vocabulary.vih_class
   module:
-    - entity_reference_revisions
     - node
-    - paragraphs
-    - taxonomy
     - user
 id: vih_cource_long_order_lists
 label: 'Tilmedinger - Lange kurser'
@@ -248,6 +240,71 @@ display:
           field_api_classes: false
           entity_type: node
           entity_field: nid
+          plugin_id: field
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: Title
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          entity_type: node
+          entity_field: title
           plugin_id: field
         field_vih_lco_first_name:
           id: field_vih_lco_first_name
@@ -628,194 +685,6 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
-        field_vih_lco_order_course_perio:
-          id: field_vih_lco_order_course_perio
-          table: node__field_vih_lco_order_course_perio
-          field: field_vih_lco_order_course_perio
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: Fag
-          exclude: true
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: target_id
-          type: paragraph_summary
-          settings: {  }
-          group_column: ''
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: ul
-          separator: ', '
-          field_api_classes: false
-          plugin_id: field
-        field_vih_ocp_order_course_slots:
-          id: field_vih_ocp_order_course_slots
-          table: paragraph__field_vih_ocp_order_course_slots
-          field: field_vih_ocp_order_course_slots
-          relationship: field_vih_lco_order_course_perio
-          group_type: group
-          admin_label: ''
-          label: Fag
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: target_id
-          type: entity_reference_revisions_entity_view
-          settings:
-            view_mode: default
-          group_column: ''
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: ul
-          separator: ', '
-          field_api_classes: false
-          plugin_id: field
-        field_vih_ocp_course_period:
-          id: field_vih_ocp_course_period
-          table: paragraph__field_vih_ocp_course_period
-          field: field_vih_ocp_course_period
-          relationship: field_vih_lco_order_course_perio
-          group_type: group
-          admin_label: ''
-          label: Periode
-          exclude: false
-          alter:
-            alter_text: true
-            text: '{{ field_vih_ocp_course_period }} ({{ field_vih_ocp_course_period__target_id }})'
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: target_id
-          type: entity_reference_label
-          settings:
-            link: true
-          group_column: target_id
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          plugin_id: field
       filters:
         type_1:
           id: type_1
@@ -858,6 +727,50 @@ display:
           entity_type: node
           entity_field: type
           plugin_id: bundle
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          relationship: field_vih_lco_course
+          group_type: group
+          admin_label: ''
+          operator: word
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: title_op
+            label: Title
+            description: ''
+            use_operator: false
+            operator: title_op
+            identifier: title
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              media_creator: '0'
+              media_manager: '0'
+              moderator: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          entity_field: title
+          plugin_id: string
       sorts:
         created:
           id: created
@@ -879,31 +792,13 @@ display:
       footer: {  }
       empty: {  }
       relationships:
-        field_vih_lco_order_course_perio:
-          id: field_vih_lco_order_course_perio
-          table: node__field_vih_lco_order_course_perio
-          field: field_vih_lco_order_course_perio
+        field_vih_lco_course:
+          id: field_vih_lco_course
+          table: node__field_vih_lco_course
+          field: field_vih_lco_course
           relationship: none
           group_type: group
-          admin_label: 'field_vih_lco_order_course_perio: Paragraph'
-          required: false
-          plugin_id: standard
-        field_vih_scg_classes:
-          id: field_vih_scg_classes
-          table: paragraph__field_vih_scg_classes
-          field: field_vih_scg_classes
-          relationship: field_vih_lco_order_course_perio
-          group_type: group
-          admin_label: 'field_vih_scg_classes: Ord i ordforråd'
-          required: false
-          plugin_id: standard
-        field_vih_ocp_course_period:
-          id: field_vih_ocp_course_period
-          table: paragraph__field_vih_ocp_course_period
-          field: field_vih_ocp_course_period
-          relationship: field_vih_lco_order_course_perio
-          group_type: group
-          admin_label: 'field_vih_ocp_course_period: Indhold'
+          admin_label: 'field_vih_lco_course: Content'
           required: false
           plugin_id: standard
       arguments:
@@ -964,19 +859,17 @@ display:
         - 'config:field.storage.node.field_vih_lco_email'
         - 'config:field.storage.node.field_vih_lco_first_name'
         - 'config:field.storage.node.field_vih_lco_last_name'
-        - 'config:field.storage.node.field_vih_lco_order_course_perio'
-        - 'config:field.storage.paragraph.field_vih_ocp_course_period'
-        - 'config:field.storage.paragraph.field_vih_ocp_order_course_slots'
-  attachment_1:
+  attachment_all_long_courses:
     display_plugin: attachment
-    id: attachment_1
-    display_title: 'Long courses'
+    id: attachment_all_long_courses
+    display_title: 'Long courses (attachment)'
     position: 3
     display_options:
-      display_extenders: {  }
+      display_extenders:
+        metatag_display_extender: {  }
       display_description: ''
       displays:
-        page_1: page_1
+        page_all_lc_and_lc_orders: page_all_lc_and_lc_orders
       fields:
         nid:
           id: nid
@@ -1178,6 +1071,7 @@ display:
         filters: false
         filter_groups: false
         arguments: false
+        footer: false
       relationships: {  }
       filters:
         type_1:
@@ -1221,32 +1115,256 @@ display:
           entity_type: node
           entity_field: type
           plugin_id: bundle
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: word
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: title_op
+            label: Title
+            description: ''
+            use_operator: false
+            operator: title_op
+            identifier: title
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              media_creator: '0'
+              media_manager: '0'
+              moderator: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          entity_field: title
+          plugin_id: string
       filter_groups:
         operator: AND
         groups:
           1: AND
       arguments: {  }
+      inherit_exposed_filters: true
+      pager:
+        type: none
+        options:
+          offset: 0
+      footer: {  }
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
         - url.query_args
         - 'user.node_grants:view'
         - user.permissions
       tags:
         - 'config:field.storage.node.field_vih_course_periods'
-  attachment_2:
-    display_plugin: attachment
-    id: attachment_2
-    display_title: Periods
-    position: 3
+  page_all_lc_and_lc_orders:
+    display_plugin: page
+    id: page_all_lc_and_lc_orders
+    display_title: 'All LCs + LC orders '
+    position: 1
     display_options:
-      display_extenders: {  }
-      display_description: ''
-      displays:
-        page_2: page_2
+      display_extenders:
+        metatag_display_extender: {  }
+      path: admin/ordrer/orders-long-courses
+      menu:
+        type: normal
+        title: 'Ordrer - Lange kurser'
+        description: ''
+        expanded: false
+        parent: 'menu_link_content:066c53ba-8634-4ca5-bf97-4337b50ef8aa'
+        weight: 0
+        context: '0'
+        menu_name: admin
+      tab_options:
+        type: normal
+        title: Indhold
+        description: ''
+        weight: 0
+      group_by: false
+      defaults:
+        group_by: false
+        filters: false
+        filter_groups: false
+        relationships: false
+        fields: false
+        header: false
+        footer: false
+        arguments: false
+      filters:
+        type_1:
+          id: type_1
+          table: node_field_data
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value:
+            vih_long_course_order: vih_long_course_order
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+            argument: null
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          relationship: field_vih_lco_course
+          group_type: group
+          admin_label: ''
+          operator: word
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: title_op
+            label: Title
+            description: ''
+            use_operator: false
+            operator: title_op
+            identifier: title
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              media_creator: '0'
+              media_manager: '0'
+              moderator: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          entity_field: title
+          plugin_id: string
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      relationships:
+        field_vih_lco_course:
+          id: field_vih_lco_course
+          table: node__field_vih_lco_course
+          field: field_vih_lco_course
+          relationship: none
+          group_type: group
+          admin_label: 'field_vih_lco_course: Content'
+          required: false
+          plugin_id: standard
       fields:
+        counter:
+          id: counter
+          table: views
+          field: counter
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          counter_start: 1
+          plugin_id: counter
         nid:
           id: nid
           table: node_field_data
@@ -1301,7 +1419,8 @@ display:
             thousand_separator: ''
             prefix_suffix: true
           group_column: value
-          group_columns: {  }
+          group_columns:
+            value: value
           group_rows: true
           delta_limit: 0
           delta_offset: 0
@@ -1320,13 +1439,13 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: Periode
+          label: Title
           exclude: false
           alter:
             alter_text: false
             text: ''
             make_link: true
-            path: 'admin/ordrer/orders-long-courses-periods/{{ nid }}'
+            path: 'node/{{ nid }}'
             absolute: false
             external: false
             replace_spaces: false
@@ -1337,7 +1456,7 @@ display:
             link_class: ''
             prefix: ''
             suffix: ''
-            target: ''
+            target: _blank
             nl2br: false
             max_length: 0
             word_boundary: true
@@ -1353,7 +1472,7 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: false
+          element_label_colon: true
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -1378,14 +1497,14 @@ display:
           entity_type: node
           entity_field: title
           plugin_id: field
-        field_vih_course_periods:
-          id: field_vih_course_periods
-          table: node__field_vih_course_periods
-          field: field_vih_course_periods
+        field_vih_lco_first_name:
+          id: field_vih_lco_first_name
+          table: node__field_vih_lco_first_name
+          field: field_vih_lco_first_name
           relationship: none
-          group_type: group
+          group_type: stddev_pop
           admin_label: ''
-          label: Periode
+          label: 'First name'
           exclude: false
           alter:
             alter_text: false
@@ -1426,6 +1545,322 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns:
+            value: value
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_vih_lco_last_name:
+          id: field_vih_lco_last_name
+          table: node__field_vih_lco_last_name
+          field: field_vih_lco_last_name
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: 'Last name'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_vih_lco_email:
+          id: field_vih_lco_email
+          table: node__field_vih_lco_email
+          field: field_vih_lco_email
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: Email
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_vih_lco_adult_last_name:
+          id: field_vih_lco_adult_last_name
+          table: node__field_vih_lco_adult_last_name
+          field: field_vih_lco_adult_last_name
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: 'Adult last name'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_vih_lco_adult_email:
+          id: field_vih_lco_adult_email
+          table: node__field_vih_lco_adult_email
+          field: field_vih_lco_adult_email
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: 'Adult email'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_vih_lco_course:
+          id: field_vih_lco_course
+          table: node__field_vih_lco_course
+          field: field_vih_lco_course
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: Course
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: true
+            path: 'node/{{ field_vih_lco_course__target_id }}'
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: _blank
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
           click_sort_column: target_id
           type: entity_reference_label
           settings:
@@ -1441,531 +1876,31 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
-      defaults:
-        fields: false
-        relationships: false
-        filters: false
-        filter_groups: false
-        arguments: false
-      relationships: {  }
-      filters:
-        type_1:
-          id: type_1
-          table: node_field_data
-          field: type
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: in
-          value:
-            vih_course_period: vih_course_period
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-            argument: null
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          entity_type: node
-          entity_field: type
-          plugin_id: bundle
-      filter_groups:
-        operator: AND
-        groups:
-          1: AND
-      arguments: {  }
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - url.query_args
-        - 'user.node_grants:view'
-        - user.permissions
-      tags:
-        - 'config:field.storage.node.field_vih_course_periods'
-  page_1:
-    display_plugin: page
-    id: page_1
-    display_title: Page
-    position: 1
-    display_options:
-      display_extenders:
-        metatag_display_extender: {  }
-      path: admin/ordrer/orders-long-courses
-      menu:
-        type: normal
-        title: 'Ordrer - Lange kurser'
-        description: ''
-        expanded: false
-        parent: 'menu_link_content:066c53ba-8634-4ca5-bf97-4337b50ef8aa'
-        weight: 0
-        context: '0'
-        menu_name: admin
-      tab_options:
-        type: normal
-        title: Indhold
-        description: ''
-        weight: 0
-      group_by: false
-      defaults:
-        group_by: false
-        filters: false
-        filter_groups: false
-      filters:
-        type_1:
-          id: type_1
-          table: node_field_data
-          field: type
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: in
-          value:
-            vih_long_course_order: vih_long_course_order
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-            argument: null
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          entity_type: node
-          entity_field: type
-          plugin_id: bundle
-        field_vih_ocp_course_period_target_id:
-          id: field_vih_ocp_course_period_target_id
-          table: paragraph__field_vih_ocp_course_period
-          field: field_vih_ocp_course_period_target_id
-          relationship: field_vih_lco_order_course_perio
-          group_type: group
-          admin_label: ''
-          operator: '='
-          value:
-            min: ''
-            max: ''
-            value: ''
-          group: 1
-          exposed: true
-          expose:
-            operator_id: field_vih_ocp_course_period_target_id_op
-            label: 'Periode ID'
-            description: ''
-            use_operator: false
-            operator: field_vih_ocp_course_period_target_id_op
-            identifier: course_period
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              media_creator: '0'
-              media_manager: '0'
-            placeholder: ''
-            min_placeholder: ''
-            max_placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          plugin_id: numeric
-        field_vih_ocs_class_target_id:
-          id: field_vih_ocs_class_target_id
-          table: paragraph__field_vih_ocs_class
-          field: field_vih_ocs_class_target_id
-          relationship: field_vih_lco_order_course_perio
-          group_type: group
-          admin_label: ''
-          operator: or
-          value: {  }
-          group: 1
-          exposed: true
-          expose:
-            operator_id: field_vih_ocs_class_target_id_op
-            label: Fag
-            description: ''
-            use_operator: false
-            operator: field_vih_ocs_class_target_id_op
-            identifier: field_vih_ocs_class_target_id
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              media_creator: '0'
-              media_manager: '0'
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: true
-          type: select
-          limit: true
-          vid: vih_class
-          hierarchy: false
-          error_message: true
-          plugin_id: taxonomy_index_tid
-        nid:
-          id: nid
-          table: node_field_data
-          field: nid
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: '='
-          value:
-            min: ''
-            max: ''
-            value: ''
-          group: 1
-          exposed: true
-          expose:
-            operator_id: nid_op
-            label: 'Ordre ID'
-            description: ''
-            use_operator: false
-            operator: nid_op
-            identifier: nid
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              media_creator: '0'
-              media_manager: '0'
-            placeholder: ''
-            min_placeholder: ''
-            max_placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          entity_type: node
-          entity_field: nid
-          plugin_id: numeric
-      filter_groups:
-        operator: AND
-        groups:
-          1: AND
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - url
-        - url.query_args
-        - user
-        - 'user.node_grants:view'
-        - user.permissions
-      tags:
-        - 'config:field.storage.node.field_vih_lco_adult_email'
-        - 'config:field.storage.node.field_vih_lco_adult_last_name'
-        - 'config:field.storage.node.field_vih_lco_course'
-        - 'config:field.storage.node.field_vih_lco_email'
-        - 'config:field.storage.node.field_vih_lco_first_name'
-        - 'config:field.storage.node.field_vih_lco_last_name'
-        - 'config:field.storage.node.field_vih_lco_order_course_perio'
-        - 'config:field.storage.paragraph.field_vih_ocp_course_period'
-        - 'config:field.storage.paragraph.field_vih_ocp_order_course_slots'
-  page_2:
-    display_plugin: page
-    id: page_2
-    display_title: 'Page (Periods)'
-    position: 1
-    display_options:
-      display_extenders:
-        metatag_display_extender: {  }
-      path: admin/ordrer/orders-long-courses-periods
-      menu:
-        type: normal
-        title: 'Ordrer - Lange kurser (Perioder)'
-        description: ''
-        expanded: false
-        parent: 'menu_link_content:066c53ba-8634-4ca5-bf97-4337b50ef8aa'
-        weight: 0
-        context: '0'
-        menu_name: admin
-      tab_options:
-        type: normal
-        title: Indhold
-        description: ''
-        weight: 0
-      group_by: false
-      defaults:
-        group_by: false
-        filters: false
-        filter_groups: false
-        arguments: false
-      filters:
-        type_1:
-          id: type_1
-          table: node_field_data
-          field: type
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: in
-          value:
-            vih_long_course_order: vih_long_course_order
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-            argument: null
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          entity_type: node
-          entity_field: type
-          plugin_id: bundle
-        field_vih_ocp_course_period_target_id:
-          id: field_vih_ocp_course_period_target_id
-          table: paragraph__field_vih_ocp_course_period
-          field: field_vih_ocp_course_period_target_id
-          relationship: field_vih_lco_order_course_perio
-          group_type: group
-          admin_label: ''
-          operator: '='
-          value:
-            min: ''
-            max: ''
-            value: ''
-          group: 1
-          exposed: true
-          expose:
-            operator_id: field_vih_ocp_course_period_target_id_op
-            label: 'Periode ID'
-            description: ''
-            use_operator: false
-            operator: field_vih_ocp_course_period_target_id_op
-            identifier: course_period
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              media_creator: '0'
-              media_manager: '0'
-            placeholder: ''
-            min_placeholder: ''
-            max_placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          plugin_id: numeric
-        field_vih_ocs_class_target_id:
-          id: field_vih_ocs_class_target_id
-          table: paragraph__field_vih_ocs_class
-          field: field_vih_ocs_class_target_id
-          relationship: field_vih_lco_order_course_perio
-          group_type: group
-          admin_label: ''
-          operator: or
-          value: {  }
-          group: 1
-          exposed: true
-          expose:
-            operator_id: field_vih_ocs_class_target_id_op
-            label: Fag
-            description: ''
-            use_operator: false
-            operator: field_vih_ocs_class_target_id_op
-            identifier: field_vih_ocs_class_target_id
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              media_creator: '0'
-              media_manager: '0'
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: true
-          type: select
-          limit: true
-          vid: vih_class
-          hierarchy: false
-          error_message: true
-          plugin_id: taxonomy_index_tid
-        nid:
-          id: nid
-          table: node_field_data
-          field: nid
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: '='
-          value:
-            min: ''
-            max: ''
-            value: ''
-          group: 1
-          exposed: true
-          expose:
-            operator_id: nid_op
-            label: 'Ordre ID'
-            description: ''
-            use_operator: false
-            operator: nid_op
-            identifier: nid
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              media_creator: '0'
-              media_manager: '0'
-            placeholder: ''
-            min_placeholder: ''
-            max_placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          entity_type: node
-          entity_field: nid
-          plugin_id: numeric
-      filter_groups:
-        operator: AND
-        groups:
-          1: AND
+      header: {  }
       display_description: ''
+      footer:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: 'Open in new window link'
+          empty: false
+          tokenize: true
+          content:
+            value: "<p>\n<a href=\"admin/ordrer/orders-long-course/{{ arguments.field_vih_lco_course_target_id }}\" targer=\"_blank\">Open in new window</a>\n</p>\n"
+            format: rich_text
+          plugin_id: text
       arguments:
-        nid:
-          id: nid
-          table: node_field_data
-          field: nid
-          relationship: field_vih_ocp_course_period
+        field_vih_lco_course_target_id:
+          id: field_vih_lco_course_target_id
+          table: node__field_vih_lco_course
+          field: field_vih_lco_course_target_id
+          relationship: none
           group_type: group
           admin_label: ''
-          default_action: ignore
+          default_action: empty
           exception:
             value: all
             title_enable: false
@@ -1992,9 +1927,7 @@ display:
           validate_options: {  }
           break_phrase: false
           not: false
-          entity_type: node
-          entity_field: nid
-          plugin_id: node_nid
+          plugin_id: numeric
     cache_metadata:
       max-age: -1
       contexts:
@@ -2002,7 +1935,6 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
-        - user
         - 'user.node_grants:view'
         - user.permissions
       tags:
@@ -2012,6 +1944,670 @@ display:
         - 'config:field.storage.node.field_vih_lco_email'
         - 'config:field.storage.node.field_vih_lco_first_name'
         - 'config:field.storage.node.field_vih_lco_last_name'
-        - 'config:field.storage.node.field_vih_lco_order_course_perio'
-        - 'config:field.storage.paragraph.field_vih_ocp_course_period'
-        - 'config:field.storage.paragraph.field_vih_ocp_order_course_slots'
+  page_lc_orders:
+    display_plugin: page
+    id: page_lc_orders
+    display_title: 'LC orders'
+    position: 1
+    display_options:
+      display_extenders:
+        metatag_display_extender: {  }
+      path: admin/ordrer/orders-long-course
+      menu:
+        type: normal
+        title: 'Ordrer - Lange kurser'
+        description: ''
+        expanded: false
+        parent: 'menu_link_content:066c53ba-8634-4ca5-bf97-4337b50ef8aa'
+        weight: 0
+        context: '0'
+        menu_name: admin
+      tab_options:
+        type: normal
+        title: Indhold
+        description: ''
+        weight: 0
+      group_by: false
+      defaults:
+        group_by: false
+        filters: false
+        filter_groups: false
+        relationships: false
+        fields: false
+        header: false
+      filters:
+        type_1:
+          id: type_1
+          table: node_field_data
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value:
+            vih_long_course_order: vih_long_course_order
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+            argument: null
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      relationships:
+        field_vih_lco_course:
+          id: field_vih_lco_course
+          table: node__field_vih_lco_course
+          field: field_vih_lco_course
+          relationship: none
+          group_type: group
+          admin_label: 'field_vih_lco_course: Content'
+          required: false
+          plugin_id: standard
+      fields:
+        counter:
+          id: counter
+          table: views
+          field: counter
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          counter_start: 1
+          plugin_id: counter
+        nid:
+          id: nid
+          table: node_field_data
+          field: nid
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ID
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: number_integer
+          settings:
+            thousand_separator: ''
+            prefix_suffix: true
+          group_column: value
+          group_columns:
+            value: value
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          entity_type: node
+          entity_field: nid
+          plugin_id: field
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: Title
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: true
+            path: 'node/{{ nid }}'
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: _blank
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          entity_type: node
+          entity_field: title
+          plugin_id: field
+        field_vih_lco_first_name:
+          id: field_vih_lco_first_name
+          table: node__field_vih_lco_first_name
+          field: field_vih_lco_first_name
+          relationship: none
+          group_type: stddev_pop
+          admin_label: ''
+          label: 'First name'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns:
+            value: value
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_vih_lco_last_name:
+          id: field_vih_lco_last_name
+          table: node__field_vih_lco_last_name
+          field: field_vih_lco_last_name
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: 'Last name'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_vih_lco_email:
+          id: field_vih_lco_email
+          table: node__field_vih_lco_email
+          field: field_vih_lco_email
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: Email
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_vih_lco_adult_last_name:
+          id: field_vih_lco_adult_last_name
+          table: node__field_vih_lco_adult_last_name
+          field: field_vih_lco_adult_last_name
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: 'Adult last name'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_vih_lco_adult_email:
+          id: field_vih_lco_adult_email
+          table: node__field_vih_lco_adult_email
+          field: field_vih_lco_adult_email
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: 'Adult email'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_vih_lco_course:
+          id: field_vih_lco_course
+          table: node__field_vih_lco_course
+          field: field_vih_lco_course
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: Course
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: true
+            path: 'node/{{ field_vih_lco_course__target_id }}'
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: _blank
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: false
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+      header: {  }
+      display_description: ''
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:field.storage.node.field_vih_lco_adult_email'
+        - 'config:field.storage.node.field_vih_lco_adult_last_name'
+        - 'config:field.storage.node.field_vih_lco_course'
+        - 'config:field.storage.node.field_vih_lco_email'
+        - 'config:field.storage.node.field_vih_lco_first_name'
+        - 'config:field.storage.node.field_vih_lco_last_name'
