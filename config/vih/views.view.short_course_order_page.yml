@@ -1,21 +1,29 @@
-uuid: fa88e9e9-700a-4db5-9182-980d52bac2f9
+uuid: 5e7dcbd3-ae04-48f9-90f7-2e836d6f461e
 langcode: da
 status: true
 dependencies:
   config:
-    - user.role.administrator
+    - field.storage.node.body
+    - field.storage.node.field_vih_sco_comment
+    - field.storage.node.field_vih_sco_course
+    - field.storage.node.field_vih_sco_persons
+    - field.storage.node.field_vih_sco_price
+    - field.storage.node.field_vih_sco_status
+    - node.type.vih_short_course_order
+    - user.role.authenticated
   module:
-    - contextual
-    - link
-    - redirect
+    - entity_reference_revisions
+    - node
+    - options
+    - text
     - user
-id: redirects
-label: Redirects
+id: short_course_order_page
+label: 'Short Course - Order page'
 module: views
 description: ''
 tag: ''
-base_table: redirect
-base_field: rid
+base_table: node_field_data
+base_field: nid
 core: 8.x
 display:
   default:
@@ -28,7 +36,7 @@ display:
         type: role
         options:
           role:
-            administrator: administrator
+            authenticated: authenticated
       cache:
         type: tag
         options: {  }
@@ -45,38 +53,153 @@ display:
         options:
           submit_button: Udfør
           reset_button: false
-          reset_button_label: Gendan
-          exposed_sorts_label: 'Sortér efter'
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
           expose_sort_order: true
-          sort_asc_label: Stigende
-          sort_desc_label: Faldende
+          sort_asc_label: Asc
+          sort_desc_label: Desc
       pager:
-        type: mini
+        type: some
         options:
-          items_per_page: 100
+          items_per_page: 1
           offset: 0
-          id: 0
-          total_pages: null
-          expose:
-            items_per_page: false
-            items_per_page_label: 'Antal elementer'
-            items_per_page_options: '5, 10, 25, 50'
-            items_per_page_options_all: false
-            items_per_page_options_all_label: '- Alle -'
-            offset: false
-            offset_label: Forskydning
-          tags:
-            previous: ‹‹
-            next: ››
       style:
-        type: table
+        type: default
       row:
         type: fields
       fields:
-        contextual_links:
-          id: contextual_links
-          table: views
-          field: contextual_links
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: false
+            ellipsis: false
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: h1
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          entity_type: node
+          entity_field: title
+          plugin_id: field
+        field_vih_sco_course:
+          id: field_vih_sco_course
+          table: node__field_vih_sco_course
+          field: field_vih_sco_course
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: 'Kursus - '
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: strong
+          element_class: ''
+          element_label_type: span
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: div
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: true
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_vih_sco_persons:
+          id: field_vih_sco_persons
+          table: node__field_vih_sco_persons
+          field: field_vih_sco_persons
           relationship: none
           group_type: group
           admin_label: ''
@@ -121,19 +244,29 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          fields:
-            redirect_source: '0'
-            dropbutton: '0'
-          destination: true
-          plugin_id: contextual_links
-        rid:
-          id: rid
-          table: redirect
-          field: rid
+          click_sort_column: target_id
+          type: entity_reference_revisions_entity_view
+          settings:
+            view_mode: embedded
+          group_column: ''
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: ol
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_vih_sco_price:
+          id: field_vih_sco_price
+          table: node__field_vih_sco_price
+          field: field_vih_sco_price
           relationship: none
           group_type: group
           admin_label: ''
-          label: ID
+          label: ''
           exclude: false
           alter:
             alter_text: false
@@ -166,7 +299,7 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: true
+          element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -175,10 +308,12 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
-          type: number_integer
+          type: number_decimal
           settings:
             thousand_separator: ''
             prefix_suffix: true
+            decimal_separator: .
+            scale: 2
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -189,17 +324,15 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: redirect
-          entity_field: rid
           plugin_id: field
-        redirect_source__path:
-          id: redirect_source__path
-          table: redirect
-          field: redirect_source__path
+        field_vih_sco_status:
+          id: field_vih_sco_status
+          table: node__field_vih_sco_status
+          field: field_vih_sco_status
           relationship: none
           group_type: group
           admin_label: ''
-          label: Fra
+          label: ''
           exclude: false
           alter:
             alter_text: false
@@ -232,7 +365,7 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: true
+          element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -240,10 +373,10 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: path
-          type: redirect_source
+          click_sort_column: value
+          type: list_default
           settings: {  }
-          group_column: ''
+          group_column: value
           group_columns: {  }
           group_rows: true
           delta_limit: 0
@@ -253,176 +386,15 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: redirect
-          entity_field: redirect_source
           plugin_id: field
-        edit_redirect:
-          id: edit_redirect
-          table: redirect
-          field: edit_redirect
+        field_vih_sco_comment:
+          id: field_vih_sco_comment
+          table: node__field_vih_sco_comment
+          field: field_vih_sco_comment
           relationship: none
           group_type: group
           admin_label: ''
-          label: 'Link til at redigere Redirect'
-          exclude: true
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          text: redigér
-          output_url_as_text: false
-          absolute: false
-          entity_type: redirect
-          plugin_id: entity_link_edit
-        delete_redirect:
-          id: delete_redirect
-          table: redirect
-          field: delete_redirect
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: 'Link til at slette Redirect'
-          exclude: true
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          text: slet
-          output_url_as_text: false
-          absolute: false
-          entity_type: redirect
-          plugin_id: entity_link_delete
-        view_redirect:
-          id: view_redirect
-          table: redirect
-          field: view_redirect
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: 'Link til Redirect'
-          exclude: true
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          text: vis
-          output_url_as_text: false
-          absolute: false
-          entity_type: redirect
-          plugin_id: entity_link
-        redirect_redirect__uri:
-          id: redirect_redirect__uri
-          table: redirect
-          field: redirect_redirect__uri
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: Til
+          label: ''
           exclude: false
           alter:
             alter_text: false
@@ -455,7 +427,7 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: true
+          element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -463,15 +435,10 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: uri
-          type: link
-          settings:
-            trim_length: 80
-            url_only: false
-            url_plain: false
-            rel: '0'
-            target: '0'
-          group_column: ''
+          click_sort_column: value
+          type: basic_string
+          settings: {  }
+          group_column: value
           group_columns: {  }
           group_rows: true
           delta_limit: 0
@@ -481,17 +448,15 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: redirect
-          entity_field: redirect_redirect
           plugin_id: field
-        dropbutton:
-          id: dropbutton
-          table: views
-          field: dropbutton
+        body:
+          id: body
+          table: node__body
+          field: body
           relationship: none
           group_type: group
           admin_label: ''
-          label: Dropknap
+          label: ''
           exclude: false
           alter:
             alter_text: false
@@ -524,7 +489,7 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: true
+          element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -532,36 +497,181 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          fields:
-            edit_redirect: edit_redirect
-            delete_redirect: delete_redirect
-            view_redirect: view_redirect
-            contextual_links: '0'
-            redirect_source__path: '0'
-            redirect_source__query: '0'
-            rid: '0'
-            redirect_redirect__uri: '0'
-            redirect_redirect__options: '0'
-            redirect_redirect__title: '0'
-          destination: true
-          plugin_id: dropbutton
-      filters: {  }
-      sorts: {  }
-      title: Redirects
+          click_sort_column: value
+          type: text_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        operations:
+          id: operations
+          table: node
+          field: operations
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          destination: false
+          entity_type: node
+          plugin_id: entity_operations
+      filters:
+        status:
+          value: '1'
+          table: node_field_data
+          field: status
+          plugin_id: boolean
+          entity_type: node
+          entity_field: status
+          id: status
+          expose:
+            operator: ''
+          group: 1
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          value:
+            vih_short_course_order: vih_short_course_order
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+      sorts:
+        created:
+          id: created
+          table: node_field_data
+          field: created
+          order: DESC
+          entity_type: node
+          entity_field: created
+          plugin_id: date
+          relationship: none
+          group_type: group
+          admin_label: ''
+          exposed: false
+          expose:
+            label: ''
+          granularity: second
+      title: 'Short Courses - Order page'
       header: {  }
-      footer: {  }
+      footer:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: false
+          tokenize: false
+          content:
+            value: '<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>'
+            format: rich_text
+          plugin_id: text
       empty: {  }
       relationships: {  }
-      arguments: {  }
+      arguments:
+        nid:
+          id: nid
+          table: node_field_data
+          field: nid
+          relationship: none
+          group_type: group
+          admin_label: ''
+          default_action: ignore
+          exception:
+            value: all
+            title_enable: false
+            title: All
+          title_enable: false
+          title: ''
+          default_argument_type: fixed
+          default_argument_options:
+            argument: ''
+          default_argument_skip_url: false
+          summary_options:
+            base_path: ''
+            count: true
+            items_per_page: 25
+            override: false
+          summary:
+            sort_order: asc
+            number_of_records: 0
+            format: default_summary
+          specify_validation: false
+          validate:
+            type: none
+            fail: 'not found'
+          validate_options: {  }
+          break_phrase: false
+          not: false
+          entity_type: node
+          entity_field: nid
+          plugin_id: node_nid
       display_extenders: {  }
+      css_class: container
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - url.query_args
+        - url
+        - 'user.node_grants:view'
         - user.roles
-      tags: {  }
+      tags:
+        - 'config:field.storage.node.body'
+        - 'config:field.storage.node.field_vih_sco_comment'
+        - 'config:field.storage.node.field_vih_sco_course'
+        - 'config:field.storage.node.field_vih_sco_persons'
+        - 'config:field.storage.node.field_vih_sco_price'
+        - 'config:field.storage.node.field_vih_sco_status'
   page_1:
     display_plugin: page
     id: page_1
@@ -570,12 +680,19 @@ display:
     display_options:
       display_extenders:
         metatag_display_extender: {  }
-      path: admin/redirects
+      path: node/%/short-course---order-page
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - url.query_args
+        - url
+        - 'user.node_grants:view'
         - user.roles
-      tags: {  }
+      tags:
+        - 'config:field.storage.node.body'
+        - 'config:field.storage.node.field_vih_sco_comment'
+        - 'config:field.storage.node.field_vih_sco_course'
+        - 'config:field.storage.node.field_vih_sco_persons'
+        - 'config:field.storage.node.field_vih_sco_price'
+        - 'config:field.storage.node.field_vih_sco_status'

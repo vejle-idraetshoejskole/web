@@ -1,4 +1,4 @@
-uuid: 43a5ae67-3429-416d-b193-2f09cb53c653
+uuid: f3a08be6-0b82-47f5-ae86-8be66df5ed2c
 langcode: da
 status: true
 dependencies:
@@ -18,6 +18,7 @@ dependencies:
     - field.storage.node.field_vih_sc_end_date
     - field.storage.node.field_vih_sc_start_date
     - field.storage.node.field_vih_sco_course
+    - field.storage.node.field_vih_sco_status
     - field.storage.paragraph.field_vih_ocp_email
     - field.storage.paragraph.field_vih_ocp_first_name
     - field.storage.paragraph.field_vih_ocp_last_name
@@ -25,20 +26,22 @@ dependencies:
     - field.storage.paragraph.field_vih_oe_email
     - field.storage.paragraph.field_vih_oe_first_name
     - field.storage.paragraph.field_vih_oe_last_name
-    - node.type.event
     - node.type.vih_event_order
     - node.type.vih_long_course_order
+    - node.type.vih_short_course
     - node.type.vih_short_course_order
     - system.menu.admin
+    - user.role.authenticated
   module:
     - datetime
     - entity_reference_revisions
     - node
+    - options
     - paragraphs
     - taxonomy
     - user
-id: vih_cource_order_lists
-label: Tilmedinger
+id: tilmedinger_korte_kurser
+label: 'Tilmedinger - korte kurser'
 module: views
 description: ''
 tag: ''
@@ -53,9 +56,10 @@ display:
     position: 0
     display_options:
       access:
-        type: perm
+        type: role
         options:
-          perm: 'create event content'
+          role:
+            authenticated: authenticated
       cache:
         type: tag
         options: {  }
@@ -1891,7 +1895,7 @@ display:
         - url
         - url.query_args
         - 'user.node_grants:view'
-        - user.permissions
+        - user.roles
       tags:
         - 'config:field.storage.node.field_vih_cp_end_date'
         - 'config:field.storage.node.field_vih_cp_start_date'
@@ -1915,17 +1919,17 @@ display:
         - 'config:field.storage.paragraph.field_vih_oe_email'
         - 'config:field.storage.paragraph.field_vih_oe_first_name'
         - 'config:field.storage.paragraph.field_vih_oe_last_name'
-  attachment_1:
+  attachment_2:
     display_plugin: attachment
-    id: attachment_1
-    display_title: Events
+    id: attachment_2
+    display_title: 'Korte kurser'
     position: 3
     display_options:
       display_extenders:
         metatag_display_extender: {  }
       display_description: ''
       displays:
-        page_2: page_2
+        page_3: page_3
       fields:
         nid:
           id: nid
@@ -2000,13 +2004,13 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: Event
+          label: 'Kort kursus'
           exclude: false
           alter:
             alter_text: false
             text: ''
             make_link: true
-            path: 'admin/ordrer/orders-events/{{ nid }}'
+            path: 'admin/ordrer/orders-short-courses/{{ nid }}'
             absolute: false
             external: false
             replace_spaces: false
@@ -2058,74 +2062,10 @@ display:
           entity_type: node
           entity_field: title
           plugin_id: field
-        field_vih_event_end_date:
-          id: field_vih_event_end_date
-          table: node__field_vih_event_end_date
-          field: field_vih_event_end_date
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: 'Slut dato'
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: datetime_default
-          settings:
-            timezone_override: ''
-            format_type: short
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          plugin_id: field
-        field_vih_event_start_date:
-          id: field_vih_event_start_date
-          table: node__field_vih_event_start_date
-          field: field_vih_event_start_date
+        field_vih_sc_start_date:
+          id: field_vih_sc_start_date
+          table: node__field_vih_sc_start_date
+          field: field_vih_sc_start_date
           relationship: none
           group_type: group
           admin_label: ''
@@ -2174,7 +2114,71 @@ display:
           type: datetime_default
           settings:
             timezone_override: ''
-            format_type: short
+            format_type: short_date_zoho
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_vih_sc_end_date:
+          id: field_vih_sc_end_date
+          table: node__field_vih_sc_end_date
+          field: field_vih_sc_end_date
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: 'Slut dato'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: datetime_default
+          settings:
+            timezone_override: ''
+            format_type: short_date_zoho
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -2203,7 +2207,7 @@ display:
           admin_label: ''
           operator: in
           value:
-            event: event
+            vih_short_course: vih_short_course
           group: 1
           exposed: false
           expose:
@@ -2235,135 +2239,11 @@ display:
           entity_type: node
           entity_field: type
           plugin_id: bundle
-        field_vih_event_end_date_value:
-          id: field_vih_event_end_date_value
-          table: node__field_vih_event_end_date
-          field: field_vih_event_end_date_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: '>'
-          value:
-            min: ''
-            max: ''
-            value: ''
-            type: date
-          group: 1
-          exposed: true
-          expose:
-            operator_id: field_vih_event_end_date_value_op
-            label: 'Slut dat0'
-            description: current-date
-            use_operator: false
-            operator: field_vih_event_end_date_value_op
-            identifier: field_vih_event_end_date_value
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              media_creator: '0'
-              media_manager: '0'
-              moderator: '0'
-            placeholder: ''
-            min_placeholder: ''
-            max_placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          plugin_id: datetime
-        status_extra:
-          id: status_extra
-          table: node_field_data
-          field: status_extra
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: '='
-          value: false
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          entity_type: node
-          plugin_id: node_status
-        status:
-          id: status
-          table: node_field_data
-          field: status
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: '='
-          value: '1'
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          entity_type: node
-          entity_field: status
-          plugin_id: boolean
       filter_groups:
         operator: AND
         groups:
           1: AND
       arguments: {  }
-      inherit_exposed_filters: true
       pager:
         type: some
         options:
@@ -2374,81 +2254,24 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - url
-        - url.query_args
-        - user
-        - 'user.node_grants:view'
-        - user.permissions
-      tags:
-        - 'config:field.storage.node.field_vih_event_end_date'
-        - 'config:field.storage.node.field_vih_event_start_date'
-  page_1:
-    display_plugin: page
-    id: page_1
-    display_title: Page
-    position: 1
-    display_options:
-      display_extenders:
-        metatag_display_extender: {  }
-      path: admin/orders
-      menu:
-        type: normal
-        title: Ordrer
-        description: ''
-        expanded: false
-        parent: 'menu_link_content:066c53ba-8634-4ca5-bf97-4337b50ef8aa'
-        weight: 0
-        context: '0'
-        menu_name: admin
-      tab_options:
-        type: normal
-        title: Indhold
-        description: ''
-        weight: 0
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - url
         - url.query_args
         - 'user.node_grants:view'
-        - user.permissions
+        - user.roles
       tags:
-        - 'config:field.storage.node.field_vih_cp_end_date'
-        - 'config:field.storage.node.field_vih_cp_start_date'
-        - 'config:field.storage.node.field_vih_eo_event'
-        - 'config:field.storage.node.field_vih_event_end_date'
-        - 'config:field.storage.node.field_vih_event_start_date'
-        - 'config:field.storage.node.field_vih_lco_adult_email'
-        - 'config:field.storage.node.field_vih_lco_adult_last_name'
-        - 'config:field.storage.node.field_vih_lco_course'
-        - 'config:field.storage.node.field_vih_lco_email'
-        - 'config:field.storage.node.field_vih_lco_first_name'
-        - 'config:field.storage.node.field_vih_lco_last_name'
-        - 'config:field.storage.node.field_vih_lco_order_course_perio'
         - 'config:field.storage.node.field_vih_sc_end_date'
         - 'config:field.storage.node.field_vih_sc_start_date'
-        - 'config:field.storage.node.field_vih_sco_course'
-        - 'config:field.storage.paragraph.field_vih_ocp_email'
-        - 'config:field.storage.paragraph.field_vih_ocp_first_name'
-        - 'config:field.storage.paragraph.field_vih_ocp_last_name'
-        - 'config:field.storage.paragraph.field_vih_ocp_order_course_slots'
-        - 'config:field.storage.paragraph.field_vih_oe_email'
-        - 'config:field.storage.paragraph.field_vih_oe_first_name'
-        - 'config:field.storage.paragraph.field_vih_oe_last_name'
-  page_2:
+  page_3:
     display_plugin: page
-    id: page_2
-    display_title: 'Event orders'
+    id: page_3
+    display_title: 'Short course orders'
     position: 1
     display_options:
       display_extenders:
         metatag_display_extender: {  }
-      path: admin/ordrer/orders-events
+      path: admin/ordrer/orders-short-courses
       menu:
         type: normal
-        title: 'Ordrer - Events'
+        title: 'Ordrer - Short courses'
         description: ''
         expanded: false
         parent: 'menu_link_content:066c53ba-8634-4ca5-bf97-4337b50ef8aa'
@@ -2461,7 +2284,7 @@ display:
         description: ''
         weight: 0
       display_description: ''
-      title: 'Event - Tilmedinger'
+      title: 'Korte kurser - Tilmedinger'
       defaults:
         title: false
         filters: false
@@ -2480,7 +2303,7 @@ display:
           admin_label: ''
           operator: in
           value:
-            vih_event_order: vih_event_order
+            vih_short_course_order: vih_short_course_order
           group: 1
           exposed: false
           expose:
@@ -2516,7 +2339,7 @@ display:
           id: title
           table: node_field_data
           field: title
-          relationship: field_vih_eo_event
+          relationship: field_vih_sco_course
           group_type: group
           admin_label: ''
           operator: contains
@@ -2539,6 +2362,7 @@ display:
               administrator: '0'
               media_creator: '0'
               media_manager: '0'
+              moderator: '0'
             placeholder: ''
           is_grouped: false
           group_info:
@@ -2673,11 +2497,11 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
-        field_vih_oe_first_name:
-          id: field_vih_oe_first_name
-          table: paragraph__field_vih_oe_first_name
-          field: field_vih_oe_first_name
-          relationship: field_vih_eo_persons
+        field_vih_ocp_first_name:
+          id: field_vih_ocp_first_name
+          table: paragraph__field_vih_ocp_first_name
+          field: field_vih_ocp_first_name
+          relationship: field_vih_sco_persons
           group_type: group
           admin_label: ''
           label: 'First name'
@@ -2736,11 +2560,11 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
-        field_vih_oe_last_name:
-          id: field_vih_oe_last_name
-          table: paragraph__field_vih_oe_last_name
-          field: field_vih_oe_last_name
-          relationship: field_vih_eo_persons
+        field_vih_ocp_last_name:
+          id: field_vih_ocp_last_name
+          table: paragraph__field_vih_ocp_last_name
+          field: field_vih_ocp_last_name
+          relationship: field_vih_sco_persons
           group_type: group
           admin_label: ''
           label: 'Last name'
@@ -2799,11 +2623,11 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
-        field_vih_oe_email:
-          id: field_vih_oe_email
-          table: paragraph__field_vih_oe_email
-          field: field_vih_oe_email
-          relationship: field_vih_eo_persons
+        field_vih_ocp_email:
+          id: field_vih_ocp_email
+          table: paragraph__field_vih_ocp_email
+          field: field_vih_ocp_email
+          relationship: field_vih_sco_persons
           group_type: group
           admin_label: ''
           label: Email
@@ -2848,9 +2672,8 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: false
+          type: basic_string
+          settings: {  }
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -2870,12 +2693,12 @@ display:
           group_type: group
           admin_label: ''
           label: 'ORDER ID'
-          exclude: true
+          exclude: false
           alter:
             alter_text: false
             text: ''
-            make_link: false
-            path: ''
+            make_link: true
+            path: '/node/{{ nid }}/short-course---order-page'
             absolute: false
             external: false
             replace_spaces: false
@@ -2886,7 +2709,7 @@ display:
             link_class: ''
             prefix: ''
             suffix: ''
-            target: ''
+            target: _blank
             nl2br: false
             max_length: 0
             word_boundary: true
@@ -2928,27 +2751,93 @@ display:
           entity_type: node
           entity_field: nid
           plugin_id: field
-      relationships:
-        field_vih_eo_persons:
-          id: field_vih_eo_persons
-          table: node__field_vih_eo_persons
-          field: field_vih_eo_persons
+        field_vih_sco_status:
+          id: field_vih_sco_status
+          table: node__field_vih_sco_status
+          field: field_vih_sco_status
           relationship: none
           group_type: group
-          admin_label: 'field_vih_eo_persons: Paragraph'
+          admin_label: ''
+          label: Status
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: list_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+      relationships:
+        field_vih_sco_persons:
+          id: field_vih_sco_persons
+          table: node__field_vih_sco_persons
+          field: field_vih_sco_persons
+          relationship: none
+          group_type: group
+          admin_label: 'field_vih_sco_persons: Paragraph'
           required: false
           plugin_id: standard
-        field_vih_eo_event:
-          id: field_vih_eo_event
-          table: node__field_vih_eo_event
-          field: field_vih_eo_event
+        field_vih_sco_course:
+          id: field_vih_sco_course
+          table: node__field_vih_sco_course
+          field: field_vih_sco_course
+          relationship: none
+          group_type: group
+          admin_label: 'field_vih_sco_course: Indhold'
+          required: false
           plugin_id: standard
       arguments:
         nid_1:
           id: nid_1
           table: node_field_data
           field: nid
-          relationship: field_vih_eo_event
+          relationship: field_vih_sco_course
           group_type: group
           admin_label: ''
           default_action: empty
@@ -3003,9 +2892,10 @@ display:
         - url
         - url.query_args
         - 'user.node_grants:view'
-        - user.permissions
+        - user.roles
       tags:
         - 'config:field.storage.node.field_vih_eo_event'
-        - 'config:field.storage.paragraph.field_vih_oe_email'
-        - 'config:field.storage.paragraph.field_vih_oe_first_name'
-        - 'config:field.storage.paragraph.field_vih_oe_last_name'
+        - 'config:field.storage.node.field_vih_sco_status'
+        - 'config:field.storage.paragraph.field_vih_ocp_email'
+        - 'config:field.storage.paragraph.field_vih_ocp_first_name'
+        - 'config:field.storage.paragraph.field_vih_ocp_last_name'
