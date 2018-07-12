@@ -1889,7 +1889,7 @@ display:
           empty: false
           tokenize: true
           content:
-            value: "<p>\n<a href=\"admin/ordrer/orders-long-course/{{ arguments.field_vih_lco_course_target_id }}\" targer=\"_blank\">Open in new window</a>\n</p>\n"
+            value: "<p>\n<a href=\"admin/ordrer/orders-long-course/{{ arguments.field_vih_lco_course_target_id }}\" target=\"_blank\">Open in new window</a>\n</p>\n"
             format: rich_text
           plugin_id: text
       arguments:
