@@ -1440,8 +1440,19 @@ ul.layout-navigation {
 
 @media print {
 
+  .sectioned.sectioned--header,
+  .layout__header,
+  button,
+  .links.btn-group,
   .region-notify,
+  .view-footer,
   .layout__footer {
-    display: none;
+    display: none !important;
   }
+  h1{
+    font-size: 16px;
+  }
+  body {
+        font-size: 12px;
+    }
 }
