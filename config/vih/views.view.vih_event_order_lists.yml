@@ -3309,7 +3309,7 @@ display:
           empty: false
           tokenize: true
           content:
-            value: "<p>\n<a href=\"admin/ordrer/order-event/{{ raw_arguments.nid }}\" test=\"test\" target=\"_blank\">Open in new window</a>\n</p>"
+            value: "<p>\n<a href=\"admin/ordrer/orders-event/{{ raw_arguments.nid }}\" test=\"test\" target=\"_blank\">Open in new window</a>\n</p>"
             format: rich_text
           plugin_id: text
     cache_metadata:
