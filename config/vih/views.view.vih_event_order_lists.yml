@@ -1,4 +1,4 @@
-uuid: f3a08be6-0b82-47f5-ae86-8be66df5ed2c
+uuid: db9e608e-e703-449a-9997-211ecb377576
 langcode: da
 status: true
 dependencies:
@@ -18,7 +18,6 @@ dependencies:
     - field.storage.node.field_vih_sc_end_date
     - field.storage.node.field_vih_sc_start_date
     - field.storage.node.field_vih_sco_course
-    - field.storage.node.field_vih_sco_status
     - field.storage.paragraph.field_vih_ocp_email
     - field.storage.paragraph.field_vih_ocp_first_name
     - field.storage.paragraph.field_vih_ocp_last_name
@@ -26,22 +25,20 @@ dependencies:
     - field.storage.paragraph.field_vih_oe_email
     - field.storage.paragraph.field_vih_oe_first_name
     - field.storage.paragraph.field_vih_oe_last_name
+    - node.type.event
     - node.type.vih_event_order
     - node.type.vih_long_course_order
-    - node.type.vih_short_course
     - node.type.vih_short_course_order
     - system.menu.admin
-    - user.role.authenticated
   module:
     - datetime
     - entity_reference_revisions
     - node
-    - options
     - paragraphs
     - taxonomy
     - user
-id: tilmedinger_korte_kurser
-label: 'Tilmedinger - korte kurser'
+id: vih_event_order_lists
+label: Tilmedinger
 module: views
 description: ''
 tag: ''
@@ -56,10 +53,9 @@ display:
     position: 0
     display_options:
       access:
-        type: role
+        type: perm
         options:
-          role:
-            authenticated: authenticated
+          perm: 'create event content'
       cache:
         type: tag
         options: {  }
@@ -1895,7 +1891,7 @@ display:
         - url
         - url.query_args
         - 'user.node_grants:view'
-        - user.roles
+        - user.permissions
       tags:
         - 'config:field.storage.node.field_vih_cp_end_date'
         - 'config:field.storage.node.field_vih_cp_start_date'
@@ -1919,17 +1915,17 @@ display:
         - 'config:field.storage.paragraph.field_vih_oe_email'
         - 'config:field.storage.paragraph.field_vih_oe_first_name'
         - 'config:field.storage.paragraph.field_vih_oe_last_name'
-  attachment_2:
+  attachment_all_events:
     display_plugin: attachment
-    id: attachment_2
-    display_title: 'Korte kurser'
+    id: attachment_all_events
+    display_title: 'Events (attachment)'
     position: 3
     display_options:
       display_extenders:
         metatag_display_extender: {  }
       display_description: ''
       displays:
-        page_3: page_3
+        page_all_events_and_events_orders: page_all_events_and_events_orders
       fields:
         nid:
           id: nid
@@ -2004,13 +2000,13 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: 'Kort kursus'
+          label: Event
           exclude: false
           alter:
             alter_text: false
             text: ''
             make_link: true
-            path: 'admin/ordrer/orders-short-courses/{{ nid }}'
+            path: 'admin/ordrer/orders-events/{{ nid }}'
             absolute: false
             external: false
             replace_spaces: false
@@ -2062,74 +2058,10 @@ display:
           entity_type: node
           entity_field: title
           plugin_id: field
-        field_vih_sc_start_date:
-          id: field_vih_sc_start_date
-          table: node__field_vih_sc_start_date
-          field: field_vih_sc_start_date
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: 'Start dato'
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: datetime_default
-          settings:
-            timezone_override: ''
-            format_type: short_date_zoho
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          plugin_id: field
-        field_vih_sc_end_date:
-          id: field_vih_sc_end_date
-          table: node__field_vih_sc_end_date
-          field: field_vih_sc_end_date
+        field_vih_event_end_date:
+          id: field_vih_event_end_date
+          table: node__field_vih_event_end_date
+          field: field_vih_event_end_date
           relationship: none
           group_type: group
           admin_label: ''
@@ -2178,7 +2110,71 @@ display:
           type: datetime_default
           settings:
             timezone_override: ''
-            format_type: short_date_zoho
+            format_type: short
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_vih_event_start_date:
+          id: field_vih_event_start_date
+          table: node__field_vih_event_start_date
+          field: field_vih_event_start_date
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: 'Start dato'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: datetime_default
+          settings:
+            timezone_override: ''
+            format_type: short
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -2207,7 +2203,7 @@ display:
           admin_label: ''
           operator: in
           value:
-            vih_short_course: vih_short_course
+            event: event
           group: 1
           exposed: false
           expose:
@@ -2239,71 +2235,63 @@ display:
           entity_type: node
           entity_field: type
           plugin_id: bundle
-      filter_groups:
-        operator: AND
-        groups:
-          1: AND
-      arguments: {  }
-      pager:
-        type: some
-        options:
-          items_per_page: 100
-          offset: 0
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - url.query_args
-        - 'user.node_grants:view'
-        - user.roles
-      tags:
-        - 'config:field.storage.node.field_vih_sc_end_date'
-        - 'config:field.storage.node.field_vih_sc_start_date'
-  page_3:
-    display_plugin: page
-    id: page_3
-    display_title: 'Short course orders'
-    position: 1
-    display_options:
-      display_extenders:
-        metatag_display_extender: {  }
-      path: admin/ordrer/orders-short-courses
-      menu:
-        type: normal
-        title: 'Ordrer - Short courses'
-        description: ''
-        expanded: false
-        parent: 'menu_link_content:066c53ba-8634-4ca5-bf97-4337b50ef8aa'
-        weight: 0
-        context: '0'
-        menu_name: admin
-      tab_options:
-        type: normal
-        title: Indhold
-        description: ''
-        weight: 0
-      display_description: ''
-      title: 'Korte kurser - Tilmedinger'
-      defaults:
-        title: false
-        filters: false
-        filter_groups: false
-        fields: false
-        relationships: false
-        arguments: false
-        empty: false
-      filters:
-        type_1:
-          id: type_1
-          table: node_field_data
-          field: type
+        field_vih_event_end_date_value:
+          id: field_vih_event_end_date_value
+          table: node__field_vih_event_end_date
+          field: field_vih_event_end_date_value
           relationship: none
           group_type: group
           admin_label: ''
-          operator: in
+          operator: '>'
           value:
-            vih_short_course_order: vih_short_course_order
+            min: ''
+            max: ''
+            value: ''
+            type: date
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_vih_event_end_date_value_op
+            label: 'Slut dat0'
+            description: current-date
+            use_operator: false
+            operator: field_vih_event_end_date_value_op
+            identifier: field_vih_event_end_date_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              media_creator: '0'
+              media_manager: '0'
+              moderator: '0'
+            placeholder: ''
+            min_placeholder: ''
+            max_placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: datetime
+        status_extra:
+          id: status_extra
+          table: node_field_data
+          field: status_extra
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: false
           group: 1
           exposed: false
           expose:
@@ -2318,8 +2306,6 @@ display:
             multiple: false
             remember_roles:
               authenticated: authenticated
-            reduce: false
-            argument: null
           is_grouped: false
           group_info:
             label: ''
@@ -2333,13 +2319,50 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           entity_type: node
-          entity_field: type
-          plugin_id: bundle
+          plugin_id: node_status
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: '1'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
         title:
           id: title
           table: node_field_data
           field: title
-          relationship: field_vih_sco_course
+          relationship: none
           group_type: group
           admin_label: ''
           operator: contains
@@ -2348,11 +2371,11 @@ display:
           exposed: true
           expose:
             operator_id: title_op
-            label: Eventnavn
+            label: Title
             description: ''
             use_operator: false
             operator: title_op
-            identifier: title
+            identifier: event_title
             required: false
             remember: false
             multiple: false
@@ -2379,6 +2402,397 @@ display:
           entity_type: node
           entity_field: title
           plugin_id: string
+        field_vih_event_start_date_value:
+          id: field_vih_event_start_date_value
+          table: node__field_vih_event_start_date
+          field: field_vih_event_start_date_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '>='
+          value:
+            min: ''
+            max: ''
+            value: ''
+            type: date
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_vih_event_start_date_value_op
+            label: 'Start date'
+            description: ''
+            use_operator: false
+            operator: field_vih_event_start_date_value_op
+            identifier: event_start_date
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              media_creator: '0'
+              media_manager: '0'
+              moderator: '0'
+            placeholder: ''
+            min_placeholder: ''
+            max_placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: datetime
+        field_vih_event_end_date_value_1:
+          id: field_vih_event_end_date_value_1
+          table: node__field_vih_event_end_date
+          field: field_vih_event_end_date_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '<='
+          value:
+            min: ''
+            max: ''
+            value: ''
+            type: date
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_vih_event_end_date_value_1_op
+            label: 'End date'
+            description: ''
+            use_operator: false
+            operator: field_vih_event_end_date_value_1_op
+            identifier: event_end_date
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              media_creator: '0'
+              media_manager: '0'
+              moderator: '0'
+            placeholder: ''
+            min_placeholder: ''
+            max_placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: datetime
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      arguments: {  }
+      inherit_exposed_filters: true
+      pager:
+        type: some
+        options:
+          items_per_page: 100
+          offset: 0
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - user
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:field.storage.node.field_vih_event_end_date'
+        - 'config:field.storage.node.field_vih_event_start_date'
+  page_1:
+    display_plugin: page
+    id: page_1
+    display_title: Page
+    position: 1
+    display_options:
+      display_extenders:
+        metatag_display_extender: {  }
+      path: admin/orders
+      menu:
+        type: normal
+        title: Ordrer
+        description: ''
+        expanded: false
+        parent: 'menu_link_content:066c53ba-8634-4ca5-bf97-4337b50ef8aa'
+        weight: 0
+        context: '0'
+        menu_name: admin
+      tab_options:
+        type: normal
+        title: Indhold
+        description: ''
+        weight: 0
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:field.storage.node.field_vih_cp_end_date'
+        - 'config:field.storage.node.field_vih_cp_start_date'
+        - 'config:field.storage.node.field_vih_eo_event'
+        - 'config:field.storage.node.field_vih_event_end_date'
+        - 'config:field.storage.node.field_vih_event_start_date'
+        - 'config:field.storage.node.field_vih_lco_adult_email'
+        - 'config:field.storage.node.field_vih_lco_adult_last_name'
+        - 'config:field.storage.node.field_vih_lco_course'
+        - 'config:field.storage.node.field_vih_lco_email'
+        - 'config:field.storage.node.field_vih_lco_first_name'
+        - 'config:field.storage.node.field_vih_lco_last_name'
+        - 'config:field.storage.node.field_vih_lco_order_course_perio'
+        - 'config:field.storage.node.field_vih_sc_end_date'
+        - 'config:field.storage.node.field_vih_sc_start_date'
+        - 'config:field.storage.node.field_vih_sco_course'
+        - 'config:field.storage.paragraph.field_vih_ocp_email'
+        - 'config:field.storage.paragraph.field_vih_ocp_first_name'
+        - 'config:field.storage.paragraph.field_vih_ocp_last_name'
+        - 'config:field.storage.paragraph.field_vih_ocp_order_course_slots'
+        - 'config:field.storage.paragraph.field_vih_oe_email'
+        - 'config:field.storage.paragraph.field_vih_oe_first_name'
+        - 'config:field.storage.paragraph.field_vih_oe_last_name'
+  page_all_events_and_events_orders:
+    display_plugin: page
+    id: page_all_events_and_events_orders
+    display_title: 'All Events + Events orders'
+    position: 1
+    display_options:
+      display_extenders:
+        metatag_display_extender: {  }
+      path: admin/ordrer/orders-events
+      menu:
+        type: normal
+        title: 'Ordrer - Events'
+        description: ''
+        expanded: false
+        parent: 'menu_link_content:066c53ba-8634-4ca5-bf97-4337b50ef8aa'
+        weight: 0
+        context: '0'
+        menu_name: admin
+      tab_options:
+        type: normal
+        title: Indhold
+        description: ''
+        weight: 0
+      display_description: ''
+      title: 'Event - Tilmedinger'
+      defaults:
+        title: false
+        filters: false
+        filter_groups: false
+        fields: false
+        relationships: false
+        arguments: false
+        empty: false
+        footer: false
+      filters:
+        type_1:
+          id: type_1
+          table: node_field_data
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value:
+            vih_event_order: vih_event_order
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+            argument: null
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+        title_1:
+          id: title_1
+          table: node_field_data
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: contains
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: title_1_op
+            label: Eventnavn
+            description: ''
+            use_operator: false
+            operator: title_1_op
+            identifier: event_title
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              media_creator: '0'
+              media_manager: '0'
+              moderator: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          entity_field: title
+          plugin_id: string
+        field_vih_event_start_date_value:
+          id: field_vih_event_start_date_value
+          table: node__field_vih_event_start_date
+          field: field_vih_event_start_date_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '>='
+          value:
+            min: ''
+            max: ''
+            value: ''
+            type: date
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_vih_event_start_date_value_op
+            label: 'Start date'
+            description: ''
+            use_operator: false
+            operator: field_vih_event_start_date_value_op
+            identifier: event_start_date
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              media_creator: '0'
+              media_manager: '0'
+              moderator: '0'
+            placeholder: ''
+            min_placeholder: ''
+            max_placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: datetime
+        field_vih_event_end_date_value:
+          id: field_vih_event_end_date_value
+          table: node__field_vih_event_end_date
+          field: field_vih_event_end_date_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '<='
+          value:
+            min: ''
+            max: ''
+            value: ''
+            type: date
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_vih_event_end_date_value_op
+            label: 'End date'
+            description: ''
+            use_operator: false
+            operator: field_vih_event_end_date_value_op
+            identifier: field_vih_event_end_date_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              media_creator: '0'
+              media_manager: '0'
+              moderator: '0'
+            placeholder: ''
+            min_placeholder: ''
+            max_placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          plugin_id: datetime
       filter_groups:
         operator: AND
         groups:
@@ -2434,14 +2848,14 @@ display:
           hide_alter_empty: true
           counter_start: 1
           plugin_id: counter
-        field_vih_eo_event:
-          id: field_vih_eo_event
-          table: node__field_vih_eo_event
-          field: field_vih_eo_event
+        title:
+          id: title
+          table: node_field_data
+          field: title
           relationship: none
           group_type: group
           admin_label: ''
-          label: ''
+          label: 'Order title'
           exclude: false
           alter:
             alter_text: false
@@ -2474,7 +2888,7 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: false
+          element_label_colon: true
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -2482,11 +2896,11 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: target_id
-          type: entity_reference_label
+          click_sort_column: value
+          type: string
           settings:
-            link: true
-          group_column: target_id
+            link_to_entity: true
+          group_column: value
           group_columns: {  }
           group_rows: true
           delta_limit: 0
@@ -2496,12 +2910,14 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+          entity_type: node
+          entity_field: title
           plugin_id: field
-        field_vih_ocp_first_name:
-          id: field_vih_ocp_first_name
-          table: paragraph__field_vih_ocp_first_name
-          field: field_vih_ocp_first_name
-          relationship: field_vih_sco_persons
+        field_vih_oe_first_name:
+          id: field_vih_oe_first_name
+          table: paragraph__field_vih_oe_first_name
+          field: field_vih_oe_first_name
+          relationship: field_vih_eo_persons
           group_type: group
           admin_label: ''
           label: 'First name'
@@ -2560,11 +2976,11 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
-        field_vih_ocp_last_name:
-          id: field_vih_ocp_last_name
-          table: paragraph__field_vih_ocp_last_name
-          field: field_vih_ocp_last_name
-          relationship: field_vih_sco_persons
+        field_vih_oe_last_name:
+          id: field_vih_oe_last_name
+          table: paragraph__field_vih_oe_last_name
+          field: field_vih_oe_last_name
+          relationship: field_vih_eo_persons
           group_type: group
           admin_label: ''
           label: 'Last name'
@@ -2623,11 +3039,11 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
-        field_vih_ocp_email:
-          id: field_vih_ocp_email
-          table: paragraph__field_vih_ocp_email
-          field: field_vih_ocp_email
-          relationship: field_vih_sco_persons
+        field_vih_oe_email:
+          id: field_vih_oe_email
+          table: paragraph__field_vih_oe_email
+          field: field_vih_oe_email
+          relationship: field_vih_eo_persons
           group_type: group
           admin_label: ''
           label: Email
@@ -2672,8 +3088,9 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
-          type: basic_string
-          settings: {  }
+          type: string
+          settings:
+            link_to_entity: false
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -2685,20 +3102,20 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
-        nid:
-          id: nid
-          table: node_field_data
-          field: nid
+        field_vih_eo_event:
+          id: field_vih_eo_event
+          table: node__field_vih_eo_event
+          field: field_vih_eo_event
           relationship: none
           group_type: group
           admin_label: ''
-          label: 'ORDER ID'
+          label: 'Event title'
           exclude: false
           alter:
             alter_text: false
             text: ''
             make_link: true
-            path: '/node/{{ nid }}/short-course---order-page'
+            path: '{{ field_vih_eo_event }}'
             absolute: false
             external: false
             replace_spaces: false
@@ -2725,7 +3142,7 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: true
+          element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -2733,12 +3150,11 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: value
-          type: number_integer
+          click_sort_column: target_id
+          type: entity_reference_label
           settings:
-            thousand_separator: ''
-            prefix_suffix: true
-          group_column: value
+            link: true
+          group_column: target_id
           group_columns: {  }
           group_rows: true
           delta_limit: 0
@@ -2748,17 +3164,240 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+          plugin_id: field
+      relationships:
+        field_vih_eo_persons:
+          id: field_vih_eo_persons
+          table: node__field_vih_eo_persons
+          field: field_vih_eo_persons
+          relationship: none
+          group_type: group
+          admin_label: 'field_vih_eo_persons: Paragraph'
+          required: false
+          plugin_id: standard
+        field_vih_eo_event:
+          id: field_vih_eo_event
+          table: node__field_vih_eo_event
+          field: field_vih_eo_event
+          plugin_id: standard
+      arguments:
+        nid:
+          id: nid
+          table: node_field_data
+          field: nid
+          relationship: field_vih_eo_event
+          group_type: group
+          admin_label: ''
+          default_action: empty
+          exception:
+            value: all
+            title_enable: false
+            title: All
+          title_enable: false
+          title: ''
+          default_argument_type: fixed
+          default_argument_options:
+            argument: ''
+          default_argument_skip_url: false
+          summary_options:
+            base_path: ''
+            count: true
+            items_per_page: 25
+            override: false
+          summary:
+            sort_order: asc
+            number_of_records: 0
+            format: default_summary
+          specify_validation: false
+          validate:
+            type: none
+            fail: 'not found'
+          validate_options: {  }
+          break_phrase: false
+          not: false
           entity_type: node
           entity_field: nid
-          plugin_id: field
-        field_vih_sco_status:
-          id: field_vih_sco_status
-          table: node__field_vih_sco_status
-          field: field_vih_sco_status
+          plugin_id: node_nid
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
           relationship: none
           group_type: group
           admin_label: ''
-          label: Status
+          empty: true
+          tokenize: false
+          content:
+            value: 'Der er ingen tilmeldinger på denne event'
+            format: rich_text
+          plugin_id: text
+      footer:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: 'Open in new window link'
+          empty: false
+          tokenize: true
+          content:
+            value: "<p>\n<a href=\"admin/ordrer/order-event/{{ raw_arguments.nid }}\" target=\"_blank\">Open in new window</a>\n</p>"
+            format: rich_text
+          plugin_id: text
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - 'user.node_grants:view'
+        - user.permissions
+      tags:
+        - 'config:field.storage.node.field_vih_eo_event'
+        - 'config:field.storage.paragraph.field_vih_oe_email'
+        - 'config:field.storage.paragraph.field_vih_oe_first_name'
+        - 'config:field.storage.paragraph.field_vih_oe_last_name'
+  page_event_orders:
+    display_plugin: page
+    id: page_event_orders
+    display_title: 'Event orders'
+    position: 1
+    display_options:
+      display_extenders:
+        metatag_display_extender: {  }
+      path: admin/ordrer/orders-event
+      menu:
+        type: normal
+        title: 'Ordrer - Events'
+        description: ''
+        expanded: false
+        parent: 'menu_link_content:066c53ba-8634-4ca5-bf97-4337b50ef8aa'
+        weight: 0
+        context: '0'
+        menu_name: admin
+      tab_options:
+        type: normal
+        title: Indhold
+        description: ''
+        weight: 0
+      display_description: ''
+      title: 'Event - Tilmedinger'
+      defaults:
+        title: false
+        filters: false
+        filter_groups: false
+        fields: false
+        relationships: false
+        arguments: false
+        empty: false
+      filters:
+        type_1:
+          id: type_1
+          table: node_field_data
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value:
+            vih_event_order: vih_event_order
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+            argument: null
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      fields:
+        counter:
+          id: counter
+          table: views
+          field: counter
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          counter_start: 1
+          plugin_id: counter
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: 'Order title'
           exclude: false
           alter:
             alter_text: false
@@ -2800,8 +3439,74 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
-          type: list_default
-          settings: {  }
+          type: string
+          settings:
+            link_to_entity: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          entity_type: node
+          entity_field: title
+          plugin_id: field
+        field_vih_oe_first_name:
+          id: field_vih_oe_first_name
+          table: paragraph__field_vih_oe_first_name
+          field: field_vih_oe_first_name
+          relationship: field_vih_eo_persons
+          group_type: group
+          admin_label: ''
+          label: 'First name'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -2813,31 +3518,282 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
-      relationships:
-        field_vih_sco_persons:
-          id: field_vih_sco_persons
-          table: node__field_vih_sco_persons
-          field: field_vih_sco_persons
+        field_vih_oe_last_name:
+          id: field_vih_oe_last_name
+          table: paragraph__field_vih_oe_last_name
+          field: field_vih_oe_last_name
+          relationship: field_vih_eo_persons
+          group_type: group
+          admin_label: ''
+          label: 'Last name'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_vih_oe_email:
+          id: field_vih_oe_email
+          table: paragraph__field_vih_oe_email
+          field: field_vih_oe_email
+          relationship: field_vih_eo_persons
+          group_type: group
+          admin_label: ''
+          label: Email
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        nid:
+          id: nid
+          table: node_field_data
+          field: nid
           relationship: none
           group_type: group
-          admin_label: 'field_vih_sco_persons: Paragraph'
+          admin_label: ''
+          label: 'ORDER ID'
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: number_integer
+          settings:
+            thousand_separator: ''
+            prefix_suffix: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          entity_type: node
+          entity_field: nid
+          plugin_id: field
+        field_vih_eo_event:
+          id: field_vih_eo_event
+          table: node__field_vih_eo_event
+          field: field_vih_eo_event
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: 'Event title'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: true
+            path: '{{ field_vih_eo_event }}'
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: _blank
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: true
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+      relationships:
+        field_vih_eo_persons:
+          id: field_vih_eo_persons
+          table: node__field_vih_eo_persons
+          field: field_vih_eo_persons
+          relationship: none
+          group_type: group
+          admin_label: 'field_vih_eo_persons: Paragraph'
           required: false
           plugin_id: standard
-        field_vih_sco_course:
-          id: field_vih_sco_course
-          table: node__field_vih_sco_course
-          field: field_vih_sco_course
-          relationship: none
-          group_type: group
-          admin_label: 'field_vih_sco_course: Indhold'
-          required: false
+        field_vih_eo_event:
+          id: field_vih_eo_event
+          table: node__field_vih_eo_event
+          field: field_vih_eo_event
           plugin_id: standard
       arguments:
         nid_1:
           id: nid_1
           table: node_field_data
           field: nid
-          relationship: field_vih_sco_course
+          relationship: field_vih_eo_event
           group_type: group
           admin_label: ''
           default_action: empty
@@ -2892,10 +3848,9 @@ display:
         - url
         - url.query_args
         - 'user.node_grants:view'
-        - user.roles
+        - user.permissions
       tags:
         - 'config:field.storage.node.field_vih_eo_event'
-        - 'config:field.storage.node.field_vih_sco_status'
-        - 'config:field.storage.paragraph.field_vih_ocp_email'
-        - 'config:field.storage.paragraph.field_vih_ocp_first_name'
-        - 'config:field.storage.paragraph.field_vih_ocp_last_name'
+        - 'config:field.storage.paragraph.field_vih_oe_email'
+        - 'config:field.storage.paragraph.field_vih_oe_first_name'
+        - 'config:field.storage.paragraph.field_vih_oe_last_name'
