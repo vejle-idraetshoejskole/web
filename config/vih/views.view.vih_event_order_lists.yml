@@ -2611,6 +2611,7 @@ display:
         arguments: false
         empty: false
         footer: false
+        header: false
       filters:
         type_1:
           id: type_1
@@ -3312,6 +3313,20 @@ display:
             value: "<p>\n<a href=\"admin/ordrer/orders-event/{{ raw_arguments.nid }}\" test=\"test\" target=\"_blank\">Open in new window</a>\n</p>"
             format: rich_text
           plugin_id: text
+      header:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: '{{ title }}'
+          empty: false
+          tokenize: true
+          content:
+            value: '<h2> {{ arguments.nid }} </h2> '
+            format: rich_text
+          plugin_id: text
     cache_metadata:
       max-age: -1
       contexts:
@@ -3359,6 +3374,8 @@ display:
         relationships: false
         arguments: false
         empty: false
+        footer: false
+        header: false
       filters:
         type_1:
           id: type_1
@@ -3904,6 +3921,21 @@ display:
           tokenize: false
           content:
             value: 'Der er ingen tilmeldinger på denne event'
+            format: rich_text
+          plugin_id: text
+      footer: {  }
+      header:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: false
+          tokenize: true
+          content:
+            value: '<h2> {{ arguments.nid_1 }} </h2> '
             format: rich_text
           plugin_id: text
     cache_metadata:
