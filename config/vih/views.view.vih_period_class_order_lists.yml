@@ -393,7 +393,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          operator: word
+          operator: allwords
           value: ''
           group: 1
           exposed: true
@@ -1388,7 +1388,7 @@ display:
           relationship: field_vih_ocp_course_period
           group_type: group
           admin_label: ''
-          operator: word
+          operator: allwords
           value: ''
           group: 1
           exposed: true
