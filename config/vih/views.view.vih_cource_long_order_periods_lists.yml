@@ -1140,7 +1140,7 @@ display:
           relationship: reverse__node__field_vih_lco_course
           group_type: count_distinct
           admin_label: ''
-          label: ID
+          label: 'Order count'
           exclude: false
           alter:
             alter_text: false
@@ -2592,20 +2592,7 @@ display:
           plugin_id: field
       header: {  }
       display_description: ''
-      footer:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: 'Open in new window link'
-          empty: false
-          tokenize: true
-          content:
-            value: "<p>\n<a href=\"admin/ordrer/orders-long-courses-period/{{ arguments.field_vih_course_periods_target_id }}\" target=\"_blank\">Open in new window</a>\n</p>\n"
-            format: rich_text
-          plugin_id: text
+      footer: {  }
       arguments:
         field_vih_course_periods_target_id:
           id: field_vih_course_periods_target_id
