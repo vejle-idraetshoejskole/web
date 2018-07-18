@@ -308,7 +308,7 @@ display:
           expose:
             label: ''
           granularity: second
-      title: 'View to see orders of particular period and class.'
+      title: 'Particular period and class order report.'
       header: {  }
       footer: {  }
       empty: {  }
