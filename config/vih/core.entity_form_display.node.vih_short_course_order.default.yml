@@ -11,6 +11,7 @@ dependencies:
     - field.field.node.vih_short_course_order.field_vih_sco_status
     - node.type.vih_short_course_order
   module:
+    - content_moderation
     - paragraphs
     - path
     - text
@@ -57,7 +58,7 @@ content:
     settings:
       title: Paragraph
       title_plural: Paragraphs
-      edit_mode: open
+      edit_mode: closed
       add_mode: dropdown
       form_display_mode: default
       default_paragraph_type: _none
@@ -83,6 +84,12 @@ content:
       include_locked: true
     third_party_settings: {  }
     region: content
+  moderation_state:
+    type: moderation_state_default
+    weight: 100
+    settings: {  }
+    region: content
+    third_party_settings: {  }
   path:
     type: path
     weight: 30
@@ -130,4 +137,6 @@ content:
   url_redirects:
     weight: 50
     region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden: {  }

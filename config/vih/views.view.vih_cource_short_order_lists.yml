@@ -2436,6 +2436,7 @@ display:
         arguments: false
         empty: false
         footer: false
+        header: false
       filters:
         type_1:
           id: type_1
@@ -3204,6 +3205,20 @@ display:
             value: "<p>\n<a href=\"admin/ordrer/orders-short-course/{{ raw_arguments.nid_1 }}\" target=\"_blank\">Open in new window</a>\n</p>"
             format: rich_text
           plugin_id: text
+      header:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: false
+          tokenize: true
+          content:
+            value: '<h2>{{ arguments.nid_1 }}</h2>'
+            format: rich_text
+          plugin_id: text
     cache_metadata:
       max-age: -1
       contexts:
@@ -3252,6 +3267,7 @@ display:
         arguments: false
         empty: false
         footer: false
+        header: false
       filters:
         type_1:
           id: type_1
@@ -3867,6 +3883,20 @@ display:
             format: rich_text
           plugin_id: text
       footer: {  }
+      header:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: false
+          tokenize: true
+          content:
+            value: '<h2>{{ arguments.nid_1 }}</h2>'
+            format: rich_text
+          plugin_id: text
     cache_metadata:
       max-age: -1
       contexts:

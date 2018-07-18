@@ -1265,30 +1265,33 @@ ignored_config_entities:
   2526: ~views.view.vih_banner_slideshow
   2528: ~views.view.vih_class_packages
   2530: ~views.view.vih_cource_long_order_lists
-  2532: ~views.view.vih_cource_short_order_lists
-  2534: ~views.view.vih_event_order_lists
-  2536: ~views.view.vih_cource_order_lists
-  2538: ~views.view.vih_courses_related_to_learning
-  2540: ~views.view.vih_employees
-  2542: ~views.view.vih_events
-  2544: ~views.view.vih_long_course_list
-  2546: ~views.view.vih_long_courses
-  2548: ~views.view.vih_my_classes_nodes
-  2550: ~views.view.vih_my_classes_terms
-  2552: ~views.view.vih_news_list_advanced
-  2554: ~views.view.vih_news_teaser
-  2556: ~views.view.vih_content_grid
-  2558: ~views.view.vih_search
-  2560: ~views.view.vih_short_course_list
-  2562: ~views.view.vih_short_courses
-  2564: ~views.view.watchdog
-  2566: ~views.view.who_s_new
-  2568: ~views.view.who_s_online
-  2570: ~context.context.page_title
-  2572: ~context.context.context_center_content
-  2574: '# No ignore config split'
-  2576: ~config_split.config_split.vih_functionality
-  2578: ~config_split.config_split.vies_functionality
+  2532: ~views.view.vih_cource_long_order_periods_lists
+  2534: ~views.view.vih_cource_short_order_lists
+  2536: ~views.view.vih_event_order_lists
+  2538: ~views.view.vih_cource_order_lists
+  2540: ~views.view.vih_period_class_order_lists
+  2542: ~views.view.vih_courses_related_to_learning
+  2544: ~views.view.vih_employees
+  2546: ~views.view.vih_events
+  2548: ~views.view.vih_long_course_list
+  2550: ~views.view.vih_long_courses
+  2552: ~views.view.vih_my_classes_nodes
+  2554: ~views.view.vih_my_classes_terms
+  2556: ~views.view.vih_news_list_advanced
+  2558: ~views.view.vih_news_teaser
+  2560: ~views.view.vih_content_grid
+  2562: ~views.view.vih_search
+  2564: ~views.view.vih_short_course_list
+  2566: ~views.view.vih_long_course_order_page
+  2568: ~views.view.vih_short_courses
+  2570: ~views.view.watchdog
+  2572: ~views.view.who_s_new
+  2574: ~views.view.who_s_online
+  2576: ~context.context.page_title
+  2578: ~context.context.context_center_content
+  2580: '# No ignore config split'
+  2582: ~config_split.config_split.vih_functionality
+  2584: ~config_split.config_split.vies_functionality
 _core:
   default_config_hash: UVH1aJ4b44UM-VdPVN7hNNuuVqfReJxwfVeDQH1Hvsk
 langcode: da
