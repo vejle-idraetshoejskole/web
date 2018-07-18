@@ -493,6 +493,14 @@ class ApplicationForm extends FormBase {
       '#type' => 'actions',
       '#attributes' => ['class' => ['col-md-12']],
     ];
+
+    // Show parent form when no parents added.
+    // At least one parent should be added.
+    if (empty($parents)) {
+      $parent_index = 1;
+      $form_state->set('parent_index', $parent_index);
+    }
+
     if ($parent_index) {
       $form['parentsWrapper']['parents']['current'] = $this->getPersonalDataForm($default_values) + [
           '#attributes' => ['class' => ['clearfix']],
