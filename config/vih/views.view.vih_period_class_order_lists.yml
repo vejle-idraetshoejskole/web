@@ -308,7 +308,7 @@ display:
           expose:
             label: ''
           granularity: second
-      title: 'Tilmedinger - Fag og periode'
+      title: 'View to see orders of particular period and class.'
       header: {  }
       footer: {  }
       empty: {  }
