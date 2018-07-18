@@ -1,4 +1,4 @@
-uuid: c2f661cd-5823-448f-a1e2-5164db7fd959
+uuid: 61b2401c-6086-4165-91a5-47b451bd0fa3
 langcode: da
 status: true
 dependencies:
@@ -9,7 +9,7 @@ dependencies:
   module:
     - node
     - user
-id: long_course_order_page
+id: vih_long_course_order_page
 label: 'Long Course - Order page'
 module: views
 description: ''
