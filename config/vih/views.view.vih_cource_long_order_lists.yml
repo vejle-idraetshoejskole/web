@@ -787,7 +787,7 @@ display:
           expose:
             label: ''
           granularity: second
-      title: Tilmeldinger
+      title: 'Particular course order report'
       header: {  }
       footer: {  }
       empty: {  }
@@ -1065,6 +1065,79 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
+        nid_1:
+          id: nid_1
+          table: node_field_data
+          field: nid
+          relationship: reverse__node__field_vih_lco_course
+          group_type: count_distinct
+          admin_label: ''
+          label: 'Orders count'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          set_precision: false
+          precision: 0
+          decimal: .
+          separator: ', '
+          format_plural: 0
+          format_plural_string: !!binary MQNAY291bnQ=
+          prefix: ''
+          suffix: ''
+          click_sort_column: value
+          type: number_integer
+          settings:
+            thousand_separator: ''
+            prefix_suffix: true
+          group_column: null
+          group_columns: null
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          field_api_classes: false
+          entity_type: node
+          entity_field: nid
+          plugin_id: field
       defaults:
         fields: false
         relationships: false
@@ -1072,7 +1145,18 @@ display:
         filter_groups: false
         arguments: false
         footer: false
-      relationships: {  }
+        group_by: false
+      relationships:
+        reverse__node__field_vih_lco_course:
+          id: reverse__node__field_vih_lco_course
+          table: node_field_data
+          field: reverse__node__field_vih_lco_course
+          relationship: none
+          group_type: group
+          admin_label: Order
+          required: false
+          entity_type: node
+          plugin_id: entity_reverse
       filters:
         type_1:
           id: type_1
@@ -1159,6 +1243,86 @@ display:
           entity_type: node
           entity_field: title
           plugin_id: string
+        langcode:
+          id: langcode
+          table: node_field_data
+          field: langcode
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value:
+            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          entity_field: langcode
+          plugin_id: language
+        langcode_1:
+          id: langcode_1
+          table: node_field_data
+          field: langcode
+          relationship: reverse__node__field_vih_lco_course
+          group_type: group
+          admin_label: ''
+          operator: in
+          value:
+            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          entity_field: langcode
+          plugin_id: language
       filter_groups:
         operator: AND
         groups:
@@ -1170,6 +1334,7 @@ display:
         options:
           offset: 0
       footer: {  }
+      group_by: true
     cache_metadata:
       max-age: -1
       contexts:
@@ -1204,7 +1369,7 @@ display:
         title: Indhold
         description: ''
         weight: 0
-      group_by: false
+      group_by: true
       defaults:
         group_by: false
         filters: false
@@ -1300,6 +1465,86 @@ display:
           entity_type: node
           entity_field: title
           plugin_id: string
+        langcode:
+          id: langcode
+          table: node_field_data
+          field: langcode
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value:
+            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          entity_field: langcode
+          plugin_id: language
+        langcode_1:
+          id: langcode_1
+          table: node_field_data
+          field: langcode
+          relationship: field_vih_lco_course
+          group_type: group
+          admin_label: ''
+          operator: in
+          value:
+            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: node
+          entity_field: langcode
+          plugin_id: language
       filter_groups:
         operator: AND
         groups:
@@ -1497,12 +1742,12 @@ display:
           entity_type: node
           entity_field: title
           plugin_id: field
-        field_vih_lco_first_name:
-          id: field_vih_lco_first_name
+        field_vih_lco_first_name_1:
+          id: field_vih_lco_first_name_1
           table: node__field_vih_lco_first_name
           field: field_vih_lco_first_name
           relationship: none
-          group_type: stddev_pop
+          group_type: group
           admin_label: ''
           label: 'First name'
           exclude: false
@@ -1550,8 +1795,7 @@ display:
           settings:
             link_to_entity: false
           group_column: value
-          group_columns:
-            value: value
+          group_columns: {  }
           group_rows: true
           delta_limit: 0
           delta_offset: 0
@@ -1878,20 +2122,7 @@ display:
           plugin_id: field
       header: {  }
       display_description: ''
-      footer:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: 'Open in new window link'
-          empty: false
-          tokenize: true
-          content:
-            value: "<p>\n<a href=\"admin/ordrer/orders-long-course/{{ arguments.field_vih_lco_course_target_id }}\" target=\"_blank\">Open in new window</a>\n</p>\n"
-            format: rich_text
-          plugin_id: text
+      footer: {  }
       arguments:
         field_vih_lco_course_target_id:
           id: field_vih_lco_course_target_id
