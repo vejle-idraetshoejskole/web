@@ -879,7 +879,7 @@ display:
           table: node_field_data
           field: nid
           relationship: none
-          group_type: count_distinct
+          group_type: group
           admin_label: ''
           label: ID
           exclude: false
@@ -937,6 +937,13 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+          set_precision: false
+          precision: 0
+          decimal: .
+          format_plural: false
+          format_plural_string: !!binary MQNAY291bnQ=
+          prefix: ''
+          suffix: ''
           entity_type: node
           entity_field: nid
           plugin_id: field
@@ -1277,6 +1284,7 @@ display:
         arguments: false
         footer: false
         group_by: false
+        header: false
       relationships:
         reverse__node__field_vih_lco_course:
           id: reverse__node__field_vih_lco_course
@@ -1651,6 +1659,7 @@ display:
           offset: 0
       footer: {  }
       group_by: true
+      header: {  }
     cache_metadata:
       max-age: -1
       contexts:
@@ -2535,7 +2544,20 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
-      header: {  }
+      header:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: false
+          tokenize: true
+          content:
+            value: '<h2> {{ field_vih_lco_course }} </h2> '
+            format: rich_text
+          plugin_id: text
       display_description: ''
       footer: {  }
       arguments:
