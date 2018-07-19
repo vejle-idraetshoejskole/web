@@ -3395,7 +3395,7 @@ display:
           empty: false
           tokenize: true
           content:
-            value: '<h2> {{ arguments.nid }} </h2> '
+            value: '<h2> {{ field_vih_eo_event }} </h2> '
             format: rich_text
           plugin_id: text
     cache_metadata:
