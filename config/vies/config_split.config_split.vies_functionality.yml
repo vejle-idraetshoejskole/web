@@ -30,6 +30,7 @@ blacklist:
   - 'field.storage.taxonomy_term.field_vies*'
 graylist:
   - block.block.bartik_content
+  - views.view.content
   - 'core.entity_form_display.taxonomy_term.vih_class.*'
   - 'core.entity_view_display.taxonomy_term.vih_class.*'
 graylist_dependents: false
