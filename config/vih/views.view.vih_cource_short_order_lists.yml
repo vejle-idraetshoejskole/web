@@ -2587,7 +2587,7 @@ display:
       path: admin/ordrer/orders-short-courses
       menu:
         type: normal
-        title: 'Ordrer - Short courses'
+        title: 'Short courses orders'
         description: ''
         expanded: false
         parent: 'menu_link_content:066c53ba-8634-4ca5-bf97-4337b50ef8aa'
@@ -3499,7 +3499,7 @@ display:
         metatag_display_extender: {  }
       path: admin/ordrer/orders-short-course
       menu:
-        type: normal
+        type: none
         title: 'Ordrer - Short courses'
         description: ''
         expanded: false

@@ -1616,7 +1616,7 @@ display:
       path: admin/ordrer/orders-long-courses-periods
       menu:
         type: normal
-        title: 'Ordrer - Lange kurser'
+        title: 'Long courses periods orders'
         description: ''
         expanded: false
         parent: 'menu_link_content:066c53ba-8634-4ca5-bf97-4337b50ef8aa'
@@ -2747,7 +2747,7 @@ display:
         metatag_display_extender: {  }
       path: admin/ordrer/orders-long-courses-period
       menu:
-        type: normal
+        type: none
         title: 'Ordrer - Lange kurser'
         description: ''
         expanded: false

@@ -1684,14 +1684,13 @@ display:
       path: admin/ordrer/orders-long-courses
       menu:
         type: normal
-        title: 'Long courses order'
+        title: 'Long courses orders'
         description: ''
         expanded: false
         parent: 'menu_link_content:066c53ba-8634-4ca5-bf97-4337b50ef8aa'
         weight: 0
         context: '0'
         menu_name: admin
-        enabled: true
       tab_options:
         type: normal
         title: Indhold
@@ -2622,7 +2621,7 @@ display:
         metatag_display_extender: {  }
       path: admin/ordrer/orders-long-course
       menu:
-        type: normal
+        type: none
         title: 'Particular course order report'
         description: ''
         expanded: false
@@ -2630,7 +2629,6 @@ display:
         weight: 0
         context: '0'
         menu_name: admin
-        enabled: false
       tab_options:
         type: normal
         title: Indhold

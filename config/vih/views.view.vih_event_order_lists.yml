@@ -2617,7 +2617,7 @@ display:
         metatag_display_extender: {  }
       path: admin/orders
       menu:
-        type: normal
+        type: none
         title: Ordrer
         description: ''
         expanded: false
@@ -2673,7 +2673,7 @@ display:
       path: admin/ordrer/orders-events
       menu:
         type: normal
-        title: 'Ordrer - Events'
+        title: 'Events orders'
         description: ''
         expanded: false
         parent: 'menu_link_content:066c53ba-8634-4ca5-bf97-4337b50ef8aa'
@@ -3422,7 +3422,7 @@ display:
         metatag_display_extender: {  }
       path: admin/ordrer/orders-event
       menu:
-        type: normal
+        type: none
         title: 'Ordrer - Events'
         description: ''
         expanded: false
