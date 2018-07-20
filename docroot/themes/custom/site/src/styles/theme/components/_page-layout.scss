@@ -92,7 +92,7 @@ h1.page-header {
       padding-left: $padding-base-horizontal;
 
       &:after,
-      &:before {
+        &:before {
         display: none;
       }
     }
@@ -1369,6 +1369,10 @@ ul.layout-navigation {
 .view.view-vih-event-order-page.view-display-id-events_order_page{
   margin-bottom: 200px;
 }
+.vih-long-course-order.print-teaser .field--name-field-vih-lco-order-course-perio.field--items > .field--item{
+@extend .col-sm-6;
+}
+
 @media only screen and (min-width: 980px) {
 
   .logo-wrapper-mobile {
@@ -1469,6 +1473,13 @@ ul.layout-navigation {
   .col-sm-6{
     width: 50%;
   }
+  .vih-long-course-order.print-teaser .field--name-field-vih-lco-order-course-perio.field--items > .field--item{
+    width: 50%;
+    float: left;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
   .view.view-vih-long-course-order-page.view-display-id-long_course_order_page,
   .view.view-vih-event-order-page.view-display-id-events_order_page{
     margin-bottom: 0px;
