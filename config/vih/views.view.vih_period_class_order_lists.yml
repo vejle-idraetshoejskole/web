@@ -618,6 +618,8 @@ display:
         relationships: false
         fields: false
         query: false
+        header: false
+        arguments: false
       filter_groups:
         operator: AND
         groups:
@@ -1034,6 +1036,58 @@ display:
           replica: false
           query_comment: ''
           query_tags: {  }
+      header:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: false
+          content:
+            value: '<a class="button" href="admin/ordrer/orders-periods-classes">Reset filters</a><br><br>'
+            format: rich_text
+          plugin_id: text
+      arguments:
+        nid:
+          id: nid
+          table: node_field_data
+          field: nid
+          relationship: none
+          group_type: group
+          admin_label: ''
+          default_action: ignore
+          exception:
+            value: all
+            title_enable: false
+            title: All
+          title_enable: false
+          title: ''
+          default_argument_type: fixed
+          default_argument_options:
+            argument: ''
+          default_argument_skip_url: false
+          summary_options:
+            base_path: ''
+            count: true
+            items_per_page: 25
+            override: false
+          summary:
+            sort_order: asc
+            number_of_records: 0
+            format: default_summary
+          specify_validation: false
+          validate:
+            type: none
+            fail: 'not found'
+          validate_options: {  }
+          break_phrase: false
+          not: false
+          entity_type: node
+          entity_field: nid
+          plugin_id: node_nid
     cache_metadata:
       max-age: -1
       contexts:
@@ -1190,20 +1244,7 @@ display:
           entity_type: taxonomy_term
           entity_field: tid
           plugin_id: taxonomy
-      footer:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: 'Open in new window link'
-          empty: false
-          tokenize: true
-          content:
-            value: "<p>\n<a href=\"admin/ordrer/orders-period-class/{{ raw_arguments.nid }}/{{ raw_arguments.tid }}\" target=\"_blank\">Open in new window</a>\n</p>\n"
-            format: rich_text
-          plugin_id: text
+      footer: {  }
       fields:
         nid:
           id: nid
