@@ -1,0 +1,73 @@
+uuid: 2bc2b642-1af7-4b9f-8691-4d5ca259e4ed
+langcode: da
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.print_teaser
+    - field.field.node.vih_event_order.field_vih_eo_event
+    - field.field.node.vih_event_order.field_vih_eo_persons
+    - field.field.node.vih_event_order.field_vih_eo_price
+    - field.field.node.vih_event_order.field_vih_eo_status
+    - node.type.vih_event_order
+  module:
+    - entity_reference_revisions
+    - options
+    - panelizer
+    - user
+third_party_settings:
+  panelizer:
+    enable: false
+    custom: false
+    allow: false
+    default: default
+id: node.vih_event_order.print_teaser
+targetEntityType: node
+bundle: vih_event_order
+mode: print_teaser
+content:
+  field_payment_status:
+    weight: 103
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: plugin_label
+    region: content
+  field_vih_eo_event:
+    weight: 1
+    label: above
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_vih_eo_persons:
+    type: entity_reference_revisions_entity_view
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: embedded
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_vih_eo_price:
+    weight: 2
+    label: inline
+    settings:
+      thousand_separator: .
+      decimal_separator: ','
+      scale: 0
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_decimal
+    region: content
+  field_vih_eo_status:
+    type: list_default
+    weight: 3
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_payment_line_item: true
+  langcode: true
+  links: true

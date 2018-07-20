@@ -3,7 +3,7 @@ langcode: da
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.teaser
+    - core.entity_view_mode.node.print_teaser
     - node.type.vih_event_order
     - user.role.authenticated
   module:
@@ -61,7 +61,7 @@ display:
         type: 'entity:node'
         options:
           relationship: none
-          view_mode: teaser
+          view_mode: print_teaser
       fields:
         operations:
           id: operations
@@ -185,20 +185,7 @@ display:
           granularity: second
       title: 'Events - Order page'
       header: {  }
-      footer:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: false
-          tokenize: false
-          content:
-            value: '<br><br><br><br><br><br><br><br>'
-            format: rich_text
-          plugin_id: text
+      footer: {  }
       empty: {  }
       relationships: {  }
       arguments:

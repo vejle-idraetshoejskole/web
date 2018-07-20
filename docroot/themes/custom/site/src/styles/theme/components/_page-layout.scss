@@ -1365,7 +1365,8 @@ ul.layout-navigation {
   margin-bottom: 10px;
 }
 
-.view.view-vih-long-course-order-page.view-display-id-long_course_order_page{
+.view.view-vih-long-course-order-page.view-display-id-long_course_order_page,
+.view.view-vih-event-order-page.view-display-id-events_order_page{
   margin-bottom: 200px;
 }
 @media only screen and (min-width: 980px) {
@@ -1468,7 +1469,8 @@ ul.layout-navigation {
   .col-sm-6{
     width: 50%;
   }
-  .view.view-vih-long-course-order-page.view-display-id-long_course_order_page{
+  .view.view-vih-long-course-order-page.view-display-id-long_course_order_page,
+  .view.view-vih-event-order-page.view-display-id-events_order_page{
     margin-bottom: 0px;
   }
 }

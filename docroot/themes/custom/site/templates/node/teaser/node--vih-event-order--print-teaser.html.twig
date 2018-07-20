@@ -1,0 +1,62 @@
+{% set classes = [
+node.bundle|clean_class,
+node.isPromoted() ? 'is-promoted',
+node.isSticky() ? 'is-sticky',
+not node.isPublished() ? 'is-unpublished',
+view_mode ? view_mode|clean_class,
+'clearfix',
+] %}
+
+<article{{ attributes.addClass(classes) }}>
+    <div class="partial">
+        <div class="partial__body">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                  {# Begin - event #}
+                  {{ content.field_vih_eo_event }}
+                  {# End - event #}
+                </div>
+                <div class="col-xs-12 col-sm-6">
+
+                  {# Begin - price #}
+                  {% if content.field_vih_eo_price %}
+                      <!-- Begin - price -->
+                      <div class="boxy boxy--price">
+                          <div class="boxy__heading">
+                              <h2 class="boxy__heading__title heading-h4">{{ "Total price" | trans }}</h2>
+                          </div>
+
+                          <div class="boxy__body">
+                            {{ content.field_vih_eo_price }}
+                          </div>
+                      </div>
+                      <!-- End - price -->
+                  {% endif %}
+                  {# End - price #}
+
+                </div>
+                <div class="col-xs-12 ">
+                    {# Begin - participants #}
+                    {% if node.field_vih_eo_persons.value %}
+                        <div class="partial partial--participants">
+                            <div class="partial__heading">
+                                <h2 class="partial__heading__title">
+                                    {{ 'Participants' | trans }}
+                                </h2>
+                            </div>
+                            <div class="partial__body">
+                                {{ content.field_vih_eo_persons }}
+                            </div>
+                        </div>
+                    {% endif %}
+                    {# End - participants #}
+
+                </div>
+                <div>
+                    {{ content.field_vih_eo_status }}
+                </div>
+                <a href="{{ path('entity.node.edit_form', {'node': node.id}) }}" class="btn-xs button btn-info btn">{{ 'Edit'|t }}</a>
+            </div>
+        </div>
+    </div>
+</article>

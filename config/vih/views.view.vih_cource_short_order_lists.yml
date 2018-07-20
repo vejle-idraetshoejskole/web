@@ -111,18 +111,12 @@ display:
           summary: ''
           description: ''
           columns:
-            title: title
             nid: nid
-            field_vih_event_end_date: field_vih_event_end_date
-            field_vih_event_start_date: field_vih_event_start_date
+            title: title
+            field_vih_sc_start_date: field_vih_sc_start_date
+            field_vih_sc_end_date: field_vih_sc_end_date
+            nid_1: nid_1
           info:
-            title:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
             nid:
               sortable: true
               default_sort_order: asc
@@ -130,21 +124,35 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            field_vih_event_end_date:
+            title:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_vih_sc_start_date:
               sortable: true
               default_sort_order: desc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-            field_vih_event_start_date:
+            field_vih_sc_end_date:
               sortable: true
-              default_sort_order: desc
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-          default: field_vih_event_end_date
+            nid_1:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+          default: field_vih_sc_start_date
           empty_table: false
       row:
         type: fields
