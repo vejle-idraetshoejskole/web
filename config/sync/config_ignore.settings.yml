@@ -1283,15 +1283,16 @@ ignored_config_entities:
   2562: ~views.view.vih_search
   2564: ~views.view.vih_short_course_list
   2566: ~views.view.vih_long_course_order_page
-  2568: ~views.view.vih_short_courses
-  2570: ~views.view.watchdog
-  2572: ~views.view.who_s_new
-  2574: ~views.view.who_s_online
-  2576: ~context.context.page_title
-  2578: ~context.context.context_center_content
-  2580: '# No ignore config split'
-  2582: ~config_split.config_split.vih_functionality
-  2584: ~config_split.config_split.vies_functionality
+  2568: ~views.view.vih_event_order_page
+  2570: ~views.view.vih_short_courses
+  2572: ~views.view.watchdog
+  2574: ~views.view.who_s_new
+  2576: ~views.view.who_s_online
+  2578: ~context.context.page_title
+  2580: ~context.context.context_center_content
+  2582: '# No ignore config split'
+  2584: ~config_split.config_split.vih_functionality
+  2586: ~config_split.config_split.vies_functionality
 _core:
   default_config_hash: UVH1aJ4b44UM-VdPVN7hNNuuVqfReJxwfVeDQH1Hvsk
 langcode: da

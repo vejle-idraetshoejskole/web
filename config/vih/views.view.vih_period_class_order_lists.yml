@@ -10,6 +10,7 @@ dependencies:
     - field.storage.paragraph.field_vih_cs_title
     - node.type.vih_course_period
     - node.type.vih_long_course_order
+    - system.menu.admin
   module:
     - datetime
     - node
@@ -812,7 +813,7 @@ display:
           type: datetime_default
           settings:
             timezone_override: ''
-            format_type: medium
+            format_type: short_date_zoho
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -876,7 +877,7 @@ display:
           type: datetime_default
           settings:
             timezone_override: ''
-            format_type: medium
+            format_type: short_date_zoho
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -1275,8 +1276,8 @@ display:
           alter:
             alter_text: false
             text: ''
-            make_link: false
-            path: ''
+            make_link: true
+            path: 'node/{{ nid }}/long-course---order-page'
             absolute: false
             external: false
             replace_spaces: false
@@ -1287,7 +1288,7 @@ display:
             link_class: ''
             prefix: ''
             suffix: ''
-            target: ''
+            target: _blank
             nl2br: false
             max_length: 0
             word_boundary: false
@@ -1314,7 +1315,7 @@ display:
           click_sort_column: value
           type: string
           settings:
-            link_to_entity: true
+            link_to_entity: false
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -1525,6 +1526,15 @@ display:
         operator: AND
         groups:
           1: AND
+      menu:
+        type: normal
+        title: 'Long courses classes orders'
+        description: ''
+        expanded: false
+        parent: 'menu_link_content:066c53ba-8634-4ca5-bf97-4337b50ef8aa'
+        weight: 0
+        context: '0'
+        menu_name: admin
     cache_metadata:
       max-age: -1
       contexts:

@@ -3008,7 +3008,7 @@ display:
             alter_text: false
             text: ''
             make_link: true
-            path: '/node/{{ nid }}'
+            path: '/node/{{ nid }}/short-course---order-page'
             absolute: false
             external: false
             replace_spaces: false
