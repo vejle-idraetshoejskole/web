@@ -250,20 +250,7 @@ display:
           granularity: second
       title: 'Long Courses - Order page'
       header: {  }
-      footer:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: false
-          tokenize: false
-          content:
-            value: '<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>'
-            format: rich_text
-          plugin_id: text
+      footer: {  }
       empty: {  }
       relationships: {  }
       arguments:
