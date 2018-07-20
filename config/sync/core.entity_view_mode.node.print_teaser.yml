@@ -1,0 +1,14 @@
+uuid: e6ea4f5f-85f7-4d7f-88d5-95bcda88ffa5
+langcode: en
+status: true
+dependencies:
+  module:
+    - lightning_core
+    - node
+third_party_settings:
+  lightning_core:
+    description: ''
+id: node.print_teaser
+label: 'Print teaser'
+targetEntityType: node
+cache: true

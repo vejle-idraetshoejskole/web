@@ -1446,13 +1446,22 @@ ul.layout-navigation {
   .links.btn-group,
   .region-notify,
   .view-footer,
-  .layout__footer {
+  .layout__footer,
+  a.btn{
     display: none !important;
   }
   h1{
     font-size: 16px;
   }
-  body {
-        font-size: 12px;
+  h2{
+    font-size: 14px;
+  }
+  h3, h4, h5, body,
+  article .field .field--label,
+  .partial--ordered-course-slot .partial__body .field--name-field-vih-ocs-title{
+    font-size: 12px;
+  }
+    .col-sm-6{
+      width: 50%;
     }
 }

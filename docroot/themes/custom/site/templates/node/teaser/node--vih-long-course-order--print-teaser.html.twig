@@ -1,0 +1,190 @@
+{% set classes = [
+node.bundle|clean_class,
+node.isPromoted() ? 'is-promoted',
+node.isSticky() ? 'is-sticky',
+not node.isPublished() ? 'is-unpublished',
+view_mode ? view_mode|clean_class,
+'clearfix',
+] %}
+
+<article{{ attributes.addClass(classes) }}>
+    <div class="partial">
+        <div class="partial__body">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6">
+
+                    {# Begin - personal information #}
+                    <div class="boxy boxy--personal-information">
+                        <div class="boxy__heading">
+                            <h3 class="boxy__heading__title">
+                                {{ 'Participant' | trans }}
+                            </h3>
+                        </div>
+                        <div class="boxy__body">
+
+                            {# Begin - names #}
+                            <div>
+                                {{ node.field_vih_lco_first_name.value }} {{ node.field_vih_lco_last_name.value }}
+                            </div>
+                            {# End - names #}
+
+                            {# Begin - address #}
+                            <div>
+                                {{ content.field_vih_lco_address }}
+                            </div>
+                            {# End - address #}
+
+                            {# Begin - zipcode and city #}
+                            <div>
+                                {{ node.field_vih_lco_zip.value }} {{ node.field_vih_lco_city.value }}
+                            </div>
+                            {# End - zipcode and city #}
+
+                            {# Begin - municipality #}
+                            <div>
+                                {{ node.field_vih_lco_municipality.value }}
+                            </div>
+                            {# End - municipality #}
+
+                            {# Begin - nationality #}
+                            {{ content.field_vih_lco_nationality }}
+                            {# End - nationality #}
+
+                            {# Begin - phone #}
+                            <div>
+                                {{ content.field_vih_lco_telefon }}
+                            </div>
+                            {# End - phone #}
+
+                            {# Begin - email #}
+                            <div>
+                                {{ content.field_vih_lco_email }}
+                            </div>
+                            {# End - email #}
+
+                        </div>
+                    </div>
+                    {# End - personal information #}
+
+                </div>
+                <div class="col-xs-12 col-sm-6">
+
+                    {# Begin - adult information #}
+                    <div class="boxy boxy--adult-information">
+                        <div class="boxy__heading">
+                            <h3 class="boxy__heading__title">{{ 'Contact person' | trans }}</h3>
+                        </div>
+                        <div class="boxy__body">
+
+                            {# Begin - firstname and lastname #}
+                            <div>
+                                {{ node.field_vih_lco_adult_first_name.value }} {{ node.field_vih_lco_adult_last_name.value }}
+                            </div>
+                            {# End - firstname and lastname #}
+
+                            {# Begin - address #}
+                            <div>
+                                {{ content.field_vih_lco_adult_address }}
+                            </div>
+                            {# End - address #}
+
+                            {# Begin - zipcode and city #}
+                            <div>
+                                {{ node.field_vih_lco_adult_zip.value }} {{ node.field_vih_lco_adult_city.value }}
+                            </div>
+                            {# End - zipcode and city #}
+
+                            {# Begin - municipality #}
+                            <div>
+                              {{ content.field_vih_lco_adult_municipality }}
+                            </div>
+                            {# End - municipality #}
+
+                            {# Begin - nationality #}
+                            <div>
+                                {{ content.field_vih_lco_adult_nationality }}
+                            </div>
+                            {# End - nationality #}
+
+                            {# Begin - phone #}
+                            <div>
+                                {{ content.field_vih_lco_adult_telefon }}
+                            </div>
+                            {# End - phone #}
+
+                            {# Begin - email #}
+                            <div>
+                                {{ content.field_vih_lco_adult_email }}
+                            </div>
+                            {# End - email #}
+
+                        </div>
+                    </div>
+                    {# End - adult information #}
+
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-6">
+
+                    {# Begin - course #}
+                    {% if node.field_vih_lco_course.value %}
+                        <div class="boxy">
+                            <div class="boxy__heading">
+                                <h3 class="boxy__heading__title">{{ 'Selected course' | trans }}</h3>
+                            </div>
+                            <div class="boxy__body">
+                                {{ content.field_vih_lco_course }}
+                            </div>
+                        </div>
+                    {% endif %}
+                    {# End - course #}
+
+                    <div class="boxy">
+                        <div class="boxy__body">
+
+                            {# Begin - message #}
+                            {{ content.field_vih_lco_message }}
+                            {# End - message #}
+
+                            {# Begin - education #}
+                            {{ content.field_vih_lco_education }}
+                            {# End - education #}
+
+                            {# Begin - found from #}
+                            {{ content.field_vih_lco_found_from }}
+                            {# End - found from #}
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-xs-12 col-sm-6">
+
+                    {# Begin - subjects #}
+                    {% if node.field_vih_lco_order_course_perio.value %}
+                        <div class="partial partial--ordered-options">
+                            <div class="partial__heading">
+                                <h3 class="partial__heading__title">
+                                    {{ 'Subjects' | trans }}
+                                </h3>
+                            </div>
+                            <div class="partial__body">
+                                {{ content.field_vih_lco_order_course_perio }}
+                            </div>
+                        </div>
+                    {% endif %}
+                    {# End - subjects #}
+
+                </div>
+                <div>
+                    {{ content.field_vih_lco_status }}
+                </div>
+                <a href="{{ path('entity.node.edit_form', {'node': node.id}) }}" class="btn-xs button btn-info btn">{{ 'Edit'|t }}</a>
+            </div>
+        </div>
+    </div>
+</article>
