@@ -2618,20 +2618,7 @@ display:
           replica: false
           query_comment: ''
           query_tags: null
-      header:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: true
-          tokenize: false
-          content:
-            value: '<a class="button" href="admin/ordrer/orders-short-courses">Reset filters</a><br><br>'
-            format: rich_text
-          plugin_id: text
+      header: {  }
     cache_metadata:
       max-age: -1
       contexts:

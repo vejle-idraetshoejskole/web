@@ -55,7 +55,7 @@ display:
         options:
           submit_button: Udfør
           reset_button: false
-          reset_button_label: Gendan
+          reset_button_label: 'Reset filters'
           exposed_sorts_label: 'Sortér efter'
           expose_sort_order: true
           sort_asc_label: Stigende
@@ -1662,20 +1662,7 @@ display:
             label: ''
           granularity: second
           plugin_id: datetime
-      header:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: true
-          tokenize: false
-          content:
-            value: '<a class="button" href="admin/ordrer/orders-long-courses-periods">Reset filters</a><br><br>'
-            format: rich_text
-          plugin_id: text
+      header: {  }
     cache_metadata:
       max-age: -1
       contexts:

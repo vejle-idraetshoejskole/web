@@ -1044,20 +1044,7 @@ display:
           replica: false
           query_comment: ''
           query_tags: {  }
-      header:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: true
-          tokenize: false
-          content:
-            value: '<a class="button" href="admin/ordrer/orders-periods-classes">Reset filters</a><br><br>'
-            format: rich_text
-          plugin_id: text
+      header: {  }
       arguments:
         nid:
           id: nid

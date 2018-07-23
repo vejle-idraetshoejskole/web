@@ -1718,20 +1718,7 @@ display:
           offset: 0
       footer: {  }
       group_by: true
-      header:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: false
-          tokenize: false
-          content:
-            value: '<a class="button" href="admin/ordrer/orders-long-courses">Reset filters</a><br><br>'
-            format: rich_text
-          plugin_id: text
+      header: {  }
     cache_metadata:
       max-age: -1
       contexts:

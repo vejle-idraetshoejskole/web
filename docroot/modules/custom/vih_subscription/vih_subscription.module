@@ -15,6 +15,22 @@ function vih_subscription_form_alter(&$form, \Drupal\Core\Form\FormStateInterfac
       }
     }
   }
+//Adding reset filters button to orders views.
+  $order_views = ['views-exposed-form-vih-period-class-order-lists-page-all-periods-and-lc-orders',
+    'views-exposed-form-vih-event-order-lists-page-all-events-and-events-orders',
+    'views-exposed-form-vih-cource-long-order-lists-page-all-lc-and-lc-orders',
+    'views-exposed-form-vih-cource-long-order-periods-lists-page-all-lc-periods-and-lc-orders',
+    'views-exposed-form-vih-cource-short-order-lists-page-all-sc-and-sc-orders'];
+  if(in_array($form['#id'], $order_views)){
+  $form['actions']['reset_filters'] = [
+  '#title' => 'Reset filters',
+  '#type' => 'link',
+  '#url' => Drupal\Core\Url::fromRoute(\Drupal::routeMatch()->getRouteName()),
+  '#attributes' => [
+    'class' => 'button',
+    ],
+  ];
+  }
 }
 
 function vih_subscription_course_period_form_submit(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {

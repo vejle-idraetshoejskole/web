@@ -2554,20 +2554,7 @@ display:
           entity_field: created
           plugin_id: date
       footer: {  }
-      header:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: false
-          tokenize: false
-          content:
-            value: '<a class="button" href="admin/ordrer/orders-events">Reset filters</a><br><br>'
-            format: rich_text
-          plugin_id: text
+      header: {  }
     cache_metadata:
       max-age: -1
       contexts:
