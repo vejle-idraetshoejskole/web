@@ -1292,10 +1292,11 @@ ignored_config_entities:
   2580: ~views.view.who_s_new
   2582: ~views.view.who_s_online
   2584: ~context.context.page_title
-  2586: ~context.context.context_center_content
-  2588: '# No ignore config split'
-  2590: ~config_split.config_split.vih_functionality
-  2592: ~config_split.config_split.vies_functionality
+  2586: ~views.view.short_course_order_page
+  2588: ~context.context.context_center_content
+  2590: '# No ignore config split'
+  2592: ~config_split.config_split.vih_functionality
+  2594: ~config_split.config_split.vies_functionality
 _core:
   default_config_hash: UVH1aJ4b44UM-VdPVN7hNNuuVqfReJxwfVeDQH1Hvsk
 langcode: da
