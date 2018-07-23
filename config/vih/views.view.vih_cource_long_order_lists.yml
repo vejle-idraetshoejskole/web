@@ -12,12 +12,14 @@ dependencies:
     - field.storage.node.field_vih_lco_email
     - field.storage.node.field_vih_lco_first_name
     - field.storage.node.field_vih_lco_last_name
+    - field.storage.node.field_vih_lco_status
     - node.type.vih_long_cource
     - node.type.vih_long_course_order
     - system.menu.admin
   module:
     - datetime
     - node
+    - options
     - user
     - views_autocomplete_filters
 id: vih_cource_long_order_lists
@@ -90,13 +92,23 @@ display:
           summary: ''
           description: ''
           columns:
+            counter: counter
             nid: nid
             title: title
-            field_vih_course_periods: field_vih_course_periods
-            nid_1: nid_1
-            field_vih_cp_start_date: field_vih_cp_start_date
-            field_vih_cp_end_date: field_vih_cp_end_date
+            field_vih_lco_first_name_1: field_vih_lco_first_name_1
+            field_vih_lco_last_name: field_vih_lco_last_name
+            field_vih_lco_email: field_vih_lco_email
+            field_vih_lco_course: field_vih_lco_course
+            field_vih_lco_course_1: field_vih_lco_course_1
+            field_vih_lco_status: field_vih_lco_status
           info:
+            counter:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
             nid:
               sortable: true
               default_sort_order: asc
@@ -111,26 +123,42 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            field_vih_course_periods:
+            field_vih_lco_first_name_1:
+              sortable: true
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-            nid_1:
+            field_vih_lco_last_name:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_vih_lco_email:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_vih_lco_course:
               sortable: false
               default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-            field_vih_cp_start_date:
-              sortable: true
-              default_sort_order: desc
+            field_vih_lco_course_1:
+              sortable: false
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-            field_vih_cp_end_date:
+            field_vih_lco_status:
               sortable: true
               default_sort_order: asc
               align: ''
@@ -805,7 +833,7 @@ display:
           expose:
             label: ''
           granularity: second
-      title: 'Particular course order report'
+      title: 'Long course registrations'
       header: {  }
       footer: {  }
       empty: {  }
@@ -1765,6 +1793,7 @@ display:
         header: false
         footer: false
         arguments: false
+        empty: false
       filters:
         type_1:
           id: type_1
@@ -2420,132 +2449,6 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
-        field_vih_lco_adult_last_name:
-          id: field_vih_lco_adult_last_name
-          table: node__field_vih_lco_adult_last_name
-          field: field_vih_lco_adult_last_name
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: 'Adult last name'
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: false
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          plugin_id: field
-        field_vih_lco_adult_email:
-          id: field_vih_lco_adult_email
-          table: node__field_vih_lco_adult_email
-          field: field_vih_lco_adult_email
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: 'Adult email'
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: false
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          plugin_id: field
         field_vih_lco_course:
           id: field_vih_lco_course
           table: node__field_vih_lco_course
@@ -2672,6 +2575,68 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
+        field_vih_lco_status:
+          id: field_vih_lco_status
+          table: node__field_vih_lco_status
+          field: field_vih_lco_status
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: Status
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: list_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
       header:
         area:
           id: area
@@ -2724,6 +2689,20 @@ display:
           break_phrase: false
           not: false
           plugin_id: numeric
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: false
+          content:
+            value: 'Der er ingen tilmeldinger på denne event'
+            format: rich_text
+          plugin_id: text
     cache_metadata:
       max-age: -1
       contexts:
@@ -2734,9 +2713,8 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
-        - 'config:field.storage.node.field_vih_lco_adult_email'
-        - 'config:field.storage.node.field_vih_lco_adult_last_name'
         - 'config:field.storage.node.field_vih_lco_course'
         - 'config:field.storage.node.field_vih_lco_email'
         - 'config:field.storage.node.field_vih_lco_first_name'
         - 'config:field.storage.node.field_vih_lco_last_name'
+        - 'config:field.storage.node.field_vih_lco_status'

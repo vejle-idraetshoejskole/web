@@ -112,12 +112,23 @@ display:
           summary: ''
           description: ''
           columns:
+            counter: counter
             nid: nid
             title: title
-            field_vih_sc_start_date: field_vih_sc_start_date
-            field_vih_sc_end_date: field_vih_sc_end_date
-            nid_1: nid_1
+            field_vih_ocp_first_name: field_vih_ocp_first_name
+            field_vih_ocp_last_name: field_vih_ocp_last_name
+            field_vih_ocp_email: field_vih_ocp_email
+            field_vih_sco_status: field_vih_sco_status
+            title_1: title_1
+            field_vih_sco_status_1: field_vih_sco_status_1
           info:
+            counter:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
             nid:
               sortable: true
               default_sort_order: asc
@@ -132,28 +143,49 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            field_vih_sc_start_date:
-              sortable: true
-              default_sort_order: desc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_vih_sc_end_date:
+            field_vih_ocp_first_name:
               sortable: true
               default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-            nid_1:
+            field_vih_ocp_last_name:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_vih_ocp_email:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_vih_sco_status:
               sortable: false
               default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-          default: field_vih_sc_start_date
+            title_1:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_vih_sco_status_1:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+          default: '-1'
           empty_table: false
       row:
         type: fields
@@ -1786,7 +1818,7 @@ display:
           expose:
             label: ''
           granularity: second
-      title: Tilmeldinger
+      title: 'Short course registrations'
       header: {  }
       footer: {  }
       empty: {  }
@@ -2655,9 +2687,8 @@ display:
         description: ''
         weight: 0
       display_description: ''
-      title: 'Particular short course order report'
       defaults:
-        title: false
+        title: true
         filters: false
         filter_groups: false
         fields: false
@@ -3310,8 +3341,73 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
-        field_vih_sco_status:
-          id: field_vih_sco_status
+        title_1:
+          id: title_1
+          table: node_field_data
+          field: title
+          relationship: field_vih_sco_course
+          group_type: group
+          admin_label: ''
+          label: 'Course title'
+          exclude: true
+          alter:
+            alter_text: false
+            text: ''
+            make_link: true
+            path: 'node/{{ raw_arguments.nid_1 }}'
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: _blank
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          entity_type: node
+          entity_field: title
+          plugin_id: field
+        field_vih_sco_status_1:
+          id: field_vih_sco_status_1
           table: node__field_vih_sco_status
           field: field_vih_sco_status
           relationship: none
@@ -3371,71 +3467,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          plugin_id: field
-        title_1:
-          id: title_1
-          table: node_field_data
-          field: title
-          relationship: field_vih_sco_course
-          group_type: group
-          admin_label: ''
-          label: 'Course title'
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: true
-            path: 'node/{{ raw_arguments.nid_1 }}'
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: _blank
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: false
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          entity_type: node
-          entity_field: title
           plugin_id: field
       relationships:
         field_vih_sco_persons:
@@ -3508,20 +3539,7 @@ display:
             value: 'Der er ingen tilmeldinger på denne event'
             format: rich_text
           plugin_id: text
-      footer:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: false
-          tokenize: true
-          content:
-            value: "<p>\n<a href=\"admin/ordrer/orders-short-course/{{ raw_arguments.nid_1 }}\" target=\"_blank\">Open in new window</a>\n</p>"
-            format: rich_text
-          plugin_id: text
+      footer: {  }
       header:
         area:
           id: area
