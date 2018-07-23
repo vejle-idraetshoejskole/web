@@ -19,6 +19,7 @@ dependencies:
     - datetime
     - node
     - user
+    - views_autocomplete_filters
 id: vih_cource_long_order_lists
 label: 'Tilmedinger - Lange kurser'
 module: views
@@ -1390,6 +1391,13 @@ display:
               media_manager: '0'
               moderator: '0'
             placeholder: ''
+            autocomplete_filter: 1
+            autocomplete_min_chars: '0'
+            autocomplete_items: '10'
+            autocomplete_field: title
+            autocomplete_raw_suggestion: 1
+            autocomplete_raw_dropdown: 1
+            autocomplete_dependent: 0
           is_grouped: false
           group_info:
             label: ''
@@ -1841,6 +1849,13 @@ display:
               media_manager: '0'
               moderator: '0'
             placeholder: ''
+            autocomplete_filter: 1
+            autocomplete_min_chars: '0'
+            autocomplete_items: '10'
+            autocomplete_field: title
+            autocomplete_raw_suggestion: 1
+            autocomplete_raw_dropdown: 1
+            autocomplete_dependent: 0
           is_grouped: false
           group_info:
             label: ''

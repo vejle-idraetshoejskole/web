@@ -37,6 +37,7 @@ dependencies:
     - paragraphs
     - taxonomy
     - user
+    - views_autocomplete_filters
 id: vih_event_order_lists
 label: Tilmedinger
 module: views
@@ -1666,6 +1667,13 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
+        title_1:
+          id: title_1
+          table: node_field_data
+          field: title
+          entity_type: node
+          entity_field: title
+          plugin_id: field
       filters:
         type_1:
           id: type_1
@@ -2410,6 +2418,13 @@ display:
               media_manager: '0'
               moderator: '0'
             placeholder: ''
+            autocomplete_filter: 1
+            autocomplete_min_chars: '0'
+            autocomplete_items: '10'
+            autocomplete_field: title
+            autocomplete_raw_suggestion: 1
+            autocomplete_raw_dropdown: 1
+            autocomplete_dependent: 0
           is_grouped: false
           group_info:
             label: ''
@@ -2670,6 +2685,13 @@ display:
               media_manager: '0'
               moderator: '0'
             placeholder: ''
+            autocomplete_filter: 1
+            autocomplete_min_chars: '0'
+            autocomplete_items: '10'
+            autocomplete_field: title_1
+            autocomplete_raw_suggestion: 1
+            autocomplete_raw_dropdown: 1
+            autocomplete_dependent: 1
           is_grouped: false
           group_info:
             label: ''
