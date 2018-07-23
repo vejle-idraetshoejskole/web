@@ -33,23 +33,14 @@ dependencies:
     - field.field.node.vih_long_course_order.field_vih_lco_zip
     - node.type.vih_long_course_order
   module:
+    - content_moderation
     - paragraphs
     - path
-    - text
 id: node.vih_long_course_order.default
 targetEntityType: node
 bundle: vih_long_course_order
 mode: default
 content:
-  body:
-    type: text_textarea_with_summary
-    weight: 7
-    settings:
-      rows: 9
-      summary_rows: 3
-      placeholder: ''
-    third_party_settings: {  }
-    region: content
   created:
     type: datetime_timestamp
     weight: 3
@@ -57,7 +48,7 @@ content:
     third_party_settings: {  }
     region: content
   field_vih_lco_address:
-    weight: 15
+    weight: 14
     settings:
       size: 60
       placeholder: ''
@@ -65,22 +56,6 @@ content:
     type: string_textfield
     region: content
   field_vih_lco_adult_address:
-    weight: 29
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
-  field_vih_lco_adult_city:
-    weight: 30
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
-  field_vih_lco_adult_email:
     weight: 28
     settings:
       size: 60
@@ -88,38 +63,15 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
-  field_vih_lco_adult_first_name:
-    weight: 25
+  field_vih_lco_adult_city:
+    weight: 29
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
     region: content
-  field_vih_lco_adult_last_name:
-    weight: 26
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
-  field_vih_lco_adult_nationality:
-    weight: 32
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
-  field_vih_lco_adult_newsletter:
-    weight: 36
-    settings:
-      display_label: true
-    third_party_settings: {  }
-    type: boolean_checkbox
-    region: content
-  field_vih_lco_adult_telefon:
+  field_vih_lco_adult_email:
     weight: 27
     settings:
       size: 60
@@ -127,7 +79,23 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
-  field_vih_lco_adult_zip:
+  field_vih_lco_adult_first_name:
+    weight: 24
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_vih_lco_adult_last_name:
+    weight: 25
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_vih_lco_adult_nationality:
     weight: 31
     settings:
       size: 60
@@ -135,8 +103,31 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
+  field_vih_lco_adult_newsletter:
+    weight: 34
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_vih_lco_adult_telefon:
+    weight: 26
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_vih_lco_adult_zip:
+    weight: 30
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
   field_vih_lco_city:
-    weight: 16
+    weight: 15
     settings:
       size: 60
       placeholder: ''
@@ -144,7 +135,7 @@ content:
     type: string_textfield
     region: content
   field_vih_lco_course:
-    weight: 8
+    weight: 7
     settings:
       match_operator: CONTAINS
       size: 60
@@ -153,46 +144,6 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_vih_lco_cpr:
-    weight: 12
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
-  field_vih_lco_education:
-    weight: 19
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
-  field_vih_lco_email:
-    weight: 23
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
-  field_vih_lco_first_name:
-    weight: 10
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
-  field_vih_lco_found_from:
-    weight: 21
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
-  field_vih_lco_last_name:
     weight: 11
     settings:
       size: 60
@@ -200,8 +151,48 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
-  field_vih_lco_message:
+  field_vih_lco_education:
+    weight: 18
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_vih_lco_email:
     weight: 22
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_vih_lco_first_name:
+    weight: 9
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_vih_lco_found_from:
+    weight: 20
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_vih_lco_last_name:
+    weight: 10
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_vih_lco_message:
+    weight: 21
     settings:
       rows: 5
       placeholder: ''
@@ -209,7 +200,7 @@ content:
     type: string_textarea
     region: content
   field_vih_lco_municipality:
-    weight: 17
+    weight: 16
     settings:
       size: 60
       placeholder: ''
@@ -217,7 +208,7 @@ content:
     type: string_textfield
     region: content
   field_vih_lco_nationality:
-    weight: 14
+    weight: 13
     settings:
       size: 60
       placeholder: ''
@@ -225,7 +216,7 @@ content:
     type: string_textfield
     region: content
   field_vih_lco_newsletter:
-    weight: 24
+    weight: 23
     settings:
       display_label: true
     third_party_settings: {  }
@@ -233,7 +224,7 @@ content:
     region: content
   field_vih_lco_order_course_perio:
     type: entity_reference_paragraphs
-    weight: 9
+    weight: 8
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -244,7 +235,7 @@ content:
     third_party_settings: {  }
     region: content
   field_vih_lco_payment:
-    weight: 20
+    weight: 19
     settings:
       size: 60
       placeholder: ''
@@ -252,13 +243,13 @@ content:
     type: string_textfield
     region: content
   field_vih_lco_status:
-    weight: 33
+    weight: 32
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_vih_lco_telefon:
-    weight: 13
+    weight: 12
     settings:
       size: 60
       placeholder: ''
@@ -266,7 +257,7 @@ content:
     type: string_textfield
     region: content
   field_vih_lco_zip:
-    weight: 18
+    weight: 17
     settings:
       size: 60
       placeholder: ''
@@ -280,6 +271,12 @@ content:
       include_locked: true
     third_party_settings: {  }
     region: content
+  moderation_state:
+    type: moderation_state_default
+    weight: 36
+    settings: {  }
+    region: content
+    third_party_settings: {  }
   path:
     type: path
     weight: 6
@@ -297,7 +294,7 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 34
+    weight: 33
     third_party_settings: {  }
     region: content
   sticky:
@@ -325,6 +322,9 @@ content:
     third_party_settings: {  }
     region: content
   url_redirects:
-    weight: 50
+    weight: 35
     region: content
-hidden: {  }
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  body: true
