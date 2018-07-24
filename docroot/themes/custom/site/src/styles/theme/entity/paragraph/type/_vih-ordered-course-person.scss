@@ -1,0 +1,9 @@
+.paragraph--type--vih-ordered-course-person.paragraph--view-mode--embedded{
+  & .field--name-field-vih-ocp-ordered-options{
+    & .paragraph--type--vih-ordered-option.paragraph--view-mode--embedded{
+      & .field--name-field-vih-oo-group-name{
+        display: inherit;
+      }
+    }
+  }
+}
