@@ -26,14 +26,74 @@ dependencies:
     - field.field.node.vies_application_form.field_vies_zip
     - node.type.vies_application_form
   module:
+    - content_moderation
+    - field_group
     - inline_entity_form
+third_party_settings:
+  field_group:
+    group_student_into:
+      children:
+        - field_vies_first_name
+        - field_vies_last_name
+        - field_vies_gender
+        - field_vies_birthday
+        - field_vies_email
+        - field_vies_country
+        - field_vies_address
+        - field_vies_zip
+        - field_vies_city
+        - field_vies_municipality
+        - field_vies_telefon
+        - field_vies_newsletter
+      parent_name: ''
+      weight: 6
+      format_type: tab
+      format_settings:
+        label: 'Student info'
+        formatter: closed
+        description: ''
+        required_fields: true
+        id: ''
+        classes: ''
+      label: 'Student info'
+      region: content
+    group_about_you:
+      children:
+        - field_vies_about_school
+        - field_vies_afterschool
+      parent_name: ''
+      weight: 7
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: 'About you'
+      region: content
+    group_evaluation:
+      children:
+        - field_vies_status
+        - field_vies_label
+      parent_name: ''
+      weight: 3
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Evaluation
+      region: content
 id: node.vies_application_form.default
 targetEntityType: node
 bundle: vies_application_form
 mode: default
 content:
   field_vies_about_school:
-    weight: 16
+    weight: 7
     settings:
       form_mode: default
       override_labels: false
@@ -42,11 +102,14 @@ content:
       allow_new: true
       allow_existing: false
       match_operator: CONTAINS
+      collapsible: false
+      collapsed: false
+      allow_duplicate: false
     third_party_settings: {  }
     type: inline_entity_form_complex
     region: content
   field_vies_address:
-    weight: 9
+    weight: 11
     settings:
       size: 60
       placeholder: ''
@@ -54,7 +117,7 @@ content:
     type: string_textfield
     region: content
   field_vies_afterschool:
-    weight: 18
+    weight: 8
     settings:
       form_mode: default
       label_singular: ''
@@ -63,11 +126,14 @@ content:
       allow_new: true
       allow_existing: false
       match_operator: CONTAINS
+      collapsible: false
+      collapsed: false
+      allow_duplicate: false
     third_party_settings: {  }
     type: inline_entity_form_complex
     region: content
   field_vies_birthday:
-    weight: 6
+    weight: 8
     settings:
       size: 60
       placeholder: ''
@@ -75,7 +141,7 @@ content:
     type: string_textfield
     region: content
   field_vies_city:
-    weight: 10
+    weight: 13
     settings:
       size: 60
       placeholder: ''
@@ -92,20 +158,23 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_vies_class_questions:
-    weight: 3
+    weight: 5
     settings:
       form_mode: default
-      override_labels: false
-      label_singular: ''
-      label_plural: ''
+      override_labels: true
+      label_singular: question
+      label_plural: questions
+      collapsible: true
+      collapsed: true
       allow_new: true
-      allow_existing: false
       match_operator: CONTAINS
+      allow_existing: false
+      allow_duplicate: false
     third_party_settings: {  }
     type: inline_entity_form_complex
     region: content
   field_vies_country:
-    weight: 8
+    weight: 10
     settings:
       size: 60
       placeholder: ''
@@ -122,7 +191,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_vies_email:
-    weight: 7
+    weight: 9
     settings:
       size: 60
       placeholder: ''
@@ -130,28 +199,6 @@ content:
     type: string_textfield
     region: content
   field_vies_first_name:
-    weight: 4
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
-  field_vies_gender:
-    weight: 14
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
-  field_vies_label:
-    weight: 20
-    settings: {  }
-    third_party_settings: {  }
-    type: options_buttons
-    region: content
-  field_vies_last_name:
     weight: 5
     settings:
       size: 60
@@ -159,8 +206,30 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
+  field_vies_gender:
+    weight: 7
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_vies_label:
+    weight: 9
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_vies_last_name:
+    weight: 6
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
   field_vies_municipality:
-    weight: 11
+    weight: 14
     settings:
       size: 60
       placeholder: ''
@@ -168,22 +237,25 @@ content:
     type: string_textfield
     region: content
   field_vies_newsletter:
-    weight: 15
+    weight: 16
     settings:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
   field_vies_parents:
-    weight: 17
+    weight: 8
     settings:
       form_mode: default
-      override_labels: false
-      label_singular: ''
-      label_plural: ''
+      override_labels: true
+      label_singular: parent
+      label_plural: parrents
+      collapsible: true
+      collapsed: true
       allow_new: true
-      allow_existing: false
       match_operator: CONTAINS
+      allow_existing: false
+      allow_duplicate: false
     third_party_settings: {  }
     type: inline_entity_form_complex
     region: content
@@ -197,13 +269,13 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_vies_status:
-    weight: 19
+    weight: 8
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
     region: content
   field_vies_telefon:
-    weight: 13
+    weight: 15
     settings:
       size: 60
       placeholder: ''
@@ -218,9 +290,17 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
-  url_redirects:
-    weight: 50
+  moderation_state:
+    type: moderation_state_default
+    weight: 10
+    settings: {  }
     region: content
+    third_party_settings: {  }
+  url_redirects:
+    weight: 9
+    region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   created: true
   langcode: true

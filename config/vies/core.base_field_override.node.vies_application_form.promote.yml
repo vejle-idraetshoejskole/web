@@ -1,0 +1,22 @@
+uuid: 979ed821-cf10-4568-8aaf-a9d6c2123761
+langcode: da
+status: true
+dependencies:
+  config:
+    - node.type.vies_application_form
+id: node.vies_application_form.promote
+field_name: promote
+entity_type: node
+bundle: vies_application_form
+label: 'Forfremmet til forside'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: Tilsluttet
+  off_label: Afbrudt
+field_type: boolean

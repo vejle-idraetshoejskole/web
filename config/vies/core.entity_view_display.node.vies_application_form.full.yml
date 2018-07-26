@@ -1,0 +1,733 @@
+uuid: 971b60a3-14ee-45ba-a4da-57e3d6e6837a
+langcode: da
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.full
+    - field.field.node.vies_application_form.field_vies_about_school
+    - field.field.node.vies_application_form.field_vies_address
+    - field.field.node.vies_application_form.field_vies_afterschool
+    - field.field.node.vies_application_form.field_vies_birthday
+    - field.field.node.vies_application_form.field_vies_city
+    - field.field.node.vies_application_form.field_vies_class
+    - field.field.node.vies_application_form.field_vies_class_questions
+    - field.field.node.vies_application_form.field_vies_country
+    - field.field.node.vies_application_form.field_vies_course
+    - field.field.node.vies_application_form.field_vies_email
+    - field.field.node.vies_application_form.field_vies_first_name
+    - field.field.node.vies_application_form.field_vies_gender
+    - field.field.node.vies_application_form.field_vies_label
+    - field.field.node.vies_application_form.field_vies_last_name
+    - field.field.node.vies_application_form.field_vies_municipality
+    - field.field.node.vies_application_form.field_vies_newsletter
+    - field.field.node.vies_application_form.field_vies_parents
+    - field.field.node.vies_application_form.field_vies_period
+    - field.field.node.vies_application_form.field_vies_status
+    - field.field.node.vies_application_form.field_vies_telefon
+    - field.field.node.vies_application_form.field_vies_zip
+    - node.type.vies_application_form
+  module:
+    - field_group
+    - panelizer
+    - user
+third_party_settings:
+  panelizer:
+    enable: false
+    custom: false
+    allow: false
+    default: default
+    displays:
+      default:
+        blocks:
+          b4f4f5e1-7626-4d79-8401-df692aba3e53:
+            id: 'entity_field:node:uid'
+            label: 'Authored by'
+            provider: ctools_block
+            label_display: '0'
+            formatter:
+              label: hidden
+              type: author
+              settings: {  }
+              third_party_settings: {  }
+              weight: 0
+              region: content
+            context_mapping:
+              entity: '@panelizer.entity_context:entity'
+            region: content
+            weight: 0
+            uuid: b4f4f5e1-7626-4d79-8401-df692aba3e53
+          bca59ce2-511b-4c51-bdf2-2f6c0e9c1867:
+            id: 'entity_field:node:created'
+            label: 'Authored on'
+            provider: ctools_block
+            label_display: '0'
+            formatter:
+              label: hidden
+              type: timestamp
+              settings:
+                date_format: medium
+                custom_date_format: ''
+                timezone: ''
+              third_party_settings: {  }
+              weight: 0
+              region: content
+            context_mapping:
+              entity: '@panelizer.entity_context:entity'
+            region: content
+            weight: 0
+            uuid: bca59ce2-511b-4c51-bdf2-2f6c0e9c1867
+          9398f476-01cc-4c5d-9b9e-e26caab4f62b:
+            id: 'entity_field:node:field_vies_about_school'
+            label: 'About to go to school'
+            provider: ctools_block
+            label_display: '0'
+            formatter:
+              label: above
+              type: entity_reference_entity_view
+              settings:
+                link: true
+                view_mode: default
+              third_party_settings: {  }
+              weight: 0
+              region: content
+            context_mapping:
+              entity: '@panelizer.entity_context:entity'
+            region: content
+            weight: 8
+            uuid: 9398f476-01cc-4c5d-9b9e-e26caab4f62b
+          7fd86066-f51a-4f3e-89f4-0c3acade0460:
+            id: 'entity_field:node:field_vies_address'
+            label: Address
+            provider: ctools_block
+            label_display: '0'
+            formatter:
+              label: hidden
+              type: string
+              settings:
+                link_to_entity: false
+              third_party_settings: {  }
+              weight: 0
+              region: content
+            context_mapping:
+              entity: '@panelizer.entity_context:entity'
+            region: content
+            weight: 11
+            uuid: 7fd86066-f51a-4f3e-89f4-0c3acade0460
+          236387c3-6cd8-4edc-982a-3445de58b90d:
+            id: 'entity_field:node:field_vies_afterschool'
+            label: 'You in efteskole'
+            provider: ctools_block
+            label_display: '0'
+            formatter:
+              label: above
+              type: entity_reference_entity_view
+              settings:
+                link: true
+                view_mode: default
+              third_party_settings: {  }
+              weight: 0
+              region: content
+            context_mapping:
+              entity: '@panelizer.entity_context:entity'
+            region: content
+            weight: 9
+            uuid: 236387c3-6cd8-4edc-982a-3445de58b90d
+          520726ac-8862-4836-b8e9-8dc8a0edd08c:
+            id: 'entity_field:node:field_vies_birthday'
+            label: Birthday
+            provider: ctools_block
+            label_display: '0'
+            formatter:
+              label: inline
+              type: string
+              settings:
+                link_to_entity: false
+              third_party_settings: {  }
+              weight: 0
+              region: content
+            context_mapping:
+              entity: '@panelizer.entity_context:entity'
+            region: content
+            weight: 18
+            uuid: 520726ac-8862-4836-b8e9-8dc8a0edd08c
+          5ecb8997-37f3-47a7-92de-5d1443e36db7:
+            id: 'entity_field:node:field_vies_city'
+            label: City
+            provider: ctools_block
+            label_display: '0'
+            formatter:
+              label: hidden
+              type: string
+              settings:
+                link_to_entity: false
+              third_party_settings: {  }
+              weight: 0
+              region: content
+            context_mapping:
+              entity: '@panelizer.entity_context:entity'
+            region: content
+            weight: 13
+            uuid: 5ecb8997-37f3-47a7-92de-5d1443e36db7
+          0b00be97-ae45-4461-81b4-23f8b7360c6f:
+            id: 'entity_field:node:field_vies_class'
+            label: Class
+            provider: ctools_block
+            label_display: '0'
+            formatter:
+              label: inline
+              type: entity_reference_label
+              settings:
+                link: false
+              third_party_settings: {  }
+              weight: 0
+              region: content
+            context_mapping:
+              entity: '@panelizer.entity_context:entity'
+            region: content
+            weight: 6
+            uuid: 0b00be97-ae45-4461-81b4-23f8b7360c6f
+          61a0838d-faeb-4f6e-baf1-1e39a72871b3:
+            id: 'entity_field:node:field_vies_class_questions'
+            label: 'Class questions'
+            provider: ctools_block
+            label_display: '0'
+            formatter:
+              label: inline
+              type: entity_reference_entity_view
+              settings:
+                link: false
+                view_mode: default
+              third_party_settings: {  }
+              weight: 0
+              region: content
+            context_mapping:
+              entity: '@panelizer.entity_context:entity'
+            region: content
+            weight: 7
+            uuid: 61a0838d-faeb-4f6e-baf1-1e39a72871b3
+          13ecf441-5c79-4f6e-8209-393baa04294a:
+            id: 'entity_field:node:field_vies_country'
+            label: Country
+            provider: ctools_block
+            label_display: '0'
+            formatter:
+              label: inline
+              type: string
+              settings:
+                link_to_entity: false
+              third_party_settings: {  }
+              weight: 0
+              region: content
+            context_mapping:
+              entity: '@panelizer.entity_context:entity'
+            region: content
+            weight: 17
+            uuid: 13ecf441-5c79-4f6e-8209-393baa04294a
+          52e3819a-1ba9-4d18-8bcf-ad8ebbee9134:
+            id: 'entity_field:node:field_vies_course'
+            label: Course
+            provider: ctools_block
+            label_display: '0'
+            formatter:
+              label: inline
+              type: entity_reference_label
+              settings:
+                link: false
+              third_party_settings: {  }
+              weight: 0
+              region: content
+            context_mapping:
+              entity: '@panelizer.entity_context:entity'
+            region: content
+            weight: 4
+            uuid: 52e3819a-1ba9-4d18-8bcf-ad8ebbee9134
+          8acadc4e-bdbd-4318-a46a-eb51c64a7424:
+            id: 'entity_field:node:field_vies_email'
+            label: Email
+            provider: ctools_block
+            label_display: '0'
+            formatter:
+              label: inline
+              type: string
+              settings:
+                link_to_entity: false
+              third_party_settings: {  }
+              weight: 0
+              region: content
+            context_mapping:
+              entity: '@panelizer.entity_context:entity'
+            region: content
+            weight: 15
+            uuid: 8acadc4e-bdbd-4318-a46a-eb51c64a7424
+          106eea3c-657c-46c9-a18e-ad76602bb1fa:
+            id: 'entity_field:node:field_vies_first_name'
+            label: 'First name'
+            provider: ctools_block
+            label_display: '0'
+            formatter:
+              label: inline
+              type: string
+              settings:
+                link_to_entity: false
+              third_party_settings: {  }
+              weight: 0
+              region: content
+            context_mapping:
+              entity: '@panelizer.entity_context:entity'
+            region: content
+            weight: 1
+            uuid: 106eea3c-657c-46c9-a18e-ad76602bb1fa
+          f292b83c-7e8e-4676-af64-48beb93ee83a:
+            id: 'entity_field:node:field_vies_gender'
+            label: Gender
+            provider: ctools_block
+            label_display: '0'
+            formatter:
+              label: inline
+              type: string
+              settings:
+                link_to_entity: false
+              third_party_settings: {  }
+              weight: 0
+              region: content
+            context_mapping:
+              entity: '@panelizer.entity_context:entity'
+            region: content
+            weight: 3
+            uuid: f292b83c-7e8e-4676-af64-48beb93ee83a
+          db003172-44ba-40ab-bff8-6eb3dc48032b:
+            id: 'entity_field:node:field_vies_label'
+            label: 'Valuation labels'
+            provider: ctools_block
+            label_display: '0'
+            formatter:
+              label: above
+              type: entity_reference_entity_view
+              settings:
+                link: true
+                view_mode: default
+              third_party_settings: {  }
+              weight: 0
+              region: content
+            context_mapping:
+              entity: '@panelizer.entity_context:entity'
+            region: content
+            weight: 21
+            uuid: db003172-44ba-40ab-bff8-6eb3dc48032b
+          8a0ed970-cbd5-4468-b0da-d832151054f3:
+            id: 'entity_field:node:field_vies_last_name'
+            label: 'Last name'
+            provider: ctools_block
+            label_display: '0'
+            formatter:
+              label: inline
+              type: string
+              settings:
+                link_to_entity: false
+              third_party_settings: {  }
+              weight: 0
+              region: content
+            context_mapping:
+              entity: '@panelizer.entity_context:entity'
+            region: content
+            weight: 2
+            uuid: 8a0ed970-cbd5-4468-b0da-d832151054f3
+          63b229eb-7f51-45b2-a570-bd558c8fa883:
+            id: 'entity_field:node:field_vies_municipality'
+            label: Municipality
+            provider: ctools_block
+            label_display: '0'
+            formatter:
+              label: inline
+              type: string
+              settings:
+                link_to_entity: false
+              third_party_settings: {  }
+              weight: 0
+              region: content
+            context_mapping:
+              entity: '@panelizer.entity_context:entity'
+            region: content
+            weight: 14
+            uuid: 63b229eb-7f51-45b2-a570-bd558c8fa883
+          4ecb7cb0-a694-4594-b092-4d57caaf9867:
+            id: 'entity_field:node:field_vies_newsletter'
+            label: Newsletter
+            provider: ctools_block
+            label_display: '0'
+            formatter:
+              label: inline
+              type: boolean
+              settings:
+                format: yes-no
+                format_custom_true: ''
+                format_custom_false: ''
+              third_party_settings: {  }
+              weight: 0
+              region: content
+            context_mapping:
+              entity: '@panelizer.entity_context:entity'
+            region: content
+            weight: 10
+            uuid: 4ecb7cb0-a694-4594-b092-4d57caaf9867
+          d6826f81-c7da-49a2-a2b7-b842ef60f9db:
+            id: 'entity_field:node:field_vies_parents'
+            label: Parents
+            provider: ctools_block
+            label_display: '0'
+            formatter:
+              label: above
+              type: entity_reference_entity_view
+              settings:
+                link: true
+                view_mode: default
+              third_party_settings: {  }
+              weight: 0
+              region: content
+            context_mapping:
+              entity: '@panelizer.entity_context:entity'
+            region: content
+            weight: 19
+            uuid: d6826f81-c7da-49a2-a2b7-b842ef60f9db
+          e5cec827-0c1a-4a34-950b-5d5c5290d578:
+            id: 'entity_field:node:field_vies_period'
+            label: Period
+            provider: ctools_block
+            label_display: '0'
+            formatter:
+              label: inline
+              type: entity_reference_label
+              settings:
+                link: false
+              third_party_settings: {  }
+              weight: 0
+              region: content
+            context_mapping:
+              entity: '@panelizer.entity_context:entity'
+            region: content
+            weight: 5
+            uuid: e5cec827-0c1a-4a34-950b-5d5c5290d578
+          65d08c47-d2dd-443d-bd6c-0fc02786d4b7:
+            id: 'entity_field:node:field_vies_status'
+            label: 'Valuation statuses'
+            provider: ctools_block
+            label_display: '0'
+            formatter:
+              label: above
+              type: entity_reference_entity_view
+              settings:
+                link: true
+                view_mode: default
+              third_party_settings: {  }
+              weight: 0
+              region: content
+            context_mapping:
+              entity: '@panelizer.entity_context:entity'
+            region: content
+            weight: 20
+            uuid: 65d08c47-d2dd-443d-bd6c-0fc02786d4b7
+          a1d1c190-d7f8-49b6-a5d4-d751630cd8fc:
+            id: 'entity_field:node:field_vies_telefon'
+            label: Telefon
+            provider: ctools_block
+            label_display: '0'
+            formatter:
+              label: inline
+              type: string
+              settings:
+                link_to_entity: false
+              third_party_settings: {  }
+              weight: 0
+              region: content
+            context_mapping:
+              entity: '@panelizer.entity_context:entity'
+            region: content
+            weight: 16
+            uuid: a1d1c190-d7f8-49b6-a5d4-d751630cd8fc
+          61194768-746c-486c-b78f-def409b6559d:
+            id: 'entity_field:node:field_vies_zip'
+            label: ZIP
+            provider: ctools_block
+            label_display: '0'
+            formatter:
+              label: hidden
+              type: string
+              settings:
+                link_to_entity: false
+              third_party_settings: {  }
+              weight: 0
+              region: content
+            context_mapping:
+              entity: '@panelizer.entity_context:entity'
+            region: content
+            weight: 12
+            uuid: 61194768-746c-486c-b78f-def409b6559d
+        id: panels_variant
+        label: Standard
+        uuid: a52e9db8-fc39-4673-9e5a-9921431d60c6
+        weight: 0
+        layout: layout_onecol
+        layout_settings: {  }
+        page_title: '[node:title]'
+        storage_type: ''
+        storage_id: ''
+        builder: ipe
+        pattern: panelizer
+      full_mode:
+        blocks:
+          3973d9eb-f3bb-4852-a0b9-9f6b4355efb8:
+            id: 'entity_field:user:field_vih_user_name_first'
+            label: Fornavn
+            provider: ctools_block
+            label_display: '0'
+            formatter:
+              label: hidden
+              type: string
+              settings:
+                link_to_entity: false
+              third_party_settings: {  }
+              weight: 0
+            region: top
+            weight: 0
+            uuid: 3973d9eb-f3bb-4852-a0b9-9f6b4355efb8
+            context_mapping:
+              entity: current_user
+          cb76ea7c-b2a7-44dd-8e99-7b54d76859bd:
+            id: 'entity_field:user:field_vih_user_name_last'
+            label: Efternavn(e)
+            provider: ctools_block
+            label_display: '0'
+            formatter:
+              label: hidden
+              type: string
+              settings:
+                link_to_entity: false
+              third_party_settings: {  }
+              weight: 0
+            region: top
+            weight: 0
+            uuid: cb76ea7c-b2a7-44dd-8e99-7b54d76859bd
+            context_mapping:
+              entity: current_user
+        id: panels_variant
+        uuid: 11473b27-958c-433a-b01e-d8c26c625331
+        label: 'Full mode'
+        weight: 0
+        layout: layout_twocol_bricks
+        layout_settings: {  }
+        page_title: ''
+        storage_type: panelizer_default
+        storage_id: 'node:vies_application_form:full:full_mode'
+        pattern: panelizer
+        builder: standard
+        static_context: {  }
+  field_group:
+    group_address:
+      children:
+        - field_vies_address
+        - field_vies_zip
+        - field_vies_city
+        - field_vies_country
+        - field_vies_municipality
+      parent_name: ''
+      weight: 10
+      format_type: html_element
+      format_settings:
+        id: ''
+        classes: ''
+        element: div
+        show_label: false
+        label_element: h3
+        attributes: ''
+        effect: none
+        speed: fast
+      label: Address
+      region: content
+id: node.vies_application_form.full
+targetEntityType: node
+bundle: vies_application_form
+mode: full
+content:
+  field_vies_about_school:
+    weight: 8
+    label: above
+    settings:
+      link: true
+      view_mode: default
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+  field_vies_address:
+    weight: 12
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_vies_afterschool:
+    weight: 9
+    label: above
+    settings:
+      link: true
+      view_mode: default
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+  field_vies_birthday:
+    weight: 13
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_vies_city:
+    weight: 14
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_vies_class:
+    weight: 6
+    label: inline
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_vies_class_questions:
+    weight: 7
+    label: above
+    settings:
+      link: false
+      view_mode: default
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+  field_vies_country:
+    weight: 15
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_vies_course:
+    weight: 4
+    label: inline
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_vies_email:
+    weight: 11
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_vies_first_name:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_vies_gender:
+    weight: 3
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_vies_label:
+    weight: 16
+    label: above
+    settings:
+      link: true
+      view_mode: default
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+  field_vies_last_name:
+    weight: 2
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_vies_municipality:
+    weight: 16
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_vies_newsletter:
+    weight: 17
+    label: inline
+    settings:
+      format: yes-no
+      format_custom_true: ''
+      format_custom_false: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_vies_parents:
+    weight: 14
+    label: above
+    settings:
+      link: true
+      view_mode: default
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+  field_vies_period:
+    weight: 5
+    label: inline
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_vies_status:
+    weight: 15
+    label: above
+    settings:
+      link: true
+      view_mode: default
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+  field_vies_telefon:
+    weight: 12
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_vies_zip:
+    weight: 13
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  links:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  langcode: true

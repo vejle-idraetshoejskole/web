@@ -40,177 +40,183 @@ bundle: vies_application_form
 mode: default
 content:
   field_vies_about_school:
-    weight: 115
+    weight: 8
     label: above
     settings:
       link: true
+      view_mode: default
     third_party_settings: {  }
-    type: entity_reference_label
+    type: entity_reference_entity_view
     region: content
   field_vies_address:
-    weight: 118
-    label: above
+    weight: 11
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
     type: string
     region: content
   field_vies_afterschool:
-    weight: 117
+    weight: 9
     label: above
     settings:
       link: true
+      view_mode: default
     third_party_settings: {  }
-    type: entity_reference_label
+    type: entity_reference_entity_view
     region: content
   field_vies_birthday:
-    weight: 133
-    label: above
+    weight: 18
+    label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
     type: string
     region: content
   field_vies_city:
-    weight: 122
-    label: above
+    weight: 13
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
     type: string
     region: content
   field_vies_class:
-    weight: 112
-    label: above
+    weight: 6
+    label: inline
     settings:
-      link: true
+      link: false
     third_party_settings: {  }
     type: entity_reference_label
     region: content
   field_vies_class_questions:
-    weight: 114
-    label: above
+    weight: 7
+    label: inline
     settings:
-      link: true
+      link: false
+      view_mode: default
     third_party_settings: {  }
-    type: entity_reference_label
+    type: entity_reference_entity_view
     region: content
   field_vies_country:
-    weight: 132
-    label: above
+    weight: 17
+    label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
     type: string
     region: content
   field_vies_course:
-    weight: 119
-    label: above
+    weight: 4
+    label: inline
     settings:
-      link: true
+      link: false
     third_party_settings: {  }
     type: entity_reference_label
     region: content
   field_vies_email:
-    weight: 123
-    label: above
+    weight: 15
+    label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
     type: string
     region: content
   field_vies_first_name:
-    weight: 124
-    label: above
+    weight: 1
+    label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
     type: string
     region: content
   field_vies_gender:
-    weight: 128
-    label: above
+    weight: 3
+    label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
     type: string
     region: content
   field_vies_label:
-    weight: 131
+    weight: 21
     label: above
     settings:
       link: true
+      view_mode: default
     third_party_settings: {  }
-    type: entity_reference_label
+    type: entity_reference_entity_view
     region: content
   field_vies_last_name:
-    weight: 125
-    label: above
+    weight: 2
+    label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
     type: string
     region: content
   field_vies_municipality:
-    weight: 126
-    label: above
+    weight: 14
+    label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
     type: string
     region: content
   field_vies_newsletter:
-    weight: 120
-    label: above
+    weight: 10
+    label: inline
     settings:
-      format: default
-      format_custom_false: ''
+      format: yes-no
       format_custom_true: ''
+      format_custom_false: ''
     third_party_settings: {  }
     type: boolean
     region: content
   field_vies_parents:
-    weight: 116
+    weight: 19
     label: above
     settings:
       link: true
+      view_mode: default
     third_party_settings: {  }
-    type: entity_reference_label
+    type: entity_reference_entity_view
     region: content
   field_vies_period:
-    weight: 111
-    label: above
+    weight: 5
+    label: inline
     settings:
-      link: true
+      link: false
     third_party_settings: {  }
     type: entity_reference_label
     region: content
   field_vies_status:
-    weight: 130
+    weight: 20
     label: above
     settings:
       link: true
+      view_mode: default
     third_party_settings: {  }
-    type: entity_reference_label
+    type: entity_reference_entity_view
     region: content
   field_vies_telefon:
-    weight: 127
-    label: above
+    weight: 16
+    label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
     type: string
     region: content
   field_vies_zip:
-    weight: 121
-    label: above
+    weight: 12
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
     type: string
     region: content
   links:
-    weight: 100
+    weight: 0
     region: content
     settings: {  }
     third_party_settings: {  }
