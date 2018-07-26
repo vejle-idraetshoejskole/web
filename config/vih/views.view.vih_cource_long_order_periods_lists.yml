@@ -91,61 +91,14 @@ display:
           summary: ''
           description: ''
           columns:
-            counter: counter
             nid: nid
-            field_vih_lco_first_name: field_vih_lco_first_name
-            field_vih_lco_last_name: field_vih_lco_last_name
-            field_vih_lco_email: field_vih_lco_email
-            nid_1: nid_1
-            title_1: title_1
             title: title
-            title_2: title_2
-            field_vih_lco_status: field_vih_lco_status
+            field_vih_cp_start_date: field_vih_cp_start_date
+            field_vih_cp_end_date: field_vih_cp_end_date
+            nid_1: nid_1
           info:
-            counter:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
             nid:
               sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_vih_lco_first_name:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_vih_lco_last_name:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_vih_lco_email:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            nid_1:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            title_1:
-              sortable: false
               default_sort_order: asc
               align: ''
               separator: ''
@@ -158,15 +111,22 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            title_2:
+            field_vih_cp_start_date:
+              sortable: true
+              default_sort_order: desc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            field_vih_cp_end_date:
               sortable: false
               default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-            field_vih_lco_status:
-              sortable: true
+            nid_1:
+              sortable: false
               default_sort_order: asc
               align: ''
               separator: ''

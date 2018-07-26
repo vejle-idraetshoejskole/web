@@ -112,23 +112,12 @@ display:
           summary: ''
           description: ''
           columns:
-            counter: counter
             nid: nid
             title: title
-            field_vih_ocp_first_name: field_vih_ocp_first_name
-            field_vih_ocp_last_name: field_vih_ocp_last_name
-            field_vih_ocp_email: field_vih_ocp_email
-            field_vih_sco_status: field_vih_sco_status
-            title_1: title_1
-            field_vih_sco_status_1: field_vih_sco_status_1
+            field_vih_sc_start_date: field_vih_sc_start_date
+            field_vih_sc_end_date: field_vih_sc_end_date
+            nid_1: nid_1
           info:
-            counter:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
             nid:
               sortable: true
               default_sort_order: asc
@@ -143,43 +132,22 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            field_vih_ocp_first_name:
+            field_vih_sc_start_date:
               sortable: true
-              default_sort_order: asc
+              default_sort_order: desc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-            field_vih_ocp_last_name:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_vih_ocp_email:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_vih_sco_status:
+            field_vih_sc_end_date:
               sortable: false
               default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-            title_1:
+            nid_1:
               sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_vih_sco_status_1:
-              sortable: true
               default_sort_order: asc
               align: ''
               separator: ''

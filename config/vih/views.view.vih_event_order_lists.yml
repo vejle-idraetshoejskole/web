@@ -110,23 +110,11 @@ display:
           summary: ''
           description: ''
           columns:
-            counter: counter
             nid: nid
             title: title
-            field_vih_oe_first_name: field_vih_oe_first_name
-            field_vih_oe_last_name: field_vih_oe_last_name
-            field_vih_oe_email: field_vih_oe_email
-            field_vih_eo_event: field_vih_eo_event
-            title_1: title_1
-            field_vih_eo_status: field_vih_eo_status
+            field_vih_event_start_date: field_vih_event_start_date
+            nid_1: nid_1
           info:
-            counter:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
             nid:
               sortable: true
               default_sort_order: asc
@@ -141,43 +129,15 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            field_vih_oe_first_name:
+            field_vih_event_start_date:
               sortable: true
-              default_sort_order: asc
+              default_sort_order: desc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-            field_vih_oe_last_name:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_vih_oe_email:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_vih_eo_event:
+            nid_1:
               sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            title_1:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_vih_eo_status:
-              sortable: true
               default_sort_order: asc
               align: ''
               separator: ''

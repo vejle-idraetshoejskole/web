@@ -92,23 +92,13 @@ display:
           summary: ''
           description: ''
           columns:
-            counter: counter
             nid: nid
             title: title
-            field_vih_lco_first_name_1: field_vih_lco_first_name_1
-            field_vih_lco_last_name: field_vih_lco_last_name
-            field_vih_lco_email: field_vih_lco_email
-            field_vih_lco_course: field_vih_lco_course
-            field_vih_lco_course_1: field_vih_lco_course_1
-            field_vih_lco_status: field_vih_lco_status
+            field_vih_course_periods: field_vih_course_periods
+            field_vih_cp_start_date: field_vih_cp_start_date
+            field_vih_cp_end_date: field_vih_cp_end_date
+            nid_1: nid_1
           info:
-            counter:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
             nid:
               sortable: true
               default_sort_order: asc
@@ -123,49 +113,33 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            field_vih_lco_first_name_1:
-              sortable: true
-              default_sort_order: asc
+            field_vih_course_periods:
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-            field_vih_lco_last_name:
+            field_vih_cp_start_date:
               sortable: true
-              default_sort_order: asc
+              default_sort_order: desc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-            field_vih_lco_email:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_vih_lco_course:
+            field_vih_cp_end_date:
               sortable: false
               default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-            field_vih_lco_course_1:
+            nid_1:
               sortable: false
               default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-            field_vih_lco_status:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-          default: '-1'
+          default: field_vih_cp_start_date
           empty_table: false
       row:
         type: fields
@@ -1172,7 +1146,8 @@ display:
             timezone_override: ''
             format_type: short_date_zoho
           group_column: entity_id
-          group_columns: {  }
+          group_columns:
+            value: value
           group_rows: true
           delta_limit: 0
           delta_offset: 0
