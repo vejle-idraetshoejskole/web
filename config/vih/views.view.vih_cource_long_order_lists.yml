@@ -16,6 +16,7 @@ dependencies:
     - node.type.vih_long_cource
     - node.type.vih_long_course_order
     - system.menu.admin
+    - user.role.authenticated
   module:
     - datetime
     - node
@@ -38,9 +39,10 @@ display:
     position: 0
     display_options:
       access:
-        type: perm
+        type: role
         options:
-          perm: 'access content'
+          role:
+            authenticated: authenticated
       cache:
         type: tag
         options: {  }
@@ -871,7 +873,7 @@ display:
         - url
         - url.query_args
         - 'user.node_grants:view'
-        - user.permissions
+        - user.roles
       tags:
         - 'config:field.storage.node.field_vih_lco_adult_email'
         - 'config:field.storage.node.field_vih_lco_adult_last_name'
@@ -1730,7 +1732,7 @@ display:
         - url
         - url.query_args
         - 'user.node_grants:view'
-        - user.permissions
+        - user.roles
       tags:
         - 'config:field.storage.node.field_vih_course_periods'
         - 'config:field.storage.node.field_vih_cp_end_date'
@@ -2686,7 +2688,7 @@ display:
         - url
         - url.query_args
         - 'user.node_grants:view'
-        - user.permissions
+        - user.roles
       tags:
         - 'config:field.storage.node.field_vih_lco_course'
         - 'config:field.storage.node.field_vih_lco_email'

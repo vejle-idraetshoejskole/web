@@ -15,6 +15,7 @@ dependencies:
     - node.type.vih_course_period
     - node.type.vih_long_course_order
     - system.menu.admin
+    - user.role.authenticated
   module:
     - datetime
     - node
@@ -39,9 +40,10 @@ display:
     position: 0
     display_options:
       access:
-        type: perm
+        type: role
         options:
-          perm: 'access content'
+          role:
+            authenticated: authenticated
       cache:
         type: tag
         options: {  }
@@ -81,12 +83,11 @@ display:
           columns:
             nid: nid
             title: title
-            field_vih_lco_first_name: field_vih_lco_first_name
-            field_vih_lco_adult_last_name: field_vih_lco_adult_last_name
-            field_vih_lco_adult_email: field_vih_lco_adult_email
-            name: name
-            title_1: title_1
-            field_vih_lco_status: field_vih_lco_status
+            field_vih_cp_start_date: field_vih_cp_start_date
+            field_vih_cp_end_date: field_vih_cp_end_date
+            field_vih_cs_title: field_vih_cs_title
+            field_vih_cs_classes: field_vih_cs_classes
+            nid_1: nid_1
           info:
             nid:
               sortable: false
@@ -102,43 +103,34 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            field_vih_lco_first_name:
+            field_vih_cp_start_date:
               sortable: true
-              default_sort_order: asc
+              default_sort_order: desc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-            field_vih_lco_adult_last_name:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_vih_lco_adult_email:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            name:
+            field_vih_cp_end_date:
               sortable: false
               default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-            title_1:
+            field_vih_cs_title:
               sortable: false
               default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-            field_vih_lco_status:
-              sortable: true
+            field_vih_cs_classes:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            nid_1:
+              sortable: false
               default_sort_order: asc
               align: ''
               separator: ''
@@ -348,7 +340,7 @@ display:
         - 'languages:language_interface'
         - url.query_args
         - 'user.node_grants:view'
-        - user.permissions
+        - user.roles
       tags: {  }
   attachment_all_periods:
     display_plugin: attachment
@@ -1030,7 +1022,7 @@ display:
           relationship: field_vih_cp_course_slots
           group_type: group
           admin_label: ''
-          label: 'Course slot title'
+          label: 'Course slot'
           exclude: false
           alter:
             alter_text: false
@@ -1076,69 +1068,6 @@ display:
           settings:
             link_to_entity: false
           group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          plugin_id: field
-        field_vih_cs_classes:
-          id: field_vih_cs_classes
-          table: paragraph__field_vih_cs_classes
-          field: field_vih_cs_classes
-          relationship: field_vih_cp_course_slots
-          group_type: group
-          admin_label: ''
-          label: 'Available classes'
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: true
-            path: '/admin/ordrer/orders-periods-classes/{{ nid }}/{{ field_vih_cs_classes__target_id }}'
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: target_id
-          type: entity_reference_label
-          settings:
-            link: false
-          group_column: entity_id
           group_columns: {  }
           group_rows: true
           delta_limit: 0
@@ -1215,6 +1144,69 @@ display:
           entity_type: node
           entity_field: nid
           plugin_id: field
+        field_vih_cs_classes:
+          id: field_vih_cs_classes
+          table: paragraph__field_vih_cs_classes
+          field: field_vih_cs_classes
+          relationship: field_vih_cp_course_slots
+          group_type: group
+          admin_label: ''
+          label: 'Available classes'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: true
+            path: '/admin/ordrer/orders-periods-classes/{{ nid }}/{{ field_vih_cs_classes__target_id }}'
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: false
+          group_column: entity_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
       display_description: ''
       pager:
         type: none
@@ -1277,7 +1269,7 @@ display:
         - url
         - url.query_args
         - 'user.node_grants:view'
-        - user.permissions
+        - user.roles
       tags:
         - 'config:field.storage.node.field_vih_cp_end_date'
         - 'config:field.storage.node.field_vih_cp_start_date'
@@ -2391,7 +2383,7 @@ display:
         - url
         - url.query_args
         - 'user.node_grants:view'
-        - user.permissions
+        - user.roles
       tags:
         - 'config:field.storage.node.field_vih_lco_adult_email'
         - 'config:field.storage.node.field_vih_lco_adult_last_name'
