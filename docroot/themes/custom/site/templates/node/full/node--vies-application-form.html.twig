@@ -1,0 +1,28 @@
+{% set classes = [
+node.bundle|clean_class,
+node.isPromoted() ? 'is-promoted',
+node.isSticky() ? 'is-sticky',
+not node.isPublished() ? 'is-unpublished',
+view_mode ? view_mode|clean_class,
+'clearfix',
+] %}
+<article{{ attributes.addClass(classes) }}>
+
+    <!-- Begin - content -->
+    <section class="sectioned sectioned--content">
+        <div class="sectioned__inner">
+            <div class="container">
+                <h1>{{ content.field_vies_first_name.0 }} {{ content.field_vies_last_name.0 }}</h1>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-7">
+                       {{ content.group_col_left }}
+                    </div>
+                    <div class="col-xs-12 col-sm-5">
+                        {{ content.group_col_right }}
+                    </div>
+                </div>
+        </div>
+    </section>
+    <!-- End - content -->
+
+</article>

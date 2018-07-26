@@ -86,3 +86,120 @@
     }
   }
 }
+
+.page-node-type-vies-application-form {
+  article {
+    .field {
+      margin: 10px 0;
+
+      .field--label {
+        margin: 0;
+      }
+
+      .field--item,.field--items, .field--label {
+        margin: 0;
+        float: none;
+        display: inline;
+      }
+    }
+
+    .field--adress {
+      margin: 10px 0;
+      clear: both;
+
+      > label {
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 18px;
+        color: $gray-dark;
+        letter-spacing: 1px;
+        font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        line-height: 1.1;
+      }
+
+      .field {
+        margin: 0;
+      }
+    }
+
+    .field--name-field-vies-parents {
+      > .field--label {
+        display: block;
+        margin: 10px 0;
+      }
+
+      > .field--items {
+        margin: 10px 0;
+
+        > .field--item  {
+
+          .application-form-parent {
+            background: #DDD;
+            padding: 10px;
+          }
+
+          &:nth-child(2) {
+            .application-form-parent {
+              background: #EEE;
+            }
+          }
+        }
+      }
+    }
+
+    .application-form-parent {
+      .field--item,.field--items, .field--label, .field--adress > label {
+        color: $gray-dark;
+        font-size: 16px;
+        text-transform: none;
+        font-weight: normal;
+        letter-spacing: normal;
+      }
+
+      .field {
+        margin: 0;
+      }
+
+      .field--adress {
+        margin: 0;
+
+        .field {
+          display: block;
+        }
+      }
+
+      .field--name-field-parent-type {
+        text-transform: capitalize;
+
+        &:after {
+          content: ":"
+        }
+      }
+    }
+
+    .application-form-answer {
+      margin: 15px 0;
+
+      .field {
+        display: block;
+
+        &--name-field-question {
+          font-weight: bold;
+          color: $gray-dark;
+        }
+
+      }
+    }
+
+    .field--name-field-vies-status,
+    .field--name-field-vies-label {
+      .field--item {
+        display: block;
+      }
+    }
+
+    .field--name-field-vies-class-questions {
+      margin-top: 30px;
+    }
+  }
+}

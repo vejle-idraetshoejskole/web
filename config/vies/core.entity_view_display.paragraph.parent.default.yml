@@ -28,14 +28,15 @@ third_party_settings:
       weight: 5
       format_type: html_element
       format_settings:
-        id: ''
-        classes: ''
+        label: Address
         element: div
         show_label: false
-        label_element: h3
+        label_element: label
         attributes: ''
         effect: none
         speed: fast
+        id: ''
+        classes: 'field--adress field--label-inline'
       label: Address
       region: content
 id: paragraph.parent.default
