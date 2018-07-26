@@ -18,9 +18,11 @@ function swallowError(error) {
 const gulp = require('gulp');
 const bless = require('gulp-bless');
 const babel = require('gulp-babel');
+const cssnano = require('gulp-cssnano');
 const styles = require('gulp-sass');
 const del = require('del');
 const modernizr = require('gulp-modernizr');
+const minify = require('gulp-minify');
 const autoprefixer = require('gulp-autoprefixer');
 const imagemin = require('gulp-imagemin');
 const concat = require('gulp-concat');
@@ -64,6 +66,11 @@ gulp.task('process:modernizr', () => {
                 'hidden'
             ]
         }))
+        .pipe(minify({
+            ext:{
+                min:'.min.js'
+            }
+        }))
         .pipe(gulp.dest('dist/javascripts'));
 });
 gulp.task('process:styles_vih', () => {
@@ -73,6 +80,7 @@ gulp.task('process:styles_vih', () => {
       .pipe(autoprefixer('last 2 version'))
       .pipe(bless())
       .pipe(sourcemaps.write())
+      .pipe(cssnano())
       .pipe(gulp.dest('dist/stylesheets'))
       .pipe(browserSync.stream({match: '**/*.css'}));
 });
@@ -83,6 +91,7 @@ gulp.task('process:styles_vies', () => {
       .pipe(autoprefixer('last 2 version'))
       .pipe(bless())
       .pipe(sourcemaps.write())
+      .pipe(cssnano())
       .pipe(gulp.dest('dist/stylesheets'))
       .pipe(browserSync.stream({match: '**/*.css'}));
 });
@@ -95,6 +104,11 @@ gulp.task('process:javascripts', () => {
         }))
         .pipe(concat('app.js'))
         .pipe(sourcemaps.write())
+        .pipe(minify({
+            ext:{
+                min:'.min.js'
+            }
+        }))
         .pipe(gulp.dest('dist/javascripts'));
 });
 gulp.task('process:fonts', () => {
