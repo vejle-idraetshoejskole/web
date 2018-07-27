@@ -19,6 +19,8 @@ class VihSubscriptionUtils {
    * @param array $message with keys
    * - to
    * - from
+   * - Cc
+   * - Bcc
    * - body
    * - sender
    * - subject
@@ -48,6 +50,11 @@ class VihSubscriptionUtils {
     if (isset($message['Cc'])) {
       $message['headers']['Cc'] = $message['Cc'];
       unset($message['Cc']);
+    }
+
+    if (isset($message['Bcc'])) {
+      $message['headers']['Bcc'] = $message['Bcc'];
+      unset($message['Bcc']);
     }
 
     return $send_mail->mail($message);

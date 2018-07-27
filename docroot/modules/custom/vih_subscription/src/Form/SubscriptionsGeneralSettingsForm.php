@@ -109,6 +109,11 @@ class SubscriptionsGeneralSettingsForm extends ConfigFormBase {
       '#title' => $this->t('Notifications (danish)'),
       '#open' => FALSE,
     ];
+    $form['vih_subscription_long_course_da']['vih_subscription_notifications_long_course_fs_da']['vih_subscription_long_course_notifications_bcc_da'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Bcc'),
+      '#default_value' => $config->get('vih_subscription_long_course_notifications_bcc_da'),
+    ];
     $form['vih_subscription_long_course_da']['vih_subscription_notifications_long_course_fs_da']['vih_subscription_long_course_notifications_subject_da'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Subject'),
@@ -140,6 +145,11 @@ class SubscriptionsGeneralSettingsForm extends ConfigFormBase {
       '#type' => 'details',
       '#title' => $this->t('Notifications (english)'),
       '#open' => FALSE,
+    ];
+    $form['vih_subscription_long_course_en']['vih_subscription_notifications_long_course_fs_en']['vih_subscription_long_course_notifications_bcc_en'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Bcc'),
+      '#default_value' => $config->get('vih_subscription_long_course_notifications_bcc_en'),
     ];
     $form['vih_subscription_long_course_en']['vih_subscription_notifications_long_course_fs_en']['vih_subscription_long_course_notifications_subject_en'] = [
       '#type' => 'textfield',
@@ -213,6 +223,11 @@ class SubscriptionsGeneralSettingsForm extends ConfigFormBase {
       '#title' => $this->t('Short course notifications (danish)'),
       '#open' => FALSE,
     ];
+    $form['vih_subscription_short_course_da']['vih_subscription_notifications_short_course_fs_da']['vih_subscription_short_course_notifications_bcc_da'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Bcc'),
+      '#default_value' => $config->get('vih_subscription_short_course_notifications_bcc_da'),
+    ];
     $form['vih_subscription_short_course_da']['vih_subscription_notifications_short_course_fs_da']['vih_subscription_short_course_notifications_subject_da'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Subject'),
@@ -244,6 +259,11 @@ class SubscriptionsGeneralSettingsForm extends ConfigFormBase {
       '#type' => 'details',
       '#title' => $this->t('Short course notifications (english)'),
       '#open' => FALSE,
+    ];
+    $form['vih_subscription_short_course_en']['vih_subscription_notifications_short_course_fs_en']['vih_subscription_short_course_notifications_bcc_en'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Bcc'),
+      '#default_value' => $config->get('vih_subscription_short_course_notifications_bcc_en'),
     ];
     $form['vih_subscription_short_course_en']['vih_subscription_notifications_short_course_fs_en']['vih_subscription_short_course_notifications_subject_en'] = [
       '#type' => 'textfield',
@@ -317,6 +337,11 @@ class SubscriptionsGeneralSettingsForm extends ConfigFormBase {
       '#title' => $this->t('Event notifications (danish)'),
       '#open' => FALSE,
     ];
+    $form['vih_subscription_event_da']['vih_subscription_notifications_event_fs_da']['vih_subscription_event_notifications_bcc_da'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Bcc'),
+      '#default_value' => $config->get('vih_subscription_event_notifications_bcc_da'),
+    ];
     $form['vih_subscription_event_da']['vih_subscription_notifications_event_fs_da']['vih_subscription_event_notifications_subject_da'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Subject'),
@@ -348,6 +373,11 @@ class SubscriptionsGeneralSettingsForm extends ConfigFormBase {
       '#type' => 'details',
       '#title' => $this->t('Event notifications (english)'),
       '#open' => FALSE,
+    ];
+    $form['vih_subscription_event_en']['vih_subscription_notifications_event_fs_en']['vih_subscription_event_notifications_bcc_en'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Bcc'),
+      '#default_value' => $config->get('vih_subscription_event_notifications_bcc_en'),
     ];
     $form['vih_subscription_event_en']['vih_subscription_notifications_event_fs_en']['vih_subscription_event_notifications_subject_en'] = [
       '#type' => 'textfield',
