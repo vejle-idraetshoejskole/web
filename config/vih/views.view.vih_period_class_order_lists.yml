@@ -2426,7 +2426,7 @@ display:
           empty: false
           tokenize: true
           content:
-            value: '<h2> {{ name }} </h2> '
+            value: '<h2> {{ name }} ([view:total-rows] orders) </h2>'
             format: rich_text
           plugin_id: text
       empty:
