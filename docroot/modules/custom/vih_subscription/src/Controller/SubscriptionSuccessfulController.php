@@ -92,6 +92,7 @@ class SubscriptionSuccessfulController extends ControllerBase {
 
       $message = [
         'to' => $order->field_vih_lco_email->value,
+        'Bcc' => $notificationsConfig->get('vih_subscription_long_course_notifications_bcc_' . \Drupal::languageManager()->getCurrentLanguage()->getId()),
         'subject' => $notificationsConfig->get('vih_subscription_long_course_notifications_subject_' . \Drupal::languageManager()->getCurrentLanguage()->getId()),
         'body' => $notification_template,
       ];
@@ -218,6 +219,7 @@ class SubscriptionSuccessfulController extends ControllerBase {
       
         $message = [
           'to' => $email,
+          'Bcc' => $notificationsConfig->get('vih_subscription_short_course_notifications_bcc_' . \Drupal::languageManager()->getCurrentLanguage()->getId()),
           'subject' => $notificationsConfig->get('vih_subscription_short_course_notifications_subject_' . \Drupal::languageManager()->getCurrentLanguage()->getId()),
           'body' => $notification_template,
         ];
@@ -298,6 +300,7 @@ class SubscriptionSuccessfulController extends ControllerBase {
 
         $message = [
           'to' => $email,
+          'Bcc' => $notificationsConfig->get('vih_subscription_event_notifications_bcc_' . \Drupal::languageManager()->getCurrentLanguage()->getId()),
           'subject' => $notificationsConfig->get('vih_subscription_event_notifications_subject_' . \Drupal::languageManager()->getCurrentLanguage()->getId()),
           'body' => $notification_template,
         ];
@@ -319,12 +322,6 @@ class SubscriptionSuccessfulController extends ControllerBase {
 
     // Add logo to message body.
     $message['body'] = $logo . $message['body'];
-
-    // Adding site-email as CC.
-    $system_site_config = \Drupal::config('system.site');
-    $site_email = $system_site_config->get('mail');
-
-    $message['Cc'] = $site_email;
 
     if (!empty($message)) {
       VihSubscriptionUtils::makeReplacements($message, $token, $replacement);
