@@ -80,11 +80,12 @@ third_party_settings:
       weight: 3
       format_type: tab
       format_settings:
-        id: ''
-        classes: ''
-        formatter: closed
+        label: Evaluation
+        formatter: open
         description: ''
         required_fields: true
+        id: ''
+        classes: ''
       label: Evaluation
       region: content
 id: node.vies_application_form.default

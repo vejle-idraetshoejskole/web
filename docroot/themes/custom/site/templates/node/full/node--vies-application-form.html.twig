@@ -18,6 +18,14 @@ view_mode ? view_mode|clean_class,
                        {{ content.group_col_left }}
                     </div>
                     <div class="col-xs-12 col-sm-5">
+                        {% if content.field_vies_label.0 or content.field_vies_status.0 %}
+                        <div class="boxy">
+                            <div class="boxy__body">
+                                {{ content.field_vies_label }}
+                                {{ content.field_vies_status }}
+                            </div>
+                        </div>
+                        {% endif %}
                         {{ content.group_col_right }}
                     </div>
                 </div>
