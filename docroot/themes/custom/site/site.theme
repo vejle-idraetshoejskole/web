@@ -250,33 +250,12 @@ function site_preprocess_node(array &$variables) {
     $course_travel_price = 0;
     $start_course_date = '';
     $end_course_date = '';
+    
+    $start_course_date = $node->field_vih_lc_start_date;
+    $end_course_date = $node->field_vih_lc_end_date;
+    
     foreach ($node->field_vih_course_periods->referencedEntities() as $period) {
-
-      if ($period->field_vih_cp_start_date->value) {
-        $curr_start_date = $period->field_vih_cp_start_date;
-      }
-
-      if ($period->field_vih_cp_end_date->value) {
-        $curr_end_date = $period->field_vih_cp_end_date;
-      }
-
-      if ($start_course_date) {
-        if ($curr_start_date->date->getTimestamp() < $start_course_date->date->getTimestamp()) {
-          $start_course_date = $curr_start_date;
-        }
-      }
-      else {
-        $start_course_date = $curr_start_date;
-      }
-      if ($end_course_date) {
-        if ($curr_end_date->date->getTimestamp() > $end_course_date->date->getTimestamp()) {
-          $end_course_date = $curr_end_date;
-        }
-      }
-      else {
-        $end_course_date = $curr_end_date;
-      }
-
+      
       //only for full display
       if ($variables['view_mode'] == 'full') {
         $variables['content']['periods'][$period->id()] = array(
