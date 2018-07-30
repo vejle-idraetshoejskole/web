@@ -160,7 +160,7 @@ function vih_subscription_system_breadcrumb_alter(\Drupal\Core\Breadcrumb\Breadc
 }
 
 /**
- * Implements HOOH_node_view().
+ * Implements hook_node_view().
  *
  * @param $node
  * @param $view_mode
@@ -176,7 +176,7 @@ function vih_subscription_node_view(&$build, Drupal\Core\Entity\EntityInterface 
 }
 
 /**
- * Implements HOOH_node_presave().
+ * Implements hook_node_presave().
  *
  */
 function vih_subscription_node_presave(Drupal\Core\Entity\EntityInterface $entity) {
@@ -206,7 +206,7 @@ function vih_subscription_node_presave(Drupal\Core\Entity\EntityInterface $entit
 }
 
 /**
- * Implements HOOH_entity_update().
+ * Implements hook_entity_update().
  *
  */
 function vih_subscription_entity_update(Drupal\Core\Entity\EntityInterface $entity) {
