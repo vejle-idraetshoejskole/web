@@ -1,0 +1,21 @@
+uuid: 6d787fcb-cd92-4fc8-a1f9-e32f94de6012
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_vih_lc_end_date
+    - node.type.vih_long_cource
+  module:
+    - datetime
+id: node.vih_long_cource.field_vih_lc_end_date
+field_name: field_vih_lc_end_date
+entity_type: node
+bundle: vih_long_cource
+label: 'End date'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

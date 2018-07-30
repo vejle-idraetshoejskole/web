@@ -174,3 +174,51 @@ function vih_subscription_node_view(&$build, Drupal\Core\Entity\EntityInterface 
     throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
   }
 }
+
+/**
+ * Implements HOOH_node_presave().
+ *
+ */
+function vih_subscription_node_presave(Drupal\Core\Entity\EntityInterface $entity) {
+
+  if ($entity->type->entity->id() == 'vih_long_cource') {
+    $periods = $entity->get('field_vih_course_periods')->referencedEntities();
+
+    if (is_array($periods)) {
+      foreach ($periods as $period) {
+        $start_date_arr[] = $period->get('field_vih_cp_start_date')->getValue()[0]['value'];
+        $end_date_arr[] = $period->get('field_vih_cp_end_date')->getValue()[0]['value'];
+      }
+    }
+    sort($start_date_arr);
+    rsort($end_date_arr);
+    
+    $course_start_date = array_shift($start_date_arr);
+    $course_end_date = array_shift($end_date_arr);
+
+    if(empty($entity->get('field_vih_lc_start_date')->getValue()) or $entity->get('field_vih_lc_start_date')->getValue()[0]['value'] <> $course_start_date){
+      $entity->set('field_vih_lc_start_date', $course_start_date);
+    }
+    if(empty($entity->get('field_vih_lc_end_date')->getValue()) or $entity->get('field_vih_lc_end_date')->getValue()[0]['value'] <> $course_start_date){
+      $entity->set('field_vih_lc_end_date', $course_end_date);
+    }
+  }
+}
+
+/**
+ * Implements HOOH_entity_update().
+ *
+ */
+function vih_subscription_entity_update(Drupal\Core\Entity\EntityInterface $entity) {
+  if (!empty($entity->type->entity) and $entity->type->entity->id() == 'vih_course_period') {
+
+    $nids = \Drupal::entityQuery('node')->condition('type', 'vih_long_cource')->condition('field_vih_course_periods', $entity->id())->execute();
+    $long_courses = \Drupal\node\Entity\Node::loadMultiple($nids);
+
+    if (is_array($long_courses)) {
+      foreach ($long_courses as $long_course) {
+        $long_course->save();
+      }
+    }
+  }
+}
