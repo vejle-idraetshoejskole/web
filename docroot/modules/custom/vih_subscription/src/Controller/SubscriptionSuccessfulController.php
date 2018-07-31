@@ -84,7 +84,7 @@ class SubscriptionSuccessfulController extends ControllerBase {
       . '/themes/custom/site/dist/images/layout-header-logo-vih.png" alt="VIH" />'
       . '</div><br>';
 
-    $token = ['@subject_name', '@person_name', '@date', '@url', '@order'];
+    $token = ['@subject_name', '@person_name', '@date', '@url', '@order', '@order_id'];
 
     if ($subject->getType() == 'vih_long_cource') {
       $notification_template = $notificationsConfig->get('vih_subscription_long_course_notifications_body_' . \Drupal::languageManager()->getCurrentLanguage()->getId());
@@ -312,6 +312,7 @@ class SubscriptionSuccessfulController extends ControllerBase {
           '<a href="' . $subject->toUrl()->setAbsolute()->toString() . '"target=_blank >' . $subject->toUrl()
             ->setAbsolute()->toString() . '</a>',
           $order_rendered,
+          $$order->id(),
         ];
       }
 
