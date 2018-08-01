@@ -2410,7 +2410,7 @@ display:
         title: 'Long courses classes orders'
         description: ''
         expanded: false
-        parent: 'menu_link_content:066c53ba-8634-4ca5-bf97-4337b50ef8aa'
+        parent: 'views_view:views.vih_order_lists.vih_order_lists_page'
         weight: 0
         context: '0'
         menu_name: admin
