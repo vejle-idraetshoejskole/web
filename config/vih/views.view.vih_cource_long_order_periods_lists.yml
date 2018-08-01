@@ -23,7 +23,7 @@ dependencies:
     - user
     - views_autocomplete_filters
 id: vih_cource_long_order_periods_lists
-label: 'Tilmedinger - Lange kurser periods'
+label: 'Tilmeldinger - Lange kurser periods'
 module: views
 description: ''
 tag: ''

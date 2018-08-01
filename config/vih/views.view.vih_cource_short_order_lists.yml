@@ -42,7 +42,7 @@ dependencies:
     - user
     - views_autocomplete_filters
 id: vih_cource_short_order_lists
-label: 'Tilmedinger - korte kurser'
+label: 'Tilmeldinger - korte kurser'
 module: views
 description: ''
 tag: ''

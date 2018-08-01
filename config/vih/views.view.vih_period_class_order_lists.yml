@@ -25,7 +25,7 @@ dependencies:
     - user
     - views_autocomplete_filters
 id: vih_period_class_order_lists
-label: 'Tilmedinger - Fag og periode'
+label: 'Tilmeldinger - Fag og periode'
 module: views
 description: ''
 tag: ''
