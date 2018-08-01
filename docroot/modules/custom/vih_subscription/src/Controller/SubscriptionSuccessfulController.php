@@ -84,7 +84,7 @@ class SubscriptionSuccessfulController extends ControllerBase {
       . '/themes/custom/site/dist/images/layout-header-logo-vih.png" alt="VIH" />'
       . '</div><br>';
 
-    $token = ['@subject_name', '@person_name', '@date', '@url', '@order', '@order_id'];
+    $token = ['@subject_name', '@person_name', '@date', '@url', '@order_id', '@order'];
 
     if ($subject->getType() == 'vih_long_cource') {
       $notification_template = $notificationsConfig->get('vih_subscription_long_course_notifications_body_' . \Drupal::languageManager()->getCurrentLanguage()->getId());
@@ -117,7 +117,9 @@ class SubscriptionSuccessfulController extends ControllerBase {
         !empty($courseDate) ? mb_strtolower($courseDate) : '',
         '<a href="' . $subject->toUrl()->setAbsolute()->toString() . '"target=_blank >' . $subject->toUrl()
           ->setAbsolute()->toString() . '</a>',
-        $order_rendered,
+          $order->id(),
+          $order_rendered,
+          
       ];
 
       // Mailchimp integration
@@ -199,6 +201,7 @@ class SubscriptionSuccessfulController extends ControllerBase {
           !empty($courseDate) ? mb_strtolower($courseDate) : '',
           '<a href="' . $subject->toUrl()->setAbsolute()->toString() . '"target=_blank >' . $subject->toUrl()
             ->setAbsolute()->toString() . '</a>',
+          $order->id(),
           $order_rendered,
         ];
       }
@@ -280,8 +283,8 @@ class SubscriptionSuccessfulController extends ControllerBase {
           !empty($eventDate) ? mb_strtolower($eventDate) : '',
           '<a href="' . $subject->toUrl()->setAbsolute()->toString() . '"target=_blank >' . $subject->toUrl()
             ->setAbsolute()->toString() . '</a>',
+          $order->id(),
           $order_rendered,
-          $$order->id(),
         ];
       }
 
