@@ -97,49 +97,18 @@ class SubscriptionSuccessfulController extends ControllerBase {
         'body' => $notification_template,
       ];
 
-      //getting the start and end date for long course START
-      // FIXME: that is a copy paste from site.theme preprocess_node function, consider refactoring
-      $start_course_date = '';
-      $end_course_date = '';
-      foreach ($subject->field_vih_course_periods->referencedEntities() as $period) {
-        if (!empty($period->field_vih_cp_start_date->getValue()[0])) {
-          if (is_array($period->field_vih_cp_start_date->getValue()[0])) {
-            $curr_start_date = array_pop($period->field_vih_cp_start_date->getValue()[0]);
-          }
-        }
-        if (!empty($period->field_vih_cp_end_date->getValue()[0])) {
-          if (is_array($period->field_vih_cp_end_date->getValue()[0])) {
-            $curr_end_date = array_pop($period->field_vih_cp_end_date->getValue()[0]);
-          }
-        }
-        if ($start_course_date) {
-          if (strtotime($curr_start_date) < strtotime($start_course_date)) {
-            $start_course_date = $curr_start_date;
-          }
-        }
-        else {
-          $start_course_date = $curr_start_date;
-        }
-        if ($end_course_date) {
-          if (strtotime($curr_end_date) > strtotime($end_course_date)) {
-            $end_course_date = $curr_end_date;
-          }
-        }
-        else {
-          $end_course_date = $curr_end_date;
-        }
-      }
-      // getting start and end date for the long course END
+      $start_course_date = $subject->field_vih_lc_start_date->date->getTimestamp();
+      $end_course_date = $subject->field_vih_lc_end_date->date->getTimestamp();
       // course date
       $courseDate = NULL;
       if ($start_course_date) {
-        $courseDate = \Drupal::service('date.formatter')->format(strtotime($start_course_date), "long_w_a_time");
+        $courseDate = \Drupal::service('date.formatter')->format($start_course_date, "long_w_a_time");
       }
       if ($end_course_date) {
         if (!(empty($courseDate))) {
           $courseDate .= ' - ';
         }
-        $courseDate .= \Drupal::service('date.formatter')->format(strtotime($end_course_date), "long_w_a_time");
+        $courseDate .= \Drupal::service('date.formatter')->format($end_course_date, "long_w_a_time");
       }
 
       $replacement = [
