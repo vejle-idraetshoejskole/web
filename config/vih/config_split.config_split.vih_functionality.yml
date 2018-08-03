@@ -10,13 +10,11 @@ theme: {  }
 blacklist:
   - config_split.config_split.vih_functionality
   - metatag.settings
-  - 'node.type.news*'
   - 'node.type.event*'
   - 'node.type.vih_event_order*'
   - 'node.type.vih_long_course_order*'
   - 'node.type.vih_short_course*'
   - 'node.type.vih_short_course_order*'
-  - 'taxonomy.vocabulary.news_tags*'
 graylist: {  }
 graylist_dependents: true
 graylist_skip_equal: true
