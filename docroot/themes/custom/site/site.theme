@@ -331,11 +331,11 @@ function site_preprocess_node(array &$variables) {
     // Setting travel price.
     $variables['content']['travel_price'] = $course_travel_price;
 
-    if ($start_course_date) {
+    if (!empty($start_course_date->date)) {
       $variables['content']['course_period_start'] = $start_course_date->date->getTimestamp();
     }
 
-    if ($end_course_date) {
+    if (!empty($end_course_date->date)) {
       $variables['content']['course_period_end'] = $end_course_date->date->getTimestamp();
     }
   } elseif ($node->getType() === 'vih_course_period') {
