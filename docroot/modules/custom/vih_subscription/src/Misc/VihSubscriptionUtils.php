@@ -146,21 +146,21 @@ class VihSubscriptionUtils {
           $end_course_date = $curr_end_date;
         }
       }
-      if ($end_course_date->date->getTimestamp() < time()) {
+      if (empty($end_course_date) or $end_course_date->date->getTimestamp() < time()) {
         return TRUE;
       }
       return FALSE;
     }
     elseif ($subject->getType() == 'vih_short_course') {
       // Is outdated
-      if ($subject->field_vih_sc_end_date->date->getTimestamp() < time()) {
+      if (empty($subject->field_vih_sc_end_date) or $subject->field_vih_sc_end_date->date->getTimestamp() < time()) {
         return TRUE;
       }
       return FALSE;
     }
     elseif ($subject->getType() == 'event') {
       // Is outdated
-      if ($subject->field_vih_event_end_date->date->getTimestamp() < time()) {
+      if (empty($subject->field_vih_event_end_date) or $subject->field_vih_event_end_date->date->getTimestamp() < time()) {
         return TRUE;
       }
       return FALSE;
