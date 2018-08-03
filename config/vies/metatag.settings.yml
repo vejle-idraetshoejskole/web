@@ -1,17 +1,5 @@
 entity_type_groups:
   node:
-    event:
-      basic: basic
-      advanced: advanced
-      facebook: facebook
-      twitter_cards: twitter_cards
-      schema_event: schema_event
-    news:
-      basic: basic
-      advanced: advanced
-      facebook: facebook
-      twitter_cards: twitter_cards
-      schema_article: schema_article
     page:
       basic: basic
       advanced: advanced
@@ -19,9 +7,12 @@ entity_type_groups:
       twitter_cards: twitter_cards
       schema_item_list: schema_item_list
       schema_web_page: schema_web_page
-    vih_course_period:
+    vies_application_form:
       basic: basic
-    vih_event_order:
+      advanced: advanced
+      facebook: facebook
+      twitter_cards: twitter_cards
+    vih_course_period:
       basic: basic
     vih_long_cource:
       basic: basic
@@ -29,18 +20,14 @@ entity_type_groups:
       facebook: facebook
       twitter_cards: twitter_cards
       schema_event: schema_event
-    vih_long_course_order:
-      basic: basic
-    vih_short_course:
-      basic: basic
-      advanced: advanced
-      facebook: facebook
-      twitter_cards: twitter_cards
-      schema_event: schema_event
-    vih_short_course_order:
-      basic: basic
   taxonomy_term:
+    questions:
+      basic: basic
     user_types:
+      basic: basic
+    valuation_labels:
+      basic: basic
+    valuation_statuses:
       basic: basic
     vih_class:
       basic: basic

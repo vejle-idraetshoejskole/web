@@ -11,6 +11,7 @@ module:
 theme: {  }
 blacklist:
   - config_split.config_split.vies_functionality
+  - metatag.settings
   - node.type.vies_application_form
   - paragraphs.paragraphs_type.parent
   - taxonomy.vocabulary.valuation_labels
