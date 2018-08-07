@@ -1,0 +1,16 @@
+uuid: b7ddfd53-d15e-46df-a308-219c22fee14f
+langcode: da
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.user_types
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: taxonomy_term.user_types
+target_entity_type_id: taxonomy_term
+target_bundle: user_types
+default_langcode: site_default
+language_alterable: true

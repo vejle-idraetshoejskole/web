@@ -1,0 +1,16 @@
+uuid: 0b33579a-6db8-4c47-8f8a-0a49d6b3ac08
+langcode: da
+status: true
+dependencies:
+  config:
+    - node.type.vih_long_cource
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: node.vih_long_cource
+target_entity_type_id: node
+target_bundle: vih_long_cource
+default_langcode: site_default
+language_alterable: true

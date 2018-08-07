@@ -1,0 +1,16 @@
+uuid: 33fac6d6-4a1f-4f8d-9067-406a41ee8b59
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.vih_ordered_course_person
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: false
+id: paragraph.vih_ordered_course_person
+target_entity_type_id: paragraph
+target_bundle: vih_ordered_course_person
+default_langcode: site_default
+language_alterable: false

@@ -1,0 +1,16 @@
+uuid: 1c6ede06-3155-43c2-b5aa-07b011ebe07b
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.vih_contact_person
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: paragraph.vih_contact_person
+target_entity_type_id: paragraph
+target_bundle: vih_contact_person
+default_langcode: site_default
+language_alterable: true

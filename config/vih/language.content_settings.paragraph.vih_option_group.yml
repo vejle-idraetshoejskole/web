@@ -1,0 +1,16 @@
+uuid: da936041-b7ef-4797-92cb-de5ea77c934d
+langcode: da
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.vih_option_group
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: paragraph.vih_option_group
+target_entity_type_id: paragraph
+target_bundle: vih_option_group
+default_langcode: site_default
+language_alterable: true

@@ -54,7 +54,6 @@ module:
   image: 0
   image_widget_crop: 0
   inline_entity_form: 0
-  language: 0
   layout_discovery: 0
   lightning: 0
   lightning_core: 0

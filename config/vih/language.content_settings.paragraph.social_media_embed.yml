@@ -1,0 +1,16 @@
+uuid: ce3f0b60-da25-4630-aabd-cf495acc80d6
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.social_media_embed
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: paragraph.social_media_embed
+target_entity_type_id: paragraph
+target_bundle: social_media_embed
+default_langcode: site_default
+language_alterable: true

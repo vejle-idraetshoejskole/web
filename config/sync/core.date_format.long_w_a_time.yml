@@ -1,8 +1,0 @@
-uuid: 420b4ac1-fc39-4cf9-ba70-54faf2531e45
-langcode: da
-status: true
-dependencies: {  }
-id: long_w_a_time
-label: 'Standard lang dato (w/a time)'
-locked: false
-pattern: 'l, F j, Y'

@@ -1,0 +1,11 @@
+uuid: 9dc0eda9-4fe0-400d-a7ed-954fa5ea02bf
+langcode: da
+status: true
+dependencies:
+  config:
+    - contact.form.kontakt_os
+id: contact_message.kontakt_os
+target_entity_type_id: contact_message
+target_bundle: kontakt_os
+default_langcode: site_default
+language_alterable: false

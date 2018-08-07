@@ -1,0 +1,16 @@
+uuid: 3dc89b0f-8fbc-407e-a327-358d2631ead7
+langcode: da
+status: true
+dependencies:
+  config:
+    - media.type.facebook
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: false
+id: media.facebook
+target_entity_type_id: media
+target_bundle: facebook
+default_langcode: site_default
+language_alterable: false

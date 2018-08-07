@@ -1,0 +1,163 @@
+uuid: 8164b0af-31b9-479e-8d94-20a9de807e0d
+langcode: da
+status: false
+dependencies:
+  config:
+    - core.entity_view_mode.node.token
+    - field.field.node.event.body
+    - field.field.node.event.field_metatag
+    - field.field.node.event.field_short_description
+    - field.field.node.event.field_vih_course_subheading
+    - field.field.node.event.field_vih_event_end_date
+    - field.field.node.event.field_vih_event_persons_limit
+    - field.field.node.event.field_vih_event_price
+    - field.field.node.event.field_vih_event_start_date
+    - field.field.node.event.field_vih_event_status
+    - field.field.node.event.field_vih_image
+    - field.field.node.event.field_vih_paragraphs
+    - field.field.node.event.field_vih_top_banner
+    - field.field.node.event.field_vih_top_banner_text
+    - field.field.node.event.scheduled_update
+    - node.type.event
+  module:
+    - datetime
+    - entity_reference_revisions
+    - metatag
+    - options
+    - panelizer
+    - text
+    - user
+third_party_settings:
+  panelizer:
+    enable: false
+    custom: false
+    allow: false
+    default: default
+id: node.event.token
+targetEntityType: node
+bundle: event
+mode: token
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_metatag:
+    weight: 12
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_empty_formatter
+    region: content
+  field_short_description:
+    weight: 13
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_vih_course_subheading:
+    weight: 8
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_vih_event_end_date:
+    type: datetime_default
+    weight: 5
+    region: content
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: medium_datetime
+    third_party_settings: {  }
+  field_vih_event_persons_limit:
+    weight: 3
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_vih_event_price:
+    type: number_decimal
+    weight: 6
+    region: content
+    label: hidden
+    settings:
+      thousand_separator: .
+      decimal_separator: ','
+      scale: 2
+      prefix_suffix: true
+    third_party_settings: {  }
+  field_vih_event_start_date:
+    type: datetime_default
+    weight: 4
+    region: content
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: medium_datetime
+    third_party_settings: {  }
+  field_vih_event_status:
+    weight: 9
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_vih_image:
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: vih_banner_smal
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+  field_vih_paragraphs:
+    weight: 7
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    type: entity_reference_revisions_entity_view
+    region: content
+  field_vih_top_banner:
+    weight: 11
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_vih_top_banner_text:
+    type: string
+    weight: 14
+    region: content
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  links:
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  scheduled_update:
+    weight: 10
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+hidden:
+  langcode: true

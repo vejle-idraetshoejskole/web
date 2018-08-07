@@ -1,0 +1,16 @@
+uuid: 8f7fca0b-dcb0-4719-bab6-c202db053adf
+langcode: da
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.vih_course_slot
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: paragraph.vih_course_slot
+target_entity_type_id: paragraph
+target_bundle: vih_course_slot
+default_langcode: site_default
+language_alterable: true

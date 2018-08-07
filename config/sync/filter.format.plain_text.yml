@@ -8,6 +8,12 @@ name: 'Ren tekst'
 format: plain_text
 weight: -8
 filters:
+  filter_html_escape:
+    id: filter_html_escape
+    provider: filter
+    status: true
+    weight: -10
+    settings: {  }
   filter_url:
     id: filter_url
     provider: filter
@@ -20,10 +26,4 @@ filters:
     provider: filter
     status: true
     weight: 0
-    settings: {  }
-  filter_html_escape:
-    id: filter_html_escape
-    provider: filter
-    status: true
-    weight: -10
     settings: {  }

@@ -1,0 +1,16 @@
+uuid: 0de93324-374d-4fb1-9d2c-6fa27a29d576
+langcode: da
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.vih_banner_slide
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: false
+id: paragraph.vih_banner_slide
+target_entity_type_id: paragraph
+target_bundle: vih_banner_slide
+default_langcode: site_default
+language_alterable: false

@@ -1,0 +1,11 @@
+uuid: 22ae9654-b6f9-446b-816f-e274a753cc7a
+langcode: en
+status: true
+dependencies:
+  config:
+    - crop.type.kvadrat
+id: crop.kvadrat
+target_entity_type_id: crop
+target_bundle: kvadrat
+default_langcode: site_default
+language_alterable: false

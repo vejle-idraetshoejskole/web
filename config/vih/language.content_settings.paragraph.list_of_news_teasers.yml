@@ -1,0 +1,16 @@
+uuid: 90077833-956e-4f3c-8e04-86c1106c4e22
+langcode: da
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.list_of_news_teasers
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: paragraph.list_of_news_teasers
+target_entity_type_id: paragraph
+target_bundle: list_of_news_teasers
+default_langcode: site_default
+language_alterable: true

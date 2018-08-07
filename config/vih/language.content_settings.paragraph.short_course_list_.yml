@@ -1,0 +1,16 @@
+uuid: 28b61e58-5fc7-435c-91a4-787b8c039060
+langcode: da
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.short_course_list_
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: paragraph.short_course_list_
+target_entity_type_id: paragraph
+target_bundle: short_course_list_
+default_langcode: site_default
+language_alterable: true

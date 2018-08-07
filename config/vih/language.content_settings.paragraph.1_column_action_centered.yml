@@ -1,0 +1,16 @@
+uuid: f6489325-78a0-4fa8-99ef-f76a9fe809ae
+langcode: da
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.1_column_action_centered
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: paragraph.1_column_action_centered
+target_entity_type_id: paragraph
+target_bundle: 1_column_action_centered
+default_langcode: site_default
+language_alterable: true

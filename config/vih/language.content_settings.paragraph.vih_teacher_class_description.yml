@@ -1,0 +1,16 @@
+uuid: 0719292f-ccf8-4c18-a042-52e117ff5e2a
+langcode: da
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.vih_teacher_class_description
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: paragraph.vih_teacher_class_description
+target_entity_type_id: paragraph
+target_bundle: vih_teacher_class_description
+default_langcode: site_default
+language_alterable: true

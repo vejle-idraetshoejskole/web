@@ -1,0 +1,16 @@
+uuid: e2207d93-a0c6-4621-beef-d8c288d124ce
+langcode: da
+status: true
+dependencies:
+  config:
+    - node.type.vih_course_period
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: node.vih_course_period
+target_entity_type_id: node
+target_bundle: vih_course_period
+default_langcode: site_default
+language_alterable: false

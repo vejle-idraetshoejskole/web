@@ -1,0 +1,11 @@
+uuid: b19c1cb1-55f2-48c5-bbf0-c90260a3d3d8
+langcode: en
+status: true
+dependencies:
+  config:
+    - crop.type.galleri_enlarged
+id: crop.galleri_enlarged
+target_entity_type_id: crop
+target_bundle: galleri_enlarged
+default_langcode: site_default
+language_alterable: false

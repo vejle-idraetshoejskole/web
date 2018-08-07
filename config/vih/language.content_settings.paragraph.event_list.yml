@@ -1,0 +1,16 @@
+uuid: b2998d94-3c13-4292-9132-0a7cafbad5b2
+langcode: da
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.event_list
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: paragraph.event_list
+target_entity_type_id: paragraph
+target_bundle: event_list
+default_langcode: site_default
+language_alterable: true

@@ -6,6 +6,7 @@ id: vies_functionality
 label: 'VIES functionality'
 folder: ../config/vies
 module:
+  language: 0
   vies_application: 0
   vies_valuation: 0
 theme: {  }

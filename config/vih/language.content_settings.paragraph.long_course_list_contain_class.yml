@@ -1,0 +1,16 @@
+uuid: 82fab7a0-cdb5-4878-9832-e9d896eca33e
+langcode: da
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.long_course_list_contain_class
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: paragraph.long_course_list_contain_class
+target_entity_type_id: paragraph
+target_bundle: long_course_list_contain_class
+default_langcode: site_default
+language_alterable: true

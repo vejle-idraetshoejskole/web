@@ -1,0 +1,11 @@
+uuid: 841bb941-e1d1-4e59-b381-6286d5a60f3b
+langcode: da
+status: true
+dependencies:
+  config:
+    - webform.webform.bestil_rundvisning
+id: webform_submission.bestil_rundvisning
+target_entity_type_id: webform_submission
+target_bundle: bestil_rundvisning
+default_langcode: site_default
+language_alterable: false

@@ -1,0 +1,11 @@
+uuid: 0ae7a33f-55c3-4ae2-a279-c46462bb2c46
+langcode: da
+status: true
+dependencies:
+  config:
+    - webform.webform.bestil_brochurer
+id: webform_submission.bestil_brochurer
+target_entity_type_id: webform_submission
+target_bundle: bestil_brochurer
+default_langcode: site_default
+language_alterable: false

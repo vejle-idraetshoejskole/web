@@ -1,0 +1,15 @@
+uuid: 1f4f276c-9251-4bb2-a0c3-9aee663b5939
+langcode: da
+status: true
+dependencies:
+  module:
+    - content_translation
+    - menu_link_content
+third_party_settings:
+  content_translation:
+    enabled: true
+id: menu_link_content.menu_link_content
+target_entity_type_id: menu_link_content
+target_bundle: menu_link_content
+default_langcode: site_default
+language_alterable: true

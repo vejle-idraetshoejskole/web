@@ -1,0 +1,16 @@
+uuid: 3fc087f7-1ee6-47a6-95a0-f2ca22bd8022
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.vih_class_groups_accordion
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: paragraph.vih_class_groups_accordion
+target_entity_type_id: paragraph
+target_bundle: vih_class_groups_accordion
+default_langcode: site_default
+language_alterable: true

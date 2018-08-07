@@ -1,0 +1,16 @@
+uuid: eaa808b9-dd28-4759-a7db-830f661f72f8
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.vih_single_class_group
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: paragraph.vih_single_class_group
+target_entity_type_id: paragraph
+target_bundle: vih_single_class_group
+default_langcode: site_default
+language_alterable: true

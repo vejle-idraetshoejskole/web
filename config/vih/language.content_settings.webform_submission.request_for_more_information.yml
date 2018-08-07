@@ -1,0 +1,11 @@
+uuid: dc28d240-7178-4207-8d09-4b2a3eecd7cb
+langcode: da
+status: true
+dependencies:
+  config:
+    - webform.webform.request_for_more_information
+id: webform_submission.request_for_more_information
+target_entity_type_id: webform_submission
+target_bundle: request_for_more_information
+default_langcode: site_default
+language_alterable: false

@@ -1,0 +1,16 @@
+uuid: 03b35cda-49e0-4507-b2ba-384e34070735
+langcode: da
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.vih_ordered_course_period
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: false
+id: paragraph.vih_ordered_course_period
+target_entity_type_id: paragraph
+target_bundle: vih_ordered_course_period
+default_langcode: site_default
+language_alterable: false

@@ -1,0 +1,16 @@
+uuid: 119c4ce6-1594-446a-80d8-71607ac5c150
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.vih_webform
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: paragraph.vih_webform
+target_entity_type_id: paragraph
+target_bundle: vih_webform
+default_langcode: site_default
+language_alterable: true

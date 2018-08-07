@@ -1,0 +1,16 @@
+uuid: bc332bad-2c8d-44b8-8a54-7c1d352252c8
+langcode: da
+status: true
+dependencies:
+  config:
+    - media.type.image
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: media.image
+target_entity_type_id: media
+target_bundle: image
+default_langcode: site_default
+language_alterable: true

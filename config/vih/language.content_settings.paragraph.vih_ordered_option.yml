@@ -1,0 +1,16 @@
+uuid: 25335ece-419f-4577-827b-4138d71a5ddd
+langcode: da
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.vih_ordered_option
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: false
+id: paragraph.vih_ordered_option
+target_entity_type_id: paragraph
+target_bundle: vih_ordered_option
+default_langcode: site_default
+language_alterable: false
