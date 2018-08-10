@@ -56,7 +56,7 @@ function bellcom_common_pathologic_alter(&$url_params, $parts, $settings) {
  */
 function bellcom_common_media_presave(Drupal\Core\Entity\EntityInterface $entity) {
   foreach ($entity->bundle->referencedEntities() as $bundle) {
-    if ($bundle->id() === 'image') {
+    if ($bundle->id() === 'image' and strpos($_SERVER['SERVER_NAME'], 'vies') === FALSE) {
       if ($entity && !$entity->hasTranslation('en')) {
         $entity->addTranslation('en', ['name' => $entity->name, 'image' => $entity->image]);
       }
