@@ -83,6 +83,16 @@
       color: $headings-color;
     }
   }
+    // vih-teacher-class-description paragraph is always with white text background.
+  &.paragraph--type--vih-teacher-class-description {
+
+    .field--name-field-vih-heading {
+      color: $headings-color;
+    }
+    .field--name-field-vih-description p{
+      color: $text-color !important;
+    }
+  }
 
 }
 
