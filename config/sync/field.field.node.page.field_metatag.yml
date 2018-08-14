@@ -14,7 +14,7 @@ bundle: page
 label: Metatag
 description: ''
 required: false
-translatable: true
+translatable: false
 default_value:
   -
     value: 'a:0:{}'

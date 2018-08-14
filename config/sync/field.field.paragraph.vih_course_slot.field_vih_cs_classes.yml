@@ -13,7 +13,7 @@ bundle: vih_course_slot
 label: 'Available classes'
 description: ''
 required: true
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:

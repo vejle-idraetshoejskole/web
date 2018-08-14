@@ -3,7 +3,6 @@ langcode: da
 status: true
 dependencies:
   module:
-    - crop
     - focal_point
 name: vih_general_teaser_image
 label: 'VIH General teaser image (400x200)'
@@ -22,10 +21,4 @@ effects:
     data:
       width: 400
       height: 200
-      crop_type: focal_point
-  1b30d409-17b0-4979-a186-2952298a5d19:
-    uuid: 1b30d409-17b0-4979-a186-2952298a5d19
-    id: crop_crop
-    weight: -10
-    data:
       crop_type: focal_point

@@ -12,7 +12,7 @@ bundle: user_quote
 label: Forfatter
 description: 'Forfatteren bag udtalelsen'
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings: {  }

@@ -13,7 +13,7 @@ bundle: list_of_news_teasers
 label: Tags
 description: ''
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:

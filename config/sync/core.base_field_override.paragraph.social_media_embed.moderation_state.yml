@@ -1,0 +1,18 @@
+uuid: 2f753c36-dd0a-4e31-bbb9-4be655d7bcdd
+langcode: da
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.social_media_embed
+id: paragraph.social_media_embed.moderation_state
+field_name: moderation_state
+entity_type: paragraph
+bundle: social_media_embed
+label: 'Moderation state'
+description: 'The moderation state of this piece of content.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

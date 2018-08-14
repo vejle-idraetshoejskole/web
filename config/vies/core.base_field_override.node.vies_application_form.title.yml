@@ -1,0 +1,18 @@
+uuid: add770ea-d959-42db-8f96-d06c5d79744b
+langcode: da
+status: true
+dependencies:
+  config:
+    - node.type.vies_application_form
+id: node.vies_application_form.title
+field_name: title
+entity_type: node
+bundle: vies_application_form
+label: Titel
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

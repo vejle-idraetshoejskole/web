@@ -1,0 +1,11 @@
+uuid: dd0a3c0e-6c6f-404b-bec8-66108b46b7f9
+langcode: da
+status: true
+dependencies:
+  module:
+    - redirect
+id: redirect.redirect
+target_entity_type_id: redirect
+target_bundle: redirect
+default_langcode: site_default
+language_alterable: false

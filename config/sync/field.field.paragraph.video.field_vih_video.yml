@@ -14,7 +14,7 @@ bundle: video
 label: 'URL til video'
 description: 'Eks. https://youtu.be/NMvl7spKEeQ'
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:

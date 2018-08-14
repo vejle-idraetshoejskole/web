@@ -1,0 +1,18 @@
+uuid: 483372d7-0ebe-4022-8191-447b950a82b8
+langcode: da
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.questions
+id: taxonomy_term.questions.name
+field_name: name
+entity_type: taxonomy_term
+bundle: questions
+label: Navn
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

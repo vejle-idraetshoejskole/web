@@ -1,0 +1,20 @@
+uuid: 5e74c13c-ea12-4498-ab72-27bc2660408c
+langcode: da
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.valuation_statuses
+  module:
+    - text
+id: taxonomy_term.valuation_statuses.description
+field_name: description
+entity_type: taxonomy_term
+bundle: valuation_statuses
+label: Beskrivelse
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

@@ -12,7 +12,7 @@ bundle: notify
 label: 'Fremhævet tekst'
 description: 'Eks. "Lige nu" eller "Live".'
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings: {  }

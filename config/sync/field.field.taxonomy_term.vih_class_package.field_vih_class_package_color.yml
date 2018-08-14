@@ -14,7 +14,7 @@ bundle: vih_class_package
 label: 'Farve på fagpakke'
 description: ''
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings: {  }

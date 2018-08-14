@@ -13,7 +13,7 @@ bundle: employee
 label: 'Bruger type'
 description: 'Hvis ingen bruger typer vælges, vises alle medarbejdere.'
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:

@@ -1,0 +1,20 @@
+uuid: 924cd170-ad9f-43c4-9107-27a9a03f0947
+langcode: da
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.valuation_statuses
+  module:
+    - path
+id: taxonomy_term.valuation_statuses.path
+field_name: path
+entity_type: taxonomy_term
+bundle: valuation_statuses
+label: 'Alternativ URL'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

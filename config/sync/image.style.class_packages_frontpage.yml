@@ -3,7 +3,6 @@ langcode: da
 status: true
 dependencies:
   module:
-    - crop
     - focal_point
 name: class_packages_frontpage
 label: 'Class Packages (Frontpage)'
@@ -22,10 +21,4 @@ effects:
     data:
       width: 290
       height: 350
-      crop_type: focal_point
-  3e49fb1d-d80f-4254-8d6e-502ad7c15c0a:
-    uuid: 3e49fb1d-d80f-4254-8d6e-502ad7c15c0a
-    id: crop_crop
-    weight: -10
-    data:
       crop_type: focal_point

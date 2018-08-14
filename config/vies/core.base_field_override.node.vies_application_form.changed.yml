@@ -1,0 +1,18 @@
+uuid: 4cdd739e-d5b1-4aa5-869c-d8f4bdf46ca7
+langcode: da
+status: true
+dependencies:
+  config:
+    - node.type.vies_application_form
+id: node.vies_application_form.changed
+field_name: changed
+entity_type: node
+bundle: vies_application_form
+label: Ændret
+description: 'Tidspunktet hvor indholdselementet sidst blev redigeret.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

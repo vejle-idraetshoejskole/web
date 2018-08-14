@@ -1,0 +1,18 @@
+uuid: dd0b1e14-6830-46f4-ba7c-b982b4d98b04
+langcode: da
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.long_course_list_contain_class
+id: paragraph.long_course_list_contain_class.moderation_state
+field_name: moderation_state
+entity_type: paragraph
+bundle: long_course_list_contain_class
+label: 'Moderation state'
+description: 'The moderation state of this piece of content.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

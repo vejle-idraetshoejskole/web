@@ -12,7 +12,7 @@ bundle: vih_long_cource
 label: 'Forkortet beskrivelse'
 description: 'Bruges til bl.a. teasers, listevisning o.l.'
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings: {  }

@@ -91,13 +91,6 @@ filters:
     status: true
     weight: 0
     settings: {  }
-  linkit:
-    id: linkit
-    provider: linkit
-    status: true
-    weight: -50
-    settings:
-      title: false
   filter_pathologic:
     id: filter_pathologic
     provider: pathologic
@@ -108,3 +101,10 @@ filters:
       local_settings:
         protocol_style: full
         local_paths: ''
+  linkit:
+    id: linkit
+    provider: linkit
+    status: true
+    weight: -50
+    settings:
+      title: false

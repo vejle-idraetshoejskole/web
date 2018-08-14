@@ -3,7 +3,6 @@ langcode: da
 status: true
 dependencies:
   module:
-    - crop
     - focal_point
 name: vih_person_teaser
 label: 'VIH Person Teaser (300x300)'
@@ -22,10 +21,4 @@ effects:
     data:
       width: 300
       height: 300
-      crop_type: focal_point
-  1f877024-1b8c-428a-9f3b-9cfcb2de9ffd:
-    uuid: 1f877024-1b8c-428a-9f3b-9cfcb2de9ffd
-    id: crop_crop
-    weight: -10
-    data:
       crop_type: focal_point

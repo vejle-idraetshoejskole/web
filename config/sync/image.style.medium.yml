@@ -3,7 +3,6 @@ langcode: da
 status: true
 dependencies:
   module:
-    - crop
     - focal_point
 _core:
   default_config_hash: Y9NmnZHQq20ASSyTNA6JnwtWrJJiSajOehGDtmUFdM0
@@ -25,10 +24,4 @@ effects:
     data:
       width: 220
       height: 220
-      crop_type: focal_point
-  98f20a0e-10b2-47f9-90bf-205102696cad:
-    uuid: 98f20a0e-10b2-47f9-90bf-205102696cad
-    id: crop_crop
-    weight: -10
-    data:
       crop_type: focal_point

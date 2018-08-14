@@ -1,0 +1,18 @@
+uuid: 2344a2db-788c-4db2-bb25-b56a514f4cf4
+langcode: da
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.list_of_news_teasers
+id: paragraph.list_of_news_teasers.moderation_state
+field_name: moderation_state
+entity_type: paragraph
+bundle: list_of_news_teasers
+label: 'Moderation state'
+description: 'The moderation state of this piece of content.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
