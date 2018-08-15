@@ -11,7 +11,7 @@ third_party_settings:
     parent: 'main:'
 name: 'Application form'
 type: vies_application_form
-description: ''
+description: 'System-node der oprettes når elever tilmelder sig. Den skal ikke oprettes manuelt.'
 help: ''
 new_revision: true
 preview_mode: 0
