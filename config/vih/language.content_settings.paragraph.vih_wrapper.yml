@@ -1,0 +1,18 @@
+uuid: 0786de09-37c5-43bd-9a57-f8a182bd3214
+langcode: da
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.vih_wrapper
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: false
+    bundle_settings:
+      untranslatable_fields_hide: '0'
+id: paragraph.vih_wrapper
+target_entity_type_id: paragraph
+target_bundle: vih_wrapper
+default_langcode: site_default
+language_alterable: false

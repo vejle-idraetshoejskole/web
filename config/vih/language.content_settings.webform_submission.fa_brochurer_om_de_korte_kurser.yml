@@ -1,0 +1,11 @@
+uuid: 1054747b-177f-4875-8704-c4347919e17c
+langcode: da
+status: true
+dependencies:
+  config:
+    - webform.webform.fa_brochurer_om_de_korte_kurser
+id: webform_submission.fa_brochurer_om_de_korte_kurser
+target_entity_type_id: webform_submission
+target_bundle: fa_brochurer_om_de_korte_kurser
+default_langcode: site_default
+language_alterable: false

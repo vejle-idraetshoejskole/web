@@ -1,0 +1,18 @@
+uuid: 869dc9cd-a8b7-4287-92d2-4eb350c9c672
+langcode: da
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.vih_list_of_news_list_advanced
+id: paragraph.vih_list_of_news_list_advanced.created
+field_name: created
+entity_type: paragraph
+bundle: vih_list_of_news_list_advanced
+label: 'Authored on'
+description: 'The time that the Paragraph was created.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: created

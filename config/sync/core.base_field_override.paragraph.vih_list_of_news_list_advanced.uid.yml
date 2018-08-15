@@ -1,0 +1,20 @@
+uuid: e71d61b7-5157-43ce-98e2-eaee8f40bf8b
+langcode: da
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.vih_list_of_news_list_advanced
+id: paragraph.vih_list_of_news_list_advanced.uid
+field_name: uid
+entity_type: paragraph
+bundle: vih_list_of_news_list_advanced
+label: 'Authored by'
+description: 'The user ID of the paragraphs author.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: 'Drupal\paragraphs\Entity\Paragraph::getCurrentUserId'
+settings:
+  handler: default
+  handler_settings: {  }
+field_type: entity_reference

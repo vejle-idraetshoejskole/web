@@ -1,0 +1,11 @@
+uuid: 46202bce-8f01-4a64-8246-cfb8dedbf0a4
+langcode: da
+status: true
+dependencies:
+  config:
+    - webform.webform.infomode_sportsjournalistik
+id: webform_submission.infomode_sportsjournalistik
+target_entity_type_id: webform_submission
+target_bundle: infomode_sportsjournalistik
+default_langcode: site_default
+language_alterable: false

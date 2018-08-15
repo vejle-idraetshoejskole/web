@@ -12,7 +12,7 @@ bundle: vih_long_cource
 label: 'Tekst på banner'
 description: ''
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings: {  }

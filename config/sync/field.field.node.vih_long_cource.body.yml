@@ -14,7 +14,7 @@ bundle: vih_long_cource
 label: Brødtekst
 description: ''
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:

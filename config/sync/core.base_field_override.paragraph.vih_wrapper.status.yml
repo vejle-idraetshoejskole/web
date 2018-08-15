@@ -1,0 +1,22 @@
+uuid: f006a1cf-5432-4c28-b3eb-f107238d96bf
+langcode: da
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.vih_wrapper
+id: paragraph.vih_wrapper.status
+field_name: status
+entity_type: paragraph
+bundle: vih_wrapper
+label: Udgivet
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Tilsluttet
+  off_label: Afbrudt
+field_type: boolean

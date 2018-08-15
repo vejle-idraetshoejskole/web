@@ -6,6 +6,7 @@ dependencies:
     - field.storage.media.image
     - media.type.image
   module:
+    - content_translation
     - image
 third_party_settings:
   content_translation:
@@ -22,7 +23,7 @@ bundle: image
 label: Image
 description: ''
 required: true
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:

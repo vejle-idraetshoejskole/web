@@ -12,7 +12,7 @@ bundle: vih_contact_person
 label: Underviser
 description: 'Vælg den bruger hvorfra der skal udtrækkes data'
 required: true
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:

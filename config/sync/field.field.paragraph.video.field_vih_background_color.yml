@@ -14,7 +14,7 @@ bundle: video
 label: Baggrundsfarve
 description: "Vælg hvilken baggrundsfarve denne sektion skal have.<br>\r\n<span class=\"primary\">Primær</span>\r\n<span class=\"secondary\">Sekundær</span>\r\n<span class=\"light-gray\">Lys grå</span>\r\n<span class=\"gray\">Grå</span>\r\n<span class=\"white\">Hvid</span>"
 required: false
-translatable: false
+translatable: true
 default_value:
   -
     value: white

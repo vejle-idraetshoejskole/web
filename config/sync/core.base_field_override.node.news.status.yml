@@ -11,7 +11,7 @@ bundle: news
 label: Publiceringsstatus
 description: 'En boolsk værdi som angiver hvorvidt indholdselementets er udgivet.'
 required: false
-translatable: false
+translatable: true
 default_value:
   -
     value: 1

@@ -1,0 +1,18 @@
+uuid: 43381dc8-5dc7-4109-9eed-19f1715566a0
+langcode: da
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.vih_wrapper
+id: paragraph.vih_wrapper.moderation_state
+field_name: moderation_state
+entity_type: paragraph
+bundle: vih_wrapper
+label: 'Moderation state'
+description: 'The moderation state of this piece of content.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
