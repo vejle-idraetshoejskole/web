@@ -28,7 +28,7 @@
         "drupal/bootstrap": "3.11",
         "drupal/paragraphs": "1.x-dev",
         "drupal/linkit": "5.0-beta7",
-        "acquia/lightning": "~3.1.4",
+        "acquia/lightning": "~3.1.5",
         "drupal/admin_toolbar": "^1.20",
         "drupal/twig_tweak": "2.x-dev",
         "drupal/eva": "^1.0@RC",
@@ -144,13 +144,7 @@
             },
             "drupal/eu_cookie_compliance": {
                 "2979295 - Add a option to open privacy policy link in a modal window" : "https://www.drupal.org/files/issues/2018-06-25/eu_cookie_compliance_privacy_policy_link_in_modal_window-2.patch"
-            },
-            "drupal/metatag": {
-                "2691313 - Metatag performance poor": "https://www.drupal.org/files/issues/2018-06-13/metatag-poor-performance-2691313-22.patch"
-            },
-            "acquia/lightning": {
-                "2972058 - Profile version number typo": "https://www.drupal.org/files/issues/2018-05-14/fix-version-string-2972058-4.patch"
-            },
+            },            
             "drupal/linkit": {
                 "2946234 - Webform entity missing": "https://www.drupal.org/files/issues/2018-05-09/linkit--webform-matcher.patch"
             },
