@@ -143,7 +143,7 @@
                 "2894797 - Multiple galleries: opens the wrong image" : "https://www.drupal.org/files/issues/fix-image-index-2894797.patch"
             },
             "drupal/eu_cookie_compliance": {
-                "2979295 - Add a option to open privacy policy link in a modal window" : "https://www.drupal.org/files/issues/2018-06-25/eu_cookie_compliance_privacy_policy_link_in_modal_window-2.patch"
+                "2979295 - Add a option to open privacy policy link in a modal window" : "https://www.drupal.org/files/issues/2018-08-22/eu_cookie_compliance_privacy_policy_link_in_modal_window-3.patch.txt"
             },            
             "drupal/linkit": {
                 "2946234 - Webform entity missing": "https://www.drupal.org/files/issues/2018-05-09/linkit--webform-matcher.patch"

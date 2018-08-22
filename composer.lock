@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bc68f18a5c4be02328cc7695a78e21c3",
+    "content-hash": "72b445af60cd9829056f4d5ce3d4a790",
     "packages": [
         {
             "name": "acquia/lightning",
@@ -70,8 +70,7 @@
                     "drupal/lightning_layout": {
                         "2989369 - The Landing Page content type on new installs is not opted into the editorial workflow": "https://www.drupal.org/files/issues/2018-07-30/2989369-feat-dep-Ensure-lightning_workflow-dep-02.patch"
                     }
-                },
-                "patches_applied": []
+                }
             },
             "autoload": {
                 "psr-4": {
@@ -3395,7 +3394,9 @@
                         "message": "Dev releases are not covered by Drupal security advisories."
                     }
                 },
-                "patches_applied": []
+                "patches_applied": {
+                    "2979295 - Add a option to open privacy policy link in a modal window": "https://www.drupal.org/files/issues/2018-08-22/eu_cookie_compliance_privacy_policy_link_in_modal_window-3.patch.txt"
+                }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
@@ -5259,8 +5260,7 @@
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
                     }
-                },
-                "patches_applied": []
+                }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
