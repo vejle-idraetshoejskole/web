@@ -148,14 +148,12 @@ class EDBBrugsenIntegration {
 
     // Adult information.
     $parent = array_shift($data['parents']);
-    $registration['Voksen.Type'] = $parent['type'];
     $registration['Voksen.Fornavn'] = $parent['firstName'];
     $registration['Voksen.Efternavn'] = $parent['lastName'];
     $registration['Voksen.Adresse'] = $parent['address'];
     $registration['Voksen.Lokalby'] = $parent['city'];
     $registration['Voksen.Postnr'] = $parent['zip'];
     $registration['Voksen.Bynavn'] = $parent['city'];
-    $registration['Voksen.Kommune'] = $parent['municipality'];
     $registration['Voksen.Fastnet'] = $parent['telefon'];
     $registration['Voksen.Mobil'] = $parent['telefon'];
     $registration['Voksen.Email'] = $parent['email'];
@@ -188,7 +186,13 @@ class EDBBrugsenIntegration {
    */
   public function addRegistration($registration) {
     if (!empty($registration)) {
-      $this->registration_repository->addRegistrations(array($registration));
+      $response = $this->registration_repository->addRegistrations(array($registration));
+      try {
+        $response->getBody();
+      } catch (\Exception $e) {
+        \Drupal::logger('vih_subscription')->error('EDBBrugsenIntegration: ' . $e->getMessage() . '. Order person name: "'
+          . $registration['Elev.Fornavn'] . ' ' . $registration['Elev.Efternavn'] . '", course: ' . $registration['Kursus']);
+      }
     }
   }
 
