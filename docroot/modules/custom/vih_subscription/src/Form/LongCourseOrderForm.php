@@ -126,6 +126,7 @@ class LongCourseOrderForm extends FormBase {
       '#title' => $this->t('CPR'),
       '#placeholder' => $this->t('CPR'),
       '#required' => TRUE,
+      '#pattern' => '[0-9]{10}',
     );
     $form['personalDataLeft']['telefon'] = array(
       '#type' => 'textfield',
