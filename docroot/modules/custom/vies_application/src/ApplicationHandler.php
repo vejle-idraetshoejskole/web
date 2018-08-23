@@ -78,9 +78,10 @@ class ApplicationHandler {
    * Full process application function.
    */
   public function process() {
-    $this->registerOrder();
     if ($this->saveData()) {
       $this->sendNotification();
+      $this->registerOrder();
+
       return TRUE;
     }
     return FALSE;
@@ -204,7 +205,10 @@ class ApplicationHandler {
 
       $edb_brugsen_integration = new EDBBrugsenIntegration($username, $password, $school_code, $book_number);
       $registration = $edb_brugsen_integration->convertApplicationToRegistration($this->data);
-      $edb_brugsen_integration->addRegistration($registration);
+      if ($edb_brugsen_integration->addRegistration($registration)) {
+        $this->application->set('field_vies_edb_synched', TRUE);
+        $this->application->save();
+      }
     }
   }
 

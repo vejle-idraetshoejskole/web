@@ -193,6 +193,13 @@ class EDBBrugsenIntegration {
         \Drupal::logger('vih_subscription')->error('EDBBrugsenIntegration: ' . $e->getMessage() . '. Order person name: "'
           . $registration['Elev.Fornavn'] . ' ' . $registration['Elev.Efternavn'] . '", course: ' . $registration['Kursus']);
       }
+
+      // Checking if was successful.
+      if (intval($response->getCount()) > 0) {
+        return TRUE;
+      } else {
+        return FALSE;
+      }
     }
   }
 

@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.vies_application_form.field_vies_class_questions
     - field.field.node.vies_application_form.field_vies_country
     - field.field.node.vies_application_form.field_vies_course
+    - field.field.node.vies_application_form.field_vies_edb_synched
     - field.field.node.vies_application_form.field_vies_email
     - field.field.node.vies_application_form.field_vies_first_name
     - field.field.node.vies_application_form.field_vies_gender
@@ -190,6 +191,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: entity_reference_autocomplete
+    region: content
+  field_vies_edb_synched:
+    weight: 26
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
     region: content
   field_vies_email:
     weight: 9
