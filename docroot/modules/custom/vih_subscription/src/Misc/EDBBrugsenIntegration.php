@@ -53,7 +53,16 @@ class EDBBrugsenIntegration {
       //student = elev information
       $registration['Elev.Fornavn'] = $longCourseOrder->get('field_vih_lco_first_name')->value;
       $registration['Elev.Efternavn'] = $longCourseOrder->get('field_vih_lco_last_name')->value;
-      $registration['Elev.Adresse'] = $longCourseOrder->get('field_vih_lco_address')->value;
+
+      $addressParts = explode('; ', $longCourseOrder->get('field_vih_lco_address')->value);
+      $addressArr = [
+        'address' => $addressParts[0],
+        'houseNumber' => $addressParts[1],
+        'houseLetter' => $addressParts[2],
+        'houseFloor' => $addressParts[3],
+      ];
+
+      $registration['Elev.Adresse'] = VihSubscriptionUtils::formatAddressToString($addressArr);
       $registration['Elev.Lokalby'] = $longCourseOrder->get('field_vih_lco_city')->value;
       $registration['Elev.Postnr'] = $longCourseOrder->get('field_vih_lco_zip')->value;
       $registration['Elev.Bynavn'] = $longCourseOrder->get('field_vih_lco_city')->value;
@@ -67,7 +76,16 @@ class EDBBrugsenIntegration {
       // adult = voksen information
       $registration['Voksen.Fornavn'] = $longCourseOrder->get('field_vih_lco_adult_first_name')->value;
       $registration['Voksen.Efternavn'] = $longCourseOrder->get('field_vih_lco_adult_last_name')->value;
-      $registration['Voksen.Adresse'] = $longCourseOrder->get('field_vih_lco_adult_address')->value;
+
+      $addressParts = explode('; ', $longCourseOrder->get('field_vih_lco_adult_address')->value);
+      $addressAdultArr = [
+        'address' => $addressParts[0],
+        'houseNumber' => $addressParts[1],
+        'houseLetter' => $addressParts[2],
+        'houseFloor' => $addressParts[3],
+      ];
+
+      $registration['Voksen.Adresse'] = VihSubscriptionUtils::formatAddressToString($addressAdultArr);
       $registration['Voksen.Lokalby'] = $longCourseOrder->get('field_vih_lco_adult_city')->value;
       $registration['Voksen.Postnr'] = $longCourseOrder->get('field_vih_lco_adult_zip')->value;
       $registration['Voksen.Bynavn'] = $longCourseOrder->get('field_vih_lco_adult_city')->value;
@@ -102,7 +120,16 @@ class EDBBrugsenIntegration {
       $registration['Elev.Fornavn'] = $order_person->field_vih_ocp_first_name->value;
       $registration['Elev.Efternavn'] = $order_person->field_vih_ocp_last_name->value;
       $registration['Elev.Email'] = $order_person->field_vih_ocp_email->value;
-      $registration['Elev.Adresse'] = $order_person->field_vih_ocp_address->value;
+
+      $addressParts = explode('; ', $order_person->field_vih_ocp_address->value);
+      $addressArr = [
+        'address' => $addressParts[0],
+        'houseNumber' => $addressParts[1],
+        'houseLetter' => $addressParts[2],
+        'houseFloor' => $addressParts[3],
+      ];
+
+      $registration['Elev.Adresse'] = VihSubscriptionUtils::formatAddressToString($addressArr);
       $registration['Elev.Lokalby'] = $order_person->field_vih_ocp_city->value;
       $registration['Elev.Postnr'] = $order_person->field_vih_ocp_zip->value;
       $registration['Elev.Bynavn'] = $order_person->field_vih_ocp_city->value;

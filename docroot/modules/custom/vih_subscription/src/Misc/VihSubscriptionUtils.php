@@ -319,7 +319,7 @@ class VihSubscriptionUtils {
   /**
    * Helper function to format address nicely.
    *
-   * @param $raw_data, formatted like
+   * @param $addressArr , formatted like
    * array (
    *    'address' => streetname,
    *    'houseNumber' => houseNumber,
@@ -329,16 +329,16 @@ class VihSubscriptionUtils {
    *
    * @return string
    */
-  public function formatAddressString($raw_data) {
-    $address = empty($raw_data['address']) ? '' : $raw_data['address'];
-    if (isset($raw_data['houseNumber'])) {
-      $address .= ' ' . $raw_data['houseNumber'];
+  public static function formatAddressToString($addressArr) {
+    $address = empty($addressArr['address']) ? '' : $addressArr['address'];
+    if (isset($addressArr['houseNumber'])) {
+      $address .= ' ' . $addressArr['houseNumber'];
     }
-    if (isset($raw_data['houseLetter'])) {
-      $address .= ', ' . $raw_data['houseLetter'];
+    if (isset($addressArr['houseLetter'])) {
+      $address .= ', ' . $addressArr['houseLetter'];
     }
-    if (isset($raw_data['houseFloor'])) {
-      $address .= ', ' . $raw_data['houseFloor'];
+    if (isset($addressArr['houseFloor'])) {
+      $address .= ', ' . $addressArr['houseFloor'];
     }
 
     return $address;

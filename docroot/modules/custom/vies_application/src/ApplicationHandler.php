@@ -109,9 +109,9 @@ class ApplicationHandler {
 
     $this->data['birthday'] = substr($this->data['cpr'], 0, 6);
 
-    $this->data['fullAddress'] = VihSubscriptionUtils::formatAddressString($this->data);
+    $this->data['fullAddress'] = VihSubscriptionUtils::formatAddressToString($this->data);
     foreach ($this->data['parents'] as $key => $parent) {
-      $this->data['parents'][$key]['fullAddress'] = VihSubscriptionUtils::formatAddressString($parent);
+      $this->data['parents'][$key]['fullAddress'] = VihSubscriptionUtils::formatAddressToString($parent);
     }
 
     // Classes questions.
