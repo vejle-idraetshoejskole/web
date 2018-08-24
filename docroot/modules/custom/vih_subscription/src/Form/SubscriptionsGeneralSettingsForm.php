@@ -134,7 +134,14 @@ class SubscriptionsGeneralSettingsForm extends ConfigFormBase {
           ->t('English'),
       '#group' => 'vih_subscription_long_course_language_specific',
     );
-
+    //VIES is in Danish only.
+    if (strpos($_SERVER['SERVER_NAME'], 'vies') !== false) {
+      $form['vih_subscription_long_course_en'] = array(
+        '#disabled' => TRUE,
+        '#access' => FALSE,
+      );
+    }
+    
     // Long course page registration text EN.
     $form['vih_subscription_long_course_en']['vih_subscription_long_course_registration_page_text_en'] = [
       '#type' => 'textarea',
@@ -250,7 +257,14 @@ class SubscriptionsGeneralSettingsForm extends ConfigFormBase {
           ->t('English'),
       '#group' => 'vih_subscription_short_course_language_specific',
     );
-
+    //VIES is in Danish only.
+    if (strpos($_SERVER['SERVER_NAME'], 'vies') !== false) {
+      $form['vih_subscription_short_course_en'] = array(
+        '#disabled' => TRUE,
+        '#access' => FALSE,
+      );
+    }
+    
     // Short course page registration text EN.
     $form['vih_subscription_short_course_en']['vih_subscription_short_course_registration_page_text_en'] = [
       '#type' => 'textarea',
@@ -366,6 +380,13 @@ class SubscriptionsGeneralSettingsForm extends ConfigFormBase {
           ->t('English'),
       '#group' => 'vih_subscription_event_language_specific',
     );
+    //VIES is in Danish only.
+    if (strpos($_SERVER['SERVER_NAME'], 'vies') !== false) {
+      $form['vih_subscription_event_en'] = array(
+        '#disabled' => TRUE,
+        '#access' => FALSE,
+      );
+    }
 
     // Event page registration text EN.
     $form['vih_subscription_event_en']['vih_subscription_event_registration_page_text_en'] = [
