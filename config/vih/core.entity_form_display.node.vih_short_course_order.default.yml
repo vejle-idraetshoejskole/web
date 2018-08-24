@@ -14,8 +14,26 @@ dependencies:
     - node.type.vih_short_course_order
   module:
     - content_moderation
+    - field_group
     - paragraphs
     - path
+third_party_settings:
+  field_group:
+    group_komit:
+      children:
+        - field_vih_sco_edb_synched
+        - field_vih_sco_edb_synch_message
+      parent_name: ''
+      weight: 15
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: KomIT
+      region: content
 id: node.vih_short_course_order.default
 targetEntityType: node
 bundle: vih_short_course_order
@@ -45,7 +63,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_vih_sco_edb_synch_message:
-    weight: 27
+    weight: 17
     settings:
       rows: 5
       placeholder: ''
@@ -53,7 +71,7 @@ content:
     type: string_textarea
     region: content
   field_vih_sco_edb_synched:
-    weight: 26
+    weight: 16
     settings:
       display_label: true
     third_party_settings: {  }
