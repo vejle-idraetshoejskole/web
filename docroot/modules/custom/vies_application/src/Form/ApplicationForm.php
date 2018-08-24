@@ -518,8 +518,9 @@ class ApplicationForm extends FormBase {
         '#suffix' => '</div>',
       ];
       $form['parentsWrapper']['actions']['add_parent'] = [
-          '#value' => $this->t('Add'),
+          '#value' => $this->t('Add more adults'),
           '#submit' => ['::submitParent'],
+          '#attributes' => ['class' => ['btn-success']],
           '#limit_validation_errors' => [['parents']],
       ] + $ajax_parent_button;
 
