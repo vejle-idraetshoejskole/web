@@ -21,6 +21,7 @@ dependencies:
     - paragraphs.paragraphs_type.vih_class_groups_accordion
     - paragraphs.paragraphs_type.vih_contact_person
     - paragraphs.paragraphs_type.vih_content_grid
+    - paragraphs.paragraphs_type.vih_grid_with_subjects
     - paragraphs.paragraphs_type.vih_list_of_news_list_advanced
     - paragraphs.paragraphs_type.vih_teacher_class_description
     - paragraphs.paragraphs_type.vih_webform
@@ -43,8 +44,8 @@ settings:
     negate: 0
     target_bundles:
       1_column_action_centered: 1_column_action_centered
-      article: article
       vih_content_grid: vih_content_grid
+      article: article
       class_packages: class_packages
       employee: employee
       event_list: event_list
@@ -62,14 +63,15 @@ settings:
       vih_contact_person: vih_contact_person
       vih_teacher_class_description: vih_teacher_class_description
       vih_webform: vih_webform
+      vih_grid_with_subjects: vih_grid_with_subjects
     target_bundles_drag_drop:
       1_column_action_centered:
         enabled: true
         weight: 26
-      article:
+      vih_content_grid:
         enabled: true
         weight: 27
-      vih_content_grid:
+      article:
         enabled: true
         weight: 27
       class_packages:
@@ -105,12 +107,15 @@ settings:
       social_media_embed:
         enabled: true
         weight: 36
-      long_course_list_contain_class:
-        weight: 37
+      app_answer:
+        weight: 36
         enabled: false
       user_quote:
         enabled: true
         weight: 37
+      long_course_list_contain_class:
+        weight: 37
+        enabled: false
       video:
         enabled: true
         weight: 38
@@ -132,11 +137,14 @@ settings:
       vih_ordered_course_person:
         weight: 44
         enabled: false
+      vih_banner_slide:
+        weight: 45
+        enabled: false
       vih_ordered_course_slot:
         weight: 45
         enabled: false
-      vih_banner_slide:
-        weight: 45
+      parent:
+        weight: 46
         enabled: false
       vih_ordered_event_person:
         weight: 46
@@ -156,4 +164,7 @@ settings:
       vih_webform:
         enabled: true
         weight: 50
+      vih_grid_with_subjects:
+        enabled: true
+        weight: 56
 field_type: entity_reference_revisions
