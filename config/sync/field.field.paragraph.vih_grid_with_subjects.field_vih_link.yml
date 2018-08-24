@@ -1,0 +1,23 @@
+uuid: fc87c706-e21e-40c7-85a2-13f781a0b7a9
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_vih_link
+    - paragraphs.paragraphs_type.vih_grid_with_subjects
+  module:
+    - link
+id: paragraph.vih_grid_with_subjects.field_vih_link
+field_name: field_vih_link
+entity_type: paragraph
+bundle: vih_grid_with_subjects
+label: Link
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 1
+field_type: link

@@ -1,0 +1,9 @@
+uuid: e64dbe4f-fe7d-41bf-9b22-2236c52e5685
+langcode: da
+status: true
+dependencies: {  }
+id: vih_grid_with_subjects
+label: 'Grid with subjects'
+icon_uuid: null
+description: 'Viser udvalgte fag i et grid.'
+behavior_plugins: {  }

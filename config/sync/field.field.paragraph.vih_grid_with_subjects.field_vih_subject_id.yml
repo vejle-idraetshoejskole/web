@@ -1,0 +1,29 @@
+uuid: 5566e140-e4a8-45be-af1e-92be2c51c5e2
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_vih_subject_id
+    - paragraphs.paragraphs_type.vih_grid_with_subjects
+    - taxonomy.vocabulary.vih_class
+id: paragraph.vih_grid_with_subjects.field_vih_subject_id
+field_name: field_vih_subject_id
+entity_type: paragraph
+bundle: vih_grid_with_subjects
+label: Fag
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      vih_class: vih_class
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
