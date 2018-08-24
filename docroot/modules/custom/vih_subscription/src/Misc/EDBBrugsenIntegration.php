@@ -183,22 +183,36 @@ class EDBBrugsenIntegration {
    * Adds the registration via webservice.
    *
    * @param $registration
+   *
+   * @return the response formed as an array, like
+   * [
+   *    'status' => TRUE/FALSE
+   *    'message' => reply from EBD system
+   * ]
    */
   public function addRegistration($registration) {
     if (!empty($registration)) {
       $response = $this->registration_repository->addRegistrations(array($registration));
+      $response_message = '';
       try {
-        $response->getBody();
+        $response_message = $response->getBody();
       } catch (\Exception $e) {
         \Drupal::logger('vih_subscription')->error('EDBBrugsenIntegration: ' . $e->getMessage() . '. Order person name: "'
           . $registration['Elev.Fornavn'] . ' ' . $registration['Elev.Efternavn'] . '", course: ' . $registration['Kursus']);
+        $response_message = $e->getMessage();
       }
 
       // Checking if was successful.
       if (intval($response->getCount()) > 0) {
-        return TRUE;
+        return [
+          'status' => TRUE,
+          'message' => $response_message,
+        ];
       } else {
-        return FALSE;
+        return [
+          'status' => FALSE,
+          'message' => $response_message,
+        ];
       }
     }
   }

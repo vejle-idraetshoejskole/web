@@ -205,10 +205,11 @@ class ApplicationHandler {
 
       $edb_brugsen_integration = new EDBBrugsenIntegration($username, $password, $school_code, $book_number);
       $registration = $edb_brugsen_integration->convertApplicationToRegistration($this->data);
-      if ($edb_brugsen_integration->addRegistration($registration)) {
-        $this->application->set('field_vies_edb_synched', TRUE);
-        $this->application->save();
-      }
+
+      $synchReply = $edb_brugsen_integration->addRegistration($registration);
+      $this->application->set('field_vies_edb_synched', $synchReply['status']);
+      $this->application->set('field_vies_edb_synch_message', $synchReply['message']);
+      $this->application->save();
     }
   }
 

@@ -1,0 +1,19 @@
+uuid: f06d9dcd-7840-4a68-81ca-18b18585ae04
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_vies_edb_synch_message
+    - node.type.vies_application_form
+id: node.vies_application_form.field_vies_edb_synch_message
+field_name: field_vies_edb_synch_message
+entity_type: node
+bundle: vies_application_form
+label: 'KomIT synch message'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

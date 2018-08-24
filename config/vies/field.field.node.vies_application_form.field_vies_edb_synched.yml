@@ -9,7 +9,7 @@ id: node.vies_application_form.field_vies_edb_synched
 field_name: field_vies_edb_synched
 entity_type: node
 bundle: vies_application_form
-label: 'EDB Brugsen synched'
+label: 'KomIT synched'
 description: ''
 required: false
 translatable: false
