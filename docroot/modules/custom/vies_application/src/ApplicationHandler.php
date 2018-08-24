@@ -182,7 +182,7 @@ class ApplicationHandler {
     $address = empty($raw_data['address']) ? '' : $raw_data['address'];
     foreach (['houseNumber', 'houseLetter', 'houseFloor'] as $key) {
       if (!empty($raw_data[$key])) {
-        $address .= ', ' . $raw_data[$key];
+        $address .= '; ' . $raw_data[$key];
       }
     }
     return $address;

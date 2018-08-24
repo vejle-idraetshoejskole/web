@@ -135,7 +135,7 @@ class EDBBrugsenIntegration {
     // Student information.
     $registration['Elev.Fornavn'] = $data['firstName'];
     $registration['Elev.Efternavn'] = $data['lastName'];
-    $registration['Elev.Adresse'] = $data['address'];
+    $registration['Elev.Adresse'] = $data['fullAddress'];
     $registration['Elev.Lokalby'] = $data['city'];
     $registration['Elev.Postnr'] = $data['zip'];
     $registration['Elev.Bynavn'] = $data['city'];
@@ -150,7 +150,7 @@ class EDBBrugsenIntegration {
     $parent = array_shift($data['parents']);
     $registration['Voksen.Fornavn'] = $parent['firstName'];
     $registration['Voksen.Efternavn'] = $parent['lastName'];
-    $registration['Voksen.Adresse'] = $parent['address'];
+    $registration['Voksen.Adresse'] = $parent['fullAddress'];
     $registration['Voksen.Lokalby'] = $parent['city'];
     $registration['Voksen.Postnr'] = $parent['zip'];
     $registration['Voksen.Bynavn'] = $parent['city'];
