@@ -35,6 +35,7 @@ dependencies:
     - field.field.node.vih_long_course_order.field_vih_lco_zip
     - node.type.vih_long_course_order
   module:
+    - field_group
     - options
     - panelizer
     - user
@@ -44,6 +45,21 @@ third_party_settings:
     custom: false
     allow: false
     default: default
+  field_group:
+    group_komit:
+      children:
+        - field_vih_lco_edb_synched
+        - field_vih_lco_edb_synch_message
+      parent_name: ''
+      weight: 27
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+      label: KomIT
+      region: content
 id: node.vih_long_course_order.default
 targetEntityType: node
 bundle: vih_long_course_order
@@ -106,7 +122,7 @@ content:
     type: string
     region: content
   field_vih_lco_adult_newsletter:
-    weight: 27
+    weight: 26
     label: above
     settings:
       format: default
@@ -220,7 +236,7 @@ content:
     type: basic_string
     region: content
   field_vih_lco_municipality:
-    weight: 26
+    weight: 25
     label: above
     settings:
       link_to_entity: false
