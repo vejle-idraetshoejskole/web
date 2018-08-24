@@ -151,7 +151,11 @@ class SubscriptionSuccessfulController extends ControllerBase {
         $edbBrugsenIntegration = new EDBBrugsenIntegration($username, $password, $school_code, $book_number);
         $registration = $edbBrugsenIntegration->convertLongCourseToRegistration($order);
         $registration = $edbBrugsenIntegration->addStudentCprNr($registration, $studentCpr);
-        $edbBrugsenIntegration->addRegistration($registration);
+
+        $synchReply = $edbBrugsenIntegration->addRegistration($registration);
+
+        $order->set('field_vih_lco_edb_synched', $synchReply['status']);
+        $order->set('field_vih_lco_edb_synch_message', $synchReply['message']);
       }
 
       //updating course order status
@@ -230,7 +234,11 @@ class SubscriptionSuccessfulController extends ControllerBase {
           if (!empty($order_person->field_vih_ocp_cpr->getValue()[0]['value'])) {
             $registration = $edbBrugsenIntegration->addStudentCprNr($registration, $order_person->field_vih_ocp_cpr->getValue()[0]['value']);
           }
-          $edbBrugsenIntegration->addRegistration($registration);
+
+          $synchReply = $edbBrugsenIntegration->addRegistration($registration);
+
+          $order->set('field_vih_sco_edb_synched', $synchReply['status']);
+          $order->set('field_vih_sco_edb_synch_message', $synchReply['message']);
 
           //deleting CPR from order person
           $order_person->set('field_vih_ocp_cpr', '');

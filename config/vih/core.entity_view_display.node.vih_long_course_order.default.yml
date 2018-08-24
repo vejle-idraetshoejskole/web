@@ -17,6 +17,8 @@ dependencies:
     - field.field.node.vih_long_course_order.field_vih_lco_city
     - field.field.node.vih_long_course_order.field_vih_lco_course
     - field.field.node.vih_long_course_order.field_vih_lco_cpr
+    - field.field.node.vih_long_course_order.field_vih_lco_edb_synch_message
+    - field.field.node.vih_long_course_order.field_vih_lco_edb_synched
     - field.field.node.vih_long_course_order.field_vih_lco_education
     - field.field.node.vih_long_course_order.field_vih_lco_email
     - field.field.node.vih_long_course_order.field_vih_lco_first_name
@@ -152,6 +154,23 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+    region: content
+  field_vih_lco_edb_synch_message:
+    weight: 29
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_vih_lco_edb_synched:
+    weight: 28
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
     region: content
   field_vih_lco_education:
     weight: 10

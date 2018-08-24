@@ -1,0 +1,18 @@
+uuid: b02cd784-41ed-46cd-a281-e1fc3b8fdbf8
+langcode: da
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_vih_sco_edb_synched
+field_name: field_vih_sco_edb_synched
+entity_type: node
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,19 @@
+uuid: 299a3461-7cdd-4def-b5c2-0a4186673f4a
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_vih_lco_edb_synch_message
+    - node.type.vih_long_course_order
+id: node.vih_long_course_order.field_vih_lco_edb_synch_message
+field_name: field_vih_lco_edb_synch_message
+entity_type: node
+bundle: vih_long_course_order
+label: 'KomIT synch message'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

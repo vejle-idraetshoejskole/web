@@ -6,6 +6,8 @@ dependencies:
     - field.field.node.vih_short_course_order.body
     - field.field.node.vih_short_course_order.field_vih_sco_comment
     - field.field.node.vih_short_course_order.field_vih_sco_course
+    - field.field.node.vih_short_course_order.field_vih_sco_edb_synch_message
+    - field.field.node.vih_short_course_order.field_vih_sco_edb_synched
     - field.field.node.vih_short_course_order.field_vih_sco_persons
     - field.field.node.vih_short_course_order.field_vih_sco_price
     - field.field.node.vih_short_course_order.field_vih_sco_status
@@ -48,6 +50,23 @@ content:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
+    region: content
+  field_vih_sco_edb_synch_message:
+    weight: 9
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_vih_sco_edb_synched:
+    weight: 8
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
     region: content
   field_vih_sco_persons:
     type: entity_reference_revisions_entity_view
