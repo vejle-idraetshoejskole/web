@@ -315,4 +315,32 @@ class VihSubscriptionUtils {
 
     return $count;
   }
+
+  /**
+   * Helper function to format address nicely.
+   *
+   * @param $raw_data, formatted like
+   * array (
+   *    'address' => streetname,
+   *    'houseNumber' => houseNumber,
+   *    'houseLetter' => houseLetter,
+   *    'houseFloor' => houseFloor,
+   * )
+   *
+   * @return string
+   */
+  public function formatAddressString($raw_data) {
+    $address = empty($raw_data['address']) ? '' : $raw_data['address'];
+    if (isset($raw_data['houseNumber'])) {
+      $address .= ' ' . $raw_data['houseNumber'];
+    }
+    if (isset($raw_data['houseLetter'])) {
+      $address .= ', ' . $raw_data['houseLetter'];
+    }
+    if (isset($raw_data['houseFloor'])) {
+      $address .= ', ' . $raw_data['houseFloor'];
+    }
+
+    return $address;
+  }
 }

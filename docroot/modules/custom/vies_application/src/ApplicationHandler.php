@@ -109,9 +109,9 @@ class ApplicationHandler {
 
     $this->data['birthday'] = substr($this->data['cpr'], 0, 6);
 
-    $this->data['fullAddress'] = $this->getFullAddress($this->data);
+    $this->data['fullAddress'] = VihSubscriptionUtils::formatAddressString($this->data);
     foreach ($this->data['parents'] as $key => $parent) {
-      $this->data['parents'][$key]['fullAddress'] = $this->getFullAddress($parent);
+      $this->data['parents'][$key]['fullAddress'] = VihSubscriptionUtils::formatAddressString($parent);
     }
 
     // Classes questions.
@@ -173,19 +173,6 @@ class ApplicationHandler {
         'answer' => $this->data[$key],
       ];
     }
-  }
-
-  /**
-   * Helper function to prepare data.
-   */
-  private function getFullAddress($raw_data) {
-    $address = empty($raw_data['address']) ? '' : $raw_data['address'];
-    foreach (['houseNumber', 'houseLetter', 'houseFloor'] as $key) {
-      if (!empty($raw_data[$key])) {
-        $address .= '; ' . $raw_data[$key];
-      }
-    }
-    return $address;
   }
 
   /**
