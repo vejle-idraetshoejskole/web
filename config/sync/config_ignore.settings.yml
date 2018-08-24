@@ -1295,7 +1295,7 @@ ignored_config_entities:
   2586: ~views.view.watchdog
   2588: ~views.view.who_s_new
   2590: ~views.view.who_s_online
-  2592: ~views.view.vih_order_lists.yml
+  2592: ~views.view.vih_order_lists
   2594: ~context.context.page_title
   2596: ~views.view.short_course_order_page
   2598: ~context.context.context_center_content

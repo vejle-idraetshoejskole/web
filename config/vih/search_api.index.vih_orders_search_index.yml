@@ -1,0 +1,125 @@
+uuid: 5921ce30-cdbb-4e68-9c63-cd657b81b193
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_vih_eo_persons
+    - field.storage.paragraph.field_vih_oe_email
+    - field.storage.node.field_vih_sco_persons
+    - field.storage.paragraph.field_vih_ocp_email
+    - field.storage.paragraph.field_vih_oe_first_name
+    - field.storage.paragraph.field_vih_ocp_first_name
+    - field.storage.paragraph.field_vih_oe_last_name
+    - field.storage.paragraph.field_vih_ocp_last_name
+    - search_api.server.vih_search
+    - core.entity_view_mode.node.email_teaser
+  module:
+    - paragraphs
+    - search_api
+    - node
+id: vih_orders_search_index
+name: 'VIH Orders search index'
+description: ''
+read_only: false
+field_settings:
+  rendered_item:
+    label: 'Rendered HTML output'
+    property_path: rendered_item
+    type: text
+    configuration:
+      roles:
+        administrator: administrator
+      view_mode:
+        'entity:node':
+          vih_event_order: email_teaser
+          vih_long_course_order: email_teaser
+          vih_short_course_order: email_teaser
+  field_vih_oe_email:
+    label: 'Persons » Paragraph » Email'
+    datasource_id: 'entity:node'
+    property_path: 'field_vih_eo_persons:entity:field_vih_oe_email'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_vih_eo_persons
+        - field.storage.paragraph.field_vih_oe_email
+      module:
+        - paragraphs
+  field_vih_ocp_email:
+    label: 'Persons » Paragraph » Email'
+    datasource_id: 'entity:node'
+    property_path: 'field_vih_sco_persons:entity:field_vih_ocp_email'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_vih_sco_persons
+        - field.storage.paragraph.field_vih_ocp_email
+      module:
+        - paragraphs
+  field_vih_oe_first_name:
+    label: 'Persons » Paragraph » First name'
+    datasource_id: 'entity:node'
+    property_path: 'field_vih_eo_persons:entity:field_vih_oe_first_name'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_vih_eo_persons
+        - field.storage.paragraph.field_vih_oe_first_name
+      module:
+        - paragraphs
+  field_vih_ocp_first_name:
+    label: 'Persons » Paragraph » First name'
+    datasource_id: 'entity:node'
+    property_path: 'field_vih_sco_persons:entity:field_vih_ocp_first_name'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_vih_sco_persons
+        - field.storage.paragraph.field_vih_ocp_first_name
+      module:
+        - paragraphs
+  field_vih_oe_last_name:
+    label: 'Persons » Paragraph » Last name'
+    datasource_id: 'entity:node'
+    property_path: 'field_vih_eo_persons:entity:field_vih_oe_last_name'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_vih_eo_persons
+        - field.storage.paragraph.field_vih_oe_last_name
+      module:
+        - paragraphs
+  field_vih_ocp_last_name:
+    label: 'Persons » Paragraph » Last name'
+    datasource_id: 'entity:node'
+    property_path: 'field_vih_sco_persons:entity:field_vih_ocp_last_name'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_vih_sco_persons
+        - field.storage.paragraph.field_vih_ocp_last_name
+      module:
+        - paragraphs
+datasource_settings:
+  'entity:node':
+    bundles:
+      default: false
+      selected:
+        - vih_event_order
+        - vih_long_course_order
+        - vih_short_course_order
+    languages:
+      default: false
+      selected:
+        - da
+processor_settings:
+  add_url: {  }
+  aggregated_field: {  }
+  rendered_item: {  }
+tracker_settings:
+  default:
+    indexing_order: fifo
+options:
+  index_directly: true
+  cron_limit: 50
+server: vih_search
