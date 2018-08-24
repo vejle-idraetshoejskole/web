@@ -145,6 +145,9 @@ class EDBBrugsenIntegration {
     $registration['Elev.Email'] = $data['email'];
     $registration['Elev.CprNr'] = $data['cpr'];
     $registration['Elev.Land'] = $data['country'];
+    if (isset($data['afterSchoolComment'])) {
+      $registration['Elev.Notat'] = $data['afterSchoolComment']['answer'];
+    }
 
     // Adult information.
     $parent = array_shift($data['parents']);
@@ -241,7 +244,8 @@ class EDBBrugsenIntegration {
       // 0 = No, 1 = Yes
       'Elev.Email' => 'kontor@vih.dk',
       'Elev.Land' => 'Danmark',
-      'Elev.Notat' => 'Svend Aage Thomsen er skolens grundlægger',
+      'Elev.Notat' => '',
+      //'Elev.Notat' => 'Svend Aage Thomsen er skolens grundlægger',
       // Specific for student
       //'Elev.Linje' => 'Fodbold',//there is not specific course track that student is subscribing, instead each subscription is a set several of course trackes
       'Voksen.Fornavn' => 'Svend Aage',
