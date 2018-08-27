@@ -325,17 +325,17 @@ class ApplicationHandler {
     $node_view = node_view($this->application, 'email_teaser');
     $application_rendered = render($node_view)->__toString();
 
-    $logo = '<div style="background-color:#009bec; width:100%; text-align:center">'
+    $logo = '<div style="background-color:#ff6400; width:100%; text-align:center">'
       . '<img src="'
       . \Drupal::request()->getSchemeAndHttpHost()
-      . '/themes/custom/site/dist/images/layout-header-logo.png" alt="VIH" />'
+      . '/themes/custom/site/dist/images/layout-header-logo-vies.png" alt="VIH" />'
       . '</div><br>';
 
     $token = ['@subject_name', '@person_name', '@url', '@application'];
     $message = [
       'to' => $this->application->field_vies_email->value,
       'subject' => "Ansøgning til @subject_name",
-      'body' => "Hej @person_name,\r\ntak for din ansøgning @subject_name.\r\nAnsøgnings detaljer: @application\r\nMere information tilgængelig her: @url."
+      'body' => "Hej @person_name,\r\ntak for din ansøgning @subject_name.\r\nAnsøgnings detaljer:\r\n\r\n @application\r\n",
     ];
 
     $application_url = Url::fromRoute('vies_application.application_form')->setAbsolute()->toString();
