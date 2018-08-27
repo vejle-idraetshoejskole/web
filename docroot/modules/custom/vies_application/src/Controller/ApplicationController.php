@@ -4,6 +4,9 @@ namespace Drupal\vies_application\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Url;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Drupal\vih_subscription\Form\SubscriptionsGeneralSettingsForm;
+use Drupal\node\Entity\Node;
 
 /**
  * Application controller.
@@ -14,12 +17,13 @@ class ApplicationController extends ControllerBase {
    * Success page callback.
    */
   public function success() {
-    $build = [
-      '#theme' => 'vies_application_submit_message',
-      '#title' => 'Tak for din tilmelding!',
-    ];
-
-    return $build;
+    $config = \Drupal::config(SubscriptionsGeneralSettingsForm::$configName);
+    $redirection_page_id = $config->get('vih_subscription_aplication_success_page');
+    if (!empty($redirection_page_id)) {
+      $redirect_url = Url::fromRoute('entity.node.canonical', array('node' => $redirection_page_id));
+      $response = new RedirectResponse($redirect_url->toString());
+      return $response->send();
+    }
   }
 
   /**

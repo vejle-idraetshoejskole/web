@@ -7,6 +7,8 @@
 
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Render\Element;
+use Drupal\vih_subscription\Form\SubscriptionsGeneralSettingsForm;
+use Drupal\node\Entity\Node;
 
 /**
  * Implements hook_help().
@@ -73,36 +75,50 @@ function vies_application_inline_entity_form_entity_form_alter(&$entity_form, &$
  * Implements hook_form_alter().
  */
 function vies_application_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
-  if (!in_array($form['#form_id'], [
-    'node_vies_application_form_edit_form',
-    'node_vies_application_form_form',
-  ])) {
-    return;
-  }
-  foreach ([
-    'field_vies_about_school',
-    'field_vies_afterschool',
-    'field_vies_class_questions',
-  ] as $field) {
-    if (empty($form[$field]['widget']['entities'])) {
-      continue;
-    }
-    $entities = &$form[$field]['widget']['entities'];
-    foreach (Element::children($entities) as $key) {
-      if (!empty($entities[$key]['#entity']->field_question->value)) {
-        $entities[$key]['#label'] = $entities[$key]['#entity']->field_question->value;
+  if (in_array($form['#form_id'], [
+        'node_vies_application_form_edit_form',
+        'node_vies_application_form_form',
+      ])) {
+    foreach ([
+  'field_vies_about_school',
+  'field_vies_afterschool',
+  'field_vies_class_questions',
+    ] as $field) {
+      if (empty($form[$field]['widget']['entities'])) {
+        continue;
+      }
+      $entities = &$form[$field]['widget']['entities'];
+      foreach (Element::children($entities) as $key) {
+        if (!empty($entities[$key]['#entity']->field_question->value)) {
+          $entities[$key]['#label'] = $entities[$key]['#entity']->field_question->value;
+        }
       }
     }
-
-  }
-  if (!empty($form['field_vies_parents']['widget']['entities'])) {
-    $entities = &$form['field_vies_parents']['widget']['entities'];
-    foreach (Element::children($entities) as $key) {
-      $label = $entities[$key]['#entity']->field_parent_type->value . ': ';
-      $label .= $entities[$key]['#entity']->field_parent_first_name->value . ' ';
-      $label .= $entities[$key]['#entity']->field_parent_last_name->value;
-      $entities[$key]['#label'] = $label;
+    if (!empty($form['field_vies_parents']['widget']['entities'])) {
+      $entities = &$form['field_vies_parents']['widget']['entities'];
+      foreach (Element::children($entities) as $key) {
+        $label = $entities[$key]['#entity']->field_parent_type->value . ': ';
+        $label .= $entities[$key]['#entity']->field_parent_first_name->value . ' ';
+        $label .= $entities[$key]['#entity']->field_parent_last_name->value;
+        $entities[$key]['#label'] = $label;
+      }
     }
   }
-
+  if($form['#form_id'] == 'vih_subscription_subscriptons_general_settings_form'){
+    $config = \Drupal::config(SubscriptionsGeneralSettingsForm::$configName);
+    $form['vih_subscription_settings_apliction_fs'] = [
+      '#type' => 'details',
+      '#title' => t('Aplication settings'),
+      '#open' => FALSE,
+    ];
+    // vies_application.application_form_success page.
+      $form['vih_subscription_settings_apliction_fs']['vih_subscription_aplication_success_page'] = [
+        '#type' => 'entity_autocomplete',
+        '#target_type' => 'node',
+        '#selection_settings' => ['target_bundles' => ['page']],
+        '#title' => t('Aplication success page'),
+        '#default_value' => !empty($config->get('vih_subscription_aplication_success_page')) ? Node::load($config->get('vih_subscription_aplication_success_page')) : NULL,
+        '#description' => t("You can use any 'page' node as '/ansogning/success' page"),
+      ];
+  }
 }
