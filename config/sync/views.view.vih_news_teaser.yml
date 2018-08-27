@@ -343,7 +343,20 @@ display:
           granularity: second
       header: {  }
       footer: {  }
-      empty: {  }
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: false
+          content:
+            value: 'Der er p.t. ingen nyheder.'
+            format: rich_text
+          plugin_id: text
       relationships: {  }
       arguments:
         field_vih_news_tags_target_id:
