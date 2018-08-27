@@ -252,8 +252,8 @@ content:
     weight: 28
     label: above
     settings:
+      view_mode: email_teaser
       link: false
-      view_mode: default
     third_party_settings: {  }
     type: entity_reference_entity_view
     region: content

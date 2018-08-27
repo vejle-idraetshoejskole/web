@@ -1,0 +1,130 @@
+uuid: a22e0cac-c46a-48cb-84a3-a052602762a6
+langcode: da
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.email_teaser
+    - field.field.paragraph.parent.field_parent_address
+    - field.field.paragraph.parent.field_parent_city
+    - field.field.paragraph.parent.field_parent_country
+    - field.field.paragraph.parent.field_parent_email
+    - field.field.paragraph.parent.field_parent_first_name
+    - field.field.paragraph.parent.field_parent_last_name
+    - field.field.paragraph.parent.field_parent_newsletter
+    - field.field.paragraph.parent.field_parent_telefon
+    - field.field.paragraph.parent.field_parent_type
+    - field.field.paragraph.parent.field_parent_zip
+    - paragraphs.paragraphs_type.parent
+  module:
+    - field_group
+third_party_settings:
+  field_group:
+    group_address:
+      children:
+        - field_parent_address
+        - field_parent_zip
+        - field_parent_city
+        - field_parent_country
+      parent_name: ''
+      weight: 5
+      format_type: html_element
+      format_settings:
+        label: Address
+        element: div
+        show_label: false
+        label_element: label
+        attributes: ''
+        effect: none
+        speed: fast
+        id: ''
+        classes: 'field--adress field--label-inline'
+      label: Address
+      region: content
+id: paragraph.parent.email_teaser
+targetEntityType: paragraph
+bundle: parent
+mode: email_teaser
+content:
+  field_parent_address:
+    weight: 6
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_parent_city:
+    weight: 8
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_parent_country:
+    weight: 9
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_parent_email:
+    weight: 3
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_parent_first_name:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_parent_last_name:
+    weight: 2
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_parent_newsletter:
+    weight: 10
+    label: inline
+    settings:
+      format: yes-no
+      format_custom_true: ''
+      format_custom_false: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_parent_telefon:
+    weight: 4
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_parent_type:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_parent_zip:
+    weight: 7
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden: {  }
