@@ -1,0 +1,23 @@
+<table cellspacing="0" cellpadding="0" border="0">
+  <tr>
+    <th colspan="2">
+      <h1>
+        {{ content.field_vies_first_name.0 }} {{ content.field_vies_last_name.0 }}
+      </h1>
+    </th>
+  </tr>
+  <tr>
+    <td>
+      {{ content.group_col_left }}
+    </td>
+    <td>
+      {% if content.field_vies_label.0 or content.field_vies_status.0 %}
+        <div>
+          {{ content.field_vies_label }}
+          {{ content.field_vies_status }}
+        </div>
+      {% endif %}
+      {{ content.group_col_right }}
+    </td>
+  </tr>
+</table>
