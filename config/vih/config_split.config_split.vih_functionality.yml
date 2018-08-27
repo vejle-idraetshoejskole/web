@@ -16,7 +16,8 @@ blacklist:
   - 'node.type.vih_long_course_order*'
   - 'node.type.vih_short_course*'
   - 'node.type.vih_short_course_order*'
+  - 'paragraphs.paragraphs_type.short_course_list_*'
 graylist: {  }
-graylist_dependents: true
-graylist_skip_equal: true
+graylist_dependents: false
+graylist_skip_equal: false
 weight: 0

@@ -13,7 +13,6 @@ dependencies:
     - paragraphs.paragraphs_type.list_of_news_teasers
     - paragraphs.paragraphs_type.long_course_list_
     - paragraphs.paragraphs_type.long_course_list_contain_class
-    - paragraphs.paragraphs_type.short_course_list_
     - paragraphs.paragraphs_type.social_media_embed
     - paragraphs.paragraphs_type.user_quote
     - paragraphs.paragraphs_type.vih_contact_person
@@ -45,7 +44,6 @@ settings:
       list_of_news_teasers: list_of_news_teasers
       long_course_list_: long_course_list_
       long_course_list_contain_class: long_course_list_contain_class
-      short_course_list_: short_course_list_
       social_media_embed: social_media_embed
       user_quote: user_quote
       vih_contact_person: vih_contact_person
@@ -85,8 +83,8 @@ settings:
         enabled: true
         weight: 42
       short_course_list_:
-        enabled: true
         weight: 43
+        enabled: false
       social_media_embed:
         enabled: true
         weight: 44
@@ -110,6 +108,9 @@ settings:
         enabled: false
       vih_course_slot:
         weight: 51
+        enabled: false
+      vih_grid_with_subjects:
+        weight: 52
         enabled: false
       vih_list_of_news_list_advanced:
         weight: 52

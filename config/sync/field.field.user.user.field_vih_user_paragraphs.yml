@@ -13,7 +13,6 @@ dependencies:
     - paragraphs.paragraphs_type.gallery
     - paragraphs.paragraphs_type.list_of_news_teasers
     - paragraphs.paragraphs_type.long_course_list_
-    - paragraphs.paragraphs_type.short_course_list_
     - paragraphs.paragraphs_type.social_media_embed
     - paragraphs.paragraphs_type.user_quote
     - paragraphs.paragraphs_type.video
@@ -51,7 +50,6 @@ settings:
       vih_list_of_news_list_advanced: vih_list_of_news_list_advanced
       employee: employee
       vih_wrapper: vih_wrapper
-      short_course_list_: short_course_list_
       user_quote: user_quote
       video: video
       gallery: gallery
@@ -92,8 +90,8 @@ settings:
         enabled: true
         weight: 32
       short_course_list_:
-        enabled: true
         weight: 32
+        enabled: false
       user_quote:
         enabled: true
         weight: 33
@@ -109,10 +107,10 @@ settings:
       vih_course_slot:
         weight: 36
         enabled: false
-      long_course_list_contain_class:
+      vih_option:
         weight: 37
         enabled: false
-      vih_option:
+      long_course_list_contain_class:
         weight: 37
         enabled: false
       vih_option_group:
@@ -142,10 +140,10 @@ settings:
       vih_single_class_group:
         weight: 44
         enabled: false
-      vih_teacher_class_description:
+      vih_banner_slide:
         weight: 45
         enabled: false
-      vih_banner_slide:
+      vih_teacher_class_description:
         weight: 45
         enabled: false
       vih_webform:
@@ -154,4 +152,7 @@ settings:
       vih_contact_person:
         enabled: true
         weight: 49
+      vih_grid_with_subjects:
+        weight: 52
+        enabled: false
 field_type: entity_reference_revisions
