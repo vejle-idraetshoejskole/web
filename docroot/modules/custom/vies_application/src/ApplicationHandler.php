@@ -335,7 +335,7 @@ class ApplicationHandler {
     $message = [
       'to' => $this->application->field_vies_email->value,
       'subject' => "Ansøgning til @subject_name",
-      'body' => "Hej @person_name,\r\ntak for din ansøgning @subject_name.\r\nAnsøgnings detaljer:\r\n\r\n @application\r\n",
+      'body' => "Hej @person_name,<br>\r\ntak for din ansøgning @subject_name.<br>\r\nAnsøgnings detaljer:<br><br>\r\n @application\r\n",
     ];
 
     $application_url = Url::fromRoute('vies_application.application_form')->setAbsolute()->toString();
