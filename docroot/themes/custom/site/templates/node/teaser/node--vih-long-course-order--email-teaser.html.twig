@@ -1,5 +1,5 @@
 <br><br>
-<Table cellspacing="0" cellpadding="0" border="0">
+<table cellspacing="0" cellpadding="0" border="0">
   <tr>
     <td colspan="4">
       <h3>{{  node.field_vih_lco_course.entity.title.value }}</h3>
@@ -11,8 +11,10 @@
       <h3>
         {{ 'Participant' | trans }}
       </h3>
-      <b>{{ 'Name' | trans }}:</b><br>
-      {{ node.field_vih_lco_first_name.value }} {{ node.field_vih_lco_last_name.value }}
+      <p>
+        <b>{{ 'Name' | trans }}:</b><br>
+        {{ node.field_vih_lco_first_name.value }} {{ node.field_vih_lco_last_name.value }}
+      </p>
       <p>
         <b>{{ node.field_vih_lco_address.fieldDefinition.label | trans }}:</b><br>
         {{ node.field_vih_lco_address.value }},
@@ -35,10 +37,11 @@
     <td row="3" style="width:20px;"></td>
     <td row="3" style="width:20px; border-left: 1px solid #000;"></td>
     <td style="vertical-align: top;">
-      <h3>{{ 'Contact person' | trans }}</h3>   
-      <b>{{ 'Name' | trans }}:</b><br>
-      {{ node.field_vih_lco_adult_first_name.value }} {{ node.field_vih_lco_adult_last_name.value }}
+      <h3>{{ 'Contact person' | trans }}</h3>
       <p>
+        <b>{{ 'Name' | trans }}:</b><br>
+        {{ node.field_vih_lco_adult_first_name.value }} {{ node.field_vih_lco_adult_last_name.value }}
+      </p>
       <p>
         <b>{{ node.field_vih_lco_adult_address.fieldDefinition.label | trans }}:</b><br>
         {{ node.field_vih_lco_adult_address.value }},
