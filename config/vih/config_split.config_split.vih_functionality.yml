@@ -16,7 +16,6 @@ blacklist:
   - 'node.type.vih_long_course_order*'
   - 'node.type.vih_short_course*'
   - 'node.type.vih_short_course_order*'
-  - 'paragraphs.paragraphs_type.short_course_list_*'
 graylist:
   - field.field.node.news.field_vih_paragraphs
   - field.field.node.page.field_vih_paragraphs
