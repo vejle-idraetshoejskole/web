@@ -1,0 +1,357 @@
+uuid: 236b4aed-caa8-4f09-8043-e8ea2488c469
+langcode: da
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.embedded_teaser_list
+    - field.field.node.vih_long_cource.body
+    - field.field.node.vih_long_cource.field_metatag
+    - field.field.node.vih_long_cource.field_short_description
+    - field.field.node.vih_long_cource.field_vih_course_image
+    - field.field.node.vih_long_cource.field_vih_course_periods
+    - field.field.node.vih_long_cource.field_vih_course_persons_limit
+    - field.field.node.vih_long_cource.field_vih_course_price
+    - field.field.node.vih_long_cource.field_vih_course_status
+    - field.field.node.vih_long_cource.field_vih_course_subheading
+    - field.field.node.vih_long_cource.field_vih_course_subsc_price
+    - field.field.node.vih_long_cource.field_vih_course_week_price
+    - field.field.node.vih_long_cource.field_vih_paragraphs
+    - field.field.node.vih_long_cource.field_vih_top_banner
+    - field.field.node.vih_long_cource.field_vih_top_banner_text
+    - field.field.node.vih_long_cource.scheduled_update
+    - node.type.vih_long_cource
+  module:
+    - entity_reference_revisions
+    - metatag
+    - options
+    - panelizer
+    - text
+    - user
+third_party_settings:
+  panelizer:
+    enable: false
+    custom: false
+    allow: false
+    default: default
+    displays:
+      default:
+        blocks:
+          c12989f5-4fde-4943-8996-78f97b0ab191:
+            id: 'entity_field:node:uid'
+            label: 'Authored by'
+            provider: ctools_block
+            label_display: '0'
+            formatter:
+              label: hidden
+              type: author
+              settings: {  }
+              third_party_settings: {  }
+              weight: 0
+            region: right
+            weight: -4
+            context_mapping:
+              entity: '@panelizer.entity_context:entity'
+            uuid: c12989f5-4fde-4943-8996-78f97b0ab191
+          a210ea00-85b6-4b07-b1d9-9c17e8e2c23b:
+            id: 'entity_field:node:created'
+            label: 'Authored on'
+            provider: ctools_block
+            label_display: '0'
+            formatter:
+              label: hidden
+              type: timestamp
+              settings:
+                date_format: medium
+                custom_date_format: ''
+                timezone: ''
+              third_party_settings: {  }
+              weight: 0
+            region: right
+            weight: -3
+            context_mapping:
+              entity: '@panelizer.entity_context:entity'
+            uuid: a210ea00-85b6-4b07-b1d9-9c17e8e2c23b
+          abc4b83d-2f2a-4563-903e-ca2366c12f09:
+            id: 'entity_field:node:body'
+            label: Body
+            provider: ctools_block
+            label_display: '0'
+            formatter:
+              label: hidden
+              type: text_default
+              settings: {  }
+              third_party_settings: {  }
+              weight: 0
+            region: left
+            weight: -3
+            context_mapping:
+              entity: '@panelizer.entity_context:entity'
+            uuid: abc4b83d-2f2a-4563-903e-ca2366c12f09
+          c76fca84-ec18-44ac-8226-79742e072adb:
+            id: 'entity_field:node:field_paragraphs'
+            label: Sektioner
+            provider: ctools_block
+            label_display: '0'
+            formatter:
+              label: above
+              type: entity_reference_revisions_entity_view
+              settings:
+                view_mode: default
+                link: ''
+              third_party_settings: {  }
+              weight: 0
+            region: right
+            weight: -7
+            context_mapping:
+              entity: '@panelizer.entity_context:entity'
+            uuid: c76fca84-ec18-44ac-8226-79742e072adb
+          6d509219-4651-4778-86f6-d491d52aae0d:
+            id: 'entity_field:node:field_vih_cource_contact_person'
+            label: 'Contact Person'
+            provider: ctools_block
+            label_display: '0'
+            formatter:
+              label: above
+              type: author
+              settings: {  }
+              third_party_settings: {  }
+              weight: 0
+            region: right
+            weight: -9
+            context_mapping:
+              entity: '@panelizer.entity_context:entity'
+            uuid: 6d509219-4651-4778-86f6-d491d52aae0d
+          cdf8412b-b123-49e3-9fbd-b6aad413fe8d:
+            id: 'entity_field:node:field_vih_course_periods'
+            label: 'Period:'
+            provider: ctools_block
+            label_display: '0'
+            formatter:
+              label: above
+              type: entity_reference_label
+              settings:
+                link: false
+              third_party_settings: {  }
+              weight: 0
+            region: left
+            weight: -4
+            context_mapping:
+              entity: '@panelizer.entity_context:entity'
+            uuid: cdf8412b-b123-49e3-9fbd-b6aad413fe8d
+          d8498d66-ba2d-45fc-a39f-e396c051dc70:
+            id: 'entity_field:node:field_vih_course_price'
+            label: Price
+            provider: ctools_block
+            label_display: '0'
+            formatter:
+              label: above
+              type: number_decimal
+              settings:
+                thousand_separator: ''
+                decimal_separator: .
+                scale: 2
+                prefix_suffix: true
+              third_party_settings: {  }
+              weight: 0
+            region: right
+            weight: -8
+            context_mapping:
+              entity: '@panelizer.entity_context:entity'
+            uuid: d8498d66-ba2d-45fc-a39f-e396c051dc70
+          cc2c11c3-b703-45ba-93e7-db4775b285ba:
+            id: 'entity_field:node:field_vih_course_subsc_price'
+            label: 'Subscription price'
+            provider: ctools_block
+            label_display: '0'
+            formatter:
+              label: above
+              type: number_decimal
+              settings:
+                thousand_separator: ''
+                decimal_separator: .
+                scale: 2
+                prefix_suffix: true
+              third_party_settings: {  }
+              weight: 0
+            region: right
+            weight: -6
+            context_mapping:
+              entity: '@panelizer.entity_context:entity'
+            uuid: cc2c11c3-b703-45ba-93e7-db4775b285ba
+          cb90f137-f963-4518-a74f-258b85f8dd89:
+            id: 'entity_field:node:field_vih_course_week_price'
+            label: 'Week price'
+            provider: ctools_block
+            label_display: '0'
+            formatter:
+              label: above
+              type: number_decimal
+              settings:
+                thousand_separator: ''
+                decimal_separator: .
+                scale: 2
+                prefix_suffix: true
+              third_party_settings: {  }
+              weight: 0
+            region: right
+            weight: -5
+            context_mapping:
+              entity: '@panelizer.entity_context:entity'
+            uuid: cb90f137-f963-4518-a74f-258b85f8dd89
+          2ddfcb30-d080-469c-ac16-2c93549017f3:
+            id: 'entity_field:node:field_vih_course_periods'
+            label: 'Period:'
+            provider: ctools_block
+            label_display: visible
+            formatter:
+              label: above
+              type: entity_reference_label
+              settings:
+                link: true
+              third_party_settings: {  }
+              weight: 0
+            region: right
+            weight: -2
+            uuid: 2ddfcb30-d080-469c-ac16-2c93549017f3
+            context_mapping:
+              entity: '@panelizer.entity_context:entity'
+        id: panels_variant
+        label: Default
+        uuid: 8cc64bf8-808c-48df-b6ed-dc141848f02e
+        weight: 0
+        layout: layout_twocol
+        layout_settings: {  }
+        page_title: null
+        storage_type: panelizer_default
+        storage_id: 'node:vih_long_cource:default:default'
+        builder: ipe
+        pattern: panelizer
+        static_context: {  }
+id: node.vih_long_cource.embedded_teaser_list
+targetEntityType: node
+bundle: vih_long_cource
+mode: embedded_teaser_list
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_metatag:
+    weight: 14
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_empty_formatter
+    region: content
+  field_vih_course_image:
+    type: entity_reference_entity_view
+    weight: 8
+    region: content
+    label: hidden
+    settings:
+      view_mode: vih_banner_smal
+      link: false
+    third_party_settings: {  }
+  field_vih_course_periods:
+    type: entity_reference_label
+    weight: 15
+    region: content
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+  field_vih_course_persons_limit:
+    type: number_integer
+    weight: 12
+    region: content
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+  field_vih_course_price:
+    weight: 4
+    label: hidden
+    settings:
+      thousand_separator: .
+      decimal_separator: ','
+      scale: 0
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_decimal
+    region: content
+  field_vih_course_status:
+    weight: 10
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_vih_course_subheading:
+    weight: 2
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_vih_course_subsc_price:
+    weight: 5
+    label: hidden
+    settings:
+      thousand_separator: .
+      decimal_separator: ','
+      scale: 0
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_decimal
+    region: content
+  field_vih_course_week_price:
+    weight: 6
+    label: hidden
+    settings:
+      thousand_separator: .
+      decimal_separator: ','
+      scale: 0
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_decimal
+    region: content
+  field_vih_paragraphs:
+    type: entity_reference_revisions_entity_view
+    weight: 9
+    region: content
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+  field_vih_top_banner:
+    weight: 13
+    label: hidden
+    settings:
+      link: true
+      view_mode: default
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+  links:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  scheduled_update:
+    weight: 11
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+hidden:
+  field_short_description: true
+  field_vih_top_banner_text: true
+  langcode: true

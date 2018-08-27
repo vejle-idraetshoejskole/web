@@ -1,0 +1,79 @@
+uuid: ab3d2fc2-44ca-4143-b805-74aa4f77fb46
+langcode: da
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.taxonomy_term.radio_selection
+    - field.field.taxonomy_term.vih_class.field_metatag
+    - field.field.taxonomy_term.vih_class.field_short_description
+    - field.field.taxonomy_term.vih_class.field_vih_class_class_packages
+    - field.field.taxonomy_term.vih_class.field_vih_class_color
+    - field.field.taxonomy_term.vih_class.field_vih_class_image
+    - field.field.taxonomy_term.vih_class.field_vih_class_material_price
+    - field.field.taxonomy_term.vih_class.field_vih_class_price_addition
+    - field.field.taxonomy_term.vih_class.field_vih_paragraphs
+    - field.field.taxonomy_term.vih_class.field_vih_subheading
+    - field.field.taxonomy_term.vih_class.field_vih_top_banner
+    - taxonomy.vocabulary.vih_class
+  module:
+    - panelizer
+third_party_settings:
+  panelizer:
+    enable: false
+    custom: false
+    allow: false
+    default: default
+id: taxonomy_term.vih_class.radio_selection
+targetEntityType: taxonomy_term
+bundle: vih_class
+mode: radio_selection
+content:
+  field_short_description:
+    type: basic_string
+    weight: 1
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  field_vih_class_image:
+    type: entity_reference_entity_view
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      view_mode: vih_class_teaser
+      link: false
+    third_party_settings: {  }
+  field_vih_class_material_price:
+    type: number_decimal
+    weight: 3
+    region: content
+    label: hidden
+    settings:
+      thousand_separator: ''
+      decimal_separator: .
+      scale: 2
+      prefix_suffix: true
+    third_party_settings: {  }
+  field_vih_class_price_addition:
+    type: number_decimal
+    weight: 2
+    region: content
+    label: hidden
+    settings:
+      thousand_separator: ''
+      decimal_separator: .
+      scale: 2
+      prefix_suffix: true
+    third_party_settings: {  }
+hidden:
+  description: true
+  field_metatag: true
+  field_questions: true
+  field_vih_class_class_packages: true
+  field_vih_class_color: true
+  field_vih_paragraphs: true
+  field_vih_subheading: true
+  field_vih_top_banner: true
+  field_vih_top_banner_text: true
+  langcode: true

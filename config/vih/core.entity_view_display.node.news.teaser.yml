@@ -1,0 +1,47 @@
+uuid: ee26dc42-fadf-40b3-8c79-065c7cb49ce7
+langcode: da
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.news.body
+    - field.field.node.news.field_metatag
+    - field.field.node.news.field_vih_news_tags
+    - field.field.node.news.field_vih_paragraphs
+    - field.field.node.news.field_vih_top_banner
+    - field.field.node.news.scheduled_update
+    - node.type.news
+  module:
+    - panelizer
+    - text
+    - user
+third_party_settings:
+  panelizer:
+    enable: false
+    custom: false
+    allow: false
+    default: default
+id: node.news.teaser
+targetEntityType: node
+bundle: news
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 0
+    settings:
+      trim_length: 100
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_metatag: true
+  field_vih_course_subheading: true
+  field_vih_image: true
+  field_vih_news_tags: true
+  field_vih_paragraphs: true
+  field_vih_top_banner: true
+  field_vih_top_banner_text: true
+  langcode: true
+  links: true
+  scheduled_update: true

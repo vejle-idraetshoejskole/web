@@ -17,7 +17,28 @@ blacklist:
   - 'node.type.vih_short_course*'
   - 'node.type.vih_short_course_order*'
   - 'paragraphs.paragraphs_type.short_course_list_*'
-graylist: {  }
+graylist:
+  - field.field.node.news.field_vih_paragraphs
+  - field.field.node.page.field_vih_paragraphs
+  - field.field.node.vih_long_cource.field_vih_paragraphs
+  - field.field.paragraph.vih_wrapper.field_vih_paragraphs
+  - field.field.taxonomy_term.vih_class.field_vih_paragraphs
+  - field.field.taxonomy_term.vih_class_package.field_vih_paragraphs
+  - field.field.user.user.field_vih_user_paragraphs
+  - 'core.entity_form_display.user.user.*'
+  - 'core.entity_view_display.user.user.*'
+  - 'core.entity_form_display.node.news.*'
+  - 'core.entity_view_display.node.news.*'
+  - 'core.entity_form_display.node.page.*'
+  - 'core.entity_view_display.node.page.*'
+  - 'core.entity_form_display.node.vih_long_cource.*'
+  - 'core.entity_view_display.node.vih_long_cource.*'
+  - 'core.entity_form_display.paragraph.vih_wrapper.*'
+  - 'core.entity_view_display.paragraph.vih_wrapper.*'
+  - 'core.entity_form_display.taxonomy_term.vih_class.*'
+  - 'core.entity_view_display.taxonomy_term.vih_class.*'
+  - 'core.entity_form_display.taxonomy_term.vih_class_package.*'
+  - 'core.entity_view_display.taxonomy_term.vih_class_package.*'
 graylist_dependents: false
 graylist_skip_equal: false
 weight: 0

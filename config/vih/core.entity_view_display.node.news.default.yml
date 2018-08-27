@@ -1,0 +1,105 @@
+uuid: 24bc5acc-57a9-47ba-8feb-2e7de472bad9
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.node.news.body
+    - field.field.node.news.field_metatag
+    - field.field.node.news.field_vih_course_subheading
+    - field.field.node.news.field_vih_image
+    - field.field.node.news.field_vih_news_tags
+    - field.field.node.news.field_vih_paragraphs
+    - field.field.node.news.field_vih_top_banner
+    - field.field.node.news.field_vih_top_banner_text
+    - field.field.node.news.scheduled_update
+    - node.type.news
+  module:
+    - entity_reference_revisions
+    - metatag
+    - panelizer
+    - text
+    - user
+third_party_settings:
+  panelizer:
+    enable: false
+    custom: false
+    allow: false
+    default: default
+id: node.news.default
+targetEntityType: node
+bundle: news
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_metatag:
+    weight: 7
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_empty_formatter
+    region: content
+  field_vih_course_subheading:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_vih_image:
+    weight: 3
+    label: hidden
+    settings:
+      view_mode: vih_banner_smal
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+  field_vih_news_tags:
+    type: entity_reference_label
+    weight: 4
+    region: content
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+  field_vih_paragraphs:
+    weight: 5
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    type: entity_reference_revisions_entity_view
+    region: content
+  field_vih_top_banner:
+    weight: 6
+    label: hidden
+    settings:
+      link: true
+      view_mode: default
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+  field_vih_top_banner_text:
+    weight: 8
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  links:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  langcode: true
+  scheduled_update: true
