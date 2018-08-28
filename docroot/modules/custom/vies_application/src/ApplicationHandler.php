@@ -41,7 +41,7 @@ class ApplicationHandler {
    * After school questions.
    */
   public static $afterSchool = [
-    'afterSchoolExpectation' => 'Hvad forventer du af et år på efterskole?',
+    'afterSchoolExpectation' => 'Vejle Idrætsefterskole det rigtige sted for mig fordi...',
     'afterSchoolHeardFrom'   => 'Hvor har du hørt om Vejle Idrætsefterskole?',
     'afterSchoolComment'     => 'Kommentar',
   ];
