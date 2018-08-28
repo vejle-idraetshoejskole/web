@@ -151,6 +151,9 @@
             },
             "drupal/entity_clone": {
                 "2945192 - Fatal error: Maximum function nesting level of '256' reached, aborting! With Support for sub-entity cloning patch": "https://www.drupal.org/files/issues/2018-08-24/max-nesting-level-2945192-11.patch"
+            },
+            "drupal/metatag": {
+                "2691313 - Metatag performance poor": "https://www.drupal.org/files/issues/2018-06-13/metatag-poor-performance-2691313-22.patch"
             }
         }
     }
