@@ -606,7 +606,7 @@ class ApplicationForm extends FormBase {
       '#required' => $required,
       '#default_value' => isset($default_values['cpr']) ? $default_values['cpr'] : NULL,
       '#pattern' => '[0-9]{10}',
-      '#field_prefix' => '<i type="button" class="icon icon-info-circle form-type-textfield__tooltip" aria-hidden="true" data-toggle="popover" data-placement="top" data-content="' . $cprHelpText . '"></i>',
+      '#field_suffix' => '<i type="button" class="icon icon-info-circle form-type-textfield__tooltip" aria-hidden="true" data-toggle="popover" data-placement="top" data-content="' . $cprHelpText . '"></i>',
     ];
 
     $personal_data['left']['telefon'] = [
