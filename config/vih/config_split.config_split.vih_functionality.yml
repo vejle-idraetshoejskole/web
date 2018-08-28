@@ -11,8 +11,6 @@ theme: {  }
 blacklist:
   - config_split.config_split.vih_functionality
   - metatag.settings
-  - 'node.type.event*'
-  - 'node.type.vih_event_order*'
   - 'node.type.vih_long_course_order*'
   - 'node.type.vih_short_course*'
   - 'node.type.vih_short_course_order*'
