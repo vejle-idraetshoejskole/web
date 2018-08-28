@@ -39,6 +39,8 @@ class SubscriptionsGeneralSettingsForm extends ConfigFormBase {
       ->getStorage('node_type')
       ->loadMultiple();
 
+    $languages = array_keys(\Drupal::languageManager()->getLanguages());
+
     $config = $this->config(SubscriptionsGeneralSettingsForm::$configName);
     $notification_description = $this->t("You can use the following replacement tokens: <br>
       <b>@subject_name</b> => Name of the course <br>
@@ -186,8 +188,6 @@ class SubscriptionsGeneralSettingsForm extends ConfigFormBase {
       ];
 
       //VIES is in Danish only.
-      $languages = array_keys(\Drupal::languageManager()->getLanguages());
-
       if (in_array('en', $languages)) {
         $form['vih_subscription_long_course_en'] = array(
         '#type' => 'details',
