@@ -54,6 +54,8 @@ class ShortCourseOrderForm extends FormBase {
     $form['#attached']['library'][] = 'vih_subscription/vih-subscription-suboptions-container';
 
     //START VARIABLES INIT //
+    $config = $this->config(SubscriptionsGeneralSettingsForm::$configName);
+
     $course = \Drupal::service('entity.repository')->getTranslationFromContext($course);
 
     $this->course = $course;
@@ -111,6 +113,10 @@ class ShortCourseOrderForm extends FormBase {
     if ($personsLimit == 0) { //unlimited
       $personsLimit = PHP_INT_MAX;
     }
+
+    $cprHelpText  = (\Drupal::languageManager()->getCurrentLanguage()
+        ->getId() === 'en') ? $config->get('vih_subscription_general_cpr_help_text_en') : $config->get('vih_subscription_general_cpr_help_text_da');
+
     //END VARIABLES INIT //
 
     //START GENERAL DATA //
@@ -187,6 +193,7 @@ class ShortCourseOrderForm extends FormBase {
           '#placeholder' => $this->t('CPR'),
           '#required' => TRUE,
           '#pattern' => '[0-9]{10}',
+          '#field_prefix' => '<i type="button" class="icon icon-info-circle form-type-textfield__tooltip" aria-hidden="true" data-toggle="popover" data-placement="top" data-content="' . $cprHelpText . '"></i>',
         );
 
         if (empty($addedParticipants)) {
@@ -418,8 +425,6 @@ class ShortCourseOrderForm extends FormBase {
     // END added participants container
 
     //START OTHER GENERAL DATA //
-    $config = $this->config(SubscriptionsGeneralSettingsForm::$configName);
-
     $form['#registration_text'] = (\Drupal::languageManager()->getCurrentLanguage()
         ->getId() === 'en') ? $config->get('vih_subscription_short_course_registration_page_text_en') : $config->get('vih_subscription_short_course_registration_page_text_da');
 

@@ -26,6 +26,12 @@
     text-align: right;
   }
 }
+.form-type-textfield .form-type-textfield__tooltip {
+  position: absolute;
+  margin-top: 43px;
+  right: 25px;
+  cursor: pointer;
+}
 
 // --------------------------------------------------
 // Variants
