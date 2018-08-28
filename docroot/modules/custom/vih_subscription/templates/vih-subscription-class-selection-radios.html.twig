@@ -2,8 +2,9 @@
 
     {% for delta, radio in radios['#options'] %}
         <div {{ attributes.addClass('entity-list-advanced', 'entity-list-advanced--class') }}>
-            {{ radios['#classes']['radio_selection'][delta] }}
-
+            <a class="link-modal" data-toggle="modal" data-target="#class-modal-{{ radios[delta]['#id'] }}">  
+                {{ radios['#classes']['radio_selection'][delta] }}
+            </a>
             <!-- Begin - action -->
             <div class="entity-list-advanced__action">
 
