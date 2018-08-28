@@ -39,6 +39,8 @@ class SubscriptionsGeneralSettingsForm extends ConfigFormBase {
       ->getStorage('node_type')
       ->loadMultiple();
 
+    $languages = array_keys(\Drupal::languageManager()->getLanguages());
+
     $config = $this->config(SubscriptionsGeneralSettingsForm::$configName);
     $notification_description = $this->t("You can use the following replacement tokens: <br>
       <b>@subject_name</b> => Name of the course <br>
@@ -134,49 +136,47 @@ class SubscriptionsGeneralSettingsForm extends ConfigFormBase {
       ];
 
       //VIES is in Danish only.
-      $languages = array_keys(\Drupal::languageManager()->getLanguages());
-
       if (in_array('en', $languages)) {
         $form['vih_subscription_long_course_en'] = array(
-        '#type' => 'details',
-        '#title' => $this
-            ->t('English'),
-        '#group' => 'vih_subscription_long_course_language_specific',
-      );
+          '#type' => 'details',
+          '#title' => $this
+              ->t('English'),
+          '#group' => 'vih_subscription_long_course_language_specific',
+        );
 
-      // Long course page registration text EN.
-      $form['vih_subscription_long_course_en']['vih_subscription_long_course_registration_page_text_en'] = [
-        '#type' => 'textarea',
-        '#title' => $this->t('Registration page text (English)'),
-        '#default_value' => $config->get('vih_subscription_long_course_registration_page_text_en'),
-      ];
+        // Long course page registration text EN.
+        $form['vih_subscription_long_course_en']['vih_subscription_long_course_registration_page_text_en'] = [
+          '#type' => 'textarea',
+          '#title' => $this->t('Registration page text (English)'),
+          '#default_value' => $config->get('vih_subscription_long_course_registration_page_text_en'),
+        ];
 
-      // Long course notification EN.
-      $form['vih_subscription_long_course_en']['vih_subscription_notifications_long_course_fs_en'] = [
-        '#type' => 'details',
-        '#title' => $this->t('Notifications (english)'),
-        '#open' => TRUE,
-      ];
-      $form['vih_subscription_long_course_en']['vih_subscription_notifications_long_course_fs_en']['vih_subscription_long_course_notifications_bcc_en'] = [
-        '#type' => 'textfield',
-        '#title' => $this->t('Bcc'),
-        '#default_value' => $config->get('vih_subscription_long_course_notifications_bcc_en'),
-        '#description' => $this->t('Example: email@vih.dk,email2@gmail.com')
-      ];
-      $form['vih_subscription_long_course_en']['vih_subscription_notifications_long_course_fs_en']['vih_subscription_long_course_notifications_subject_en'] = [
-        '#type' => 'textfield',
-        '#title' => $this->t('Subject'),
-        '#default_value' => $config->get('vih_subscription_long_course_notifications_subject_en'),
-      ];
-      $form['vih_subscription_long_course_en']['vih_subscription_notifications_long_course_fs_en']['vih_subscription_long_course_notifications_body_en'] = [
-        '#type' => 'textarea',
-        '#title' => $this->t('Body'),
-        '#default_value' => $config->get('vih_subscription_long_course_notifications_body_en'),
-        '#description' => $notification_description,
-      ];
-      // Long course language specific END.
-    }
+        // Long course notification EN.
+        $form['vih_subscription_long_course_en']['vih_subscription_notifications_long_course_fs_en'] = [
+          '#type' => 'details',
+          '#title' => $this->t('Notifications (english)'),
+          '#open' => TRUE,
+        ];
+        $form['vih_subscription_long_course_en']['vih_subscription_notifications_long_course_fs_en']['vih_subscription_long_course_notifications_bcc_en'] = [
+          '#type' => 'textfield',
+          '#title' => $this->t('Bcc'),
+          '#default_value' => $config->get('vih_subscription_long_course_notifications_bcc_en'),
+          '#description' => $this->t('Example: email@vih.dk,email2@gmail.com')
+        ];
+        $form['vih_subscription_long_course_en']['vih_subscription_notifications_long_course_fs_en']['vih_subscription_long_course_notifications_subject_en'] = [
+          '#type' => 'textfield',
+          '#title' => $this->t('Subject'),
+          '#default_value' => $config->get('vih_subscription_long_course_notifications_subject_en'),
+        ];
+        $form['vih_subscription_long_course_en']['vih_subscription_notifications_long_course_fs_en']['vih_subscription_long_course_notifications_body_en'] = [
+          '#type' => 'textarea',
+          '#title' => $this->t('Body'),
+          '#default_value' => $config->get('vih_subscription_long_course_notifications_body_en'),
+          '#description' => $notification_description,
+        ];
+        // Long course language specific END.
       }
+    }
     /**
      * Long course end.
      */
@@ -386,7 +386,7 @@ class SubscriptionsGeneralSettingsForm extends ConfigFormBase {
           '#group' => 'vih_subscription_event_language_specific',
         );
 
-      // Event page registration text EN.
+        // Event page registration text EN.
         $form['vih_subscription_event_en']['vih_subscription_event_registration_page_text_en'] = [
           '#type' => 'textarea',
           '#title' => $this->t('Registration page text (English)'),
