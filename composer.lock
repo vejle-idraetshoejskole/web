@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e829d86f355a0e62e884ce320b4e5df8",
+    "content-hash": "d3cf1f4560ae594bc36ad6f2e27614f2",
     "packages": [
         {
             "name": "acquia/lightning",
@@ -3224,7 +3224,7 @@
                     }
                 },
                 "patches_applied": {
-                    "2945192 - Fatal error: Maximum function nesting level of '256' reached, aborting! With Support for sub-entity cloning patch": "https://www.drupal.org/files/issues/2018-07-02/max-nesting-level-2945192-10_0.patch"
+                    "2945192 - Fatal error: Maximum function nesting level of '256' reached, aborting! With Support for sub-entity cloning patch": "https://www.drupal.org/files/issues/2018-08-24/max-nesting-level-2945192-11.patch"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -3639,11 +3639,17 @@
         },
         {
             "name": "drupal/field_group",
-            "version": "dev-3.x",
+            "version": "3.0.0-beta1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/field_group",
-                "reference": "072bf212d8e13aa242a4e274e5a4837a0e0ffc5e"
+                "reference": "8.x-3.0-beta1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/field_group-8.x-3.0-beta1.zip",
+                "reference": "8.x-3.0-beta1",
+                "shasum": "a5dfb66385be7a1b3db232e49779d5bc530a048e"
             },
             "require": {
                 "drupal/core": "*"
@@ -3654,11 +3660,11 @@
                     "dev-3.x": "3.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-3.0-beta1+20-dev",
-                    "datestamp": "1533547380",
+                    "version": "8.x-3.0-beta1",
+                    "datestamp": "1510352338",
                     "security-coverage": {
                         "status": "not-covered",
-                        "message": "Dev releases are not covered by Drupal security advisories."
+                        "message": "Beta releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -3692,8 +3698,7 @@
             "homepage": "https://www.drupal.org/project/field_group",
             "support": {
                 "source": "http://cgit.drupalcode.org/field_group"
-            },
-            "time": "2018-08-06T10:30:37+00:00"
+            }
         },
         {
             "name": "drupal/focal_point",
@@ -14840,7 +14845,6 @@
         "drupal/layout_plugin": 15,
         "drupal/page_manager": 10,
         "drupal/coffee": 20,
-        "drupal/field_group": 20,
         "drupal/url_embed": 20,
         "drupal/focal_point": 10,
         "drupal/owlcarousel": 15,
