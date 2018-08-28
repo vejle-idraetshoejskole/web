@@ -5,4 +5,4 @@ dependencies: {  }
 id: long_w_a_time
 label: 'Standard lang dato (w/a time)'
 locked: false
-pattern: 'l, F j, Y'
+pattern: 'l j. F Y'
