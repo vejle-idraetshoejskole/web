@@ -6,11 +6,13 @@ dependencies:
     - entity_browser.browser.media_browser
     - field.field.paragraph.list_of_news_teasers.field_vih_background_color
     - field.field.paragraph.list_of_news_teasers.field_vih_background_img
+    - field.field.paragraph.list_of_news_teasers.field_vih_empty_message
     - field.field.paragraph.list_of_news_teasers.field_vih_heading
     - field.field.paragraph.list_of_news_teasers.field_vih_link
     - field.field.paragraph.list_of_news_teasers.field_vih_tags
     - paragraphs.paragraphs_type.list_of_news_teasers
   module:
+    - content_moderation
     - entity_browser
     - field_group
     - link
@@ -21,7 +23,7 @@ third_party_settings:
         - field_vih_background_img
         - field_vih_background_color
       parent_name: ''
-      weight: 3
+      weight: 4
       format_type: tab
       format_settings:
         id: ''
@@ -56,6 +58,14 @@ content:
       open: true
     region: content
     third_party_settings: {  }
+  field_vih_empty_message:
+    weight: 3
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
   field_vih_heading:
     weight: 0
     settings:
@@ -80,19 +90,19 @@ content:
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
-    weight: 100
+    weight: 7
     settings: {  }
     region: content
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 5
+    weight: 6
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   translation:
-    weight: 4
+    weight: 5
     region: content
     settings: {  }
     third_party_settings: {  }

@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.paragraph.list_of_news_teasers.field_vih_background_color
     - field.field.paragraph.list_of_news_teasers.field_vih_background_img
+    - field.field.paragraph.list_of_news_teasers.field_vih_empty_message
     - field.field.paragraph.list_of_news_teasers.field_vih_heading
     - field.field.paragraph.list_of_news_teasers.field_vih_link
     - field.field.paragraph.list_of_news_teasers.field_vih_tags
@@ -16,6 +17,13 @@ targetEntityType: paragraph
 bundle: list_of_news_teasers
 mode: default
 content:
+  field_vih_empty_message:
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
   field_vih_heading:
     weight: 0
     label: hidden
