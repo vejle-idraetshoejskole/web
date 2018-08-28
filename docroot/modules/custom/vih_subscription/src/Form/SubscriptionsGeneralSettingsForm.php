@@ -39,6 +39,8 @@ class SubscriptionsGeneralSettingsForm extends ConfigFormBase {
       ->getStorage('node_type')
       ->loadMultiple();
 
+    $languages = array_keys(\Drupal::languageManager()->getLanguages());
+
     $config = $this->config(SubscriptionsGeneralSettingsForm::$configName);
     $notification_description = $this->t("You can use the following replacement tokens: <br>
       <b>@subject_name</b> => Name of the course <br>
@@ -47,6 +49,58 @@ class SubscriptionsGeneralSettingsForm extends ConfigFormBase {
       <b>@url</b> => Link to the course <br>
       <b>@order</b> => Order full information <br>
       <b>@order_id</b> => Order ID");
+
+
+    /**
+     * General start.
+     */
+    $form['vih_subscription_settings_general_fs'] = [
+      '#type' => 'details',
+      '#title' => $this->t('General settings'),
+      '#open' => FALSE,
+    ];
+
+    // General language specific START.
+    $form['vih_subscription_settings_general_fs']['vih_subscription_general_language_specific'] = array(
+      '#type' => 'vertical_tabs',
+      '#default_tab' => 'edit-vih-subscription-general-da',
+    );
+
+    $form['vih_subscription_general_da'] = array(
+      '#type' => 'details',
+      '#title' => $this
+          ->t('Danish'),
+      '#group' => 'vih_subscription_general_language_specific',
+      '#weight' => -1
+    );
+
+    // General CPR help text DA.
+    $form['vih_subscription_general_da']['vih_subscription_general_cpr_help_text_da'] = [
+      '#type' => 'textarea',
+      '#title' => $this->t('CPR field help text (Danish)'),
+      '#default_value' => $config->get('vih_subscription_general_cpr_help_text_da'),
+    ];
+
+    //VIES is in Danish only.
+    if (in_array('en', $languages)) {
+      $form['vih_subscription_general_en'] = array(
+        '#type' => 'details',
+        '#title' => $this
+            ->t('English'),
+        '#group' => 'vih_subscription_general_language_specific',
+      );
+
+      // General CPR help text EN.
+      $form['vih_subscription_general_en']['vih_subscription_general_cpr_help_text_en'] = [
+        '#type' => 'textarea',
+        '#title' => $this->t('CPR field help text (English)'),
+        '#default_value' => $config->get('vih_subscription_general_cpr_help_text_en'),
+      ];
+      // General language specific END.
+    }
+    /**
+     * General end.
+     */
 
     /**
      * Long course start.
@@ -134,8 +188,6 @@ class SubscriptionsGeneralSettingsForm extends ConfigFormBase {
       ];
 
       //VIES is in Danish only.
-      $languages = array_keys(\Drupal::languageManager()->getLanguages());
-
       if (in_array('en', $languages)) {
         $form['vih_subscription_long_course_en'] = array(
         '#type' => 'details',

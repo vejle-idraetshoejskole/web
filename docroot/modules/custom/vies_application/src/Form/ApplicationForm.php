@@ -8,6 +8,7 @@ use Drupal\Core\Locale\CountryManager;
 use Drupal\node\Entity\Node;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\vies_application\ApplicationHandler;
+use Drupal\vih_subscription\Form\SubscriptionsGeneralSettingsForm;
 
 /**
  * Class ApplicationForm.
@@ -593,13 +594,21 @@ class ApplicationForm extends FormBase {
       '#required' => $required,
       '#default_value' => isset($default_values['lastName']) ? $default_values['lastName'] : NULL,
     ];
+
+    $config = $this->config(SubscriptionsGeneralSettingsForm::$configName);
+    $cprHelpText  = (\Drupal::languageManager()->getCurrentLanguage()
+        ->getId() === 'en') ? $config->get('vih_subscription_general_cpr_help_text_en') : $config->get('vih_subscription_general_cpr_help_text_da');
+
     $personal_data['left']['cpr'] = [
       '#type' => 'textfield',
       '#title' => 'CPR',
-      '#placeholder' => 'xxxxxx-xxxx',
+      '#placeholder' => 'xxxxxxxxxx',
       '#required' => $required,
       '#default_value' => isset($default_values['cpr']) ? $default_values['cpr'] : NULL,
+      '#pattern' => '[0-9]{10}',
+      '#field_suffix' => '<i type="button" class="icon icon-info-circle form-type-textfield__tooltip" aria-hidden="true" data-toggle="popover" data-placement="top" data-content="' . $cprHelpText . '"></i>',
     ];
+
     $personal_data['left']['telefon'] = [
       '#type' => 'textfield',
       '#title' => 'Telefon',
