@@ -1,0 +1,89 @@
+uuid: 4f0a18ab-d657-447b-89bd-f21fc35daa56
+langcode: da
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.user.compact
+    - field.field.user.user.field_vih_top_banner
+    - field.field.user.user.field_vih_top_banner_text
+    - field.field.user.user.field_vih_user_birthday
+    - field.field.user.user.field_vih_user_descr
+    - field.field.user.user.field_vih_user_email
+    - field.field.user.user.field_vih_user_job_title
+    - field.field.user.user.field_vih_user_name_first
+    - field.field.user.user.field_vih_user_name_last
+    - field.field.user.user.field_vih_user_paragraphs
+    - field.field.user.user.field_vih_user_phone
+    - field.field.user.user.field_vih_user_photo
+    - field.field.user.user.field_vih_user_qualifications
+    - field.field.user.user.field_vih_user_type_id
+  module:
+    - panelizer
+    - text
+    - user
+third_party_settings:
+  panelizer:
+    enable: false
+    custom: false
+    allow: false
+    default: default
+id: user.user.compact
+targetEntityType: user
+bundle: user
+mode: compact
+content:
+  field_vih_user_descr:
+    type: text_trimmed
+    weight: 4
+    label: hidden
+    settings:
+      trim_length: 150
+    third_party_settings: {  }
+    region: content
+  field_vih_user_name_first:
+    type: string
+    weight: 1
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_vih_user_name_last:
+    type: string
+    weight: 2
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_vih_user_phone:
+    type: string
+    weight: 3
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    region: content
+  field_vih_user_photo:
+    type: entity_reference_entity_view
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      view_mode: vih_person_teaser_
+      link: false
+    third_party_settings: {  }
+hidden:
+  field_banner: true
+  field_metatag: true
+  field_vih_top_banner: true
+  field_vih_top_banner_text: true
+  field_vih_user_birthday: true
+  field_vih_user_email: true
+  field_vih_user_job_title: true
+  field_vih_user_paragraphs: true
+  field_vih_user_qualifications: true
+  field_vih_user_type_id: true
+  langcode: true
+  member_for: true
+  vih_user_status: true

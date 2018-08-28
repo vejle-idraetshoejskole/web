@@ -1,0 +1,73 @@
+uuid: 7542e609-0a8f-401f-a6f4-0d674c392961
+langcode: da
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.vih_long_cource.body
+    - field.field.node.vih_long_cource.field_metatag
+    - field.field.node.vih_long_cource.field_short_description
+    - field.field.node.vih_long_cource.field_vih_course_image
+    - field.field.node.vih_long_cource.field_vih_course_periods
+    - field.field.node.vih_long_cource.field_vih_course_persons_limit
+    - field.field.node.vih_long_cource.field_vih_course_price
+    - field.field.node.vih_long_cource.field_vih_course_status
+    - field.field.node.vih_long_cource.field_vih_course_subheading
+    - field.field.node.vih_long_cource.field_vih_course_subsc_price
+    - field.field.node.vih_long_cource.field_vih_course_week_price
+    - field.field.node.vih_long_cource.field_vih_lc_end_date
+    - field.field.node.vih_long_cource.field_vih_lc_start_date
+    - field.field.node.vih_long_cource.field_vih_paragraphs
+    - field.field.node.vih_long_cource.field_vih_top_banner
+    - field.field.node.vih_long_cource.field_vih_top_banner_text
+    - field.field.node.vih_long_cource.scheduled_update
+    - node.type.vih_long_cource
+  module:
+    - panelizer
+    - user
+third_party_settings:
+  panelizer:
+    enable: false
+    custom: false
+    allow: false
+    default: default
+id: node.vih_long_cource.teaser
+targetEntityType: node
+bundle: vih_long_cource
+mode: teaser
+content:
+  field_short_description:
+    type: basic_string
+    weight: 1
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  field_vih_course_image:
+    type: entity_reference_entity_view
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      view_mode: vih_general_teaser_image
+      link: false
+    third_party_settings: {  }
+hidden:
+  body: true
+  field_banner: true
+  field_metatag: true
+  field_vih_course_periods: true
+  field_vih_course_persons_limit: true
+  field_vih_course_price: true
+  field_vih_course_status: true
+  field_vih_course_subheading: true
+  field_vih_course_subsc_price: true
+  field_vih_course_week_price: true
+  field_vih_lc_end_date: true
+  field_vih_lc_start_date: true
+  field_vih_paragraphs: true
+  field_vih_top_banner: true
+  field_vih_top_banner_text: true
+  langcode: true
+  links: true
+  scheduled_update: true

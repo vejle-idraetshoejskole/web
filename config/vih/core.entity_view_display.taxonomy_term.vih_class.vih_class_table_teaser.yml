@@ -1,0 +1,59 @@
+uuid: 63e87ce4-4c5b-4088-bc32-5217a6e1e722
+langcode: da
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.taxonomy_term.vih_class_table_teaser
+    - field.field.taxonomy_term.vih_class.field_metatag
+    - field.field.taxonomy_term.vih_class.field_short_description
+    - field.field.taxonomy_term.vih_class.field_vih_class_class_packages
+    - field.field.taxonomy_term.vih_class.field_vih_class_color
+    - field.field.taxonomy_term.vih_class.field_vih_class_image
+    - field.field.taxonomy_term.vih_class.field_vih_class_material_price
+    - field.field.taxonomy_term.vih_class.field_vih_class_price_addition
+    - field.field.taxonomy_term.vih_class.field_vih_paragraphs
+    - field.field.taxonomy_term.vih_class.field_vih_subheading
+    - field.field.taxonomy_term.vih_class.field_vih_top_banner
+    - taxonomy.vocabulary.vih_class
+  module:
+    - panelizer
+third_party_settings:
+  panelizer:
+    enable: false
+    custom: false
+    allow: false
+    default: default
+id: taxonomy_term.vih_class.vih_class_table_teaser
+targetEntityType: taxonomy_term
+bundle: vih_class
+mode: vih_class_table_teaser
+content:
+  field_short_description:
+    type: basic_string
+    weight: 1
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  field_vih_class_image:
+    type: entity_reference_entity_view
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      view_mode: vih_class_teaser
+      link: false
+    third_party_settings: {  }
+hidden:
+  description: true
+  field_metatag: true
+  field_questions: true
+  field_vih_class_class_packages: true
+  field_vih_class_color: true
+  field_vih_class_material_price: true
+  field_vih_class_price_addition: true
+  field_vih_paragraphs: true
+  field_vih_subheading: true
+  field_vih_top_banner: true
+  field_vih_top_banner_text: true
+  langcode: true
