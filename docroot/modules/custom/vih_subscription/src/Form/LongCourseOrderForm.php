@@ -92,6 +92,7 @@ class LongCourseOrderForm extends FormBase {
           $radiosOptions[$class->id()] = ''; //$this->t('Vælg');
 
           $classesRadioSelections[$class->id()] = taxonomy_term_view($class, 'radio_selection');
+          $classesRadioSelections[$class->id()]['#modal'] = taxonomy_term_view($class, 'modal_window');
         }
 
         $form[$availableClassesCid] = array(
