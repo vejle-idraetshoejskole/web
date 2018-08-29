@@ -218,9 +218,6 @@ table .btn-radio-select.active {
 .path-node .paragraph--type--class-packages .angled-background-inner {
   margin-bottom: 100px;
 }
-.popover .arrow {
-  display: none;
-}
 .popover #search-form {
   height: 100%;
 }
@@ -303,24 +300,6 @@ ul.layout-navigation__link {
       }
     }
   }
-}
-.popover-content {
-  padding: 0;
-  height: 100%
-}
-.popover {
-  position: absolute;
-  left: 0 !important;
-  top: 80px !important;
-  z-index: 2;
-  /*    top: 57px !important;*/
-  margin-right: -5px;
-  overflow: hidden;
-  height: 68px;
-}
-.popover-content input {
-  border: none;
-  box-shadow: none;
 }
 .field--name-field-video {
   width: 100%;
@@ -634,12 +613,6 @@ div[role=heading] {
   font-size: 16px;
   font-weight: bold;
   opacity: 1;
-}
-.popover {
-  border-radius: 0px;
-}
-.popover .glyphicon-search {
-  color: #fff;
 }
 .path-frontpage .field--name-field-heading p {
   font-weight: bold !important;

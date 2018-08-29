@@ -422,10 +422,22 @@ function site_preprocess_paragraph__list_of_news_teasers(&$variables) {
 
     $contextual_filter = implode('+', $ids);
 
-    $variables['content']['embedded_view'] = views_embed_view('vih_news_teaser', 'embedded_list', $contextual_filter);
+    if (!empty(views_get_view_result('vih_news_teaser', 'embedded_list', $contextual_filter))) {
+
+      // Result not empty, unsetting the empty message.
+      unset($variables['content']['field_vih_empty_message']);
+
+      $variables['content']['embedded_view'] = views_embed_view('vih_news_teaser', 'embedded_list', $contextual_filter);
+    }
   }
   else {
-    $variables['content']['embedded_view'] = views_embed_view('vih_news_teaser', 'embedded_list');
+    if (!empty(views_get_view_result('vih_news_teaser', 'embedded_list'))) {
+
+      // Result not empty, unsetting the empty message.
+      unset($variables['content']['field_vih_empty_message']);
+
+      $variables['content']['embedded_view'] = views_embed_view('vih_news_teaser', 'embedded_list');
+    }
   }
 }
 
@@ -444,10 +456,22 @@ function site_preprocess_paragraph__vih_list_of_news_list_advanced(&$variables) 
 
     $contextual_filter = implode('+', $ids);
 
-    $variables['content']['embedded_view'] = views_embed_view('vih_news_list_advanced', 'embedded_list', $contextual_filter);
+    if (!empty(views_get_view_result('vih_news_list_advanced', 'embedded_list', $contextual_filter))) {
+
+      // Result not empty, unsetting the empty message.
+      unset($variables['content']['field_vih_empty_message']);
+
+      $variables['content']['embedded_view'] = views_embed_view('vih_news_list_advanced', 'embedded_list', $contextual_filter);
+    }
   }
   else {
-    $variables['content']['embedded_view'] = views_embed_view('vih_news_list_advanced', 'embedded_list');
+    if (!empty(views_get_view_result('vih_news_list_advanced', 'embedded_list'))) {
+
+      // Result not empty, unsetting the empty message.
+      unset($variables['content']['field_vih_empty_message']);
+
+      $variables['content']['embedded_view'] = views_embed_view('vih_news_list_advanced', 'embedded_list');
+    }
   }
 }
 

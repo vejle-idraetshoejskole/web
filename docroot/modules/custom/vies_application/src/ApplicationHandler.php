@@ -331,11 +331,17 @@ class ApplicationHandler {
       . '/themes/custom/site/dist/images/layout-header-logo-vies.png" alt="VIH" />'
       . '</div><br>';
 
+    $config = \Drupal::config(SubscriptionsGeneralSettingsForm::$configName);
+    $mail_bcc = $config->get('vih_subscription_application_notifications_bcc_da');
+    $mail_subject = $config->get('vih_subscription_application_notifications_subject_da');
+    $mail_body = $config->get('vih_subscription_application_notifications_body_da');
+
     $token = ['@subject_name', '@person_name', '@url', '@application'];
     $message = [
       'to' => $this->application->field_vies_email->value,
-      'subject' => "Ansøgning til @subject_name",
-      'body' => "Hej @person_name,<br>\r\ntak for din ansøgning @subject_name.<br>\r\nAnsøgnings detaljer:<br><br>\r\n @application\r\n",
+      'subject' => $mail_subject,
+      'body' => $mail_body,
+      'Bcc' => $mail_bcc,
     ];
 
     $application_url = Url::fromRoute('vies_application.application_form')->setAbsolute()->toString();

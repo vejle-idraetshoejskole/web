@@ -103,22 +103,27 @@ function vies_application_form_alter(&$form, \Drupal\Core\Form\FormStateInterfac
         $entities[$key]['#label'] = $label;
       }
     }
-  }
-  if($form['#form_id'] == 'vih_subscription_subscriptons_general_settings_form'){
-    $config = \Drupal::config(SubscriptionsGeneralSettingsForm::$configName);
-    $form['vih_subscription_settings_apliction_fs'] = [
-      '#type' => 'details',
-      '#title' => t('Application settings'),
-      '#open' => FALSE,
-    ];
-    // vies_application.application_form_success page.
-      $form['vih_subscription_settings_apliction_fs']['vih_subscription_aplication_success_page'] = [
-        '#type' => 'entity_autocomplete',
-        '#target_type' => 'node',
-        '#selection_settings' => ['target_bundles' => ['page']],
-        '#title' => t('Application success page'),
-        '#default_value' => !empty($config->get('vih_subscription_aplication_success_page')) ? Node::load($config->get('vih_subscription_aplication_success_page')) : NULL,
-        '#description' => t("You can use any 'page' node as '/ansogning/success' page"),
-      ];
+
+    // Getting application node.
+    $applicationNode = $form_state->getFormObject()->getEntity();
+    if (isset($applicationNode->field_vies_class->entity)) {
+      // Getting class referenced labels.
+      $classTerm = $applicationNode->field_vies_class->entity;
+
+      $referencedLabels = array();
+
+      if ($classTerm->field_vies_valuation_labels) {
+        foreach ($classTerm->field_vies_valuation_labels->getValue() as $reference) {
+          $referencedLabels[] = $reference['target_id'];
+        }
+      }
+
+      // Limiting the labels choice.
+      foreach (array_keys($form['field_vies_label']['widget']['#options']) as $key) {
+        if (!in_array($key, $referencedLabels)) {
+          unset($form['field_vies_label']['widget']['#options'][$key]);
+        }
+      }
+    }
   }
 }

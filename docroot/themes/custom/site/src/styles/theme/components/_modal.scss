@@ -102,8 +102,14 @@ $modal-margin: 70px;
   h2 {
     margin-top: 0;
   }
+  & > .banner{
+    display: none;
+  }
+  & .container{
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
-
 // Admin fix
 .toolbar-horizontal.toolbar-fixed {
 

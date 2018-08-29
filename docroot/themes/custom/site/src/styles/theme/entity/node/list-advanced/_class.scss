@@ -21,13 +21,20 @@
 .entity-list-advanced--class {
 
   .entity-list-advanced__image {
-    cursor: hand;
     cursor: pointer;
   }
   & a.link-cover{
     width: 100%;
     height: 100%;
     position: absolute;
+  }
+  & > a.link-modal{
+    color: unset;
+    display: contents;
+    &:hover, &:active, &:focus{
+      color: unset;
+      text-decoration: none;
+    }
   }
 }
 

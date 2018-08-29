@@ -44,6 +44,8 @@ class LongCourseOrderForm extends FormBase {
     $form['#attached']['library'][] = 'vih_subscription/vih-subscription-accordion-class-selection';
     $form['#attached']['library'][] = 'vih_subscription/vih-subscription-terms-and-conditions-modal';
 
+    $config = $this->config(SubscriptionsGeneralSettingsForm::$configName);
+
     $this->course = $course;
     if ($order != NULL) {
       if (Crypt::hashEquals($checksum, VihSubscriptionUtils::generateChecksum($course, $order))) {
@@ -90,6 +92,7 @@ class LongCourseOrderForm extends FormBase {
           $radiosOptions[$class->id()] = ''; //$this->t('Vælg');
 
           $classesRadioSelections[$class->id()] = taxonomy_term_view($class, 'radio_selection');
+          $classesRadioSelections[$class->id()]['#modal'] = taxonomy_term_view($class, 'modal_window');
         }
 
         $form[$availableClassesCid] = array(
@@ -104,6 +107,9 @@ class LongCourseOrderForm extends FormBase {
         );
       }
     }
+
+    $cprHelpText  = (\Drupal::languageManager()->getCurrentLanguage()
+        ->getId() === 'en') ? $config->get('vih_subscription_general_cpr_help_text_en') : $config->get('vih_subscription_general_cpr_help_text_da');
 
     //Personal data - left side
     $form['personalDataLeft'] = array(
@@ -127,6 +133,7 @@ class LongCourseOrderForm extends FormBase {
       '#placeholder' => $this->t('CPR'),
       '#required' => TRUE,
       '#pattern' => '[0-9]{10}',
+      '#field_suffix' => '<i type="button" class="icon icon-info-circle form-type-textfield__tooltip" aria-hidden="true" data-toggle="popover" data-placement="top" data-content="' . $cprHelpText . '"></i>',
     );
     $form['personalDataLeft']['telefon'] = array(
       '#type' => 'textfield',
@@ -323,8 +330,6 @@ class LongCourseOrderForm extends FormBase {
     }
 
     $form['#theme'] = 'vih_subscription_long_course_order_form';
-
-    $config = $this->config(SubscriptionsGeneralSettingsForm::$configName);
 
     $form['#registration_text'] = (\Drupal::languageManager()->getCurrentLanguage()
         ->getId() === 'en') ? $config->get('vih_subscription_long_course_registration_page_text_en') : $config->get('vih_subscription_long_course_registration_page_text_da');

@@ -1,0 +1,19 @@
+uuid: 9515bd13-f441-4083-99f9-ea74397669a7
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_vih_empty_message
+    - paragraphs.paragraphs_type.list_of_news_teasers
+id: paragraph.list_of_news_teasers.field_vih_empty_message
+field_name: field_vih_empty_message
+entity_type: paragraph
+bundle: list_of_news_teasers
+label: 'Tom tekst'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

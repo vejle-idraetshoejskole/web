@@ -22,7 +22,7 @@ blacklist:
   - 'taxonomy.vocabulary.questions*'
   - 'taxonomy.vocabulary.valuation_labels*'
   - 'taxonomy.vocabulary.valuation_statuses*'
-  - 'field.field.taxonomy_term.vih_class.field_vies_questions*'
+  - 'field.field.taxonomy_term.vih_class.field_vies*'
   - 'field.storage.node.field_vies_class_questions*'
   - 'paragraphs.paragraphs_type.app_answer*'
   - 'field.storage.node.field_vies*'
