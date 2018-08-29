@@ -331,13 +331,13 @@ class VihSubscriptionUtils {
    */
   public static function formatAddressToString($addressArr) {
     $address = empty($addressArr['address']) ? '' : $addressArr['address'];
-    if (isset($addressArr['houseNumber'])) {
+    if (isset($addressArr['houseNumber']) && !empty(trim($addressArr['houseNumber']))) {
       $address .= ' ' . $addressArr['houseNumber'];
     }
-    if (isset($addressArr['houseLetter'])) {
+    if (isset($addressArr['houseLetter']) && !empty(trim($addressArr['houseLetter']))) {
       $address .= ', ' . $addressArr['houseLetter'];
     }
-    if (isset($addressArr['houseFloor'])) {
+    if (isset($addressArr['houseFloor']) && !empty(trim($addressArr['houseFloor']))) {
       $address .= ', ' . $addressArr['houseFloor'];
     }
 

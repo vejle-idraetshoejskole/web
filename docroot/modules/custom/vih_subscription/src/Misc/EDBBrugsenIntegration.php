@@ -172,7 +172,7 @@ class EDBBrugsenIntegration {
     $registration['Elev.Email'] = $data['email'];
     $registration['Elev.CprNr'] = $data['cpr'];
     $registration['Elev.Land'] = $data['country'];
-    if (isset($data['afterSchoolComment'])) {
+    if (isset($data['afterSchoolComment']) && isset($data['afterSchoolComment']['answer'])) {
       $registration['Elev.Notat'] = $data['afterSchoolComment']['answer'];
     }
 
