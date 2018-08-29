@@ -875,10 +875,10 @@ ignored_config_entities:
   1746: ~field.field.scheduled_update.node_embargo.field_moderation_state
   1748: ~field.field.scheduled_update.vih_user_status_update.field_vih_usu_status
   1750: ~field.field.taxonomy_term.questions.field_vies_answer
-  1752: ~field.field.taxonomy_term.questions.field_vies_valuation_labels
-  1754: ~field.field.taxonomy_term.questions.field_vies_question_type
-  1756: ~field.field.taxonomy_term.vih_class.field_metatag
-  1758: ~field.field.taxonomy_term.vih_class.field_vies_questions
+  1752: ~field.field.taxonomy_term.questions.field_vies_question_type
+  1754: ~field.field.taxonomy_term.vih_class.field_metatag
+  1756: ~field.field.taxonomy_term.vih_class.field_vies_questions
+  1758: ~field.field.taxonomy_term.vih_class.field_vies_valuation_labels
   1760: ~field.field.taxonomy_term.vih_class.field_short_description
   1762: ~field.field.taxonomy_term.vih_class.field_vih_class_class_packages
   1764: ~field.field.taxonomy_term.vih_class.field_vih_class_color
