@@ -475,6 +475,69 @@ class SubscriptionsGeneralSettingsForm extends ConfigFormBase {
      * Event end.
      */
 
+    /**
+     * Application form start.
+     */
+    if (array_key_exists('vies_application_form', $existingContentTypes)) {
+      $config = \Drupal::config(SubscriptionsGeneralSettingsForm::$configName);
+      $form['vih_subscription_settings_application_fs'] = [
+        '#type' => 'details',
+        '#title' => t('Application settings'),
+        '#open' => FALSE,
+      ];
+      // vies_application.application_form_success page.
+      $form['vih_subscription_settings_application_fs']['vih_subscription_application_success_page'] = [
+        '#type' => 'entity_autocomplete',
+        '#target_type' => 'node',
+        '#selection_settings' => ['target_bundles' => ['page']],
+        '#title' => t('Application success page'),
+        '#default_value' => !empty($config->get('vih_subscription_application_success_page')) ? Node::load($config->get('vih_subscription_application_success_page')) : NULL,
+        '#description' => t("You can use any 'page' node as '/ansogning/success' page"),
+      ];
+
+      $form['vih_subscription_settings_application_fs']['vih_subscription_application_language_specific'] = array(
+        '#type' => 'vertical_tabs',
+        '#default_tab' => 'edit-vih-subscription-application-da',
+      );
+
+      $form['edit-vih-subscription-application-da'] = array(
+        '#type' => 'details',
+        '#title' => t('Danish'),
+        '#group' => 'vih_subscription_application_language_specific',
+        '#weight' => -1
+      );
+
+      $form['edit-vih-subscription-application-da']['vih_subscription_notifications_application_fs_da'] = [
+        '#type' => 'details',
+        '#title' => t('Notifications (danish)'),
+        '#open' => TRUE,
+      ];
+      $form['edit-vih-subscription-application-da']['vih_subscription_notifications_application_fs_da']['vih_subscription_application_notifications_bcc_da'] = [
+        '#type' => 'textfield',
+        '#title' => t('Bcc'),
+        '#default_value' => $config->get('vih_subscription_application_notifications_bcc_da'),
+        '#description' => t('Example: email@vih.dk,email2@gmail.com')
+      ];
+      $form['edit-vih-subscription-application-da']['vih_subscription_notifications_application_fs_da']['vih_subscription_application_notifications_subject_da'] = [
+        '#type' => 'textfield',
+        '#title' => t('Subject'),
+        '#default_value' => $config->get('vih_subscription_application_notifications_subject_da'),
+      ];
+      $notification_description = t("You can use the following replacement tokens: <br>
+      <b>@subject_name</b> => Name of the application <br>
+      <b>@person_name</b> => Name of the person <br>
+      <b>@application</b> => Application full information <br>");
+      $form['edit-vih-subscription-application-da']['vih_subscription_notifications_application_fs_da']['vih_subscription_application_notifications_body_da'] = [
+        '#type' => 'textarea',
+        '#title' => t('Body'),
+        '#default_value' => $config->get('vih_subscription_application_notifications_body_da'),
+        '#description' => $notification_description,
+      ];
+    }
+    /**
+     * Application form end.
+     */
+
     return parent::buildForm($form, $form_state);
   }
 

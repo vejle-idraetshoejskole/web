@@ -332,9 +332,9 @@ class ApplicationHandler {
       . '</div><br>';
 
     $config = \Drupal::config(SubscriptionsGeneralSettingsForm::$configName);
-    $mail_bcc = $config->get('vih_subscription_apliction_notifications_bcc_da');
-    $mail_subject = $config->get('vih_subscription_apliction_notifications_subject_da');
-    $mail_body = $config->get('vih_subscription_apliction_notifications_body_da');
+    $mail_bcc = $config->get('vih_subscription_application_notifications_bcc_da');
+    $mail_subject = $config->get('vih_subscription_application_notifications_subject_da');
+    $mail_body = $config->get('vih_subscription_application_notifications_body_da');
 
     $token = ['@subject_name', '@person_name', '@url', '@application'];
     $message = [
