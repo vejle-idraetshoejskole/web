@@ -41,6 +41,10 @@ $modal-inner-spacing: 70px;
     .sectioned--skewed {
       margin-left: 0 - $modal-inner-spacing;
       margin-right: 0 - $modal-inner-spacing;
+      margin-top: 0;
+      margin-bottom: 0;
+      padding-top: 0;
+      padding-bottom: 0;
 
       .container {
         width: 100% !important;
@@ -57,6 +61,21 @@ $modal-inner-spacing: 70px;
 
         &:before {
           display: none;
+        }
+        & .sectioned--skewed-angle-bottom{
+          & .angled-background-image-wrapper{
+            z-index: unset;
+            & .angled-background-image-element{
+              z-index: 0;
+            }
+            & .cover-overlay{
+              z-index: 1;
+            }
+          }
+          & .sectioned__inner{
+            position: relative;
+            z-index: 1;
+          }
         }
       }
 
