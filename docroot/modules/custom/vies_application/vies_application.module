@@ -109,9 +109,13 @@ function vies_application_form_alter(&$form, \Drupal\Core\Form\FormStateInterfac
     if (isset($applicationNode->field_vies_class->entity)) {
       // Getting class referenced labels.
       $classTerm = $applicationNode->field_vies_class->entity;
+
       $referencedLabels = array();
-      foreach ($classTerm->field_vies_valuation_labels->getValue() as $reference) {
-        $referencedLabels[] = $reference['target_id'];
+
+      if ($classTerm->field_vies_valuation_labels) {
+        foreach ($classTerm->field_vies_valuation_labels->getValue() as $reference) {
+          $referencedLabels[] = $reference['target_id'];
+        }
       }
 
       // Limiting the labels choice.
