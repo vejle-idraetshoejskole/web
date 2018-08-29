@@ -44,11 +44,6 @@ $lg-banner-title-font-size: 46px;
 // Styling
 // --------------------------------------------------
 
-.modal-body{
-  & > .banner{
-    display: none;
-  }
-}
 .banner {
   @include banner-mixin-angle($xs-sectioned-skewed-angle-height);
 
