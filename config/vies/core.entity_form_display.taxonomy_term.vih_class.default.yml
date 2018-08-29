@@ -7,6 +7,7 @@ dependencies:
     - field.field.taxonomy_term.vih_class.field_metatag
     - field.field.taxonomy_term.vih_class.field_short_description
     - field.field.taxonomy_term.vih_class.field_vies_questions
+    - field.field.taxonomy_term.vih_class.field_vies_valuation_labels
     - field.field.taxonomy_term.vih_class.field_vih_class_class_packages
     - field.field.taxonomy_term.vih_class.field_vih_class_color
     - field.field.taxonomy_term.vih_class.field_vih_class_image
@@ -64,10 +65,9 @@ third_party_settings:
     group_misc:
       children:
         - langcode
-        - translation
         - path
       parent_name: ''
-      weight: 7
+      weight: 9
       format_type: tab
       format_settings:
         id: ''
@@ -121,6 +121,20 @@ third_party_settings:
         required_fields: true
       label: Spørgsmål
       region: content
+    group_valuation:
+      children:
+        - field_vies_valuation_labels
+      parent_name: ''
+      weight: 6
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: 'Valuation labels'
+      region: content
 id: taxonomy_term.vih_class.default
 targetEntityType: taxonomy_term
 bundle: vih_class
@@ -135,7 +149,7 @@ content:
     third_party_settings: {  }
     region: content
   field_metatag:
-    weight: 6
+    weight: 8
     settings: {  }
     third_party_settings: {  }
     type: metatag_firehose
@@ -164,6 +178,12 @@ content:
       collapsed: false
       allow_duplicate: false
     third_party_settings: {  }
+  field_vies_valuation_labels:
+    weight: 7
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
   field_vih_class_class_packages:
     weight: 9
     settings:

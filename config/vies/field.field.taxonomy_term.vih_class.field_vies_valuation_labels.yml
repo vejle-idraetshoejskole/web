@@ -1,0 +1,29 @@
+uuid: 3b9f32da-f3b6-4806-80eb-44b95a77ea7c
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_vies_valuation_labels
+    - taxonomy.vocabulary.valuation_labels
+    - taxonomy.vocabulary.vih_class
+id: taxonomy_term.vih_class.field_vies_valuation_labels
+field_name: field_vies_valuation_labels
+entity_type: taxonomy_term
+bundle: vih_class
+label: 'Valuation labels'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      valuation_labels: valuation_labels
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

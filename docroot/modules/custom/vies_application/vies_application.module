@@ -103,5 +103,23 @@ function vies_application_form_alter(&$form, \Drupal\Core\Form\FormStateInterfac
         $entities[$key]['#label'] = $label;
       }
     }
+
+    // Getting application node.
+    $applicationNode = $form_state->getFormObject()->getEntity();
+    if (isset($applicationNode->field_vies_class->entity)) {
+      // Getting class referenced labels.
+      $classTerm = $applicationNode->field_vies_class->entity;
+      $referencedLabels = array();
+      foreach ($classTerm->field_vies_valuation_labels->getValue() as $reference) {
+        $referencedLabels[] = $reference['target_id'];
+      }
+
+      // Limiting the labels choice.
+      foreach (array_keys($form['field_vies_label']['widget']['#options']) as $key) {
+        if (!in_array($key, $referencedLabels)) {
+          unset($form['field_vies_label']['widget']['#options'][$key]);
+        }
+      }
+    }
   }
 }
