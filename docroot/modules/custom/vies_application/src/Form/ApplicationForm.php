@@ -8,6 +8,7 @@ use Drupal\Core\Locale\CountryManager;
 use Drupal\node\Entity\Node;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\vies_application\ApplicationHandler;
+use Drupal\vih_subscription\Form\CommonFormUtils;
 use Drupal\vih_subscription\Form\SubscriptionsGeneralSettingsForm;
 
 /**
@@ -29,6 +30,8 @@ class ApplicationForm extends FormBase {
     $form['#attached']['library'][] = 'vih_subscription/vih-subscription-accordion-class-selection';
     $form['#attached']['library'][] = 'vih_subscription/vih-subscription-terms-and-conditions-modal';
     $form['#theme'] = 'vies_application_form';
+
+    $config = $this->config(SubscriptionsGeneralSettingsForm::$configName);
 
     $nids = \Drupal::entityQuery('node')->condition('type', 'vih_long_cource')->execute();
     $options = [];
@@ -194,10 +197,21 @@ class ApplicationForm extends FormBase {
 
     $this->buildApplicationFormElements($form, $form_state);
 
+    if (!empty($terms_and_conditions_page_id = $config->get('vih_subscription_application_terms_and_conditions_page'))) {
+      $terms_and_conditions_link = CommonFormUtils::getTermsAndConditionsLink($terms_and_conditions_page_id);
+      $form['terms_and_conditions']['accepted'] = array(
+        '#type' => 'checkboxes',
+        '#options' => array('accepted' => $this->t('I agree to the @terms_and_conditions', array('@terms_and_conditions' => $terms_and_conditions_link))),
+        '#title' => $this->t('Terms and conditions'),
+        '#required' => TRUE,
+      );
+    }
+
     $form['submit'] = [
       '#type' => 'submit',
       '#value' => 'Send min ansøgning',
     ];
+
     $form_state->setCached(FALSE);
 
     return $form;

@@ -479,12 +479,21 @@ class SubscriptionsGeneralSettingsForm extends ConfigFormBase {
      * Application form start.
      */
     if (array_key_exists('vies_application_form', $existingContentTypes)) {
-      $config = \Drupal::config(SubscriptionsGeneralSettingsForm::$configName);
       $form['vih_subscription_settings_application_fs'] = [
         '#type' => 'details',
         '#title' => t('Application settings'),
         '#open' => FALSE,
       ];
+      // Application terms and conditions page.
+      $form['vih_subscription_settings_application_fs']['vih_subscription_application_terms_and_conditions_page'] = [
+        '#type' => 'entity_autocomplete',
+        '#target_type' => 'node',
+        '#selection_settings' => ['target_bundles' => ['page']],
+        '#title' => $this->t('Terms and conditions page'),
+        '#default_value' => !empty($config->get('vih_subscription_application_terms_and_conditions_page')) ? Node::load($config->get('vih_subscription_application_terms_and_conditions_page')) : NULL,
+        '#description' => $this->t("You can use any 'page' node as terms and conditions page"),
+      ];
+
       // vies_application.application_form_success page.
       $form['vih_subscription_settings_application_fs']['vih_subscription_application_success_page'] = [
         '#type' => 'entity_autocomplete',
