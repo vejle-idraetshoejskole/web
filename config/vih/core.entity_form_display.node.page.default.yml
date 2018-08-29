@@ -1,0 +1,236 @@
+uuid: 2f19e58e-9d86-4d85-aa5d-b19a41f31e22
+langcode: da
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.media_browser
+    - field.field.node.page.body
+    - field.field.node.page.field_metatag
+    - field.field.node.page.field_vih_course_subheading
+    - field.field.node.page.field_vih_paragraphs
+    - field.field.node.page.field_vih_small_image
+    - field.field.node.page.field_vih_top_banner
+    - field.field.node.page.field_vih_top_banner_text
+    - field.field.node.page.panelizer
+    - field.field.node.page.scheduled_update
+    - node.type.page
+  module:
+    - entity_browser
+    - field_group
+    - inline_entity_form
+    - metatag
+    - paragraphs
+    - path
+    - text
+third_party_settings:
+  field_group:
+    group_banner:
+      children:
+        - field_vih_top_banner
+        - field_vih_top_banner_text
+      parent_name: ''
+      weight: 0
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Banner
+      region: content
+    group_content:
+      children:
+        - field_vih_small_image
+        - title
+        - field_vih_course_subheading
+        - body
+      parent_name: ''
+      weight: 1
+      format_type: tab
+      format_settings:
+        label: Indhold
+        formatter: open
+        description: ''
+        required_fields: true
+        id: ''
+        classes: ''
+      label: Indhold
+      region: content
+    group_misc:
+      children:
+        - field_metatag
+        - uid
+        - created
+        - promote
+        - sticky
+        - path
+        - scheduled_update
+        - langcode
+        - translation
+      parent_name: ''
+      weight: 3
+      format_type: tab
+      format_settings:
+        label: Andet
+        formatter: open
+        description: ''
+        required_fields: true
+        id: ''
+        classes: ''
+      label: Andet
+      region: content
+_core:
+  default_config_hash: TxhuWU1Nx6xQDpdGqYIme3ATgLWVCY3CNGvlJqndorw
+id: node.page.default
+targetEntityType: node
+bundle: page
+mode: default
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 33
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  created:
+    type: datetime_timestamp
+    weight: 13
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_metatag:
+    weight: 11
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_firehose
+    region: content
+  field_vih_course_subheading:
+    weight: 32
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_vih_paragraphs:
+    weight: 2
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: all
+      add_mode: modal
+      form_display_mode: default
+      default_paragraph_type: _none
+    third_party_settings: {  }
+    type: paragraphs
+    region: content
+  field_vih_small_image:
+    type: entity_browser_entity_reference
+    weight: 30
+    settings:
+      entity_browser: media_browser
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: thumbnail
+      open: true
+    region: content
+    third_party_settings: {  }
+  field_vih_top_banner:
+    type: entity_browser_entity_reference
+    weight: 29
+    settings:
+      entity_browser: media_browser
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      open: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: thumbnail
+    region: content
+    third_party_settings: {  }
+  field_vih_top_banner_text:
+    weight: 30
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  langcode:
+    type: language_select
+    weight: 18
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+    region: content
+  path:
+    type: path
+    weight: 16
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  promote:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 14
+    third_party_settings: {  }
+    region: content
+  scheduled_update:
+    type: inline_entity_form_complex
+    weight: 17
+    region: content
+    settings:
+      form_mode: default
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      match_operator: CONTAINS
+      override_labels: false
+      allow_existing: false
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 15
+    third_party_settings: {  }
+    region: content
+  title:
+    type: string_textfield
+    weight: 31
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  translation:
+    weight: 19
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 12
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  url_redirects:
+    weight: 50
+    region: content
+hidden:
+  panelizer: true
+  status: true

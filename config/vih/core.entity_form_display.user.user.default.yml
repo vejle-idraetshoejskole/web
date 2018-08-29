@@ -1,0 +1,298 @@
+uuid: 42b9c5d7-cbe5-49d0-9d1d-86cb0b8b1c1d
+langcode: da
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.media_browser
+    - field.field.user.user.field_metatag
+    - field.field.user.user.field_vih_top_banner
+    - field.field.user.user.field_vih_top_banner_text
+    - field.field.user.user.field_vih_user_birthday
+    - field.field.user.user.field_vih_user_descr
+    - field.field.user.user.field_vih_user_email
+    - field.field.user.user.field_vih_user_job_title
+    - field.field.user.user.field_vih_user_name_first
+    - field.field.user.user.field_vih_user_name_last
+    - field.field.user.user.field_vih_user_paragraphs
+    - field.field.user.user.field_vih_user_phone
+    - field.field.user.user.field_vih_user_photo
+    - field.field.user.user.field_vih_user_qualifications
+    - field.field.user.user.field_vih_user_type_id
+    - field.field.user.user.vih_user_status
+  module:
+    - datetime
+    - entity_browser
+    - field_group
+    - inline_entity_form
+    - metatag
+    - paragraphs
+    - path
+    - text
+    - user
+third_party_settings:
+  field_group:
+    group_user:
+      children:
+        - field_vih_user_job_title
+        - field_vih_user_name_first
+        - field_vih_user_name_last
+        - field_vih_user_type_id
+        - field_vih_user_photo
+      parent_name: ''
+      weight: 1
+      format_type: tab
+      format_settings:
+        label: Bruger
+        formatter: open
+        description: ''
+        required_fields: true
+        id: ''
+        classes: ''
+      label: Bruger
+      region: content
+    group_content:
+      children:
+        - field_vih_user_descr
+        - field_vih_user_qualifications
+        - field_vih_user_paragraphs
+      parent_name: ''
+      weight: 2
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: open
+        description: ''
+        required_fields: true
+      label: Indhold
+      region: content
+    group_banner:
+      children:
+        - field_vih_top_banner_text
+        - field_vih_top_banner
+      parent_name: ''
+      weight: 0
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Banner
+      region: content
+    group_user_information:
+      children:
+        - account
+        - field_vih_user_birthday
+        - langcode
+        - language
+        - translation
+        - path
+      parent_name: ''
+      weight: 4
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: 'User information'
+      region: content
+    group_contact_information:
+      children:
+        - contact
+        - field_vih_user_phone
+        - field_vih_user_email
+      parent_name: ''
+      weight: 3
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: 'Contact information'
+      region: content
+id: user.user.default
+targetEntityType: user
+bundle: user
+mode: default
+content:
+  account:
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  contact:
+    weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_metatag:
+    weight: 5
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_firehose
+    region: content
+  field_vih_top_banner:
+    type: entity_browser_entity_reference
+    weight: 3
+    settings:
+      entity_browser: media_browser
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      open: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: thumbnail
+    region: content
+    third_party_settings: {  }
+  field_vih_top_banner_text:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_vih_user_birthday:
+    type: datetime_default
+    weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_vih_user_descr:
+    type: text_textarea
+    weight: 17
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_vih_user_email:
+    type: email_default
+    weight: 7
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_vih_user_job_title:
+    type: string_textfield
+    weight: 13
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_vih_user_name_first:
+    type: string_textfield
+    weight: 14
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_vih_user_name_last:
+    type: string_textfield
+    weight: 15
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_vih_user_paragraphs:
+    type: paragraphs
+    weight: 19
+    region: content
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: all
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: _none
+    third_party_settings: {  }
+  field_vih_user_phone:
+    type: string_textfield
+    weight: 6
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_vih_user_photo:
+    type: entity_browser_entity_reference
+    weight: 22
+    settings:
+      entity_browser: media_browser
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: thumbnail
+      open: true
+    region: content
+    third_party_settings: {  }
+  field_vih_user_qualifications:
+    weight: 18
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_vih_user_type_id:
+    type: entity_reference_autocomplete
+    weight: 21
+    region: content
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 6
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  language:
+    weight: 7
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 9
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  translation:
+    weight: 8
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  vih_user_status:
+    type: inline_entity_form_complex
+    weight: 6
+    settings:
+      override_labels: true
+      label_singular: 'User status'
+      label_plural: 'User statuss'
+      allow_new: true
+      match_operator: CONTAINS
+      allow_existing: false
+      form_mode: default
+    third_party_settings: {  }
+    region: content
+hidden:
+  timezone: true

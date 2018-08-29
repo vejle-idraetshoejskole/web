@@ -1,9 +1,10 @@
-uuid: fa709c8e-2f45-4d6a-ac9b-ae15d53919a2
+uuid: 128a0c05-12d3-443d-b02c-36d26d230588
 langcode: da
 status: true
 dependencies:
   config:
-    - field.storage.taxonomy_term.field_vih_paragraphs
+    - field.storage.node.field_vih_paragraphs
+    - node.type.page
     - paragraphs.paragraphs_type.1_column_action_centered
     - paragraphs.paragraphs_type.article
     - paragraphs.paragraphs_type.class_packages
@@ -13,19 +14,24 @@ dependencies:
     - paragraphs.paragraphs_type.gallery
     - paragraphs.paragraphs_type.list_of_news_teasers
     - paragraphs.paragraphs_type.long_course_list_
+    - paragraphs.paragraphs_type.short_course_list_
     - paragraphs.paragraphs_type.social_media_embed
     - paragraphs.paragraphs_type.user_quote
     - paragraphs.paragraphs_type.video
     - paragraphs.paragraphs_type.vih_class_groups_accordion
+    - paragraphs.paragraphs_type.vih_contact_person
+    - paragraphs.paragraphs_type.vih_content_grid
+    - paragraphs.paragraphs_type.vih_grid_with_subjects
+    - paragraphs.paragraphs_type.vih_list_of_news_list_advanced
     - paragraphs.paragraphs_type.vih_teacher_class_description
     - paragraphs.paragraphs_type.vih_webform
-    - taxonomy.vocabulary.vih_class_package
+    - paragraphs.paragraphs_type.vih_wrapper
   module:
     - entity_reference_revisions
-id: taxonomy_term.vih_class_package.field_vih_paragraphs
+id: node.page.field_vih_paragraphs
 field_name: field_vih_paragraphs
-entity_type: taxonomy_term
-bundle: vih_class_package
+entity_type: node
+bundle: page
 label: Sektioner
 description: ''
 required: false
@@ -39,24 +45,33 @@ settings:
     target_bundles:
       1_column_action_centered: 1_column_action_centered
       article: article
+      vih_content_grid: vih_content_grid
       class_packages: class_packages
       employee: employee
       event_list: event_list
+      vih_list_of_news_list_advanced: vih_list_of_news_list_advanced
       file: file
+      vih_wrapper: vih_wrapper
       gallery: gallery
       list_of_news_teasers: list_of_news_teasers
       long_course_list_: long_course_list_
+      short_course_list_: short_course_list_
       social_media_embed: social_media_embed
       user_quote: user_quote
       video: video
       vih_class_groups_accordion: vih_class_groups_accordion
       vih_teacher_class_description: vih_teacher_class_description
+      vih_contact_person: vih_contact_person
       vih_webform: vih_webform
+      vih_grid_with_subjects: vih_grid_with_subjects
     target_bundles_drag_drop:
       1_column_action_centered:
         enabled: true
         weight: 26
       article:
+        enabled: true
+        weight: 27
+      vih_content_grid:
         enabled: true
         weight: 27
       class_packages:
@@ -68,9 +83,15 @@ settings:
       event_list:
         enabled: true
         weight: 30
+      vih_list_of_news_list_advanced:
+        enabled: true
+        weight: 30
       file:
         enabled: true
         weight: 31
+      vih_wrapper:
+        enabled: true
+        weight: 32
       gallery:
         enabled: true
         weight: 32
@@ -81,8 +102,8 @@ settings:
         enabled: true
         weight: 34
       short_course_list_:
+        enabled: true
         weight: 35
-        enabled: false
       social_media_embed:
         enabled: true
         weight: 36
@@ -107,23 +128,20 @@ settings:
       vih_option_group:
         weight: 42
         enabled: false
-      vih_content_grid:
-        weight: 43
-        enabled: false
       vih_ordered_course_period:
         weight: 43
         enabled: false
       vih_ordered_course_person:
         weight: 44
         enabled: false
+      vih_banner_slide:
+        weight: 45
+        enabled: false
       vih_ordered_course_slot:
         weight: 45
         enabled: false
       vih_ordered_event_person:
         weight: 46
-        enabled: false
-      vih_banner_slide:
-        weight: 47
         enabled: false
       vih_ordered_option:
         weight: 47
@@ -135,18 +153,12 @@ settings:
         enabled: true
         weight: 49
       vih_contact_person:
+        enabled: true
         weight: 49
-        enabled: false
       vih_webform:
         enabled: true
         weight: 50
       vih_grid_with_subjects:
-        weight: 52
-        enabled: false
-      vih_list_of_news_list_advanced:
-        weight: 53
-        enabled: false
-      vih_wrapper:
-        weight: 64
-        enabled: false
+        enabled: true
+        weight: 56
 field_type: entity_reference_revisions

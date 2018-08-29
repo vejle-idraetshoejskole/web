@@ -14,7 +14,6 @@ dependencies:
     - paragraphs.paragraphs_type.gallery
     - paragraphs.paragraphs_type.list_of_news_teasers
     - paragraphs.paragraphs_type.long_course_list_
-    - paragraphs.paragraphs_type.short_course_list_
     - paragraphs.paragraphs_type.social_media_embed
     - paragraphs.paragraphs_type.user_quote
     - paragraphs.paragraphs_type.video
@@ -44,8 +43,8 @@ settings:
     negate: 0
     target_bundles:
       1_column_action_centered: 1_column_action_centered
-      vih_content_grid: vih_content_grid
       article: article
+      vih_content_grid: vih_content_grid
       class_packages: class_packages
       employee: employee
       event_list: event_list
@@ -55,23 +54,22 @@ settings:
       gallery: gallery
       list_of_news_teasers: list_of_news_teasers
       long_course_list_: long_course_list_
-      short_course_list_: short_course_list_
       social_media_embed: social_media_embed
       user_quote: user_quote
       video: video
       vih_class_groups_accordion: vih_class_groups_accordion
-      vih_contact_person: vih_contact_person
       vih_teacher_class_description: vih_teacher_class_description
+      vih_contact_person: vih_contact_person
       vih_webform: vih_webform
       vih_grid_with_subjects: vih_grid_with_subjects
     target_bundles_drag_drop:
       1_column_action_centered:
         enabled: true
         weight: 26
-      vih_content_grid:
+      article:
         enabled: true
         weight: 27
-      article:
+      vih_content_grid:
         enabled: true
         weight: 27
       class_packages:
@@ -102,20 +100,17 @@ settings:
         enabled: true
         weight: 34
       short_course_list_:
-        enabled: true
         weight: 35
+        enabled: false
       social_media_embed:
         enabled: true
         weight: 36
-      app_answer:
-        weight: 36
+      long_course_list_contain_class:
+        weight: 37
         enabled: false
       user_quote:
         enabled: true
         weight: 37
-      long_course_list_contain_class:
-        weight: 37
-        enabled: false
       video:
         enabled: true
         weight: 38
@@ -143,9 +138,6 @@ settings:
       vih_ordered_course_slot:
         weight: 45
         enabled: false
-      parent:
-        weight: 46
-        enabled: false
       vih_ordered_event_person:
         weight: 46
         enabled: false
@@ -155,10 +147,10 @@ settings:
       vih_single_class_group:
         weight: 48
         enabled: false
-      vih_contact_person:
+      vih_teacher_class_description:
         enabled: true
         weight: 49
-      vih_teacher_class_description:
+      vih_contact_person:
         enabled: true
         weight: 49
       vih_webform:

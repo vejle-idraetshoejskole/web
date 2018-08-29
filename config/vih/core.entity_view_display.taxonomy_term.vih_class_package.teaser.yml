@@ -1,0 +1,60 @@
+uuid: 79eb0e6f-9c78-447a-9569-a77acbd3b301
+langcode: da
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.taxonomy_term.teaser
+    - field.field.taxonomy_term.vih_class_package.field_metatag
+    - field.field.taxonomy_term.vih_class_package.field_short_description
+    - field.field.taxonomy_term.vih_class_package.field_vih_class_package_color
+    - field.field.taxonomy_term.vih_class_package.field_vih_cp_image
+    - field.field.taxonomy_term.vih_class_package.field_vih_paragraphs
+    - field.field.taxonomy_term.vih_class_package.field_vih_subheading
+    - field.field.taxonomy_term.vih_class_package.field_vih_top_banner
+    - field.field.taxonomy_term.vih_class_package.field_vih_top_banner_text
+    - taxonomy.vocabulary.vih_class_package
+  module:
+    - options
+    - panelizer
+third_party_settings:
+  panelizer:
+    enable: false
+    custom: false
+    allow: false
+    default: default
+id: taxonomy_term.vih_class_package.teaser
+targetEntityType: taxonomy_term
+bundle: vih_class_package
+mode: teaser
+content:
+  field_short_description:
+    type: basic_string
+    weight: 2
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  field_vih_class_package_color:
+    type: list_key
+    weight: 1
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  field_vih_cp_image:
+    type: entity_reference_entity_view
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      view_mode: vih_class_packages_frontpage
+      link: false
+    third_party_settings: {  }
+hidden:
+  description: true
+  field_metatag: true
+  field_vih_paragraphs: true
+  field_vih_subheading: true
+  field_vih_top_banner: true
+  field_vih_top_banner_text: true
+  langcode: true

@@ -1,0 +1,248 @@
+uuid: 9efb2f77-281f-4919-af0d-ad0fe6b09b72
+langcode: da
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.media_browser
+    - field.field.node.news.body
+    - field.field.node.news.field_metatag
+    - field.field.node.news.field_vih_course_subheading
+    - field.field.node.news.field_vih_image
+    - field.field.node.news.field_vih_news_tags
+    - field.field.node.news.field_vih_paragraphs
+    - field.field.node.news.field_vih_top_banner
+    - field.field.node.news.field_vih_top_banner_text
+    - field.field.node.news.scheduled_update
+    - node.type.news
+  module:
+    - entity_browser
+    - field_group
+    - inline_entity_form
+    - metatag
+    - paragraphs
+    - path
+    - text
+third_party_settings:
+  field_group:
+    group_banner:
+      children:
+        - field_vih_top_banner
+        - field_vih_top_banner_text
+      parent_name: ''
+      weight: 0
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Banner
+      region: content
+    group_content:
+      children:
+        - title
+        - field_vih_course_subheading
+        - body
+        - field_vih_news_tags
+        - field_vih_image
+      parent_name: ''
+      weight: 1
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: open
+        description: ''
+        required_fields: true
+      label: Indhold
+      region: content
+    group_misc:
+      children:
+        - field_metatag
+        - uid
+        - created
+        - translation
+        - promote
+        - sticky
+        - path
+        - scheduled_update
+        - langcode
+      parent_name: ''
+      weight: 4
+      format_type: tab
+      format_settings:
+        label: Andet
+        formatter: open
+        description: ''
+        required_fields: true
+        id: ''
+        classes: ''
+      label: Andet
+      region: content
+id: node.news.default
+targetEntityType: node
+bundle: news
+mode: default
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 17
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  created:
+    type: datetime_timestamp
+    weight: 28
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_metatag:
+    weight: 26
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_firehose
+    region: content
+  field_vih_course_subheading:
+    weight: 16
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_vih_image:
+    type: entity_browser_entity_reference
+    weight: 19
+    settings:
+      entity_browser: media_browser
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: thumbnail
+      open: true
+    region: content
+    third_party_settings: {  }
+  field_vih_news_tags:
+    type: entity_reference_autocomplete
+    weight: 18
+    region: content
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_vih_paragraphs:
+    weight: 2
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: all
+      add_mode: modal
+      form_display_mode: default
+      default_paragraph_type: _none
+    third_party_settings: {  }
+    type: paragraphs
+    region: content
+  field_vih_top_banner:
+    type: entity_browser_entity_reference
+    weight: 16
+    settings:
+      entity_browser: media_browser
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      open: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: thumbnail
+    region: content
+    third_party_settings: {  }
+  field_vih_top_banner_text:
+    weight: 17
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  langcode:
+    type: language_select
+    weight: 34
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+    region: content
+  moderation_state:
+    type: moderation_state_default
+    weight: 100
+    settings: {  }
+    region: content
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 32
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  promote:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 30
+    third_party_settings: {  }
+    region: content
+  scheduled_update:
+    weight: 33
+    settings:
+      match_operator: CONTAINS
+      form_mode: default
+      override_labels: false
+      label_singular: ''
+      label_plural: ''
+      allow_new: true
+      allow_existing: false
+    third_party_settings: {  }
+    type: inline_entity_form_complex
+    region: content
+  sticky:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 31
+    third_party_settings: {  }
+    region: content
+  title:
+    type: string_textfield
+    weight: 15
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  translation:
+    weight: 29
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 27
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  url_redirects:
+    weight: 50
+    region: content
+hidden:
+  status: true

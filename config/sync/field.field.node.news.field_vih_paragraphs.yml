@@ -14,7 +14,6 @@ dependencies:
     - paragraphs.paragraphs_type.gallery
     - paragraphs.paragraphs_type.list_of_news_teasers
     - paragraphs.paragraphs_type.long_course_list_
-    - paragraphs.paragraphs_type.short_course_list_
     - paragraphs.paragraphs_type.social_media_embed
     - paragraphs.paragraphs_type.user_quote
     - paragraphs.paragraphs_type.video
@@ -53,7 +52,6 @@ settings:
       gallery: gallery
       list_of_news_teasers: list_of_news_teasers
       long_course_list_: long_course_list_
-      short_course_list_: short_course_list_
       social_media_embed: social_media_embed
       user_quote: user_quote
       video: video
@@ -98,8 +96,8 @@ settings:
         enabled: true
         weight: 34
       short_course_list_:
-        enabled: true
         weight: 35
+        enabled: false
       social_media_embed:
         enabled: true
         weight: 36
@@ -130,10 +128,10 @@ settings:
       vih_ordered_course_person:
         weight: 44
         enabled: false
-      vih_ordered_course_slot:
+      vih_banner_slide:
         weight: 45
         enabled: false
-      vih_banner_slide:
+      vih_ordered_course_slot:
         weight: 45
         enabled: false
       vih_ordered_event_person:
@@ -145,13 +143,16 @@ settings:
       vih_single_class_group:
         weight: 48
         enabled: false
-      vih_contact_person:
-        enabled: true
-        weight: 49
       vih_teacher_class_description:
         weight: 49
         enabled: false
+      vih_contact_person:
+        enabled: true
+        weight: 49
       vih_webform:
         enabled: true
         weight: 50
+      vih_grid_with_subjects:
+        weight: 52
+        enabled: false
 field_type: entity_reference_revisions

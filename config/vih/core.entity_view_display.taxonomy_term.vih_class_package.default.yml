@@ -1,0 +1,76 @@
+uuid: 9889d1ea-35fa-4d2a-98b8-5a17e504fce9
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.vih_class_package.field_metatag
+    - field.field.taxonomy_term.vih_class_package.field_short_description
+    - field.field.taxonomy_term.vih_class_package.field_vih_class_package_color
+    - field.field.taxonomy_term.vih_class_package.field_vih_cp_image
+    - field.field.taxonomy_term.vih_class_package.field_vih_paragraphs
+    - field.field.taxonomy_term.vih_class_package.field_vih_subheading
+    - field.field.taxonomy_term.vih_class_package.field_vih_top_banner
+    - field.field.taxonomy_term.vih_class_package.field_vih_top_banner_text
+    - taxonomy.vocabulary.vih_class_package
+  module:
+    - entity_reference_revisions
+    - panelizer
+    - text
+third_party_settings:
+  panelizer:
+    enable: false
+    custom: false
+    allow: false
+    default: default
+id: taxonomy_term.vih_class_package.default
+targetEntityType: taxonomy_term
+bundle: vih_class_package
+mode: default
+content:
+  description:
+    type: text_default
+    weight: 1
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  field_vih_paragraphs:
+    weight: 2
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    type: entity_reference_revisions_entity_view
+    region: content
+  field_vih_subheading:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_vih_top_banner:
+    weight: 3
+    label: hidden
+    settings:
+      link: true
+      view_mode: default
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+  field_vih_top_banner_text:
+    weight: 4
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  field_metatag: true
+  field_short_description: true
+  field_vih_class_package_color: true
+  field_vih_cp_image: true
+  langcode: true

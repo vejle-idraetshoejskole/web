@@ -1,0 +1,56 @@
+uuid: 7d3efe49-c265-4659-b3b0-915efc38bfa9
+langcode: da
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.page.body
+    - field.field.node.page.field_metatag
+    - field.field.node.page.field_vih_course_subheading
+    - field.field.node.page.field_vih_paragraphs
+    - field.field.node.page.field_vih_small_image
+    - field.field.node.page.field_vih_top_banner
+    - field.field.node.page.panelizer
+    - field.field.node.page.scheduled_update
+    - image.style.large
+    - node.type.page
+  module:
+    - media
+    - panelizer
+    - user
+third_party_settings:
+  panelizer:
+    enable: false
+    custom: false
+    allow: false
+    default: default
+_core:
+  default_config_hash: rN2zrScZAJ9xB16hm_Deb9QJKy6JXnn0PdI2n5Z3KRs
+id: node.page.teaser
+targetEntityType: node
+bundle: page
+mode: teaser
+content:
+  field_vih_small_image:
+    type: media_thumbnail
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      image_style: large
+      image_link: ''
+    third_party_settings: {  }
+  workbench_moderation_control:
+    weight: -20
+    region: content
+hidden:
+  body: true
+  field_metatag: true
+  field_vih_course_subheading: true
+  field_vih_paragraphs: true
+  field_vih_top_banner: true
+  field_vih_top_banner_text: true
+  langcode: true
+  links: true
+  panelizer: true
+  scheduled_update: true

@@ -1,0 +1,28 @@
+uuid: c316650b-b369-43bb-a900-50fae7f80fe1
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.vih_wrapper.field_vih_background_color
+    - field.field.paragraph.vih_wrapper.field_vih_background_img
+    - field.field.paragraph.vih_wrapper.field_vih_paragraphs
+    - paragraphs.paragraphs_type.vih_wrapper
+  module:
+    - entity_reference_revisions
+id: paragraph.vih_wrapper.default
+targetEntityType: paragraph
+bundle: vih_wrapper
+mode: default
+content:
+  field_vih_paragraphs:
+    type: entity_reference_revisions_entity_view
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_vih_background_color: true
+  field_vih_background_img: true
