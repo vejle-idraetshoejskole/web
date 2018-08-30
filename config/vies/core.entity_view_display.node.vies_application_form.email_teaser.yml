@@ -51,9 +51,8 @@ third_party_settings:
         - field_vies_telefon
         - field_vies_birthday
         - field_vies_newsletter
-        - field_vies_parents
       parent_name: ''
-      weight: 2
+      weight: 3
       format_type: html_element
       format_settings:
         label: col-left
@@ -78,17 +77,16 @@ third_party_settings:
       weight: 22
       format_type: html_element
       format_settings:
-        label: Address
+        label: 'Address:'
         element: div
         show_label: true
-        label_element: label
-        label_element_classes: ''
+        label_element: b
         attributes: ''
         effect: none
         speed: fast
         id: ''
         classes: ''
-      label: Address
+      label: 'Address:'
       region: content
     group_col_right:
       children:
@@ -96,7 +94,7 @@ third_party_settings:
         - field_vies_about_school
         - field_vies_afterschool
       parent_name: ''
-      weight: 3
+      weight: 4
       format_type: html_element
       format_settings:
         id: ''
@@ -109,6 +107,23 @@ third_party_settings:
         effect: none
         speed: fast
       label: col-right
+      region: content
+    group_parents:
+      children:
+        - field_vies_parents
+      parent_name: ''
+      weight: 2
+      format_type: html_element
+      format_settings:
+        id: ''
+        classes: ''
+        element: div
+        show_label: true
+        label_element: b
+        attributes: ''
+        effect: none
+        speed: fast
+      label: 'Parents:'
       region: content
 id: node.vies_application_form.email_teaser
 targetEntityType: node
@@ -125,7 +140,7 @@ content:
     type: entity_reference_entity_view
     region: content
   field_vies_address:
-    weight: 23
+    weight: 5
     label: hidden
     settings:
       link_to_entity: false
@@ -150,7 +165,7 @@ content:
     type: string
     region: content
   field_vies_city:
-    weight: 25
+    weight: 7
     label: hidden
     settings:
       link_to_entity: false
@@ -175,7 +190,7 @@ content:
     type: entity_reference_entity_view
     region: content
   field_vies_country:
-    weight: 26
+    weight: 8
     label: hidden
     settings:
       link_to_entity: false
@@ -215,7 +230,7 @@ content:
     type: string
     region: content
   field_vies_label:
-    weight: 5
+    weight: 6
     label: above
     settings:
       link: false
@@ -249,8 +264,8 @@ content:
     type: boolean
     region: content
   field_vies_parents:
-    weight: 28
-    label: above
+    weight: 29
+    label: hidden
     settings:
       view_mode: email_teaser
       link: false
@@ -266,7 +281,7 @@ content:
     type: entity_reference_label
     region: content
   field_vies_status:
-    weight: 4
+    weight: 5
     label: above
     settings:
       link: false
@@ -282,7 +297,7 @@ content:
     type: string
     region: content
   field_vies_zip:
-    weight: 24
+    weight: 6
     label: hidden
     settings:
       link_to_entity: false
