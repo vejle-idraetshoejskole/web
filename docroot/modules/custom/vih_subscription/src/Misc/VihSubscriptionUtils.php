@@ -68,8 +68,8 @@ class VihSubscriptionUtils {
    * @param $replacement
    */
   public static function makeReplacements(&$message, $token, $replacement) {
-    foreach($replacement as $key => &$value){
-      $value = str_replace("\r\n", "\r\n" . '<br>', $value);
+    foreach($message as $key => &$value){
+      $value = nl2br($value);
     }
     $message['subject'] = str_replace($token, $replacement, $message['subject']);
     $message['body'] = str_replace($token, $replacement, $message['body']);
