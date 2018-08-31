@@ -50,12 +50,19 @@ class ValuationForm extends FormBase {
 
     $available_period = [];
     $available_courses = [];
+    $available_year_of_bitrh = [];
     foreach (Node::loadMultiple($applications) as $application) {
       $course = $application->field_vies_course->referencedEntities()[0];
       $available_courses[$course->id()] = $course->getTitle();
 
       $period = $application->field_vies_period->referencedEntities()[0];
       $available_period[$period->id()] = $period->getTitle();
+
+      if (!empty($application->field_vies_birthday[0]->value)
+        && $dates = \DateTime::createFromFormat('y', substr($application->field_vies_birthday[0]->value, 3, 2))) {
+        $year_of_bitrh = $dates->format('Y');
+        $available_year_of_bitrh[$year_of_bitrh] = $year_of_bitrh;
+      }
     }
 
     $course_options = $available_courses;
@@ -72,7 +79,7 @@ class ValuationForm extends FormBase {
         'callback' => '::ajaxUpdate',
         'wrapper' => 'valuation-form-wrapper',
       ],
-      '#wrapper_attributes' => ['class' => ['col-md-4']],
+      '#wrapper_attributes' => ['class' => ['col-md-3']],
     ];
 
     // Reset form when course has been changed.
@@ -108,7 +115,20 @@ class ValuationForm extends FormBase {
         'callback' => '::ajaxUpdate',
         'wrapper' => 'valuation-form-wrapper',
       ],
-      '#wrapper_attributes' => ['class' => ['col-md-4']],
+      '#wrapper_attributes' => ['class' => ['col-md-3']],
+    ];
+
+    $yb_default_value = $form_state->getValue('yb');
+    $form['filters']['yb'] = [
+      '#type' => 'select',
+      '#options' => ['' => 'Fødselsår'] + $available_year_of_bitrh,
+      '#placeholder' => 'Fødselsår',
+      '#default_value' => $yb_default_value,
+      '#ajax' => [
+        'callback' => '::ajaxUpdate',
+        'wrapper' => 'valuation-form-wrapper',
+      ],
+      '#wrapper_attributes' => ['class' => ['col-md-3']],
     ];
 
     $gender_default_value = $form_state->getValue('gender');
@@ -121,7 +141,7 @@ class ValuationForm extends FormBase {
         'callback' => '::ajaxUpdate',
         'wrapper' => 'valuation-form-wrapper',
       ],
-      '#wrapper_attributes' => ['class' => ['col-md-4']],
+      '#wrapper_attributes' => ['class' => ['col-md-3']],
     ];
 
     $headers = ['Navn'];
@@ -148,6 +168,14 @@ class ValuationForm extends FormBase {
       if (!empty($gender_default_value)
         && $gender_default_value != $application->field_vies_gender->getValue()[0]['value']) {
         continue;
+      }
+
+      if (!empty($yb_default_value)
+        && !empty($application->field_vies_birthday[0]->value)
+        && $dates = \DateTime::createFromFormat('y', substr($application->field_vies_birthday[0]->value, 3, 2))) {
+        if ($yb_default_value != $dates->format('Y')) {
+          continue;
+        }
       }
 
       if (!empty($application->field_vies_label->getValue())
