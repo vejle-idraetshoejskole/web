@@ -41,14 +41,14 @@
 
   background-color: $body-bg;
 
-  color: $headings-color;
+  color: $notify-text-color;
   text-transform: uppercase;
 }
 
 .notify__highlighted {
   padding: 5px floor( ( $grid-gutter-width / 2 ) );
 
-  background-color: $brand-secondary;
+  background-color: $notify-highlighted-background-color;
   color: #fff;
 }
 
