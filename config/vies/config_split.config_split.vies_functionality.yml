@@ -30,6 +30,7 @@ blacklist:
   - 'field.storage.paragraph.field_parent*'
   - 'field.storage.paragraph.field_question*'
   - 'field.storage.taxonomy_term.field_vies*'
+  - 'views.view.vies*'
 graylist:
   - block.block.bartik_content
   - views.view.content
