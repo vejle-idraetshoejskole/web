@@ -1,0 +1,90 @@
+<?php
+
+use Drupal\menu_link_content\Entity\MenuLinkContent;
+
+/**
+ * Implements hook_entity_presave().
+ *
+ * Creates the menu link for the vih_class term.
+ *
+ * @param \Drupal\Core\Entity\EntityInterface $entity
+ */
+function vies_valuation_entity_presave(Drupal\Core\Entity\EntityInterface $entity) {
+  if ($entity->bundle() === 'vih_class') {
+    $parentMenuItem = NULL;
+    $existingMenuItem = NULL;
+    $allMenuItems = array();
+
+    $tid = $entity->id();
+
+    // Getting menu items.
+    $menu_name = 'admin';
+    $storage = \Drupal::entityManager()->getStorage('menu_link_content');
+    $menu_links = $storage->loadByProperties(['menu_name' => $menu_name]);
+
+    // Finding the existing menu item and parent.
+    foreach ($menu_links as $menu_link) {
+      if ($menu_link->link->uri === "internal:/taxonomy/term/$tid/valuation") {
+        $existingMenuItem = $menu_link;
+      }
+      if ($menu_link->link->uri === "internal:/admin/ordrer/valuations") {
+        $parentMenuItem = $menu_link;
+      }
+
+      if (preg_match('/internal:\/taxonomy\/term\/\d*\/valuation/i', $menu_link->link->uri)) {
+        $allMenuItems[$menu_link->title->value] = $menu_link;
+      }
+    }
+
+    // Menu item does not exist, create one.
+    if (!$existingMenuItem) {
+      $termValuationLink = MenuLinkContent::create([
+        'title' => $entity->label(),
+        'link' => ['uri' => "internal:/taxonomy/term/$tid/valuation"],
+        'menu_name' => $menu_name,
+        'parent' => $parentMenuItem->getPluginId(),
+        'expanded' => FALSE,
+      ]);
+      $termValuationLink->save();
+
+      $allMenuItems[$termValuationLink->title->value] = $termValuationLink;
+    }
+
+    // Sort all links alphabetically.
+    ksort($allMenuItems);
+    // Resave all meunu items with updated weight.
+    $weight = 0;
+    foreach ($allMenuItems as $menuItem) {
+      $menuItem->weight = $weight;
+      $weight++;
+      $menuItem->save();
+    }
+  }
+}
+
+/**
+ * Implements hook_entity_delete().
+ *
+ * Deletes the menu link for the vih_class term.
+ *
+ * @param \Drupal\Core\Entity\EntityInterface $entity
+ */
+function vies_valuation_entity_delete(Drupal\Core\Entity\EntityInterface $entity) {
+  if ($entity->bundle() === 'vih_class') {
+    $tid = $entity->id();
+
+    // Getting menu items.
+    $menu_name = 'admin';
+    $storage = \Drupal::entityManager()->getStorage('menu_link_content');
+    $menu_links = $storage->loadByProperties(['menu_name' => $menu_name]);
+
+    // Finding the existing menu item and parent.
+    foreach ($menu_links as $menu_link) {
+      if ($menu_link->link->uri === "internal:/taxonomy/term/$tid/valuation") {
+        $menu_link->delete();
+      }
+    }
+  }
+}
+
+

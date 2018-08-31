@@ -21,6 +21,7 @@ dependencies:
     - paragraphs.paragraphs_type.vih_class_groups_accordion
     - paragraphs.paragraphs_type.vih_contact_person
     - paragraphs.paragraphs_type.vih_content_grid
+    - paragraphs.paragraphs_type.vih_grid_with_subjects
     - paragraphs.paragraphs_type.vih_list_of_news_list_advanced
     - paragraphs.paragraphs_type.vih_webform
     - paragraphs.paragraphs_type.vih_wrapper
@@ -60,6 +61,7 @@ settings:
       vih_class_groups_accordion: vih_class_groups_accordion
       vih_contact_person: vih_contact_person
       vih_webform: vih_webform
+      vih_grid_with_subjects: vih_grid_with_subjects
     target_bundles_drag_drop:
       1_column_action_centered:
         enabled: true
@@ -155,6 +157,6 @@ settings:
         enabled: true
         weight: 50
       vih_grid_with_subjects:
+        enabled: true
         weight: 52
-        enabled: false
 field_type: entity_reference_revisions

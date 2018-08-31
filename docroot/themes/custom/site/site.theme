@@ -9,7 +9,7 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
  * Implements hook_preprocess_page() for page.html.twig.
  */
 function site_preprocess_html(&$variables) {
-  if (strpos($_SERVER['SERVER_NAME'], 'vies') !== false) {
+  if (_detect_site() === 'vies') {
     $variables['#attached']['library'][] =  'site/styles_vies';
     $variables['attributes']['class'][] = 'is-vies';
   } else {
@@ -53,6 +53,9 @@ function site_preprocess_page(array &$variables) {
     $banner['#theme'] = 'header_banner';
     $variables['header_banner'] = $banner;
   }
+
+  // Pass which site we are on - for use with ex. logo display.
+  $variables['activated_site'] = _detect_site();
 
   // Theme settings.
   $variables['theme_settings']['copyright_interval'] = '';
@@ -921,4 +924,15 @@ function site_theme() {
       'render element' => 'banner',
     ],
   ];
+}
+
+/**
+ * Detects which site are used.
+ */
+function _detect_site() {
+  if (strpos($_SERVER['SERVER_NAME'], 'vies') !== false) {
+    return 'vies';
+  }
+
+  return 'vih';
 }

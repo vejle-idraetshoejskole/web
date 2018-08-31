@@ -21,6 +21,7 @@ dependencies:
     - paragraphs.paragraphs_type.vih_class_groups_accordion
     - paragraphs.paragraphs_type.vih_contact_person
     - paragraphs.paragraphs_type.vih_content_grid
+    - paragraphs.paragraphs_type.vih_grid_with_subjects
     - paragraphs.paragraphs_type.vih_list_of_news_list_advanced
     - paragraphs.paragraphs_type.vih_teacher_class_description
     - paragraphs.paragraphs_type.vih_webform
@@ -59,9 +60,10 @@ settings:
       user_quote: user_quote
       video: video
       vih_class_groups_accordion: vih_class_groups_accordion
-      vih_contact_person: vih_contact_person
       vih_teacher_class_description: vih_teacher_class_description
+      vih_contact_person: vih_contact_person
       vih_webform: vih_webform
+      vih_grid_with_subjects: vih_grid_with_subjects
     target_bundles_drag_drop:
       1_column_action_centered:
         enabled: true
@@ -132,10 +134,10 @@ settings:
       vih_ordered_course_person:
         weight: 44
         enabled: false
-      vih_ordered_course_slot:
+      vih_banner_slide:
         weight: 45
         enabled: false
-      vih_banner_slide:
+      vih_ordered_course_slot:
         weight: 45
         enabled: false
       vih_ordered_event_person:
@@ -147,13 +149,16 @@ settings:
       vih_single_class_group:
         weight: 48
         enabled: false
-      vih_contact_person:
+      vih_teacher_class_description:
         enabled: true
         weight: 49
-      vih_teacher_class_description:
+      vih_contact_person:
         enabled: true
         weight: 49
       vih_webform:
         enabled: true
         weight: 50
+      vih_grid_with_subjects:
+        enabled: true
+        weight: 52
 field_type: entity_reference_revisions

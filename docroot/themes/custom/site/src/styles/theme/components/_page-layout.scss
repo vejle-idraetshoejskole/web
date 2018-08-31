@@ -23,6 +23,10 @@ $md-page-layout-content-inner-padding-bottom: 60px;
 // Styling
 // --------------------------------------------------
 
+div#sliding-popup {
+  background-color: $brand-primary !important;
+}
+
 .sliding-popup-bottom,
 .sliding-popup-top {
   z-index: $zindex-modal - 30;

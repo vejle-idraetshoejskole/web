@@ -23,14 +23,17 @@
   .entity-list-advanced__image {
     cursor: pointer;
   }
+
   & a.link-cover{
     width: 100%;
     height: 100%;
     position: absolute;
   }
+
   & > a.link-modal{
     color: unset;
     display: contents;
+
     &:hover, &:active, &:focus{
       color: unset;
       text-decoration: none;
@@ -50,7 +53,22 @@
 @media #{$breakpoint-mobile-and-up} {}
 
 // Mobile - only
-@media #{$breakpoint-mobile-only} {}
+@media #{$breakpoint-mobile-only} {
+
+  .entity-list-advanced--class {
+    position: relative;
+
+    .entity-list-advanced__action {
+      position: absolute;
+
+      top: 30px;
+      left: 0;
+      right: 0;
+
+      justify-content: center;
+    }
+  }
+}
 
 // Tablet - and up
 @media #{$breakpoint-tablet-and-up} {}
