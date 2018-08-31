@@ -410,7 +410,7 @@ $breakpoint-mobile-to-tablet: "screen and (max-width: #{$screen-sm-max})";
         height: 100%;
         max-width: 230px;
         width: 230px;
-        background-color: #0080af;
+        background-color: $navbar-sidebar-background-color;
         padding: 0;
         border: none;
         -webkit-box-shadow: inset -5px 0px 29px -9px rgba(0, 0, 0, 0.5);
