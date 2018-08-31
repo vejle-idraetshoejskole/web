@@ -17,16 +17,16 @@ bundle: vih_grid_with_subjects
 mode: default
 content:
   field_vih_heading:
-    weight: 1
-    label: above
+    weight: 0
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
     type: string
     region: content
   field_vih_link:
-    weight: 0
-    label: above
+    weight: 2
+    label: hidden
     settings:
       trim_length: 80
       url_only: false
@@ -36,7 +36,15 @@ content:
     third_party_settings: {  }
     type: link
     region: content
+  field_vih_subject_id:
+    type: entity_reference_entity_view
+    weight: 1
+    region: content
+    label: hidden
+    settings:
+      view_mode: teaser
+      link: false
+    third_party_settings: {  }
 hidden:
   field_vih_background_color: true
   field_vih_background_img: true
-  field_vih_subject_id: true
