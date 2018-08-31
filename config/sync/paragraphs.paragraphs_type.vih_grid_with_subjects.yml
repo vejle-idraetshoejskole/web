@@ -3,7 +3,7 @@ langcode: da
 status: true
 dependencies: {  }
 id: vih_grid_with_subjects
-label: 'Grid with subjects'
+label: 'Grid med udvalgte fag'
 icon_uuid: null
 description: 'Viser udvalgte fag i et grid.'
 behavior_plugins: {  }
