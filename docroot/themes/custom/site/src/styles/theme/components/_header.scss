@@ -78,7 +78,7 @@ $breakpoint-mobile-to-tablet: "screen and (max-width: #{$screen-sm-max})";
     }
 
     span {
-      color: $brand-secondary;
+      color: $layout-header-highlighted-text;
       font-size: $font-size-extra-extra-small;
       margin-left: 6px;
       font-weight: $font-weight-bold;
