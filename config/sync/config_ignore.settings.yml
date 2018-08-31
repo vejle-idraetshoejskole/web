@@ -1319,7 +1319,7 @@ ignored_config_entities:
   2634: ~views.view.vih_long_course_order_page
   2636: ~views.view.vih_event_order_page
   2638: ~views.view.vih_short_courses
-  2640: ~views.view.vies_application_list.yml
+  2640: ~views.view.vies_application_list
   2642: ~views.view.watchdog
   2644: ~views.view.who_s_new
   2646: ~views.view.who_s_online
