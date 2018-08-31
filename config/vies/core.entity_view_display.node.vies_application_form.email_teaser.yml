@@ -50,9 +50,8 @@ third_party_settings:
         - field_vies_email
         - field_vies_telefon
         - field_vies_birthday
-        - field_vies_newsletter
       parent_name: ''
-      weight: 3
+      weight: 2
       format_type: html_element
       format_settings:
         label: col-left
@@ -94,7 +93,7 @@ third_party_settings:
         - field_vies_about_school
         - field_vies_afterschool
       parent_name: ''
-      weight: 4
+      weight: 3
       format_type: html_element
       format_settings:
         id: ''
@@ -107,23 +106,6 @@ third_party_settings:
         effect: none
         speed: fast
       label: col-right
-      region: content
-    group_parents:
-      children:
-        - field_vies_parents
-      parent_name: ''
-      weight: 2
-      format_type: html_element
-      format_settings:
-        id: ''
-        classes: ''
-        element: div
-        show_label: true
-        label_element: b
-        attributes: ''
-        effect: none
-        speed: fast
-      label: 'Parents:'
       region: content
 id: node.vies_application_form.email_teaser
 targetEntityType: node
@@ -230,7 +212,7 @@ content:
     type: string
     region: content
   field_vies_label:
-    weight: 6
+    weight: 5
     label: above
     settings:
       link: false
@@ -253,18 +235,8 @@ content:
     third_party_settings: {  }
     type: string
     region: content
-  field_vies_newsletter:
-    weight: 27
-    label: inline
-    settings:
-      format: yes-no
-      format_custom_true: ''
-      format_custom_false: ''
-    third_party_settings: {  }
-    type: boolean
-    region: content
   field_vies_parents:
-    weight: 29
+    weight: 6
     label: hidden
     settings:
       view_mode: email_teaser
@@ -281,7 +253,7 @@ content:
     type: entity_reference_label
     region: content
   field_vies_status:
-    weight: 5
+    weight: 4
     label: above
     settings:
       link: false
@@ -307,5 +279,6 @@ content:
 hidden:
   field_vies_edb_synch_message: true
   field_vies_edb_synched: true
+  field_vies_newsletter: true
   langcode: true
   links: true

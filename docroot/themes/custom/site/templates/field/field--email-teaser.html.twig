@@ -39,7 +39,7 @@
  */
 #}
 
-<div style="display: table;">
+<div style="display: inline;">
   {% if label_hidden %}
     {% if multiple %}
       <div class="field--items">
@@ -53,7 +53,7 @@
       {% endfor %}
     {% endif %}
   {% else %}
-    <div style="float: left;"><b>{{ label }}:</b>
+    <div><b>{{ label }}:</b>
       {% if multiple %}
       {% endif %}
       {% for item in items %}

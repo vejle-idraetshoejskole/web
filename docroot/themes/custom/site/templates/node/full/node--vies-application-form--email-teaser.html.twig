@@ -1,21 +1,19 @@
+
 <table cellspacing="0" cellpadding="0" border="0">
   <tr>
-    <td>
-      <b>
-        Student:
-      </b>
+    <td style="vertical-align: top;">
       {{ content.field_vies_first_name.0 }} {{ content.field_vies_last_name.0 }}
       {{ content.group_col_left }}
     </td>
-  </tr>
-  <tr>
+    <td style="border-left: 1px solid black;">
+    </td>
     <td>
-      <br>{{ content.group_col_right }}
+      {{ content.group_col_right }}
     </td>
   </tr>
   <tr>
+    <td colspan="3" style="border-top: 1px solid black; vertical-align: top">
+      {{content.field_vies_parents }}
     <td>
-      <br>{{content.group_parents }}
-    </td>
   </tr>
 </table>

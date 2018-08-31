@@ -15,38 +15,13 @@ dependencies:
     - field.field.paragraph.parent.field_parent_type
     - field.field.paragraph.parent.field_parent_zip
     - paragraphs.paragraphs_type.parent
-  module:
-    - field_group
-third_party_settings:
-  field_group:
-    group_address:
-      children:
-        - field_parent_address
-        - field_parent_zip
-        - field_parent_city
-        - field_parent_country
-      parent_name: ''
-      weight: 5
-      format_type: html_element
-      format_settings:
-        label: Address
-        element: div
-        show_label: false
-        label_element: label
-        attributes: ''
-        effect: none
-        speed: fast
-        id: ''
-        classes: 'field--adress field--label-inline'
-      label: Address
-      region: content
 id: paragraph.parent.email_teaser
 targetEntityType: paragraph
 bundle: parent
 mode: email_teaser
 content:
   field_parent_address:
-    weight: 6
+    weight: 5
     label: hidden
     settings:
       link_to_entity: false
@@ -54,7 +29,7 @@ content:
     type: string
     region: content
   field_parent_city:
-    weight: 8
+    weight: 7
     label: hidden
     settings:
       link_to_entity: false
@@ -62,7 +37,7 @@ content:
     type: string
     region: content
   field_parent_country:
-    weight: 9
+    weight: 8
     label: hidden
     settings:
       link_to_entity: false
@@ -93,16 +68,6 @@ content:
     third_party_settings: {  }
     type: string
     region: content
-  field_parent_newsletter:
-    weight: 10
-    label: inline
-    settings:
-      format: yes-no
-      format_custom_true: ''
-      format_custom_false: ''
-    third_party_settings: {  }
-    type: boolean
-    region: content
   field_parent_telefon:
     weight: 4
     label: inline
@@ -120,11 +85,12 @@ content:
     type: string
     region: content
   field_parent_zip:
-    weight: 7
+    weight: 6
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
     type: string
     region: content
-hidden: {  }
+hidden:
+  field_parent_newsletter: true
