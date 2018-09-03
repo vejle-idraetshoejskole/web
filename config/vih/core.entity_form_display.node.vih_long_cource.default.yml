@@ -23,7 +23,6 @@ dependencies:
     - field.field.node.vih_long_cource.scheduled_update
     - node.type.vih_long_cource
   module:
-    - content_moderation
     - entity_browser
     - field_group
     - inline_entity_form
@@ -253,12 +252,6 @@ content:
       include_locked: true
     third_party_settings: {  }
     region: content
-  moderation_state:
-    type: moderation_state_default
-    weight: 6
-    settings: {  }
-    region: content
-    third_party_settings: {  }
   path:
     type: path
     weight: 32
@@ -288,6 +281,13 @@ content:
     third_party_settings: {  }
     type: inline_entity_form_complex
     region: content
+  status:
+    type: boolean_checkbox
+    weight: 6
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
   sticky:
     type: boolean_checkbox
     settings:
@@ -325,4 +325,4 @@ content:
 hidden:
   field_vih_lc_end_date: true
   field_vih_lc_start_date: true
-  status: true
+  moderation_state: true

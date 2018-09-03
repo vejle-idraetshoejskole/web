@@ -69,7 +69,6 @@ third_party_settings:
         - field_vih_event_start_date
         - field_vih_event_end_date
         - field_vih_event_price
-        - field_vih_cource_contact_person
         - field_vih_event_persons_limit
       parent_name: ''
       weight: 3
@@ -204,6 +203,9 @@ content:
       add_mode: modal
       form_display_mode: default
       default_paragraph_type: _none
+      features:
+        duplicate: duplicate
+        collapse_edit_all: collapse_edit_all
     third_party_settings: {  }
     type: paragraphs
     region: content
@@ -259,9 +261,19 @@ content:
       match_operator: CONTAINS
       override_labels: false
       allow_existing: false
+      collapsible: false
+      collapsed: false
+      allow_duplicate: false
     third_party_settings: {  }
     type: inline_entity_form_complex
     region: content
+  status:
+    type: boolean_checkbox
+    weight: 6
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
   sticky:
     type: boolean_checkbox
     settings:
@@ -292,7 +304,9 @@ content:
     third_party_settings: {  }
     region: content
   url_redirects:
-    weight: 50
+    weight: 5
     region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
-  status: true
+  moderation_state: true
