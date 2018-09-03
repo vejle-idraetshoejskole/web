@@ -251,14 +251,11 @@ function site_preprocess_node(array &$variables) {
 
     //preloading travel classes
     $course_travel_price = 0;
-    $start_course_date = '';
-    $end_course_date = '';
-    
+
     $start_course_date = $node->field_vih_lc_start_date;
     $end_course_date = $node->field_vih_lc_end_date;
     
     foreach ($node->field_vih_course_periods->referencedEntities() as $period) {
-      
       //only for full display
       if ($variables['view_mode'] == 'full') {
         $variables['content']['periods'][$period->id()] = array(
@@ -267,11 +264,15 @@ function site_preprocess_node(array &$variables) {
         );
 
         foreach ($period->field_vih_cp_course_slots->referencedEntities() as $slot) {
+          $slot = \Drupal::service('entity.repository')->getTranslationFromContext($slot);
+
           $travel = array_pop($slot->field_vih_cs_travel->getValue()[0]);
           $mandatory = array_pop($slot->field_vih_cs_mandatory->getValue()[0]);
 
           foreach ($slot->field_vih_cs_classes->referencedEntities() as $class) {
             foreach ($class->field_vih_class_class_packages->referencedEntities() as $class_package) {
+              $class_package = \Drupal::service('entity.repository')->getTranslationFromContext($class_package);
+
               // For the list
               if (!isset($variables['content']['classes_packages']) || empty($variables['content']['classes_packages'][$class_package->id()])) {
                 $variables['content']['classes_packages'][$class_package->id()] = [
@@ -283,7 +284,7 @@ function site_preprocess_node(array &$variables) {
                     ->getViewBuilder('taxonomy_term')
                     ->view($class_package, 'vih_class_package_accordion'),
                 ];
-                // Sorting array by taxonimy weights
+                // Sorting array by taxonomy weights
                 uasort($variables['content']['classes_packages'], function($a, $b) {
                   if ($a['weight'] == $b['weight']) {
                     return strcasecmp($a['name'], $b['name']);
@@ -299,9 +300,6 @@ function site_preprocess_node(array &$variables) {
                   'id' => $class_package->id(),
                   'name' => $class_package->getName(),
                   'term' => array()
-//                  'term' => \Drupal::entityTypeManager()
-//                    ->getViewBuilder('taxonomy_term')
-//                    ->view($class_package, 'vih_class_package_accordion'),
                 ];
               }
 
@@ -343,6 +341,7 @@ function site_preprocess_node(array &$variables) {
     }
   } elseif ($node->getType() === 'vih_course_period') {
     foreach ($node->field_vih_cp_course_slots->referencedEntities() as $slot) {
+      $slot = \Drupal::service('entity.repository')->getTranslationFromContext($slot);
       $variables['content']['#course_slots'][$slot->id()] = [
         'id' => $slot->id(),
         'name' => $slot->field_vih_cs_title->value
