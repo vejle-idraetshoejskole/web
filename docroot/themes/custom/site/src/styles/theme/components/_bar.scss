@@ -1,0 +1,98 @@
+// |--------------------------------------------------------------------------
+// | Bar
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .bar
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+@mixin bar-mixin() {}
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+.bar {
+  padding: 7px 0;
+
+  color: #fff;
+
+  background-color: #2e3338;
+
+  &, a {
+    font-size: 10px;
+  }
+
+  a {
+
+    &, &:hover, &:focus {
+      color: #fff;
+
+      text-decoration: none;
+    }
+  }
+
+  span {
+    font-size: 9px;
+
+    color: $brand-secondary;
+
+    &.icon {
+      font-size: inherit;
+
+      color: #fff;
+    }
+  }
+}
+.bar__row {
+  padding: 5px 15px;
+}
+
+.bar__row__item {}
+
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@media #{$breakpoint-mobile-and-up} {}
+
+// Mobile - only
+@media #{$breakpoint-mobile-only} {}
+
+// Tablet - and up
+@media #{$breakpoint-tablet-and-up} {}
+
+// Tablet - only
+@media #{$breakpoint-tablet-only} {}
+
+// Desktop - and up
+@media #{$breakpoint-desktop-and-up} {}
+
+// Desktop - only
+@media #{$breakpoint-desktop-only} {}
+
+// Large desktop - and up
+@media #{$breakpoint-large-desktop-and-up} {}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}
