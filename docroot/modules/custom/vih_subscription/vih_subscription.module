@@ -169,9 +169,13 @@ function vih_subscription_system_breadcrumb_alter(\Drupal\Core\Breadcrumb\Breadc
 function vih_subscription_node_view(&$build, Drupal\Core\Entity\EntityInterface $entity, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display) {
   global $user;
   $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-   //In case the translation is missing, trigger 404.
-  if (!$entity->hasTranslation($language)) {
-    throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+
+  // In case the translation is missing, trigger 404, skipping orders are they always exist only in one lang.
+  $bundle = $entity->bundle();
+  if ($bundle !== 'vih_long_course_order' && $bundle !== 'vih_short_course_order' &&  $bundle !== 'vih_event_order') {
+    if (!$entity->hasTranslation($language)) {
+      throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+    }
   }
 }
 
