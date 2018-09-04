@@ -59,7 +59,7 @@ class ValuationForm extends FormBase {
       $available_period[$period->id()] = $period->getTitle();
 
       if (!empty($application->field_vies_birthday[0]->value)
-        && $dates = \DateTime::createFromFormat('y', substr($application->field_vies_birthday[0]->value, 3, 2))) {
+        && $dates = \DateTime::createFromFormat('y', substr($application->field_vies_birthday[0]->value, 4, 2))) {
         $year_of_bitrh = $dates->format('Y');
         $available_year_of_bitrh[$year_of_bitrh] = $year_of_bitrh;
       }
@@ -172,7 +172,7 @@ class ValuationForm extends FormBase {
 
       if (!empty($yb_default_value)
         && !empty($application->field_vies_birthday[0]->value)
-        && $dates = \DateTime::createFromFormat('y', substr($application->field_vies_birthday[0]->value, 3, 2))) {
+        && $dates = \DateTime::createFromFormat('y', substr($application->field_vies_birthday[0]->value, 4, 2))) {
         if ($yb_default_value != $dates->format('Y')) {
           continue;
         }
