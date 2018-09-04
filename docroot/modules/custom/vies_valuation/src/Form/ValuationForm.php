@@ -215,7 +215,9 @@ class ValuationForm extends FormBase {
       $rows[] = $row;
 
     }
-
+    $form['header'] = [
+      '#markup' => '<h2>Ansøgere der ikke er vurderet</h2>',
+    ];
     $headers[] = 'Handlinger';
 
     $form['applications'] = [
@@ -282,6 +284,12 @@ class ValuationForm extends FormBase {
       '#type' => 'container',
       '#attributes' => ['class' => ['row', 'container-inline']],
       '#weight' => -10,
+    ];
+
+    $form['valuated']['filters']['header'] = [
+      '#markup' => '<h2>Vurderet ansøgere</h2>',
+      '#prefix' => '<div class="col-md-12">',
+      '#suffix' => '</div>',
     ];
 
     $labels_default_value = $form_state->getValue('labels');
