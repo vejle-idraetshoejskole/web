@@ -127,7 +127,7 @@ $list-advanced-inner-left-right-spacing: floor( ( $grid-gutter-width / 2 ) );
   .btn {
 
     .icon {
-      font-size: 24px;
+      font-size: inherit;
     }
 
     + .btn {
