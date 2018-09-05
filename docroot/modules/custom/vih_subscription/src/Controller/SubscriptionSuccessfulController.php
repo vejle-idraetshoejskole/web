@@ -78,11 +78,19 @@ class SubscriptionSuccessfulController extends ControllerBase {
     $node_view = node_view($order, 'email_teaser', \Drupal::languageManager()->getCurrentLanguage()->getId());
     $order_rendered = render($node_view)->__toString();
 
-    $logo = '<div style="background-color:#009bec; width:100%; text-align:center">'
-      . '<img src="'
-      . \Drupal::request()->getSchemeAndHttpHost()
-      . '/themes/custom/site/dist/images/layout-header-logo-vih.png" alt="VIH" />'
-      . '</div><br>';
+    if (_detect_site() === 'vies') {
+      $logo = '<div style="background-color:#FF8100; width:100%; text-align:center">'
+              . '<img src="'
+              . \Drupal::request()->getSchemeAndHttpHost()
+              . '/themes/custom/site/dist/images/layout-header-logo-vies.png" alt="VIES logo" />'
+              . '</div><br>';
+    } else {
+      $logo = '<div style="background-color:#009bec; width:100%; text-align:center">'
+              . '<img src="'
+              . \Drupal::request()->getSchemeAndHttpHost()
+              . '/themes/custom/site/dist/images/layout-header-logo-vih.png" alt="VIH logo" />'
+              . '</div><br>';
+    }
 
     $token = ['@subject_name', '@person_name', '@date', '@url', '@order_id', '@order'];
 
@@ -309,4 +317,15 @@ class SubscriptionSuccessfulController extends ControllerBase {
       VihSubscriptionUtils::sendMail($message);
     }
   }
+}
+
+/**
+ * Detects which site are used.
+ */
+function _detect_site() {
+  if (strpos($_SERVER['SERVER_NAME'], 'vies') !== false) {
+    return 'vies';
+  }
+
+  return 'vih';
 }
