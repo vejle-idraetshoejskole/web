@@ -1,9 +1,73 @@
 <header class="layout__header layout__header-mobile visible-xs visible-sm">
-    <div class=" layout__header-row layout__header-row--bottom">
-        {% if page.mobile_header_navigation %}
-            {{ page.mobile_header_navigation }}
-        {% endif %}
-    </div>
+  <div class=" layout__header-row layout__header-row--bottom">
+
+    {% if page.mobile_header_navigation %}
+      <nav id="navbar-collapse-menu"
+           class="navmenu navmenu-default navmenu-fixed-left offcanvas"
+           role="navigation">
+
+        <!-- Begin - bar -->
+        <div class="bar">
+
+          <!-- Begin - black bar - right -->
+          <div class="bar__row">
+            <div class="bar__row__item">
+              <aside class="layout-header-language-selection">
+                {{ page.header_black_bar_right }}
+              </aside>
+            </div>
+          </div>
+          <!-- End - black bar - right -->
+
+          {% if theme_settings.contact_information.phone_system and theme_settings.contact_information.phone_readable and theme_settings.contact_information.working_hours %}
+            <!-- Begin - contact information -->
+            <div class="bar__row">
+              <div class="bar__row__item">
+                <a
+                  href="tel:{{ theme_settings.contact_information.phone_system }}"><span
+                    class="icon icon-phone"></span> {{ theme_settings.contact_information.phone_readable }}
+                </a>
+                <span>{{ theme_settings.contact_information.working_hours }}</span>
+              </div>
+            </div>
+            <!-- End - contact information -->
+          {% endif %}
+
+          {% if theme_settings.header_bar.tour_url %}
+            <!-- Begin - tour -->
+            <div class="bar__row">
+              <div class="bar__row__item">
+                <a
+                  href="{{ path('entity.node.canonical', {'node': theme_settings.header_bar.tour_url }) }}"><span
+                    class="icon icon-bookmark-o"></span> {{ 'Guided tour' | trans }}
+                </a>
+                <span><strong>{{ 'get your own impression' | trans }}</strong></span>
+              </div>
+            </div>
+            <!-- End - tour -->
+          {% endif %}
+
+          {% if theme_settings.header_bar.contact_url %}
+            <!-- Begin - contact -->
+            <div class="bar__row">
+              <div class="bar__row__item">
+                <a
+                  href="{{ path('entity.node.canonical', {'node': theme_settings.header_bar.contact_url }) }}"><span
+                    class="icon icon-portrait"></span> {{ 'Contact' | trans }}</a>
+              </div>
+            </div>
+            <!-- End - contact -->
+          {% endif %}
+
+        </div>
+        <!-- End - bar -->
+
+        {{ page.mobile_header_navigation }}
+
+      </nav>
+    {% endif %}
+
+  </div>
 </header>
 
 <header id="main-menu" class="layout__header">

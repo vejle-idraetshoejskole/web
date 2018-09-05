@@ -115,11 +115,6 @@ function site_theme_suggestions_taxonomy_term_alter(
  */
 function site_preprocess_block(array &$variables) {
   $variables['content']['#attributes']['block'] = $variables['attributes']['id'];
-
-  // Main menu mobile
-  if ($variables['attributes']['id'] === 'block-site-main-menu-mobile') {
-    $variables['theme_settings'] = _site_collect_theme_settings();
-  }
 }
 
 /**

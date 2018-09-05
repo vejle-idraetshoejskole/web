@@ -35,78 +35,9 @@
 #}
 
 {% set heading_id = attributes.id ~ '-menu'|clean_id %}
-{#<nav  role="navigation" aria-labelledby="{{ heading_id }}"{{ attributes.removeClass('clearfix')|without('role', 'aria-labelledby').addClass('navbar navbar-default') }} >#}
- {#<div class="collapse navbar-collapse width" id="navbar-collapse-menu" aria-expanded="false" style="width: 0px;">#}
-  {#{% block content %}#}
-    {#{{ content }}#}
-  {#{% endblock %}#}
- {#</div>#}
-{#</nav>#}
 
-<nav id="navbar-collapse-menu" class="navmenu navmenu-default navmenu-fixed-left offcanvas" role="navigation">
-    {#<div class="navbar-collapse">#}
-
-  <!-- Begin - bar -->
-  <div class="bar">
-
-    {% if theme_settings.contact_information.phone_system and theme_settings.contact_information.phone_readable and theme_settings.contact_information.working_hours %}
-      <!-- Begin - contact information -->
-      <div class="bar__row">
-        <div class="bar__row__item">
-          <a
-            href="tel:{{ theme_settings.contact_information.phone_system }}"><span
-              class="icon icon-phone"></span> {{ theme_settings.contact_information.phone_readable }}
-          </a>
-          <span>{{ theme_settings.contact_information.working_hours }}</span>
-        </div>
-      </div>
-      <!-- End - contact information -->
-    {% endif %}
-
-    {% if theme_settings.header_bar.tour_url %}
-      <!-- Begin - tour -->
-      <div class="bar__row">
-        <div class="bar__row__item">
-          <a
-            href="{{ path('entity.node.canonical', {'node': theme_settings.header_bar.tour_url }) }}"><span
-              class="icon icon-bookmark-o"></span> {{ 'Guided tour' | trans }}</a>
-          <span><strong>{{ 'get your own impression' | trans }}</strong></span>
-        </div>
-      </div>
-      <!-- End - tour -->
-    {% endif %}
-
-    {% if theme_settings.header_bar.contact_url %}
-      <!-- Begin - contact -->
-      <div class="bar__row">
-        <div class="bar__row__item">
-          <a
-            href="{{ path('entity.node.canonical', {'node': theme_settings.header_bar.contact_url }) }}"><span
-              class="icon icon-portrait"></span> {{ 'Contact' | trans }}</a>
-        </div>
-      </div>
-      <!-- End - contact -->
-    {% endif %}
-
-  </div>
-  <!-- End - bar -->
-
-
-
-
-
-
-
-
-
-
-
-    <nav class="slinky-menu">
-        {% block content %}
-            {{ content }}
-        {% endblock %}
-    </nav>
-    {#</div>#}
+<nav class="slinky-menu">
+  {% block content %}
+    {{ content }}
+  {% endblock %}
 </nav>
-
-
