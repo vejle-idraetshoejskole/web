@@ -256,6 +256,8 @@ function site_preprocess_node(array &$variables) {
     $end_course_date = $node->field_vih_lc_end_date;
     
     foreach ($node->field_vih_course_periods->referencedEntities() as $period) {
+      $period = \Drupal::service('entity.repository')->getTranslationFromContext($period);
+
       //only for full display
       if ($variables['view_mode'] == 'full') {
         $variables['content']['periods'][$period->id()] = array(
