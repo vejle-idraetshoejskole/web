@@ -8,9 +8,13 @@ dependencies:
     - field.storage.node.field_vies_email
     - node.type.vies_application_form
     - system.menu.admin
+    - taxonomy.vocabulary.vih_class
+    - user.role.authenticated
   module:
     - node
+    - taxonomy
     - user
+    - verf
     - views_autocomplete_filters
 id: vies_application_list
 label: 'Tilmeldinger - Applications'
@@ -28,9 +32,10 @@ display:
     position: 0
     display_options:
       access:
-        type: perm
+        type: role
         options:
-          perm: 'access content'
+          role:
+            authenticated: authenticated
       cache:
         type: tag
         options: {  }
@@ -475,6 +480,7 @@ display:
           entity_type: node
           entity_field: type
           plugin_id: bundle
+          group: 1
         title:
           id: title
           table: node_field_data
@@ -526,6 +532,168 @@ display:
           entity_type: node
           entity_field: title
           plugin_id: views_autocomplete_filters_string
+        field_vies_course_target_id_verf:
+          id: field_vies_course_target_id_verf
+          table: node__field_vies_course
+          field: field_vies_course_target_id_verf
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value:
+            all: all
+            29: '29'
+            35: '35'
+            36: '36'
+            174: '174'
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_vies_course_target_id_verf_op
+            label: Course
+            description: ''
+            use_operator: false
+            operator: field_vies_course_target_id_verf_op
+            identifier: field_vies_course_target_id_verf
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              media_creator: '0'
+              media_manager: '0'
+              moderator: '0'
+            reduce: 0
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          verf_target_bundles:
+            vih_long_cource: vih_long_cource
+            event: 0
+            news: 0
+            page: 0
+            vies_application_form: 0
+            vih_course_period: 0
+            vih_event_order: 0
+          plugin_id: verf
+        field_vies_period_target_id_verf:
+          id: field_vies_period_target_id_verf
+          table: node__field_vies_period
+          field: field_vies_period_target_id_verf
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: in
+          value:
+            all: all
+            27: '27'
+            167: '167'
+            168: '168'
+            169: '169'
+            30: '30'
+            171: '171'
+            172: '172'
+            173: '173'
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_vies_period_target_id_verf_op
+            label: Period
+            description: ''
+            use_operator: false
+            operator: field_vies_period_target_id_verf_op
+            identifier: field_vies_period_target_id_verf
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              media_creator: '0'
+              media_manager: '0'
+              moderator: '0'
+            reduce: 0
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          verf_target_bundles:
+            vih_course_period: vih_course_period
+            event: 0
+            news: 0
+            page: 0
+            vies_application_form: 0
+            vih_event_order: 0
+            vih_long_cource: 0
+          plugin_id: verf
+        field_vies_class_target_id:
+          id: field_vies_class_target_id
+          table: node__field_vies_class
+          field: field_vies_class_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: field_vies_class_target_id_op
+            label: Class
+            description: ''
+            use_operator: false
+            operator: field_vies_class_target_id_op
+            identifier: field_vies_class_target_id
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              media_creator: '0'
+              media_manager: '0'
+              moderator: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          type: select
+          limit: true
+          vid: vih_class
+          hierarchy: false
+          error_message: true
+          plugin_id: taxonomy_index_tid
       sorts:
         created:
           id: created
@@ -550,6 +718,10 @@ display:
       arguments: {  }
       display_extenders:
         metatag_display_extender: {  }
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
     cache_metadata:
       max-age: -1
       contexts:
@@ -557,11 +729,14 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - user
         - 'user.node_grants:view'
-        - user.permissions
+        - user.roles
       tags:
         - 'config:field.storage.node.field_vies_class'
         - 'config:field.storage.node.field_vies_email'
+        - 'config:views.view.vies_application_list'
+        - node_list
   page_1:
     display_plugin: page
     id: page_1
@@ -570,7 +745,7 @@ display:
     display_options:
       display_extenders:
         metatag_display_extender: {  }
-      path: admin/ordrer/appliations
+      path: admin/ordrer/applications
       menu:
         type: normal
         title: Applications
@@ -587,8 +762,11 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - user
         - 'user.node_grants:view'
-        - user.permissions
+        - user.roles
       tags:
         - 'config:field.storage.node.field_vies_class'
         - 'config:field.storage.node.field_vies_email'
+        - 'config:views.view.vies_application_list'
+        - node_list
