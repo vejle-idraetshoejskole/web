@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.user.compact
+    - field.field.user.user.field_metatag
     - field.field.user.user.field_vih_top_banner
     - field.field.user.user.field_vih_top_banner_text
     - field.field.user.user.field_vih_user_birthday
@@ -17,6 +18,7 @@ dependencies:
     - field.field.user.user.field_vih_user_photo
     - field.field.user.user.field_vih_user_qualifications
     - field.field.user.user.field_vih_user_type_id
+    - field.field.user.user.vih_user_status
   module:
     - panelizer
     - text
@@ -34,12 +36,19 @@ mode: compact
 content:
   field_vih_user_descr:
     type: text_trimmed
-    weight: 4
+    weight: 5
     label: hidden
     settings:
       trim_length: 150
     third_party_settings: {  }
     region: content
+  field_vih_user_email:
+    type: basic_string
+    weight: 3
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
   field_vih_user_name_first:
     type: string
     weight: 1
@@ -58,7 +67,7 @@ content:
     third_party_settings: {  }
   field_vih_user_phone:
     type: string
-    weight: 3
+    weight: 4
     label: hidden
     settings:
       link_to_entity: false
@@ -79,7 +88,6 @@ hidden:
   field_vih_top_banner: true
   field_vih_top_banner_text: true
   field_vih_user_birthday: true
-  field_vih_user_email: true
   field_vih_user_job_title: true
   field_vih_user_paragraphs: true
   field_vih_user_qualifications: true

@@ -12,7 +12,7 @@
             {{ user.field_vih_user_name_first.value }}
             {{ user.field_vih_user_name_last.value }}
           </h3>
-          {{ content|without("field_vih_user_phone", "field_vih_user_photo", "field_vih_user_name_first", "field_vih_user_name_last") }}
+          {{ content|without("field_vih_user_phone", "field_vih_user_photo", "field_vih_user_email", "field_vih_user_name_first", "field_vih_user_name_last") }}
         </td>
         <td class="teacher-contact-info hidden-xs">
           <h5>{{ "Contact information"|trans }}:</h5>
@@ -29,9 +29,11 @@
           {# End - phone #}
 
           {# Begin - email #}
-          <span class="teacher-mail">
-            <span class="icon icon-mail"></span> {{ user.email }}
-          </span>
+          {% if user.field_vih_user_email.value %}
+            <span class="teacher-mail">
+              <span class="icon icon-mail"></span> {{ content.field_vih_user_email }}
+            </span>
+          {% endif %}
           {# End - email #}
 
         </td>
