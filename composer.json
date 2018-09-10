@@ -77,7 +77,8 @@
         "drupal/smtp": "^1.0@beta",
         "drupal/views_arg_order_sort": "1.x-dev",
         "drupal/date_popup": "^1.0",
-        "drupal/views_autocomplete_filters": "^1.2"
+        "drupal/views_autocomplete_filters": "^1.2",
+        "drupal/verf": "^1.0@beta"
     },
     "repositories": [
         {
@@ -150,6 +151,9 @@
             },
             "drupal/entity_clone": {
                 "2945192 - Fatal error: Maximum function nesting level of '256' reached, aborting! With Support for sub-entity cloning patch": "https://www.drupal.org/files/issues/2018-08-24/max-nesting-level-2945192-11.patch"
+            },
+            "drupal/verf": {
+                "2871758 - InvalidArgumentException": "https://www.drupal.org/files/issues/2871758-1.patch"
             }
         }
     }

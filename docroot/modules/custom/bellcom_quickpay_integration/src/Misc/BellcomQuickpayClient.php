@@ -11,6 +11,7 @@ class BellcomQuickpayClient {
 
   public $client;
   public $testMode;
+  public $prefix;
   public $defaultCurrency = 'DKK';
 
   public function __construct() {
@@ -19,6 +20,7 @@ class BellcomQuickpayClient {
     $api_key = $config->get('api_key');
 
     $this->testMode = $config->get('test_mode');
+    $this->prefix = $config->get('prefix');
     $this->client = new QuickPay(":{$api_key}");
   }
 
@@ -46,10 +48,17 @@ class BellcomQuickpayClient {
     $variables->subject = $subjectUrl->toString();
 
     try {
+      // Only take 6 last digits from order id.
+      // Prevents the problem with order_id beeing too long. Limit is 20 chars.
+      $orderIdTrimmed = substr($order->id(), -6);
+
+      // Make orders unique by adding last 3 digits of timestamp;
+      $timestamp = substr(time(), -3);
+
       // Create payment
       $payment_form = array(
         // Generating unique order ID.
-        'order_id' => (($this->testMode) ? 'test-' : 'order-') . $subject->id() . '-' . ($order->id()) . '-' . substr(time(), -5),
+        'order_id' => (($this->testMode) ? 'T-' : '') . $this->prefix . $orderIdTrimmed . '-' . $timestamp,
         'currency' => $this->defaultCurrency,
         'variables' => $variables
       );

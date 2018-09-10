@@ -2,6 +2,8 @@
 
 namespace Drupal\bellcom_quickpay_integration\Form;
 
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\ReplaceCommand;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 
@@ -46,48 +48,59 @@ class QuickpaySettingsForm extends ConfigFormBase {
       '#type' => 'checkbox',
       '#title' => $this->t('Run in TEST mode?'),
       '#default_value' => $config->get('test_mode'),
+      '#ajax' => [
+        'callback' => '::ajaxAddTestModePrefixCallback',
+        'progress' => array(
+          'type' => 'none'
+        ),
+      ],
     ];
+
+    $form['bellcom_quickpay_integration_fieldset']['prefix_container'] = [
+      '#type' => 'container',
+      '#attributes' => ['id' => 'js-prefix-container'],
+    ];
+
+    $form['bellcom_quickpay_integration_fieldset']['prefix_container']['prefix'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Quickpay order id prefix'),
+      '#size' => 15,
+      '#maxlength' => 8,
+      '#default_value' => $config->get('prefix'),
+      '#description' => $this->t('Max length 8 characters'),
+    ];
+    if ($config->get('test_mode')) {
+      $form['bellcom_quickpay_integration_fieldset']['prefix_container']['prefix']['#field_prefix'] = 'T-';
+    }
 
     $form['bellcom_quickpay_integration_fieldset']['api_key'] = [
       '#type' => 'textfield',
       '#title' => $this->t('API Key'),
       '#default_value' => $config->get('api_key'),
     ];
-//
-//    $form['vih_subscription_edbbrugsen']['password'] = [
-//      '#type' => 'textfield',
-//      '#title' => $this->t('EDBBrugresen password'),
-//      '#default_value' => $config->get('password'),
-//      '#states' => [
-//        'visible'=> [
-//          ':input[name = "active"]' => ['checked' => TRUE]
-//        ]
-//      ]
-//    ];
-//
-//    $form['vih_subscription_edbbrugsen']['school_code'] = [
-//      '#type' => 'textfield',
-//      '#title' => $this->t('EDBBrugresen school code'),
-//      '#default_value' => $config->get('school_code'),
-//      '#states' => [
-//        'visible'=> [
-//          ':input[name = "active"]' => ['checked' => TRUE]
-//        ]
-//      ]
-//    ];
-//
-//    $form['vih_subscription_edbbrugsen']['book_number'] = [
-//      '#type' => 'textfield',
-//      '#title' => $this->t('EDBBrugresen book number'),
-//      '#default_value' => $config->get('book_number'),
-//      '#states' => [
-//        'visible'=> [
-//          ':input[name = "active"]' => ['checked' => TRUE]
-//        ]
-//      ]
-//    ];
 
     return parent::buildForm($form, $form_state);
+  }
+
+  /**
+   * Showing/hiding information about mode prefix.
+   *
+   * @param array $form
+   * @param FormStateInterface $form_state
+   *
+   * @return AjaxResponse
+   */
+  function ajaxAddTestModePrefixCallback(array &$form, FormStateInterface $form_state) {
+    if ($form_state->getValue('test_mode')) {
+      $form['bellcom_quickpay_integration_fieldset']['prefix_container']['prefix']['#field_prefix'] = 'T-';
+    }
+    else {
+      $form['bellcom_quickpay_integration_fieldset']['prefix_container']['prefix']['#field_prefix'] = '';
+    }
+
+    $response = new AjaxResponse();
+    $response->addCommand(new ReplaceCommand('#js-prefix-container', $form['bellcom_quickpay_integration_fieldset']['prefix_container']));
+    return $response;
   }
 
   /**

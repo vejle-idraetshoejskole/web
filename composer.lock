@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cfd1b10ae6cc194017cb7254297b1d3b",
+    "content-hash": "f637c08a64a7fff74066d36e9fd50f8c",
     "packages": [
         {
             "name": "acquia/lightning",
@@ -2104,16 +2104,16 @@
         },
         {
             "name": "drupal/core",
-            "version": "8.5.6",
+            "version": "8.5.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core.git",
-                "reference": "7d7184a69ac90ce53929ce99f18458043416107a"
+                "reference": "d8bdf376c0549e9bfc33030157b498df4b9bec87"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drupal/core/zipball/7d7184a69ac90ce53929ce99f18458043416107a",
-                "reference": "7d7184a69ac90ce53929ce99f18458043416107a",
+                "url": "https://api.github.com/repos/drupal/core/zipball/d8bdf376c0549e9bfc33030157b498df4b9bec87",
+                "reference": "d8bdf376c0549e9bfc33030157b498df4b9bec87",
                 "shasum": ""
             },
             "require": {
@@ -2322,7 +2322,6 @@
                     "2869592 - Disabled update module shouldn't produce a status report warning": "https://www.drupal.org/files/issues/2869592-remove-update-warning-7.patch",
                     "2885441 - EntityReferenceAutocompleteWidget should define its size setting as an integer": "https://www.drupal.org/files/issues/2885441-2.patch",
                     "2815221 - Add quickedit to the latest-revision route": "https://www.drupal.org/files/issues/2018-06-07/2815221-102.patch",
-                    "2921661 (follow-up): Add support to migrate multilingual revisions": "https://www.drupal.org/files/issues/2018-07-04/2921661-86-8.6.x.patch",
                     "2877383 - Add action support to Media module": "https://www.drupal.org/files/issues/2877383-56.patch",
                     "2670730 - Provide a delete action for each content entity type": "https://www.drupal.org/files/issues/2670730-81-89-8.5.0-rc1.patch",
                     "2945571 - Off canvas looks funky when using Seven theme": "https://www.drupal.org/files/issues/2018-08-22/off-canvas-2945571-19.patch"
@@ -2349,7 +2348,7 @@
                 "GPL-2.0-or-later"
             ],
             "description": "Drupal is an open source content management platform powering millions of websites and applications.",
-            "time": "2018-08-01T20:50:42+00:00"
+            "time": "2018-09-05T22:26:39+00:00"
         },
         {
             "name": "drupal/crop",
@@ -7083,6 +7082,56 @@
             "time": "2017-04-19T19:17:34+00:00"
         },
         {
+            "name": "drupal/verf",
+            "version": "1.0.0-beta6",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/verf",
+                "reference": "8.x-1.0-beta6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/verf-8.x-1.0-beta6.zip",
+                "reference": "8.x-1.0-beta6",
+                "shasum": "64e9c2c09d4b7ef2ab02f9421d46ec02a5603bf0"
+            },
+            "require": {
+                "drupal/core": "~8.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.0-beta6",
+                    "datestamp": "1468079039",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                },
+                "patches_applied": {
+                    "2871758 - InvalidArgumentException": "https://www.drupal.org/files/issues/2871758-1.patch"
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Xano",
+                    "homepage": "https://www.drupal.org/user/62965"
+                }
+            ],
+            "description": "Provides Views filters for entity reference fields.",
+            "homepage": "https://www.drupal.org/project/verf",
+            "support": {
+                "source": "http://cgit.drupalcode.org/verf"
+            }
+        },
+        {
             "name": "drupal/video_embed_field",
             "version": "2.0.0",
             "source": {
@@ -10528,16 +10577,16 @@
         },
         {
             "name": "zendframework/zend-diactoros",
-            "version": "1.8.5",
+            "version": "1.8.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-diactoros.git",
-                "reference": "3e4edb822c942f37ade0d09579cfbab11e2fee87"
+                "reference": "20da13beba0dde8fb648be3cc19765732790f46e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-diactoros/zipball/3e4edb822c942f37ade0d09579cfbab11e2fee87",
-                "reference": "3e4edb822c942f37ade0d09579cfbab11e2fee87",
+                "url": "https://api.github.com/repos/zendframework/zend-diactoros/zipball/20da13beba0dde8fb648be3cc19765732790f46e",
+                "reference": "20da13beba0dde8fb648be3cc19765732790f46e",
                 "shasum": ""
             },
             "require": {
@@ -10550,6 +10599,7 @@
             "require-dev": {
                 "ext-dom": "*",
                 "ext-libxml": "*",
+                "php-http/psr7-integration-tests": "dev-master",
                 "phpunit/phpunit": "^5.7.16 || ^6.0.8 || ^7.2.7",
                 "zendframework/zend-coding-standard": "~1.0"
             },
@@ -10587,7 +10637,7 @@
                 "psr",
                 "psr-7"
             ],
-            "time": "2018-08-10T14:16:32+00:00"
+            "time": "2018-09-05T19:29:37+00:00"
         },
         {
             "name": "zendframework/zend-escaper",
@@ -15070,7 +15120,8 @@
         "drupal/media_entity_actions": 15,
         "drupal/wbm2cm": 10,
         "drupal/smtp": 10,
-        "drupal/views_arg_order_sort": 20
+        "drupal/views_arg_order_sort": 20,
+        "drupal/verf": 10
     },
     "prefer-stable": true,
     "prefer-lowest": false,
