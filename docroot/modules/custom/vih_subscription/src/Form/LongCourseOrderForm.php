@@ -57,6 +57,8 @@ class LongCourseOrderForm extends FormBase {
 
     //composing available classes selection per CourseSlot for each CoursePeriod
     foreach ($course->field_vih_course_periods->referencedEntities() as $periodDelta => $coursePeriod) {
+      $coursePeriod = \Drupal::service('entity.repository')->getTranslationFromContext($coursePeriod);
+
       //coursePeriods render helping array
       $form['#coursePeriods'][$periodDelta] = array(
         'title' => $coursePeriod->getTitle(),
@@ -67,6 +69,8 @@ class LongCourseOrderForm extends FormBase {
       foreach ($coursePeriod->field_vih_cp_course_slots->referencedEntities() as $courseSlot) {
         // Adding only not mandatory course slots.
         if (!$courseSlot->field_vih_cs_mandatory->value) {
+          $courseSlot = \Drupal::service('entity.repository')->getTranslationFromContext($courseSlot);
+
           $notMandatoryCourseSlots[] = $courseSlot;
         }
       }

@@ -80,7 +80,7 @@ content:
     third_party_settings: {  }
     region: content
   scheduled_update:
-    weight: 11
+    weight: 12
     settings:
       match_operator: CONTAINS
       form_mode: default
@@ -89,9 +89,19 @@ content:
       label_plural: ''
       allow_new: true
       allow_existing: false
+      collapsible: false
+      collapsed: false
+      allow_duplicate: false
     third_party_settings: {  }
     type: inline_entity_form_complex
     region: content
+  status:
+    type: boolean_checkbox
+    weight: 14
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
   sticky:
     type: boolean_checkbox
     settings:
@@ -107,6 +117,11 @@ content:
       placeholder: ''
     third_party_settings: {  }
     region: content
+  translation:
+    weight: 11
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
     weight: 2
@@ -117,7 +132,9 @@ content:
     third_party_settings: {  }
     region: content
   url_redirects:
-    weight: 50
+    weight: 13
     region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
-  status: true
+  moderation_state: true
