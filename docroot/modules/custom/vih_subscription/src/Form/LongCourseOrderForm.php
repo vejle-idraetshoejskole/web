@@ -362,7 +362,7 @@ class LongCourseOrderForm extends FormBase {
         $courseSlots = $coursePeriod->field_vih_cp_course_slots->referencedEntities();
         $courseSlot = $courseSlots[$courseSlotDelta];
 
-        if (!is_numeric($radioValue) && $courseSlot->field_vih_cs_mandatory->value) {
+        if (!is_numeric($radioValue)) {
           $form_state->setErrorByName($radioKey, $this->t('Please make a selection in %slotName.', array('%slotName' => $courseSlot->field_vih_cs_title->value)));
         }
       }
