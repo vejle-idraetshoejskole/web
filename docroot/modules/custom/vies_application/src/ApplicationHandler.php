@@ -58,9 +58,9 @@ class ApplicationHandler {
    * Adult type.
    */
   public static $adultType = [
-    'mother' => 'Mor',
-    'father' => 'Far',
-    'other'  => 'Andre',
+    'mor' => 'Mor',
+    'far' => 'Far',
+    'andre'  => 'Andre',
   ];
 
   /**

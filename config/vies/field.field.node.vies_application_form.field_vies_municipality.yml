@@ -9,7 +9,7 @@ id: node.vies_application_form.field_vies_municipality
 field_name: field_vies_municipality
 entity_type: node
 bundle: vies_application_form
-label: Municipality
+label: Kommune
 description: ''
 required: false
 translatable: false
