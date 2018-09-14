@@ -389,6 +389,7 @@ class LongCourseOrderForm extends FormBase {
         $courseSlotDelta = $matches[2];
         $courseSlots = $coursePeriod->field_vih_cp_course_slots->referencedEntities();
         $courseSlot = $courseSlots[$courseSlotDelta];
+        $courseSlot = \Drupal::service('entity.repository')->getTranslationFromContext($courseSlot);
 
         $orderedCourseSlot = Paragraph::create([
           'type' => 'vih_ordered_course_slot',
