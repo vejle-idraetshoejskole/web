@@ -176,6 +176,9 @@ function site_preprocess_node(array &$variables) {
   //$variables['display_submitted'] = FALSE;
   $node = $variables['node'];
 
+  $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  $variables['language'] = $language;
+
   // Event
   if ($node->getType() == 'event') {
     $variables['content']['can_be_subscribed'] = \Drupal\vih_subscription\Misc\VihSubscriptionUtils::acceptsMoreSubscriptions($node);

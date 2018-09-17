@@ -9,7 +9,7 @@ id: node.vih_long_course_order.field_vih_lco_telefon
 field_name: field_vih_lco_telefon
 entity_type: node
 bundle: vih_long_course_order
-label: Telefon
+label: Telephone
 description: ''
 required: false
 translatable: false
