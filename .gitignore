@@ -104,7 +104,6 @@ mailchimp.settings.yml
 !config/*/core.extension.yml
 !config/*/core.menu.static_menu_link_overrides.yml
 !config/*/entity_browser.*
-!config/*/language
 !config/*/field.field.*
 !config/*/field.settings.yml
 !config/*/field.storage.*
