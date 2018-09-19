@@ -10,7 +10,7 @@ id: node.vies_application_form.field_vies_parents
 field_name: field_vies_parents
 entity_type: node
 bundle: vies_application_form
-label: Parents
+label: Forældre
 description: ''
 required: false
 translatable: false
@@ -86,11 +86,17 @@ settings:
       vih_option_group:
         weight: 50
         enabled: false
+      vih_banner_slide:
+        weight: 51
+        enabled: false
       vih_ordered_course_period:
         weight: 51
         enabled: false
       vih_ordered_course_person:
         weight: 52
+        enabled: false
+      vih_contact_person:
+        weight: 53
         enabled: false
       vih_ordered_course_slot:
         weight: 53
@@ -101,13 +107,22 @@ settings:
       vih_ordered_option:
         weight: 55
         enabled: false
+      vih_grid_with_subjects:
+        weight: 56
+        enabled: false
       vih_single_class_group:
         weight: 56
+        enabled: false
+      vih_list_of_news_list_advanced:
+        weight: 57
         enabled: false
       vih_teacher_class_description:
         weight: 57
         enabled: false
       vih_webform:
         weight: 58
+        enabled: false
+      vih_wrapper:
+        weight: 68
         enabled: false
 field_type: entity_reference

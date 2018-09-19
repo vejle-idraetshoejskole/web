@@ -9,7 +9,7 @@ id: node.vies_application_form.field_vies_gender
 field_name: field_vies_gender
 entity_type: node
 bundle: vies_application_form
-label: Gender
+label: Køn
 description: ''
 required: false
 translatable: false

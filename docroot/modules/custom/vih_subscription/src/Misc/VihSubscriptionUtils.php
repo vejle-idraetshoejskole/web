@@ -233,8 +233,13 @@ class VihSubscriptionUtils {
    * @throws \Exception
    */
   public static function subscribeToMailchimp($firstName, $lastName, $email) {
-    // Get first mail chimp list
+    // Getting all lists.
     $lists = mailchimp_get_lists(NULL, NULL);
+
+    // List ID from config.
+    $config = \Drupal::config(SubscriptionsGeneralSettingsForm::$configName);
+    $list_id = $config->get('vih_subscription_mailchimp_list_id');
+
     try {
       if (!$firstName || !$lastName || !$email) {
         throw new \Exception("Some of the mandatory parameters are not provided. Received first name: $firstName, last name: $lastName, email: $email");
@@ -243,12 +248,10 @@ class VihSubscriptionUtils {
         throw new \Exception('No available mailchimp list can be be found');
       }
 
-      $list = array_pop($lists);
+      $list = $lists[$list_id];
       if (!$list) {
         throw new \Exception('No available mailchimp list can be be found');
       }
-
-      $list_id = $list->id;
 
       if ($list_id) {
         $merge_vars = array(
