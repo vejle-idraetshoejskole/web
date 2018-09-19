@@ -185,10 +185,10 @@ class ValuationForm extends FormBase {
       }
 
       $row = [];
-      $row[] = new FormattableMarkup('@firstname @lastname', [
+      $row[] = \Drupal::l(new FormattableMarkup('@firstname @lastname', [
         '@firstname' => $application->field_vies_first_name->getValue()[0]['value'],
         '@lastname' => $application->field_vies_last_name->getValue()[0]['value'],
-      ]);
+      ]), $application->toUrl());
 
       foreach ($application->field_vies_class_questions->referencedEntities() as $class_questions) {
         $question_reference = $class_questions->field_question_reference->getValue();
@@ -360,10 +360,10 @@ class ValuationForm extends FormBase {
       }
 
       $row = [];
-      $row[] = new FormattableMarkup('@firstname @lastname', [
+      $row[] = \Drupal::l(new FormattableMarkup('@firstname @lastname', [
         '@firstname' => $application->field_vies_first_name->getValue()[0]['value'],
         '@lastname' => $application->field_vies_last_name->getValue()[0]['value'],
-      ]);
+      ]), $application->toUrl());
 
       $answer = '';
       foreach ($application->field_vies_class_questions->referencedEntities() as $class_questions) {
