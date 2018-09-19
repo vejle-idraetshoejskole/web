@@ -1,0 +1,3 @@
+settings:
+  prefix: 'Persons limit'
+  suffix: 'Enter 0 for unlimited'

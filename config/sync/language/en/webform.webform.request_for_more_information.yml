@@ -1,0 +1,9 @@
+elements: ''
+handlers:
+  e_mail:
+    settings:
+      body: "Thank you for your interest in Vejle Idr&aelig;tsh&oslash;jskole. We will contact you shortly with more information.<br />\r\n<br />\r\nIf you want to see news and pictures from Vejle Idr&aelig;tsh&oslash;jskole, please join our international Facebook group: https://www.facebook.com/groups/iinternationalsvih/&nbsp;<br />\r\n<br />\r\nYou can see your submission here:<br />\r\n[submission:values]<br />\r\n<br />\r\nYours sincerely,<br />\r\nA friendly e-mail robot<br />\r\nVejle Idr&aelig;tsh&oslash;jskole"
+  e_mail_zoho_crm:
+    settings:
+      body: "<p class=\"name\">Added: {{ webform_token('[current-date:short_date_zoho]', webform_submission) }}</p>\r\n<p class=\"name\">Lastname: {{ webform_token('[webform_submission:values:name]', webform_submission) }}</p>\r\n<p class=\"email\">Email: {{ webform_token('[webform_submission:values:email]', webform_submission) }}</p>\r\n<p class=\"phone\">Phone: {{ webform_token('[webform_submission:values:phone]', webform_submission) }}</p>\r\n<p class=\"phone\">Birthday: {{ webform_token('[webform_submission:values:birthday:short_date_zoho]', webform_submission) }}</p>\r\n<p class=\"phone\">Country: {{ webform_token('[webform_submission:values:nationality:country]', webform_submission) }}</p>\r\n<p class=\"phone\">Description: Request more information - {{ webform_token('[webform_submission:values:when_do_you_want_to_start_]', webform_submission) }} - {{ webform_token('[webform_submission:values:which_subjects_are_you_interested_in_]', webform_submission) }} - {{ webform_token('[webform_submission:values:question_]', webform_submission) }} - {{ webform_token('[webform_submission:values:how_did_you_hear_about_vejle_idraetshojskole_]', webform_submission) }} - {{ webform_token('[webform_submission:values:question_]', webform_submission) }}</p>"
+title: 'Request more information'
