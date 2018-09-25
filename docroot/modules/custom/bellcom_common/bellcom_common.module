@@ -108,3 +108,22 @@ function bellcom_common_preprocess_breadcrumb(&$variables){
   // Making breadcrumbs not being cached.
   $variables['#cache']['contexts'][] = 'url';
 }
+
+/**
+ * Implements hook_translation_insert().
+ *
+ * Makes paragraphs status not published when translation created.
+ */
+function bellcom_common_entity_translation_insert(\Drupal\Core\Entity\EntityInterface $translation) {
+  if ($translation->getEntityTypeId() == 'taxonomy_term'){
+    $paragraphs  = $translation->field_vih_paragraphs->getValue();
+    foreach ($paragraphs as $element) {
+      $paragraphs_entity = \Drupal\paragraphs\Entity\Paragraph::load( $element['target_id'] );
+      if ($paragraphs_entity->hasTranslation('en')) {
+        $paragraphs_entity = $paragraphs_entity->getTranslation('en');
+        $paragraphs_entity->set('status', 0);
+        $paragraphs_entity->save();
+      }
+    }
+  }
+}
