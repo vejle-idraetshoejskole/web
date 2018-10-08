@@ -230,16 +230,17 @@ class VihSubscriptionUtils {
    * @param $firstName
    * @param $lastName
    * @param $email
+   * @param $lang
    *
    * @throws \Exception
    */
-  public static function subscribeToMailchimp($firstName, $lastName, $email) {
+  public static function subscribeToMailchimp($firstName, $lastName, $email, $lang = 'da') {
     // Getting all lists.
     $lists = mailchimp_get_lists(NULL, NULL);
 
     // List ID from config.
     $config = \Drupal::config(SubscriptionsGeneralSettingsForm::$configName);
-    $list_id = $config->get('vih_subscription_mailchimp_list_id');
+    $list_id = $config->get('vih_subscription_mailchimp_list_id_' . $lang);
 
     try {
       if (!$firstName || !$lastName || !$email) {

@@ -72,10 +72,12 @@ class SubscriptionSuccessfulController extends ControllerBase {
    * @param NodeInterface $order
    */
   private function registerOrder(NodeInterface $subject, NodeInterface $order) {
+    $currentLangId = \Drupal::languageManager()->getCurrentLanguage()->getId();
+
     //Send email
     $notificationsConfig = \Drupal::configFactory()->getEditable(SubscriptionsGeneralSettingsForm::$configName);
     $message = array();
-    $node_view = node_view($order, 'email_teaser', \Drupal::languageManager()->getCurrentLanguage()->getId());
+    $node_view = node_view($order, 'email_teaser', $currentLangId);
     $order_rendered = render($node_view)->__toString();
 
     if (_detect_site() === 'vies') {
@@ -95,13 +97,13 @@ class SubscriptionSuccessfulController extends ControllerBase {
     $token = ['@subject_name', '@person_name', '@date', '@url', '@order_id', '@order'];
 
     if ($subject->getType() == 'vih_long_cource') {
-      $notification_template = $notificationsConfig->get('vih_subscription_long_course_notifications_body_' . \Drupal::languageManager()->getCurrentLanguage()->getId());
+      $notification_template = $notificationsConfig->get('vih_subscription_long_course_notifications_body_' . $currentLangId);
       $notification_template = preg_replace("/\r\n|\r|\n/",'<br/>', $notification_template);
 
       $message = [
         'to' => $order->field_vih_lco_email->value,
-        'Bcc' => $notificationsConfig->get('vih_subscription_long_course_notifications_bcc_' . \Drupal::languageManager()->getCurrentLanguage()->getId()),
-        'subject' => $notificationsConfig->get('vih_subscription_long_course_notifications_subject_' . \Drupal::languageManager()->getCurrentLanguage()->getId()),
+        'Bcc' => $notificationsConfig->get('vih_subscription_long_course_notifications_bcc_' . $currentLangId),
+        'subject' => $notificationsConfig->get('vih_subscription_long_course_notifications_subject_' . $currentLangId),
         'body' => $notification_template,
       ];
 
@@ -136,14 +138,14 @@ class SubscriptionSuccessfulController extends ControllerBase {
         $firstName = $order->field_vih_lco_first_name->value;
         $lastName = $order->field_vih_lco_last_name->value;
 
-        VihSubscriptionUtils::subscribeToMailchimp($firstName, $lastName, $email);
+        VihSubscriptionUtils::subscribeToMailchimp($firstName, $lastName, $email, $currentLangId);
       }
       if ($order->field_vih_lco_adult_newsletter->value) {
         $adultEmail = $order->field_vih_lco_adult_email->value;
         $adultFirstName = $order->field_vih_lco_adult_first_name->value;
         $adultLastName = $order->field_vih_lco_adult_last_name->value;
 
-        VihSubscriptionUtils::subscribeToMailchimp($adultFirstName, $adultLastName, $adultEmail);
+        VihSubscriptionUtils::subscribeToMailchimp($adultFirstName, $adultLastName, $adultEmail, $currentLangId);
       }
 
       //EDBBrugsen Integration
@@ -197,13 +199,13 @@ class SubscriptionSuccessfulController extends ControllerBase {
           $courseDate .= \Drupal::service('date.formatter')
             ->format(strtotime($subject->field_vih_sc_end_date->value), "long");
         }
-        $notification_template = $notificationsConfig->get('vih_subscription_short_course_notifications_body_' . \Drupal::languageManager()->getCurrentLanguage()->getId());
+        $notification_template = $notificationsConfig->get('vih_subscription_short_course_notifications_body_' . $currentLangId);
         $notification_template = preg_replace("/\r\n|\r|\n/",'<br/>', $notification_template);
       
         $message = [
           'to' => $email,
-          'Bcc' => $notificationsConfig->get('vih_subscription_short_course_notifications_bcc_' . \Drupal::languageManager()->getCurrentLanguage()->getId()),
-          'subject' => $notificationsConfig->get('vih_subscription_short_course_notifications_subject_' . \Drupal::languageManager()->getCurrentLanguage()->getId()),
+          'Bcc' => $notificationsConfig->get('vih_subscription_short_course_notifications_bcc_' . $currentLangId),
+          'subject' => $notificationsConfig->get('vih_subscription_short_course_notifications_subject_' . $currentLangId),
           'body' => $notification_template,
         ];
 
@@ -226,7 +228,7 @@ class SubscriptionSuccessfulController extends ControllerBase {
           $firstName = $order_person->field_vih_ocp_first_name->value;
           $lastName = $order_person->field_vih_ocp_last_name->value;
 
-          VihSubscriptionUtils::subscribeToMailchimp($firstName, $lastName, $email);
+          VihSubscriptionUtils::subscribeToMailchimp($firstName, $lastName, $email, $currentLangId);
         }
 
         // EDBBrugsen Integration.
@@ -283,13 +285,13 @@ class SubscriptionSuccessfulController extends ControllerBase {
           $eventDate .= \Drupal::service('date.formatter')
             ->format(strtotime($subject->field_vih_event_end_date->value), "long");
         }
-        $notification_template = $notificationsConfig->get('vih_subscription_event_notifications_body_' . \Drupal::languageManager()->getCurrentLanguage()->getId());
+        $notification_template = $notificationsConfig->get('vih_subscription_event_notifications_body_' . $currentLangId);
         $notification_template = preg_replace("/\r\n|\r|\n/",'<br/>', $notification_template);
 
         $message = [
           'to' => $email,
-          'Bcc' => $notificationsConfig->get('vih_subscription_event_notifications_bcc_' . \Drupal::languageManager()->getCurrentLanguage()->getId()),
-          'subject' => $notificationsConfig->get('vih_subscription_event_notifications_subject_' . \Drupal::languageManager()->getCurrentLanguage()->getId()),
+          'Bcc' => $notificationsConfig->get('vih_subscription_event_notifications_bcc_' . $currentLangId),
+          'subject' => $notificationsConfig->get('vih_subscription_event_notifications_subject_' . $currentLangId),
           'body' => $notification_template,
         ];
 

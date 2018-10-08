@@ -60,15 +60,6 @@ class SubscriptionsGeneralSettingsForm extends ConfigFormBase {
       '#open' => FALSE,
     ];
 
-    $form['vih_subscription_settings_general_fs']['vih_subscription_mailchimp_list_id'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Mailchimp List ID'),
-      '#default_value' => $config->get('vih_subscription_mailchimp_list_id'),
-      '#description' => $this->t('An ID of the mailchimp list that user will get subscribed to, when ticking the corresponding checkbox. <br/>If the list is does not exist in the provided  <a href="@mailchimp-config-link">Mailchimp account</a>, no subscription will be made.', array(
-        '@mailchimp-config-link' => '/admin/config/services/mailchimp',
-      ))
-    ];
-
     // General language specific START.
     $form['vih_subscription_settings_general_fs']['vih_subscription_general_language_specific'] = array(
       '#type' => 'vertical_tabs',
@@ -82,6 +73,16 @@ class SubscriptionsGeneralSettingsForm extends ConfigFormBase {
       '#group' => 'vih_subscription_general_language_specific',
       '#weight' => -1
     );
+
+    // General Mailchimp ID DA.
+    $form['vih_subscription_general_da']['vih_subscription_mailchimp_list_id_da'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Mailchimp List ID (Danish)'),
+      '#default_value' => $config->get('vih_subscription_mailchimp_list_id_da'),
+      '#description' => $this->t('An ID of the mailchimp list that user will get subscribed to, when ticking the corresponding checkbox. <br/>If the list is does not exist in the provided  <a href="@mailchimp-config-link">Mailchimp account</a>, no subscription will be made.', array(
+          '@mailchimp-config-link' => '/admin/config/services/mailchimp',
+        ))
+    ];
 
     // General CPR help text DA.
     $form['vih_subscription_general_da']['vih_subscription_general_cpr_help_text_da'] = [
@@ -98,6 +99,16 @@ class SubscriptionsGeneralSettingsForm extends ConfigFormBase {
             ->t('English'),
         '#group' => 'vih_subscription_general_language_specific',
       );
+
+      // General Mailchimp ID DA.
+      $form['vih_subscription_general_en']['vih_subscription_mailchimp_list_id_en'] = [
+        '#type' => 'textfield',
+        '#title' => $this->t('Mailchimp List ID (English)'),
+        '#default_value' => $config->get('vih_subscription_mailchimp_list_id_en'),
+        '#description' => $this->t('An ID of the mailchimp list that user will get subscribed to, when ticking the corresponding checkbox. <br/>If the list is does not exist in the provided  <a href="@mailchimp-config-link">Mailchimp account</a>, no subscription will be made.', array(
+            '@mailchimp-config-link' => '/admin/config/services/mailchimp',
+          ))
+      ];
 
       // General CPR help text EN.
       $form['vih_subscription_general_en']['vih_subscription_general_cpr_help_text_en'] = [
