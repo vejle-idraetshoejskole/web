@@ -10,7 +10,7 @@ id: node.vies_application_form.field_vies_period
 field_name: field_vies_period
 entity_type: node
 bundle: vies_application_form
-label: Periode
+label: Klassetrin
 description: ''
 required: false
 translatable: false
