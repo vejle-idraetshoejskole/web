@@ -889,14 +889,14 @@ display:
           entity_type: node
           entity_field: type
           plugin_id: bundle
-        field_vih_cp_start_date_value:
-          id: field_vih_cp_start_date_value
-          table: node__field_vih_cp_start_date
-          field: field_vih_cp_start_date_value
-          relationship: field_vih_course_periods
+        field_vih_lc_start_date_value:
+          id: field_vih_lc_start_date_value
+          table: node__field_vih_lc_start_date
+          field: field_vih_lc_start_date_value
+          relationship: none
           group_type: group
           admin_label: ''
-          operator: '>'
+          operator: '>='
           value:
             min: ''
             max: ''
