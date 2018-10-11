@@ -60,12 +60,12 @@ class EDBBrugsenIntegration {
       $addressArr = [
         'address' => $addressParts[0],
         'houseNumber' => $addressParts[1],
-        'houseLetter' => $addressParts[2],
-        'houseFloor' => $addressParts[3],
+        'houseLetter' => !empty($addressParts[2])? $addressParts[2] : NULL ,
+        'houseFloor' => !empty($addressParts[3])? $addressParts[2] : NULL ,
       ];
 
       $registration['Elev.Adresse'] = VihSubscriptionUtils::formatAddressToString($addressArr);
-      $registration['Elev.Lokalby'] = $longCourseOrder->get('field_vih_lco_city')->value;
+      $registration['Elev.Lokalby'] = NULL;
       $registration['Elev.Postnr'] = $longCourseOrder->get('field_vih_lco_zip')->value;
       $registration['Elev.Bynavn'] = $longCourseOrder->get('field_vih_lco_city')->value;
       $registration['Elev.Kommune'] = $longCourseOrder->get('field_vih_lco_municipality')->value;
@@ -83,12 +83,12 @@ class EDBBrugsenIntegration {
       $addressAdultArr = [
         'address' => $addressParts[0],
         'houseNumber' => $addressParts[1],
-        'houseLetter' => $addressParts[2],
-        'houseFloor' => $addressParts[3],
+        'houseLetter' => !empty($addressParts[2])? $addressParts[2] : NULL ,
+        'houseFloor' => !empty($addressParts[3])? $addressParts[2] : NULL ,
       ];
 
       $registration['Voksen.Adresse'] = VihSubscriptionUtils::formatAddressToString($addressAdultArr);
-      $registration['Voksen.Lokalby'] = $longCourseOrder->get('field_vih_lco_adult_city')->value;
+      $registration['Voksen.Lokalby'] = NULL;
       $registration['Voksen.Postnr'] = $longCourseOrder->get('field_vih_lco_adult_zip')->value;
       $registration['Voksen.Bynavn'] = $longCourseOrder->get('field_vih_lco_adult_city')->value;
       $registration['Voksen.Fastnet'] = $longCourseOrder->get('field_vih_lco_adult_telefon')->value;
@@ -96,6 +96,9 @@ class EDBBrugsenIntegration {
       $registration['Voksen.Email'] = $longCourseOrder->get('field_vih_lco_adult_email')->value;
       $registration['Voksen.Land'] = $edb_utility->getCountryCode($longCourseOrder->get('field_vih_lco_adult_nationality')->value);
 
+      $registration['Fri132'] = $longCourseOrder->get('field_vih_lco_education')->value;
+      $registration['Fri082'] = date('d.m.Y');
+      
       $registration += $this->getDefaultRegistrationValues();
     }
     elseif ($longCourseOrder->getType() == 'vih_short_course_order') {
