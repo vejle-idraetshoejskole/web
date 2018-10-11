@@ -151,13 +151,6 @@ class LongCourseOrderForm extends FormBase {
       '#placeholder' => $this->t('E-mail address'),
       '#required' => TRUE,
     );
-    $form['personalDataLeft']['nationality'] = array(
-      '#type' => 'select',
-      '#title' => $this->t('Nationality'),
-      '#options' => CourseOrderOptionsList::getNationalityList(),
-      '#default_value' => 'DK',
-      '#required' => TRUE,
-    );
     $form['personalDataLeft']['payment'] = array(
       '#type' => 'select',
       '#title' => $this->t('How are you planning to pay?'),
@@ -217,6 +210,13 @@ class LongCourseOrderForm extends FormBase {
       '#type' => 'textfield',
       '#title' => $this->t('Municipality'),
       '#placeholder' => $this->t('Municipality'),
+      '#required' => TRUE,
+    );
+    $form['personalDataRight']['nationality'] = array(
+      '#type' => 'select',
+      '#title' => $this->t('Country'),
+      '#options' => CourseOrderOptionsList::getNationalityList(),
+      '#default_value' => 'DK',
       '#required' => TRUE,
     );
     $form['personalDataRight']['education'] = array(

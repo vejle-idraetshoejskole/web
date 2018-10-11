@@ -9,7 +9,7 @@ id: node.vih_long_course_order.field_vih_lco_nationality
 field_name: field_vih_lco_nationality
 entity_type: node
 bundle: vih_long_course_order
-label: Nationality
+label: Country
 description: ''
 required: false
 translatable: false
