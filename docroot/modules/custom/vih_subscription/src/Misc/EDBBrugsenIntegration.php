@@ -13,6 +13,7 @@ use Drupal\vih_subscription\Form\CourseOrderOptionsList;
 use EDBBrugs\Client;
 use EDBBrugs\Credentials;
 use EDBBrugs\RegistrationRepository;
+use EDBBrugs\Utility;
 
 class EDBBrugsenIntegration {
 
@@ -45,6 +46,7 @@ class EDBBrugsenIntegration {
    * @return array
    */
   public function convertLongCourseToRegistration(NodeInterface $longCourseOrder) {
+    $edb_utility = new Utility;
     $registration = array();
 
     if ($longCourseOrder->getType() == 'vih_long_course_order') {
@@ -70,7 +72,7 @@ class EDBBrugsenIntegration {
       $registration['Elev.Fastnet'] = $longCourseOrder->get('field_vih_lco_telefon')->value;
       $registration['Elev.Mobil'] = $longCourseOrder->get('field_vih_lco_telefon')->value;
       $registration['Elev.Email'] = $longCourseOrder->get('field_vih_lco_email')->value;
-      $registration['Elev.Land'] = $longCourseOrder->get('field_vih_lco_nationality')->value;
+      $registration['Elev.Land'] = $edb_utility->getCountryCode($longCourseOrder->get('field_vih_lco_nationality')->value);
       $registration['Elev.Notat'] = $longCourseOrder->get('field_vih_lco_message')->value;
 
       // adult = voksen information
@@ -92,7 +94,7 @@ class EDBBrugsenIntegration {
       $registration['Voksen.Fastnet'] = $longCourseOrder->get('field_vih_lco_adult_telefon')->value;
       $registration['Voksen.Mobil'] = $longCourseOrder->get('field_vih_lco_adult_telefon')->value;
       $registration['Voksen.Email'] = $longCourseOrder->get('field_vih_lco_adult_email')->value;
-      $registration['Voksen.Land'] = $longCourseOrder->get('field_vih_lco_adult_nationality')->value;
+      $registration['Voksen.Land'] = $edb_utility->getCountryCode($longCourseOrder->get('field_vih_lco_adult_nationality')->value);
 
       $registration += $this->getDefaultRegistrationValues();
     }
@@ -112,6 +114,7 @@ class EDBBrugsenIntegration {
    * @return array
    */
   public function convertShortCourseOrderPersonToRegistration(NodeInterface $shortCourseOrder, Paragraph $order_person) {
+    $edb_utility = new Utility;
     $registration = array();
 
     if ($order_person->getType() == 'vih_ordered_course_person') {
@@ -133,7 +136,7 @@ class EDBBrugsenIntegration {
       $registration['Elev.Lokalby'] = $order_person->field_vih_ocp_city->value;
       $registration['Elev.Postnr'] = $order_person->field_vih_ocp_zip->value;
       $registration['Elev.Bynavn'] = $order_person->field_vih_ocp_city->value;
-      $registration['Elev.Land'] = $order_person->field_vih_ocp_country->value;
+      $registration['Elev.Land'] = $edb_utility->getCountryCode($order_person->field_vih_ocp_country->value);
 
       //using only Booking number/Kartotek from default values
       $defaultValues = $this->getDefaultRegistrationValues();
@@ -153,6 +156,7 @@ class EDBBrugsenIntegration {
    *   Converted registration array.
    */
   public function convertApplicationToRegistration(array $data) {
+    $edb_utility = new Utility;
     $registration = array();
 
     $registration['Kursus'] = $data['courseTitle'];
@@ -171,11 +175,11 @@ class EDBBrugsenIntegration {
     $registration['Elev.Mobil'] = $data['telefon'];
     $registration['Elev.Email'] = $data['email'];
     $registration['Elev.CprNr'] = $data['cpr'];
-    $registration['Elev.Land'] = $data['country'];
+    $registration['Elev.Land'] = $edb_utility->getCountryCode($data['country']);
     if (isset($data['afterSchoolComment']) && isset($data['afterSchoolComment']['answer'])) {
       $registration['Elev.Notat'] = $data['afterSchoolComment']['answer'];
     }
-
+    
     // Adult information.
     $parent = array_shift($data['parents']);
     $registration['Voksen.Fornavn'] = $parent['firstName'];
@@ -188,8 +192,8 @@ class EDBBrugsenIntegration {
     $registration['Voksen.Mobil'] = $parent['telefon'];
     $registration['Voksen.Email'] = $parent['email'];
     $registration['Voksen.CprNr'] = $parent['cpr'];
-    $registration['Voksen.Land'] = $parent['country'];
-
+    $registration['Voksen.Land'] = $edb_utility->getCountryCode($parent['country']);
+     
     $registration['Elev.TidlSkole'] = $data['schoolFrom']['answer'];
 
     // Fill in the rest key values;
@@ -252,6 +256,7 @@ class EDBBrugsenIntegration {
    * @return array
    */
   protected function getDefaultRegistrationValues() {
+    $edb_utility = new Utility;
     return array(
       'Kartotek' => $this->book_number,
       'Kursus' => 'Vinterkursus 18/19',
@@ -270,7 +275,7 @@ class EDBBrugsenIntegration {
       'Elev.MobilBeskyttet' => 0,
       // 0 = No, 1 = Yes
       'Elev.Email' => 'kontor@vih.dk',
-      'Elev.Land' => 'Danmark',
+      'Elev.Land' => $edb_utility->getCountryCode('Danmark'),
       'Elev.Notat' => '',
       //'Elev.Notat' => 'Svend Aage Thomsen er skolens grundlægger',
       // Specific for student
@@ -288,7 +293,7 @@ class EDBBrugsenIntegration {
       'Voksen.MobilBeskyttet' => 0,
       // 0 = No, 1 = Yes
       'Voksen.Email' => 'kontor@vih.dk',
-      'Voksen.Land' => 'Danmark',
+      'Voksen.Land' => $edb_utility->getCountryCode('Danmark'),
     );
   }
 }
