@@ -72,7 +72,7 @@ class EDBBrugsenIntegration {
       $registration['Elev.Fastnet'] = $longCourseOrder->get('field_vih_lco_telefon')->value;
       $registration['Elev.Mobil'] = $longCourseOrder->get('field_vih_lco_telefon')->value;
       $registration['Elev.Email'] = $longCourseOrder->get('field_vih_lco_email')->value;
-      $registration['Elev.Land'] = $edb_utility->getCountryCode($longCourseOrder->get('field_vih_lco_nationality')->value);
+      $registration['Elev.Land'] = $edb_utility->getCountryCode($longCourseOrder->get('field_vih_lco_country')->value);
       $registration['Elev.Notat'] = $longCourseOrder->get('field_vih_lco_message')->value;
 
       // adult = voksen information

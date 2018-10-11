@@ -15,6 +15,7 @@ dependencies:
     - field.field.node.vih_long_course_order.field_vih_lco_adult_telefon
     - field.field.node.vih_long_course_order.field_vih_lco_adult_zip
     - field.field.node.vih_long_course_order.field_vih_lco_city
+    - field.field.node.vih_long_course_order.field_vih_lco_country
     - field.field.node.vih_long_course_order.field_vih_lco_course
     - field.field.node.vih_long_course_order.field_vih_lco_cpr
     - field.field.node.vih_long_course_order.field_vih_lco_edb_synch_message
@@ -149,6 +150,14 @@ content:
     region: content
   field_vih_lco_city:
     weight: 8
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_vih_lco_country:
+    weight: 30
     label: above
     settings:
       link_to_entity: false

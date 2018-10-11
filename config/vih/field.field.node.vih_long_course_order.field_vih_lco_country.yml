@@ -1,15 +1,15 @@
-uuid: 07629e7e-a7cc-4109-9b01-2265d3967263
+uuid: 43d29bd9-0fcd-4989-a3f1-965c547a37c1
 langcode: da
 status: true
 dependencies:
   config:
-    - field.storage.node.field_vih_lco_nationality
+    - field.storage.node.field_vih_lco_country
     - node.type.vih_long_course_order
-id: node.vih_long_course_order.field_vih_lco_nationality
-field_name: field_vih_lco_nationality
+id: node.vih_long_course_order.field_vih_lco_country
+field_name: field_vih_lco_country
 entity_type: node
 bundle: vih_long_course_order
-label: Citizenship
+label: Country
 description: ''
 required: false
 translatable: false

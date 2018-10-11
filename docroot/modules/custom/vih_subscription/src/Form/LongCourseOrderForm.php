@@ -151,6 +151,13 @@ class LongCourseOrderForm extends FormBase {
       '#placeholder' => $this->t('E-mail address'),
       '#required' => TRUE,
     );
+    $form['personalDataLeft']['nationality'] = array(
+      '#type' => 'select',
+      '#title' => $this->t('Citizenship'),
+      '#options' => CourseOrderOptionsList::getNationalityList(),
+      '#default_value' => 'DK',
+      '#required' => TRUE,
+    );
     $form['personalDataLeft']['payment'] = array(
       '#type' => 'select',
       '#title' => $this->t('How are you planning to pay?'),
@@ -212,7 +219,7 @@ class LongCourseOrderForm extends FormBase {
       '#placeholder' => $this->t('Municipality'),
       '#required' => TRUE,
     );
-    $form['personalDataRight']['nationality'] = array(
+    $form['personalDataRight']['country'] = array(
       '#type' => 'select',
       '#title' => $this->t('Country'),
       '#options' => CourseOrderOptionsList::getNationalityList(),
@@ -221,7 +228,7 @@ class LongCourseOrderForm extends FormBase {
     );
     $form['personalDataRight']['education'] = array(
       '#type' => 'select',
-      '#title' => $this->t('Education'),
+      '#title' => $this->t('Education at course start'),
       '#options' => CourseOrderOptionsList::getEducationList(),
       '#required' => TRUE,
     );
@@ -506,6 +513,7 @@ class LongCourseOrderForm extends FormBase {
         'field_vih_lco_cpr' => $form_state->getValue('cpr'), //CPR will be deleted from database immediately, after order is confirmed
         'field_vih_lco_telefon' => $form_state->getValue('telefon'),
         'field_vih_lco_email' => $form_state->getValue('email'),
+        'field_vih_lco_country' => CourseOrderOptionsList::getNationalityList($form_state->getValue('country')),
         'field_vih_lco_nationality' => CourseOrderOptionsList::getNationalityList($form_state->getValue('nationality')),
         'field_vih_lco_newsletter' => $form_state->getValue('newsletter'),
         'field_vih_lco_address' => implode('; ', $address_array),
