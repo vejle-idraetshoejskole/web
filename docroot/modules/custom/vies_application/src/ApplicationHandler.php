@@ -336,7 +336,7 @@ class ApplicationHandler {
     $mail_subject = $config->get('vih_subscription_application_notifications_subject_da');
     $mail_body = $config->get('vih_subscription_application_notifications_body_da');
 
-    $token = ['@subject_name', '@person_name', '@url', '@application'];
+    $token = ['@subject_name', '@class_name', '@person_name', '@url', '@application'];
     $message = [
       'to' => $this->application->field_vies_email->value,
       'subject' => $mail_subject,
@@ -347,6 +347,7 @@ class ApplicationHandler {
     $application_url = Url::fromRoute('vies_application.application_form')->setAbsolute()->toString();
     $replacement = [
       $this->data['courseTitle'],
+      $this->data['classTitle'],
       $this->application->field_vies_first_name->value . ' ' . $this->application->field_vies_last_name->value,
       '<a href="' . $application_url . '"target=_blank >' . $application_url . '</a>',
       $application_rendered,

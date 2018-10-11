@@ -554,6 +554,7 @@ class SubscriptionsGeneralSettingsForm extends ConfigFormBase {
       ];
       $notification_description = t("You can use the following replacement tokens: <br>
       <b>@subject_name</b> => Name of the application <br>
+      <b>@class_name</b> => Name of the class <br>
       <b>@person_name</b> => Name of the person <br>
       <b>@application</b> => Application full information <br>");
       $form['edit-vih-subscription-application-da']['vih_subscription_notifications_application_fs_da']['vih_subscription_application_notifications_body_da'] = [
