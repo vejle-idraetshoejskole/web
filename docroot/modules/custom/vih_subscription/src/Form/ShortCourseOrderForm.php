@@ -193,7 +193,7 @@ class ShortCourseOrderForm extends FormBase {
           '#placeholder' => $this->t('CPR'),
           '#required' => TRUE,
           '#pattern' => '[0-9]{10}',
-          '#field_suffix' => '<i type="button" class="icon icon-info-circle form-type-textfield__tooltip" aria-hidden="true" data-toggle="popover" data-placement="top" data-content="' . $cprHelpText . '"></i>',
+          '#field_suffix' => '<i type="button" class="icon icon-info-circle form-type-textfield__tooltip" aria-hidden="true" data-trigger="hover" data-toggle="popover" data-placement="top" data-content="' . $cprHelpText . '"></i>',
         );
 
         if (empty($addedParticipants)) {
