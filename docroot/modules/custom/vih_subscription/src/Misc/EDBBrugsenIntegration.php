@@ -97,7 +97,6 @@ class EDBBrugsenIntegration {
       $registration['Voksen.Land'] = $edb_utility->getCountryCode($longCourseOrder->get('field_vih_lco_adult_nationality')->value);
 
       $registration['Fri132'] = $longCourseOrder->get('field_vih_lco_education')->value;
-      $registration['Fri082'] = date('d.m.Y');
       
       $registration += $this->getDefaultRegistrationValues();
     }
@@ -136,7 +135,7 @@ class EDBBrugsenIntegration {
       ];
 
       $registration['Elev.Adresse'] = VihSubscriptionUtils::formatAddressToString($addressArr);
-      $registration['Elev.Lokalby'] = $order_person->field_vih_ocp_city->value;
+      $registration['Elev.Lokalby'] = NULL;
       $registration['Elev.Postnr'] = $order_person->field_vih_ocp_zip->value;
       $registration['Elev.Bynavn'] = $order_person->field_vih_ocp_city->value;
       $registration['Elev.Land'] = $edb_utility->getCountryCode($order_person->field_vih_ocp_country->value);
@@ -170,7 +169,7 @@ class EDBBrugsenIntegration {
     $registration['Elev.Fornavn'] = $data['firstName'];
     $registration['Elev.Efternavn'] = $data['lastName'];
     $registration['Elev.Adresse'] = $data['fullAddress'];
-    $registration['Elev.Lokalby'] = $data['city'];
+    $registration['Elev.Lokalby'] = NULL;
     $registration['Elev.Postnr'] = $data['zip'];
     $registration['Elev.Bynavn'] = $data['city'];
     $registration['Elev.Kommune'] = $data['municipality'];
@@ -188,7 +187,7 @@ class EDBBrugsenIntegration {
     $registration['Voksen.Fornavn'] = $parent['firstName'];
     $registration['Voksen.Efternavn'] = $parent['lastName'];
     $registration['Voksen.Adresse'] = $parent['fullAddress'];
-    $registration['Voksen.Lokalby'] = $parent['city'];
+    $registration['Voksen.Lokalby'] = NULL;
     $registration['Voksen.Postnr'] = $parent['zip'];
     $registration['Voksen.Bynavn'] = $parent['city'];
     $registration['Voksen.Fastnet'] = $parent['telefon'];
@@ -267,7 +266,7 @@ class EDBBrugsenIntegration {
       'Elev.Fornavn' => 'Svend Aage',
       'Elev.Efternavn' => 'Thomsen',
       'Elev.Adresse' => 'Ørnebjergvej 28',
-      'Elev.Lokalby' => 'Grejs',
+      'Elev.Lokalby' => NULL,
       'Elev.Postnr' => '7100',
       'Elev.Bynavn' => 'Vejle',
       'Elev.CprNr' => '010119421942',
@@ -286,7 +285,7 @@ class EDBBrugsenIntegration {
       'Voksen.Fornavn' => 'Svend Aage',
       'Voksen.Efternavn' => 'Thomsen',
       'Voksen.Adresse' => 'Ørnebjergvej 28',
-      'Voksen.Lokalby' => 'Grejs',
+      'Voksen.Lokalby' => NULL,
       'Voksen.Postnr' => '7100',
       'Voksen.Bynavn' => 'Vejle',
       'Voksen.Fastnet' => '75820811',
@@ -297,6 +296,7 @@ class EDBBrugsenIntegration {
       // 0 = No, 1 = Yes
       'Voksen.Email' => 'kontor@vih.dk',
       'Voksen.Land' => $edb_utility->getCountryCode('Danmark'),
+      'Fri082' => date('d.m.Y'),
     );
   }
 }
