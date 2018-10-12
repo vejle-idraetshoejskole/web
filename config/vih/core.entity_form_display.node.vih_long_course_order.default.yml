@@ -14,6 +14,7 @@ dependencies:
     - field.field.node.vih_long_course_order.field_vih_lco_adult_newsletter
     - field.field.node.vih_long_course_order.field_vih_lco_adult_telefon
     - field.field.node.vih_long_course_order.field_vih_lco_adult_zip
+    - field.field.node.vih_long_course_order.field_vih_lco_birthdate
     - field.field.node.vih_long_course_order.field_vih_lco_city
     - field.field.node.vih_long_course_order.field_vih_lco_country
     - field.field.node.vih_long_course_order.field_vih_lco_course
@@ -34,9 +35,11 @@ dependencies:
     - field.field.node.vih_long_course_order.field_vih_lco_status
     - field.field.node.vih_long_course_order.field_vih_lco_telefon
     - field.field.node.vih_long_course_order.field_vih_lco_zip
+    - field.field.node.vih_long_course_order.field_vih_no_cpr
     - node.type.vih_long_course_order
   module:
     - content_moderation
+    - datetime
     - paragraphs
     - path
 id: node.vih_long_course_order.default
@@ -51,7 +54,7 @@ content:
     third_party_settings: {  }
     region: content
   field_vih_lco_address:
-    weight: 14
+    weight: 16
     settings:
       size: 60
       placeholder: ''
@@ -59,69 +62,6 @@ content:
     type: string_textfield
     region: content
   field_vih_lco_adult_address:
-    weight: 28
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
-  field_vih_lco_adult_city:
-    weight: 29
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
-  field_vih_lco_adult_email:
-    weight: 27
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
-  field_vih_lco_adult_first_name:
-    weight: 24
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
-  field_vih_lco_adult_last_name:
-    weight: 25
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
-  field_vih_lco_adult_nationality:
-    weight: 31
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
-  field_vih_lco_adult_newsletter:
-    weight: 34
-    settings:
-      display_label: true
-    third_party_settings: {  }
-    type: boolean_checkbox
-    region: content
-  field_vih_lco_adult_telefon:
-    weight: 26
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
-  field_vih_lco_adult_zip:
     weight: 30
     settings:
       size: 60
@@ -129,8 +69,77 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
+  field_vih_lco_adult_city:
+    weight: 31
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_vih_lco_adult_email:
+    weight: 29
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_vih_lco_adult_first_name:
+    weight: 26
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_vih_lco_adult_last_name:
+    weight: 27
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_vih_lco_adult_nationality:
+    weight: 34
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_vih_lco_adult_newsletter:
+    weight: 37
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_vih_lco_adult_telefon:
+    weight: 28
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_vih_lco_adult_zip:
+    weight: 33
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_vih_lco_birthdate:
+    weight: 13
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
   field_vih_lco_city:
-    weight: 15
+    weight: 17
     settings:
       size: 60
       placeholder: ''
@@ -138,7 +147,7 @@ content:
     type: string_textfield
     region: content
   field_vih_lco_country:
-    weight: 39
+    weight: 32
     settings:
       size: 60
       placeholder: ''
@@ -163,7 +172,7 @@ content:
     type: string_textfield
     region: content
   field_vih_lco_edb_synch_message:
-    weight: 38
+    weight: 41
     settings:
       rows: 5
       placeholder: ''
@@ -171,14 +180,14 @@ content:
     type: string_textarea
     region: content
   field_vih_lco_edb_synched:
-    weight: 37
+    weight: 40
     settings:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
   field_vih_lco_education:
-    weight: 18
+    weight: 20
     settings:
       size: 60
       placeholder: ''
@@ -186,7 +195,7 @@ content:
     type: string_textfield
     region: content
   field_vih_lco_email:
-    weight: 22
+    weight: 24
     settings:
       size: 60
       placeholder: ''
@@ -202,7 +211,7 @@ content:
     type: string_textfield
     region: content
   field_vih_lco_found_from:
-    weight: 20
+    weight: 22
     settings:
       size: 60
       placeholder: ''
@@ -218,7 +227,7 @@ content:
     type: string_textfield
     region: content
   field_vih_lco_message:
-    weight: 21
+    weight: 23
     settings:
       rows: 5
       placeholder: ''
@@ -226,7 +235,7 @@ content:
     type: string_textarea
     region: content
   field_vih_lco_municipality:
-    weight: 16
+    weight: 18
     settings:
       size: 60
       placeholder: ''
@@ -234,7 +243,7 @@ content:
     type: string_textfield
     region: content
   field_vih_lco_nationality:
-    weight: 13
+    weight: 15
     settings:
       size: 60
       placeholder: ''
@@ -242,7 +251,7 @@ content:
     type: string_textfield
     region: content
   field_vih_lco_newsletter:
-    weight: 23
+    weight: 25
     settings:
       display_label: true
     third_party_settings: {  }
@@ -261,7 +270,7 @@ content:
     third_party_settings: {  }
     region: content
   field_vih_lco_payment:
-    weight: 19
+    weight: 21
     settings:
       size: 60
       placeholder: ''
@@ -269,13 +278,13 @@ content:
     type: string_textfield
     region: content
   field_vih_lco_status:
-    weight: 32
+    weight: 35
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_vih_lco_telefon:
-    weight: 12
+    weight: 14
     settings:
       size: 60
       placeholder: ''
@@ -283,12 +292,19 @@ content:
     type: string_textfield
     region: content
   field_vih_lco_zip:
-    weight: 17
+    weight: 19
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
+    region: content
+  field_vih_no_cpr:
+    weight: 12
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
     region: content
   langcode:
     type: language_select
@@ -299,7 +315,7 @@ content:
     region: content
   moderation_state:
     type: moderation_state_default
-    weight: 36
+    weight: 39
     settings: {  }
     region: content
     third_party_settings: {  }
@@ -320,7 +336,7 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 33
+    weight: 36
     third_party_settings: {  }
     region: content
   sticky:
@@ -348,7 +364,7 @@ content:
     third_party_settings: {  }
     region: content
   url_redirects:
-    weight: 35
+    weight: 38
     region: content
     settings: {  }
     third_party_settings: {  }

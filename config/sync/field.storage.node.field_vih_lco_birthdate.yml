@@ -1,0 +1,20 @@
+uuid: 717024a4-4ebe-4b95-aa89-5398ca0772ee
+langcode: da
+status: true
+dependencies:
+  module:
+    - datetime
+    - node
+id: node.field_vih_lco_birthdate
+field_name: field_vih_lco_birthdate
+entity_type: node
+type: datetime
+settings:
+  datetime_type: date
+module: datetime
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

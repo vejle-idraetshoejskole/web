@@ -44,6 +44,7 @@ class LongCourseOrderForm extends FormBase {
     $cur_language_code = \Drupal::languageManager()->getCurrentLanguage()->getId();
     $form['#attached']['library'][] = 'vih_subscription/vih-subscription-accordion-class-selection';
     $form['#attached']['library'][] = 'vih_subscription/vih-subscription-terms-and-conditions-modal';
+    $form['#attached']['library'][] = 'vih_subscription/vih_subscription_form_items_visibility';
 
     $config = $this->config(SubscriptionsGeneralSettingsForm::$configName);
 
@@ -97,7 +98,7 @@ class LongCourseOrderForm extends FormBase {
           $radiosOptions[$class->id()] = ''; //$this->t('Vælg');
 
           $classesRadioSelections[$class->id()] = taxonomy_term_view($class, 'radio_selection');
-          $classesRadioSelections[$class->id()]['#modal'] = taxonomy_term_view($class, 'modal_window');
+          #$classesRadioSelections[$class->id()]['#modal'] = taxonomy_term_view($class, 'modal_window');
         }
 
         $form[$availableClassesCid] = array(
@@ -131,11 +132,20 @@ class LongCourseOrderForm extends FormBase {
       '#placeholder' => $this->t('Lastname'),
       '#required' => TRUE,
     );
+    $form['personalDataLeft']['nocpr'] = array(
+      '#type' => 'checkbox',
+      '#title' => $this->t('Jeg har ikke et dansk CPR nummer'),
+    );
+    $form['personalDataLeft']['birthdate'] = array(
+      '#type' => 'date',
+      '#title' => $this->t('Birthdate'),
+      '#placeholder' => $this->t('Birthdate'),
+      '#date_date_format' => 'm-d-Y',
+    );
     $form['personalDataLeft']['cpr'] = array(
       '#type' => 'textfield',
       '#title' => $this->t('CPR'),
       '#placeholder' => $this->t('CPR'),
-      '#required' => TRUE,
       '#pattern' => '[0-9]{10}',
       '#field_suffix' => '<i type="button" class="icon icon-info-circle form-type-textfield__tooltip" aria-hidden="true" data-trigger="hover" data-toggle="popover" data-placement="top" data-content="' . $cprHelpText . '"></i>',
     );
@@ -378,6 +388,16 @@ class LongCourseOrderForm extends FormBase {
           $form_state->setErrorByName($radioKey, $this->t('Please make a selection in %slotName.', array('%slotName' => $courseSlot->field_vih_cs_title->value)));
         }
       }
+      if ('cpr' === $radioKey) {
+        if (NULL == $form_state->getValue('cpr') and 0 == $form_state->getValue('nocpr')) {
+          $form_state->setErrorByName($radioKey, $this->t('Please enter CPR.'));
+        }
+      }
+      if ('birthdate' === $radioKey) {
+        if (NULL == $form_state->getValue('birthdate') and 1 == $form_state->getValue('nocpr')) {
+          $form_state->setErrorByName($radioKey, $this->t('Please enter birthdate.'));
+        }
+      }
     }
   }
 
@@ -517,6 +537,8 @@ class LongCourseOrderForm extends FormBase {
         'field_vih_lco_country' => CourseOrderOptionsList::getNationalityList($form_state->getValue('country')),
         'field_vih_lco_nationality' => CourseOrderOptionsList::getNationalityList($form_state->getValue('nationality')),
         'field_vih_lco_newsletter' => $form_state->getValue('newsletter'),
+        'field_vih_no_cpr' => $form_state->getValue('nocpr'),
+        'field_vih_lco_birthdate' => $form_state->getValue('birthdate'),
         'field_vih_lco_address' => implode('; ', $address_array),
         'field_vih_lco_city' => $form_state->getValue('city'),
         'field_vih_lco_municipality' => $form_state->getValue('municipality'),
