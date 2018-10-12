@@ -41,6 +41,7 @@ class LongCourseOrderForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $course = NULL, NodeInterface $order = NULL, $checksum = NULL) {
+    $cur_language_code = \Drupal::languageManager()->getCurrentLanguage()->getId();
     $form['#attached']['library'][] = 'vih_subscription/vih-subscription-accordion-class-selection';
     $form['#attached']['library'][] = 'vih_subscription/vih-subscription-terms-and-conditions-modal';
 
@@ -112,8 +113,7 @@ class LongCourseOrderForm extends FormBase {
       }
     }
 
-    $cprHelpText  = (\Drupal::languageManager()->getCurrentLanguage()
-        ->getId() === 'en') ? $config->get('vih_subscription_general_cpr_help_text_en') : $config->get('vih_subscription_general_cpr_help_text_da');
+    $cprHelpText  = ($cur_language_code === 'en') ? $config->get('vih_subscription_general_cpr_help_text_en') : $config->get('vih_subscription_general_cpr_help_text_da');
 
     //Personal data - left side
     $form['personalDataLeft'] = array(
@@ -162,7 +162,9 @@ class LongCourseOrderForm extends FormBase {
       '#type' => 'select',
       '#title' => $this->t('How are you planning to pay?'),
       '#options' => CourseOrderOptionsList::getPaymentList(),
-      '#required' => TRUE,
+      '#required' => $cur_language_code === 'en' ? FALSE : TRUE,
+      '#disabled' => $cur_language_code === 'en' ? TRUE : NULL,
+      '#access' => $cur_language_code === 'en' ? FALSE : NULL,
     );
     $form['personalDataLeft']['newsletter'] = array(
       '#type' => 'checkbox',
@@ -342,8 +344,7 @@ class LongCourseOrderForm extends FormBase {
 
     $form['#theme'] = 'vih_subscription_long_course_order_form';
 
-    $form['#registration_text'] = (\Drupal::languageManager()->getCurrentLanguage()
-        ->getId() === 'en') ? $config->get('vih_subscription_long_course_registration_page_text_en') : $config->get('vih_subscription_long_course_registration_page_text_da');
+    $form['#registration_text'] = ($cur_language_code === 'en') ? $config->get('vih_subscription_long_course_registration_page_text_en') : $config->get('vih_subscription_long_course_registration_page_text_da');
 
     if (!empty($terms_and_conditions_page_id = $config->get('vih_subscription_long_course_terms_and_conditions_page'))) {
       $terms_and_conditions_link = CommonFormUtils::getTermsAndConditionsLink($terms_and_conditions_page_id);
