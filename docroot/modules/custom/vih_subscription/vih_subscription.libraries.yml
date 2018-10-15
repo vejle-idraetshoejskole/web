@@ -20,10 +20,3 @@ vih-subscription-suboptions-container:
   dependencies:
     - core/jquery
     - core/drupalSettings
-vih_subscription_form_items_visibility:
-  version: 1.x
-  js:
-    js/vih_subscription_form_items_visibility.js: {}
-  dependencies:
-    - core/jquery
-    - core/drupalSettings

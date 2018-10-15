@@ -44,7 +44,6 @@ class LongCourseOrderForm extends FormBase {
     $cur_language_code = \Drupal::languageManager()->getCurrentLanguage()->getId();
     $form['#attached']['library'][] = 'vih_subscription/vih-subscription-accordion-class-selection';
     $form['#attached']['library'][] = 'vih_subscription/vih-subscription-terms-and-conditions-modal';
-    $form['#attached']['library'][] = 'vih_subscription/vih_subscription_form_items_visibility';
 
     $config = $this->config(SubscriptionsGeneralSettingsForm::$configName);
 
@@ -98,7 +97,7 @@ class LongCourseOrderForm extends FormBase {
           $radiosOptions[$class->id()] = ''; //$this->t('Vælg');
 
           $classesRadioSelections[$class->id()] = taxonomy_term_view($class, 'radio_selection');
-          #$classesRadioSelections[$class->id()]['#modal'] = taxonomy_term_view($class, 'modal_window');
+          $classesRadioSelections[$class->id()]['#modal'] = taxonomy_term_view($class, 'modal_window');
         }
 
         $form[$availableClassesCid] = array(
@@ -141,6 +140,14 @@ class LongCourseOrderForm extends FormBase {
       '#title' => $this->t('Birthdate'),
       '#placeholder' => $this->t('Birthdate'),
       '#date_date_format' => 'm-d-Y',
+      '#states' => array(
+        // Only show this field when the 'nocpr' checkbox is disabled.
+        'visible' => array(
+          ':input[name="nocpr"]' => array(
+            'checked' => TRUE,
+          ),
+        ),
+      ),
     );
     $form['personalDataLeft']['cpr'] = array(
       '#type' => 'textfield',
@@ -148,6 +155,14 @@ class LongCourseOrderForm extends FormBase {
       '#placeholder' => $this->t('CPR'),
       '#pattern' => '[0-9]{10}',
       '#field_suffix' => '<i type="button" class="icon icon-info-circle form-type-textfield__tooltip" aria-hidden="true" data-trigger="hover" data-toggle="popover" data-placement="top" data-content="' . $cprHelpText . '"></i>',
+      '#states' => array(
+        // Only show this field when the 'nocpr' checkbox is disabled.
+        'visible' => array(
+          ':input[name="nocpr"]' => array(
+            'checked' => FALSE,
+          ),
+        ),
+      ),
     );
     $form['personalDataLeft']['telefon'] = array(
       '#type' => 'textfield',

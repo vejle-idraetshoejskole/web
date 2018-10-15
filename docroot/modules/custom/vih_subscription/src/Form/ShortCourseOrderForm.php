@@ -187,13 +187,40 @@ class ShortCourseOrderForm extends FormBase {
           '#prefix' => '<div class="col-xs-12 col-sm-6">',
           '#suffix' => '</div></div>',
         );
+        $form['newParticipantContainer']['newParticipantFieldset']['nocpr'] = array(
+          '#type' => 'checkbox',
+          '#title' => $this->t('Jeg har ikke et dansk CPR nummer'),
+        );
+        $form['newParticipantContainer']['newParticipantFieldset']['birthdate'] = array(
+          '#type' => 'date',
+          '#title' => $this->t('Birthdate'),
+          '#placeholder' => $this->t('Birthdate'),
+          '#date_date_format' => 'm-d-Y',
+          '#attributes' => array('class' => array('classname')),
+          
+          '#states' => array(
+            // Only show this field when the 'nocpr' checkbox is enabled.
+            'visible' => array(
+              ':input[name="newParticipantContainer[newParticipantFieldset][nocpr]"]' => array(
+                'checked' => TRUE,
+              ),
+            ),
+          ),
+        );
         $form['newParticipantContainer']['newParticipantFieldset']['cpr'] = array(
           '#type' => 'textfield',
           '#title' => $this->t('CPR'),
           '#placeholder' => $this->t('CPR'),
-          '#required' => TRUE,
           '#pattern' => '[0-9]{10}',
           '#field_suffix' => '<i type="button" class="icon icon-info-circle form-type-textfield__tooltip" aria-hidden="true" data-trigger="hover" data-toggle="popover" data-placement="top" data-content="' . $cprHelpText . '"></i>',
+          '#states' => array(
+            // Only show this field when the 'nocpr' checkbox is disabled.
+            'visible' => array(
+              ':input[name="newParticipantContainer[newParticipantFieldset][nocpr]"]' => array(
+                'checked' => FALSE,
+              ),
+            ),
+          ),
         );
 
         if (empty($addedParticipants)) {
@@ -467,6 +494,7 @@ class ShortCourseOrderForm extends FormBase {
         ['newParticipantContainer', 'newParticipantFieldset', 'lastName'],
         ['newParticipantContainer', 'newParticipantFieldset', 'email'],
         ['newParticipantContainer', 'newParticipantFieldset', 'cpr'],
+        ['newParticipantContainer', 'newParticipantFieldset', 'birthdate'],
         ['terms_and_conditions'],
         ['order_comment']
       ),
@@ -517,6 +545,8 @@ class ShortCourseOrderForm extends FormBase {
     $participant['lastName'] = $userInput['newParticipantContainer']['newParticipantFieldset']['lastName'];
     $participant['email'] = $userInput['newParticipantContainer']['newParticipantFieldset']['email'];
     $participant['cpr'] = $userInput['newParticipantContainer']['newParticipantFieldset']['cpr'];
+    $participant['birthdate'] = $userInput['newParticipantContainer']['newParticipantFieldset']['birthdate'];
+    $participant['nocpr'] = $userInput['newParticipantContainer']['newParticipantFieldset']['nocpr'];
     $participant['address'] = $userInput['newParticipantContainer']['newParticipantFieldset']['address'];
     $participant['house']['houseNumber'] = $userInput['newParticipantContainer']['newParticipantFieldset']['house']['houseNumber'];
     $participant['house']['houseLetter'] = $userInput['newParticipantContainer']['newParticipantFieldset']['house']['houseLetter'];
@@ -608,6 +638,8 @@ class ShortCourseOrderForm extends FormBase {
       $userInput['newParticipantContainer']['newParticipantFieldset']['lastName'] = $participantToEdit['lastName'];
       $userInput['newParticipantContainer']['newParticipantFieldset']['email'] = $participantToEdit['email'];
       $userInput['newParticipantContainer']['newParticipantFieldset']['cpr'] = $participantToEdit['cpr'];
+      $userInput['newParticipantContainer']['newParticipantFieldset']['nocpr'] = $participantToEdit['nocpr'];
+      $userInput['newParticipantContainer']['newParticipantFieldset']['birthdate'] = $participantToEdit['birthdate'];
       $userInput['newParticipantContainer']['newParticipantFieldset']['address'] = $participantToEdit['address'];
       $userInput['newParticipantContainer']['newParticipantFieldset']['house']['houseNumber'] = $participantToEdit['house']['houseNumber'];
       $userInput['newParticipantContainer']['newParticipantFieldset']['house']['houseLetter'] = $participantToEdit['house']['houseLetter'];
@@ -745,27 +777,33 @@ class ShortCourseOrderForm extends FormBase {
     if ($triggeringElement['#id'] == 'add-participant-options') {
       $userInput = $form_state->getUserInput();
 
-      // Checking that we don't have any option selected of option that reached the stock value limit.
-      foreach ($this->course->field_vih_sc_option_groups->referencedEntities() as $optionGroupDelta => $optionGroup) {
-        $selectedOptionDelta = $userInput['availableOptionsContainer']['optionGroups'][$optionGroupDelta]['option'];
+      if (!empty($form['newParticipantContainer']['newParticipantFieldset'])) {
+        if (0 == $form_state->getValues()['newParticipantContainer']['newParticipantFieldset']['nocpr'] and NULL == $form_state->getValues()['newParticipantContainer']['newParticipantFieldset']['cpr']) {
+          $form_state->setError($form['newParticipantContainer']['newParticipantFieldset']['cpr'], $this->t('Please add, CPR.'));
+          if (0 <> $form_state->getValues()['newParticipantContainer']['newParticipantFieldset']['nocpr'] and NULL == $form_state->getValues()['newParticipantContainer']['newParticipantFieldset']['birthdate']) {
+            $form_state->setError($form['newParticipantContainer']['newParticipantFieldset']['birthdate'], $this->t('Pleaase, add birthdate.'));
+          }
+          // Checking that we don't have any option selected of option that reached the stock value limit.
+          foreach ($this->course->field_vih_sc_option_groups->referencedEntities() as $optionGroupDelta => $optionGroup) {
+            $selectedOptionDelta = $userInput['availableOptionsContainer']['optionGroups'][$optionGroupDelta]['option'];
 
-        if (in_array($selectedOptionDelta, $this->getOptionGroupOptionsDisabled($form_state, $optionGroupDelta))) {
-          $form_state->setError($form['availableOptionsContainer']['optionGroups'][$optionGroupDelta]['option'], $this->t('This option exceeds limit and cannot be selected'));
+            if (in_array($selectedOptionDelta, $this->getOptionGroupOptionsDisabled($form_state, $optionGroupDelta))) {
+              $form_state->setError($form['availableOptionsContainer']['optionGroups'][$optionGroupDelta]['option'], $this->t('This option exceeds limit and cannot be selected'));
+            }
+          }
         }
       }
     }
-
     //submit button
     if ($triggeringElement['#id'] == 'vih-course-submit') {
       $form_state->clearErrors();
-
+     
       $addedParticipants = $form_state->get('addedParticipants');
       //not added participants
       if (!count($addedParticipants)) {
         $form_state->setError($form['newParticipantContainer']['newParticipantFieldset']['firstName'], $this->t('Please add, at least, one participant'));
         $form_state->setError($form['newParticipantContainer']['newParticipantFieldset']['lastName'], $this->t('Please add, at least, one participant'));
         $form_state->setError($form['newParticipantContainer']['newParticipantFieldset']['email'], $this->t('Please add, at least, one participant'));
-        $form_state->setError($form['newParticipantContainer']['newParticipantFieldset']['cpr'], $this->t('Please add, at least, one participant'));
       }
       $config = $this->config(SubscriptionsGeneralSettingsForm::$configName);
       if (empty($form_state->getValue('terms_and_conditions')['accepted']) && !empty($config->get('vih_subscription_short_course_terms_and_conditions_page'))) {
@@ -818,16 +856,19 @@ class ShortCourseOrderForm extends FormBase {
           ]);
           $orderedOptions[] = $orderedOption;
         }
-
-        //Get birthdate from CPR
-        // We need to convert 2 digit year to 4 digit year, not to get 2065 instead of 1965
-        $birthdate_year = \DateTime::createFromFormat('y', substr($addedParticipant['cpr'], 4, 2));
-        if ($birthdate_year > date('Y')) {
-          $birthdate_year = \DateTime::createFromFormat('Y', '19' . substr($addedParticipant['cpr'], 4, 2));
+        if (0 == $addedParticipant['nocpr']) {
+          //Get birthdate from CPR
+          // We need to convert 2 digit year to 4 digit year, not to get 2065 instead of 1965
+          $birthdate_year = \DateTime::createFromFormat('y', substr($addedParticipant['cpr'], 4, 2));
+          if ($birthdate_year > date('Y')) {
+            $birthdate_year = \DateTime::createFromFormat('Y', '19' . substr($addedParticipant['cpr'], 4, 2));
+          }
+          $birthdate = substr($addedParticipant['cpr'], 0, 4) . $birthdate_year->format('Y');
+          $birthdate = \DateTime::createFromFormat('dmY', $birthdate)->format('Y-m-d');
         }
-
-        $birthdate = substr($addedParticipant['cpr'], 0, 4) . $birthdate_year->format('Y');
-        $birthdate = \DateTime::createFromFormat('dmY', $birthdate)->format('Y-m-d');
+        else {
+          $birthdate = $addedParticipant['birthdate'];
+        }
         $adress_arr = [];
         foreach ([
           $addedParticipant['address'],
@@ -847,6 +888,7 @@ class ShortCourseOrderForm extends FormBase {
           'field_vih_ocp_last_name' => $addedParticipant['lastName'],
           'field_vih_ocp_email' => $addedParticipant['email'],
           'field_vih_ocp_cpr' => $addedParticipant['cpr'],
+          'field_vih_ocp_no_cpr' => $addedParticipant['nocpr'],
           //CPR will be deleted from database immediately, after order is confirmed
           'field_vih_ocp_address' => implode('; ', $adress_arr),
           'field_vih_ocp_city' => $addedParticipant['city'],
@@ -989,6 +1031,8 @@ class ShortCourseOrderForm extends FormBase {
       $participant['lastName'] = $subscribedPerson->field_vih_ocp_last_name->value;
       $participant['email'] = $subscribedPerson->field_vih_ocp_email->value;
       $participant['cpr'] = $subscribedPerson->field_vih_ocp_cpr->value;
+      $participant['birthdate'] = $subscribedPerson->field_vih_ocp_birthdate->value;
+      $participant['nocpr'] = $subscribedPerson->field_vih_no_cpr->value;
       $participant['address'] = $address_parts[0];
       $participant['house']['houseNumber'] = !empty($address_parts[1]) ? $address_parts[1] : '';
       $participant['house']['houseLetter'] = !empty($address_parts[2]) ? $address_parts[2] : '';
