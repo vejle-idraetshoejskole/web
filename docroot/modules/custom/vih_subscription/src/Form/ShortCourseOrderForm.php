@@ -1032,7 +1032,7 @@ class ShortCourseOrderForm extends FormBase {
       $participant['email'] = $subscribedPerson->field_vih_ocp_email->value;
       $participant['cpr'] = $subscribedPerson->field_vih_ocp_cpr->value;
       $participant['birthdate'] = $subscribedPerson->field_vih_ocp_birthdate->value;
-      $participant['nocpr'] = $subscribedPerson->field_vih_no_cpr->value;
+      $participant['nocpr'] = $subscribedPerson->field_vih_ocp_no_cpr->value;
       $participant['address'] = $address_parts[0];
       $participant['house']['houseNumber'] = !empty($address_parts[1]) ? $address_parts[1] : '';
       $participant['house']['houseLetter'] = !empty($address_parts[2]) ? $address_parts[2] : '';
