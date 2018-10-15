@@ -206,11 +206,11 @@
 #vih-subscription-long-course-order-form,
 #vih-subscription-short-course-order-form,
 #application-form{
-  .form-item-birthdate{
+  .form-type-date{
     label{
       margin-bottom: 5px;
     }
-    input#edit-birthdate{
+    input{
       display: block;
     }
   }
