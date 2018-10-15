@@ -96,7 +96,7 @@ class EDBBrugsenIntegration {
       $registration['Voksen.Email'] = $longCourseOrder->get('field_vih_lco_adult_email')->value;
       $registration['Voksen.Land'] = $edb_utility->getCountryCode($longCourseOrder->get('field_vih_lco_adult_nationality')->value);
 
-      $registration['Fri132'] = $longCourseOrder->get('field_vih_lco_education')->value;
+      $registration['EgneFelter.EgetFelt1'] = '[Fri132]' . $longCourseOrder->get('field_vih_lco_education')->value;
       
       $registration += $this->getDefaultRegistrationValues();
     }
@@ -296,7 +296,7 @@ class EDBBrugsenIntegration {
       // 0 = No, 1 = Yes
       'Voksen.Email' => 'kontor@vih.dk',
       'Voksen.Land' => $edb_utility->getCountryCode('Danmark'),
-      'Fri082' => date('d.m.Y'),
+      'EgneFelter.EgetFelt7' => '[Fri082]' . date('d.m.Y'),
     );
   }
 }
