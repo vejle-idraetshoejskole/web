@@ -780,16 +780,16 @@ class ShortCourseOrderForm extends FormBase {
       if (!empty($form['newParticipantContainer']['newParticipantFieldset'])) {
         if (0 == $form_state->getValues()['newParticipantContainer']['newParticipantFieldset']['nocpr'] and NULL == $form_state->getValues()['newParticipantContainer']['newParticipantFieldset']['cpr']) {
           $form_state->setError($form['newParticipantContainer']['newParticipantFieldset']['cpr'], $this->t('Please add, CPR.'));
-          if (0 <> $form_state->getValues()['newParticipantContainer']['newParticipantFieldset']['nocpr'] and NULL == $form_state->getValues()['newParticipantContainer']['newParticipantFieldset']['birthdate']) {
-            $form_state->setError($form['newParticipantContainer']['newParticipantFieldset']['birthdate'], $this->t('Pleaase, add birthdate.'));
-          }
-          // Checking that we don't have any option selected of option that reached the stock value limit.
-          foreach ($this->course->field_vih_sc_option_groups->referencedEntities() as $optionGroupDelta => $optionGroup) {
-            $selectedOptionDelta = $userInput['availableOptionsContainer']['optionGroups'][$optionGroupDelta]['option'];
+        }
+        if (0 <> $form_state->getValues()['newParticipantContainer']['newParticipantFieldset']['nocpr'] and NULL == $form_state->getValues()['newParticipantContainer']['newParticipantFieldset']['birthdate']) {
+          $form_state->setError($form['newParticipantContainer']['newParticipantFieldset']['birthdate'], $this->t('Pleaase, add birthdate.'));
+        }
+        // Checking that we don't have any option selected of option that reached the stock value limit.
+        foreach ($this->course->field_vih_sc_option_groups->referencedEntities() as $optionGroupDelta => $optionGroup) {
+          $selectedOptionDelta = $userInput['availableOptionsContainer']['optionGroups'][$optionGroupDelta]['option'];
 
-            if (in_array($selectedOptionDelta, $this->getOptionGroupOptionsDisabled($form_state, $optionGroupDelta))) {
-              $form_state->setError($form['availableOptionsContainer']['optionGroups'][$optionGroupDelta]['option'], $this->t('This option exceeds limit and cannot be selected'));
-            }
+          if (in_array($selectedOptionDelta, $this->getOptionGroupOptionsDisabled($form_state, $optionGroupDelta))) {
+            $form_state->setError($form['availableOptionsContainer']['optionGroups'][$optionGroupDelta]['option'], $this->t('This option exceeds limit and cannot be selected'));
           }
         }
       }
