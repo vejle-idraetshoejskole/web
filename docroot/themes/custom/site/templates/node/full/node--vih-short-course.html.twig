@@ -141,7 +141,12 @@
                                     <div class="boxy__body">
                                       {% for vih_og_option in vih_sc_option.entity.field_vih_og_options %}
                                         <div class="field-vih-og-price-addition-container">
-                                          {%  set optionPrice = vih_og_option.entity.field_vih_option_price_addition.value + node.field_vih_sc_price.value %}
+                                          {% if vih_og_option.entity.field_vih_option_price_addition.value %}
+                                            {%  set optionPrice = vih_og_option.entity.field_vih_option_price_addition.value + node.field_vih_sc_price.value %}
+                                          {% else %}
+                                            {%  set optionPrice = node.field_vih_sc_price.value %}
+                                          {% endif %}
+
                                           {{ vih_og_option.entity.field_vih_option_title.value }}&nbsp;-&nbsp;
                                           DKK&nbsp;{{ optionPrice | number_format(2, ',', '.') }}
 
@@ -162,7 +167,7 @@
                                   {%  set optionGroupDelta = loop.index0 %}
 
                                   {# Skipping the option group with main price - already printed above #}
-                                  {% if optionGroupDelta != content.main_price_index %}
+                                  {% if content.main_price_index is not defined or optionGroupDelta != content.main_price_index %}
                                     <div class="boxy boxy--price">
                                       <div class="boxy__heading">
                                         <h2 class="boxy__heading__title heading-h4">
