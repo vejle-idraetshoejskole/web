@@ -60,53 +60,17 @@ class SubscriptionSuccessfulController extends ControllerBase {
     }
   }
 
-  public function getTitle() {
-    return $this->t('Tak for din tilmelding');
-  }
-
   /**
-   * Wrapper function register order:
-   * Sending notification email, changing order status, registering on EDB system
-   *
-   * @param NodeInterface $subject
-   * @param NodeInterface $order
+   * {@inheritdoc}
    */
-  private function registerOrder(NodeInterface $subject, NodeInterface $order) {
+  public function _sendConfirmationEmail(NodeInterface $subject, NodeInterface $order) {
     $currentLangId = \Drupal::languageManager()->getCurrentLanguage()->getId();
-
-    //Send email
     $notificationsConfig = \Drupal::configFactory()->getEditable(SubscriptionsGeneralSettingsForm::$configName);
     $message = array();
     $node_view = node_view($order, 'email_teaser', $currentLangId);
     $order_rendered = render($node_view)->__toString();
 
-    if (_detect_site() === 'vies') {
-      $logo = '<div style="background-color:#FF8100; width:100%; text-align:center">'
-              . '<img src="'
-              . \Drupal::request()->getSchemeAndHttpHost()
-              . '/themes/custom/site/dist/images/layout-header-logo-vies.png" alt="VIES logo" />'
-              . '</div><br>';
-    } else {
-      $logo = '<div style="background-color:#009bec; width:100%; text-align:center">'
-              . '<img src="'
-              . \Drupal::request()->getSchemeAndHttpHost()
-              . '/themes/custom/site/dist/images/layout-header-logo-vih.png" alt="VIH logo" />'
-              . '</div><br>';
-    }
-
-    $token = ['@subject_name', '@person_name', '@date', '@url', '@order_id', '@order'];
-
     if ($subject->getType() == 'vih_long_cource') {
-      $notification_template = $notificationsConfig->get('vih_subscription_long_course_notifications_body_' . $currentLangId);
-      $notification_template = preg_replace("/\r\n|\r|\n/",'<br/>', $notification_template);
-
-      $message = [
-        'to' => $order->field_vih_lco_email->value,
-        'Bcc' => $notificationsConfig->get('vih_subscription_long_course_notifications_bcc_' . $currentLangId),
-        'subject' => $notificationsConfig->get('vih_subscription_long_course_notifications_subject_' . $currentLangId),
-        'body' => $notification_template,
-      ];
-
       $start_course_date = $subject->field_vih_lc_start_date->date->getTimestamp();
       $end_course_date = $subject->field_vih_lc_end_date->date->getTimestamp();
       // course date
@@ -126,12 +90,164 @@ class SubscriptionSuccessfulController extends ControllerBase {
         $order->field_vih_lco_first_name->value . ' ' . $order->field_vih_lco_last_name->value,
         !empty($courseDate) ? mb_strtolower($courseDate) : '',
         '<a href="' . $subject->toUrl()->setAbsolute()->toString() . '"target=_blank >' . $subject->toUrl()
-          ->setAbsolute()->toString() . '</a>',
-          $order->id(),
-          $order_rendered,
-          
+            ->setAbsolute()->toString() . '</a>',
+        $order->id(),
+        $order_rendered,
       ];
 
+      $notification_template = $notificationsConfig->get('vih_subscription_long_course_notifications_body_' . $currentLangId);
+      $notification_template = preg_replace("/\r\n|\r|\n/", '<br/>', $notification_template);
+
+      $message = [
+        'to' => $order->field_vih_lco_email->value,
+        'Bcc' => $notificationsConfig->get('vih_subscription_long_course_notifications_bcc_' . $currentLangId),
+        'subject' => $notificationsConfig->get('vih_subscription_long_course_notifications_subject_' . $currentLangId),
+        'body' => $notification_template,
+      ];
+    }
+    elseif ($subject->getType() == 'vih_short_course') {
+      $allParticipants = $order->get('field_vih_sco_persons')->getValue();
+      if (!empty($allParticipants)) {
+        //getting first participant
+        $firstParticipantTargetId = $allParticipants[0]['target_id'];
+        $firstParticipantParagraph = Paragraph ::load($firstParticipantTargetId);
+
+        // first participant values
+        $firstName = $firstParticipantParagraph->field_vih_ocp_first_name->value;
+        $lastName = $firstParticipantParagraph->field_vih_ocp_last_name->value;
+        $email = $firstParticipantParagraph->field_vih_ocp_email->value;
+
+        //course date
+        $courseDate = NULL;
+        if ($subject->field_vih_sc_start_date->value) {
+          $courseDate = \Drupal::service('date.formatter')
+              ->format(strtotime($subject->field_vih_sc_start_date->value), "long");
+        }
+        if ($subject->field_vih_sc_end_date->value) {
+          if (!(empty($courseDate))) {
+            $courseDate .= ' - ';
+          }
+          $courseDate .= \Drupal::service('date.formatter')
+              ->format(strtotime($subject->field_vih_sc_end_date->value), "long");
+        }
+        $notification_template = $notificationsConfig->get('vih_subscription_short_course_notifications_body_' . $currentLangId);
+        $notification_template = preg_replace("/\r\n|\r|\n/", '<br/>', $notification_template);
+
+        $message = [
+          'to' => $email,
+          'Bcc' => $notificationsConfig->get('vih_subscription_short_course_notifications_bcc_' . $currentLangId),
+          'subject' => $notificationsConfig->get('vih_subscription_short_course_notifications_subject_' . $currentLangId),
+          'body' => $notification_template,
+        ];
+
+        $replacement = [
+          $subject->getTitle(),
+          $firstName . ' ' . $lastName,
+          !empty($courseDate) ? mb_strtolower($courseDate) : '',
+          '<a href="' . $subject->toUrl()->setAbsolute()->toString() . '"target=_blank >' . $subject->toUrl()
+              ->setAbsolute()->toString() . '</a>',
+          $order->id(),
+          $order_rendered,
+        ];
+      }
+    }
+    elseif ($subject->getType() == 'event') {
+      $allParticipants = $order->get('field_vih_eo_persons')->getValue();
+      if (!empty($allParticipants)) {
+        //getting first participant
+        $firstParticipantTargetId = $allParticipants[0]['target_id'];
+        $firstParticipantParagraph = Paragraph ::load($firstParticipantTargetId);
+
+        // first participant values
+        $firstName = $firstParticipantParagraph->field_vih_oe_first_name->value;
+        $lastName = $firstParticipantParagraph->field_vih_oe_last_name->value;
+        $email = $firstParticipantParagraph->field_vih_oe_email->value;
+
+        //event date
+        $eventDate = NULL;
+        if ($subject->field_vih_event_start_date->value) {
+          $eventDate = \Drupal::service('date.formatter')
+              ->format(strtotime($subject->field_vih_event_start_date->value), "long");
+        }
+        if ($subject->field_vih_event_end_date->value) {
+          if (!(empty($eventDate))) {
+            $eventDate .= ' - ';
+          }
+          $eventDate .= \Drupal::service('date.formatter')
+              ->format(strtotime($subject->field_vih_event_end_date->value), "long");
+        }
+        $notification_template = $notificationsConfig->get('vih_subscription_event_notifications_body_' . $currentLangId);
+        $notification_template = preg_replace("/\r\n|\r|\n/", '<br/>', $notification_template);
+
+        $message = [
+          'to' => $email,
+          'Bcc' => $notificationsConfig->get('vih_subscription_event_notifications_bcc_' . $currentLangId),
+          'subject' => $notificationsConfig->get('vih_subscription_event_notifications_subject_' . $currentLangId),
+          'body' => $notification_template,
+        ];
+
+        $replacement = [
+          $subject->getTitle(),
+          $firstName . ' ' . $lastName,
+          !empty($eventDate) ? mb_strtolower($eventDate) : '',
+          '<a href="' . $subject->toUrl()->setAbsolute()->toString() . '"target=_blank >' . $subject->toUrl()
+              ->setAbsolute()->toString() . '</a>',
+          $order->id(),
+          $order_rendered,
+        ];
+      }
+    }
+
+    // Add logo to message body.
+    if (_detect_site() === 'vies') {
+      $logo = '<div style="background-color:#FF8100; width:100%; text-align:center">'
+          . '<img src="'
+          . \Drupal::request()->getSchemeAndHttpHost()
+          . '/themes/custom/site/dist/images/layout-header-logo-vies.png" alt="VIES logo" />'
+          . '</div><br>';
+    }
+    else {
+      $logo = '<div style="background-color:#009bec; width:100%; text-align:center">'
+          . '<img src="'
+          . \Drupal::request()->getSchemeAndHttpHost()
+          . '/themes/custom/site/dist/images/layout-header-logo-vih.png" alt="VIH logo" />'
+          . '</div><br>';
+    }
+
+    $message['body'] = $logo . $message['body']. 'FROM RESEND.';
+    $token = ['@subject_name', '@person_name', '@date', '@url', '@order_id', '@order'];
+    if (!empty($message)) {
+      VihSubscriptionUtils::makeReplacements($message, $token, $replacement);
+      VihSubscriptionUtils::sendMail($message);
+    }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function resend(NodeInterface $subject, NodeInterface $order) {
+    $this->_sendConfirmationEmail($subject, $order);
+    $build = array(
+      '#theme' => 'vih-subscription-email-resend-page'
+    );
+    return $build;
+  }
+
+  public function getTitle() {
+    return $this->t('Tak for din tilmelding');
+  }
+  /**
+   * Wrapper function register order:
+   * Sending notification email, changing order status, registering on EDB system
+   *
+   * @param NodeInterface $subject
+   * @param NodeInterface $order
+   */
+  private function registerOrder(NodeInterface $subject, NodeInterface $order) {
+    $currentLangId = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    $notificationsConfig = \Drupal::configFactory()->getEditable(SubscriptionsGeneralSettingsForm::$configName);
+
+    if ($subject->getType() == 'vih_long_cource') {
       // Mailchimp integration
       if ($order->field_vih_lco_newsletter->value) {
         $email = $order->field_vih_lco_email->value;
@@ -175,50 +291,6 @@ class SubscriptionSuccessfulController extends ControllerBase {
       $order->save();
     }
     elseif ($subject->getType() == 'vih_short_course') {
-      $allParticipants = $order->get('field_vih_sco_persons')->getValue();
-      if (!empty($allParticipants)) {
-        //getting first participant
-        $firstParticipantTargetId = $allParticipants[0]['target_id'];
-        $firstParticipantParagraph = Paragraph ::load($firstParticipantTargetId);
-
-        // first participant values
-        $firstName = $firstParticipantParagraph->field_vih_ocp_first_name->value;
-        $lastName = $firstParticipantParagraph->field_vih_ocp_last_name->value;
-        $email = $firstParticipantParagraph->field_vih_ocp_email->value;
-
-        //course date
-        $courseDate = NULL;
-        if ($subject->field_vih_sc_start_date->value) {
-          $courseDate = \Drupal::service('date.formatter')
-            ->format(strtotime($subject->field_vih_sc_start_date->value), "long");
-        }
-        if ($subject->field_vih_sc_end_date->value) {
-          if (!(empty($courseDate))) {
-            $courseDate .= ' - ';
-          }
-          $courseDate .= \Drupal::service('date.formatter')
-            ->format(strtotime($subject->field_vih_sc_end_date->value), "long");
-        }
-        $notification_template = $notificationsConfig->get('vih_subscription_short_course_notifications_body_' . $currentLangId);
-        $notification_template = preg_replace("/\r\n|\r|\n/",'<br/>', $notification_template);
-      
-        $message = [
-          'to' => $email,
-          'Bcc' => $notificationsConfig->get('vih_subscription_short_course_notifications_bcc_' . $currentLangId),
-          'subject' => $notificationsConfig->get('vih_subscription_short_course_notifications_subject_' . $currentLangId),
-          'body' => $notification_template,
-        ];
-
-        $replacement = [
-          $subject->getTitle(),
-          $firstName . ' ' . $lastName,
-          !empty($courseDate) ? mb_strtolower($courseDate) : '',
-          '<a href="' . $subject->toUrl()->setAbsolute()->toString() . '"target=_blank >' . $subject->toUrl()
-            ->setAbsolute()->toString() . '</a>',
-          $order->id(),
-          $order_rendered,
-        ];
-      }
 
       $order_persons = $order->field_vih_sco_persons->referencedEntities();
       foreach ($order_persons as $order_person) {
@@ -261,63 +333,14 @@ class SubscriptionSuccessfulController extends ControllerBase {
       $order->save();
     }
     elseif ($subject->getType() == 'event') {
-      $allParticipants = $order->get('field_vih_eo_persons')->getValue();
-      if (!empty($allParticipants)) {
-        //getting first participant
-        $firstParticipantTargetId = $allParticipants[0]['target_id'];
-        $firstParticipantParagraph = Paragraph ::load($firstParticipantTargetId);
 
-        // first participant values
-        $firstName = $firstParticipantParagraph->field_vih_oe_first_name->value;
-        $lastName = $firstParticipantParagraph->field_vih_oe_last_name->value;
-        $email = $firstParticipantParagraph->field_vih_oe_email->value;
-
-        //event date
-        $eventDate = NULL;
-        if ($subject->field_vih_event_start_date->value) {
-          $eventDate = \Drupal::service('date.formatter')
-            ->format(strtotime($subject->field_vih_event_start_date->value), "long");
-        }
-        if ($subject->field_vih_event_end_date->value) {
-          if (!(empty($eventDate))) {
-            $eventDate .= ' - ';
-          }
-          $eventDate .= \Drupal::service('date.formatter')
-            ->format(strtotime($subject->field_vih_event_end_date->value), "long");
-        }
-        $notification_template = $notificationsConfig->get('vih_subscription_event_notifications_body_' . $currentLangId);
-        $notification_template = preg_replace("/\r\n|\r|\n/",'<br/>', $notification_template);
-
-        $message = [
-          'to' => $email,
-          'Bcc' => $notificationsConfig->get('vih_subscription_event_notifications_bcc_' . $currentLangId),
-          'subject' => $notificationsConfig->get('vih_subscription_event_notifications_subject_' . $currentLangId),
-          'body' => $notification_template,
-        ];
-
-        $replacement = [
-          $subject->getTitle(),
-          $firstName . ' ' . $lastName,
-          !empty($eventDate) ? mb_strtolower($eventDate) : '',
-          '<a href="' . $subject->toUrl()->setAbsolute()->toString() . '"target=_blank >' . $subject->toUrl()
-            ->setAbsolute()->toString() . '</a>',
-          $order->id(),
-          $order_rendered,
-        ];
-      }
 
       //updating event order status
       $order->set('field_vih_eo_status', 'confirmed');
       $order->save();
     }
 
-    // Add logo to message body.
-    $message['body'] = $logo . $message['body'];
 
-    if (!empty($message)) {
-      VihSubscriptionUtils::makeReplacements($message, $token, $replacement);
-      VihSubscriptionUtils::sendMail($message);
-    }
   }
 }
 
