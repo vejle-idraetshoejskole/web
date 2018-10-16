@@ -13,6 +13,7 @@ dependencies:
     - field.field.paragraph.vih_ordered_course_person.field_vih_ocp_first_name
     - field.field.paragraph.vih_ordered_course_person.field_vih_ocp_last_name
     - field.field.paragraph.vih_ordered_course_person.field_vih_ocp_newsletter
+    - field.field.paragraph.vih_ordered_course_person.field_vih_ocp_no_cpr
     - field.field.paragraph.vih_ordered_course_person.field_vih_ocp_ordered_options
     - field.field.paragraph.vih_ordered_course_person.field_vih_ocp_zip
     - paragraphs.paragraphs_type.vih_ordered_course_person
@@ -97,6 +98,16 @@ content:
     region: content
   field_vih_ocp_newsletter:
     weight: 11
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_vih_ocp_no_cpr:
+    weight: 13
     label: above
     settings:
       format: default

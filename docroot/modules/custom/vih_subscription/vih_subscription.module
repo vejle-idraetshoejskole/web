@@ -64,6 +64,9 @@ function vih_subscription_theme() {
     'vih_subscription_thank_you_page' => array(
       'render element' => 'page',
     ),
+    'vih-subscription-email-resend-page' => array(
+      'render element' => 'page',
+    ),
     'vih_subscription_cancelled_page' => array(
       'render element' => 'page',
     ),
