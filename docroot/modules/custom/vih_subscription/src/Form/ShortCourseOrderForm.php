@@ -196,8 +196,6 @@ class ShortCourseOrderForm extends FormBase {
           '#title' => $this->t('Birthdate'),
           '#placeholder' => $this->t('Birthdate'),
           '#date_date_format' => 'm-d-Y',
-          '#attributes' => array('class' => array('classname')),
-          
           '#states' => array(
             // Only show this field when the 'nocpr' checkbox is enabled.
             'visible' => array(
