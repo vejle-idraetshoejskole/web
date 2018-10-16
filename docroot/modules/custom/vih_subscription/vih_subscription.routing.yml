@@ -16,7 +16,7 @@ vih_subscription.long_course_order_create:
   requirements:
     _permission: 'access content'
     course: \d+
-vih_subscription.long_course_order_resend:
+vih_subscription.order_mail_resend:
   path: 'mailresend/{subject}/tilmelding/{order}'
   options:
     parameters:

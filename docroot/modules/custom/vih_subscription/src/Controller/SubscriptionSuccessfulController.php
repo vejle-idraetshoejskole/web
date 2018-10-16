@@ -214,7 +214,7 @@ class SubscriptionSuccessfulController extends ControllerBase {
           . '</div><br>';
     }
 
-    $message['body'] = $logo . $message['body']. 'FROM RESEND.';
+    $message['body'] = $logo . $message['body'];
     $token = ['@subject_name', '@person_name', '@date', '@url', '@order_id', '@order'];
     if (!empty($message)) {
       VihSubscriptionUtils::makeReplacements($message, $token, $replacement);

@@ -97,8 +97,7 @@ view_mode ? view_mode|clean_class,
         {# Begin - content #}
         {{ content }}
         {# End - content #}
-        <a href="/mailresend/{{  node.field_vih_sco_course.target_id }}/tilmelding/{{ node.id }}" class="btn-success btn">{{ 'Resend Email' | trans }}</a>
-
+        <a href="{{ path('vih_subscription.order_mail_resend', {'order': node.id, 'subject': node.field_vih_sco_course.target_id}) }}" class="btn-success btn btn-xs">{{ 'Resend Email' | trans }}</a>
       </div>
     </div>
   </section>

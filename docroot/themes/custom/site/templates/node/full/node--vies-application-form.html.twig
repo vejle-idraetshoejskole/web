@@ -29,7 +29,7 @@ view_mode ? view_mode|clean_class,
                         {{ content.group_col_right }}
                     </div>
                 </div>
-              <a href="/ansogning/mailresend/{{ node.id }}" class="btn-success btn">{{ 'Resend Email' | trans }}</a>
+              <a href="{{ path('field_vih_sco_course.target_id', {'order': node.id}) }}" class="btn-success btn btn-xs">{{ 'Resend Email' | trans }}</a>  
         </div>
     </section>
     <!-- End - content -->
