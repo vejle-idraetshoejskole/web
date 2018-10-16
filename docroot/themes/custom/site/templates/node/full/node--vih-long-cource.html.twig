@@ -116,8 +116,20 @@
                                         <div class="partial__body">
                                             <div class="row">
 
-                                                {% for travel_class in content.travel_classes_mandatory %}
-                                                    <div class="col-sm-12">
+                                              {% set mandatoryImageClass = 'col-md-6' %}
+
+                                              {% if content.travel_classes_mandatory|length == 1 %}
+                                                {% set mandatoryImageClass = 'col-xs-12' %}
+                                              {% endif %}
+                                              {% if content.travel_classes_mandatory|length == 2 %}
+                                                {% set mandatoryImageClass = 'col-md-6' %}
+                                              {% endif %}
+                                              {% if content.travel_classes_mandatory|length == 3 %}
+                                                {% set mandatoryImageClass = 'col-md-4 col-sm-6' %}
+                                              {% endif %}
+
+                                              {% for travel_class in content.travel_classes_mandatory %}
+                                                    <div class="{{ mandatoryImageClass }}">
                                                         {{ travel_class }}
                                                     </div>
                                                 {% endfor %}
@@ -134,8 +146,20 @@
                                         <div class="partial__body">
                                             <div class="row">
 
+                                              {% set optionalImageClass = 'col-md-6' %}
+
+                                              {% if content.travel_classes_optional|length == 1 %}
+                                                {% set optionalImageClass = 'col-xs-12' %}
+                                              {% endif %}
+                                              {% if content.travel_classes_optional|length == 2 %}
+                                                {% set optionalImageClass = 'col-md-6' %}
+                                              {% endif %}
+                                              {% if content.travel_classes_optional|length == 3 %}
+                                                {% set optionalImageClass = 'col-md-4 col-sm-6' %}
+                                              {% endif %}
+
                                                 {% for travel_class in content.travel_classes_optional %}
-                                                    <div class="col-md-4 col-sm-6 show-additional-price">
+                                                    <div class="{{ optionalImageClass }} show-additional-price">
                                                         {{ travel_class }}
                                                     </div>
                                                 {% endfor %}
