@@ -1,0 +1,18 @@
+uuid: 491d5726-bc4c-4547-ab5f-ea44bbc6c69f
+langcode: da
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.field_vih_og_is_main_price
+field_name: field_vih_og_is_main_price
+entity_type: paragraph
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
