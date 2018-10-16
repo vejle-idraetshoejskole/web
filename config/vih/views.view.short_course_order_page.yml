@@ -1265,7 +1265,7 @@ display:
             trim_whitespace: false
             alt: 'Resend Email'
             rel: ''
-            link_class: 'btn-success btn'
+            link_class: 'btn-success btn btn-xs'
             prefix: ''
             suffix: ''
             target: ''
