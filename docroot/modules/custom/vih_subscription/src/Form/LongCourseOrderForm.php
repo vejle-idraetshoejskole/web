@@ -66,23 +66,15 @@ class LongCourseOrderForm extends FormBase {
         'courseSlots' => array(),
       );
 
-      $notMandatoryCourseSlots = array();
-      foreach ($coursePeriod->field_vih_cp_course_slots->referencedEntities() as $courseSlot) {
-        // Adding only not mandatory course slots.
-        if (!$courseSlot->field_vih_cs_mandatory->value) {
-          $courseSlot = \Drupal::service('entity.repository')->getTranslationFromContext($courseSlot);
+      foreach ($coursePeriod->field_vih_cp_course_slots->referencedEntities() as $slotDelta => $courseSlot) {
+        $courseSlot = \Drupal::service('entity.repository')->getTranslationFromContext($courseSlot);
 
-          $notMandatoryCourseSlots[] = $courseSlot;
-        }
-      }
-
-      foreach ($notMandatoryCourseSlots as $slotDelta => $courseSlot) {
         //saving component id for future references
         $availableClassesCid = "course-period-$periodDelta-courseSlot-$slotDelta-availableClasses";
 
         //courseSlot render helping array
         $form['#coursePeriods'][$periodDelta]['courseSlots'][$slotDelta] = array(
-          'title' => $courseSlot->field_vih_cs_title->value,
+          'title' => $courseSlot->field_vih_cs_title->value . (($courseSlot->field_vih_cs_mandatory->value) ? ' ' . $this->t('(mandatory)') : ''),
           'availableClasses' => array(
             'cid' => $availableClassesCid
           )
@@ -100,16 +92,27 @@ class LongCourseOrderForm extends FormBase {
           $classesRadioSelections[$class->id()]['#modal'] = taxonomy_term_view($class, 'modal_window');
         }
 
-        $form[$availableClassesCid] = array(
-          '#type' => 'radios',
-          //'#title' => $this->t('Poll status'),
-          //'#default_value' => 1,
-          '#options' => $radiosOptions,
-          '#theme' => 'vih_subscription_class_selection_radios',
-          '#classes' => array(
-            'radio_selection' => $classesRadioSelections
-          ),
-        );
+        if (!$courseSlot->field_vih_cs_mandatory->value) {
+          $form[$availableClassesCid] = array(
+            '#type' => 'radios',
+            '#options' => $radiosOptions,
+            '#theme' => 'vih_subscription_class_selection_radios',
+            '#classes' => array(
+              'radio_selection' => $classesRadioSelections
+            ),
+          );
+        } else {
+          $form[$availableClassesCid] = array(
+            '#type' => 'container',
+            '#default_value' => 1,
+            '#disabled' => TRUE,
+            '#options' => $radiosOptions,
+            '#theme' => 'vih_subscription_class_selection_radios',
+            '#classes' => array(
+              'radio_selection' => $classesRadioSelections
+            ),
+          );
+        }
       }
     }
 
