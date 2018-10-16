@@ -26,8 +26,8 @@ class LongCourseOrderForm extends FormBase {
   /**
    * Returns page title
    */
-  public function getTitle() {
-    return $this->t('Tailor your stay');
+  public function getTitle($course) {
+    return $this->t('Tailor @label', ['@label' => $course->label()]);
   }
 
   /**
