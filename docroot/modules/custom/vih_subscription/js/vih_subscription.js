@@ -27,6 +27,10 @@
       });
 
       $buttons.on('click', function (event) {
+        if ($(this).hasClass('disabled')) {
+            return;
+        }
+
         var $element = $(this),
             $period = $element.parents('.panel-group'),
             $class_collection = $element.parents('.panel'),
@@ -91,11 +95,8 @@
 
           // Next collection exists
           if ($next_class_collection.length) {
-            console.log('Class collection exists');
-
             // There is classes inside the collection
             if ($next_class_collection.find('.entity-list-advanced--class').length) {
-
               $next_class_collection
                   .find('.panel-collapse')
                   .collapse('show');
@@ -104,11 +105,8 @@
 
           // No more class collections inside this period (look inside the next period)
           else {
-
             // There is classes inside the collection
             if ($next_period_class_collection.find('.entity-list-advanced--class').length) {
-              console.log('Class collection does not exist');
-
               $next_period_class_collection
                   .find('.panel-collapse')
                   .collapse('show');

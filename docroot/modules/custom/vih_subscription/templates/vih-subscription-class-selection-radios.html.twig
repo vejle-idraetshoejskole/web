@@ -7,8 +7,11 @@
             </a>
             <!-- Begin - action -->
             <div class="entity-list-advanced__action">
-
-                <span class="btn btn-default btn-radio-select">
+                {% if radios[delta] is not defined %}
+                  {% set buttonClass = 'active disabled' %}
+                  {% set buttonAttribures = 'disabled' %}
+                {% endif %}
+                <span class="btn btn-default btn-radio-select {{ buttonClass }}" {{ buttonAttribures }}>
                     {{ radios[delta] }}
                 </span>
 
