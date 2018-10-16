@@ -66,9 +66,9 @@
                                 {# Begin - period #}
                                 {% if content.course_period_start or content.course_period_end %}
                                     <div class="boxy boxy--time-period">
-                                        <div class="boxy__heading">
-                                            <h2 class="boxy__heading__title heading-h4">{{ 'Course period' | trans }}</h2>
-                                        </div>
+                                        {#<div class="boxy__heading">#}
+                                            {#<h2 class="boxy__heading__title heading-h4">{{ 'Course period' | trans }}</h2>#}
+                                        {#</div>#}
 
                                         <div class="boxy__body">
                                             <div class="time-period">
@@ -82,6 +82,12 @@
                                                         - {{ content.course_period_end | format_date('default_medium_date_without_time') }}
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div class="text-center partial__body">
+                                                <a href="{{ url('vih_subscription.long_course_order_create', {'course': node.id}) }}"
+                                                   class="btn btn-primary">
+                                                  {{ "Sign up and choose your subjects" | trans }}
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
