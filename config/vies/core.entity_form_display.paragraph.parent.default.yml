@@ -4,46 +4,41 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.parent.field_parent_address
+    - field.field.paragraph.parent.field_parent_birthdate
     - field.field.paragraph.parent.field_parent_city
     - field.field.paragraph.parent.field_parent_country
     - field.field.paragraph.parent.field_parent_email
     - field.field.paragraph.parent.field_parent_first_name
     - field.field.paragraph.parent.field_parent_last_name
     - field.field.paragraph.parent.field_parent_newsletter
+    - field.field.paragraph.parent.field_parent_no_cpr
     - field.field.paragraph.parent.field_parent_telefon
     - field.field.paragraph.parent.field_parent_type
     - field.field.paragraph.parent.field_parent_zip
     - paragraphs.paragraphs_type.parent
+  module:
+    - content_moderation
+    - datetime
 id: paragraph.parent.default
 targetEntityType: paragraph
 bundle: parent
 mode: default
 content:
   field_parent_address:
-    weight: 1
+    weight: 0
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
+    region: content
+  field_parent_birthdate:
+    weight: 6
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
     region: content
   field_parent_city:
-    weight: 5
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
-  field_parent_country:
-    weight: 10
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
-  field_parent_email:
     weight: 4
     settings:
       size: 60
@@ -51,7 +46,15 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
-  field_parent_first_name:
+  field_parent_country:
+    weight: 11
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_parent_email:
     weight: 3
     settings:
       size: 60
@@ -59,7 +62,7 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
-  field_parent_last_name:
+  field_parent_first_name:
     weight: 2
     settings:
       size: 60
@@ -67,30 +70,29 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
+  field_parent_last_name:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
   field_parent_newsletter:
-    weight: 8
+    weight: 9
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_parent_no_cpr:
+    weight: 5
     settings:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
     region: content
   field_parent_telefon:
-    weight: 6
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
-  field_parent_type:
-    weight: 9
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
-  field_parent_zip:
     weight: 7
     settings:
       size: 60
@@ -98,6 +100,28 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
+  field_parent_type:
+    weight: 10
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_parent_zip:
+    weight: 8
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  moderation_state:
+    type: moderation_state_default
+    weight: 12
+    settings: {  }
+    region: content
+    third_party_settings: {  }
 hidden:
   created: true
   status: true

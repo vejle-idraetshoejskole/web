@@ -21,6 +21,7 @@ dependencies:
     - field.field.node.vies_application_form.field_vies_last_name
     - field.field.node.vies_application_form.field_vies_municipality
     - field.field.node.vies_application_form.field_vies_newsletter
+    - field.field.node.vies_application_form.field_vies_no_cpr
     - field.field.node.vies_application_form.field_vies_parents
     - field.field.node.vies_application_form.field_vies_period
     - field.field.node.vies_application_form.field_vies_status
@@ -189,6 +190,16 @@ content:
       format: yes-no
       format_custom_true: ''
       format_custom_false: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_vies_no_cpr:
+    weight: 25
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
     third_party_settings: {  }
     type: boolean
     region: content

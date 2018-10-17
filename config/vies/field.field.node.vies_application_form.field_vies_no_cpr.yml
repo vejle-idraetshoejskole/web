@@ -1,0 +1,23 @@
+uuid: b0d7b7ec-25f9-4bae-ae80-e55c6cb50ba2
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_vies_no_cpr
+    - node.type.vies_application_form
+id: node.vies_application_form.field_vies_no_cpr
+field_name: field_vies_no_cpr
+entity_type: node
+bundle: vies_application_form
+label: 'Jeg har ikke et dansk CPR nummer'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

@@ -254,6 +254,21 @@ class ApplicationForm extends FormBase {
       }
     }
 
+    if (0 == $form_state->getValues()['nocpr'] and NULL == $form_state->getValues()['cpr']) {
+      $form_state->setError($form['personalDataWrapper']['data']['left']['cpr'], $this->t('Please add, CPR.'));
+    }
+    if (0 <> $form_state->getValues()['nocpr'] and NULL == $form_state->getValues()['birthdate']) {
+      $form_state->setError($form['personalDataWrapper']['data']['left']['birthdate'], $this->t('Pleaase, add birthdate.'));
+    }
+    if (!empty($values['parents']['current'])) {
+      if (0 == $form_state->getValues()['parents']['current']['left']['nocpr'] and NULL == $form_state->getValues()['parents']['current']['left']['cpr']) {
+        $form_state->setErrorByName("parents][current][left][cpr", $this->t('Please add, CPR.'));
+      }
+      if (0 <> $form_state->getValues()['parents']['current']['left']['nocpr'] and NULL == $form_state->getValues()['parents']['current']['left']['birthdate']) {
+        $form_state->setErrorByName("parents][current][left][birthdate", $this->t('Pleaase, add birthdate.'));
+      }
+    }
+
     $parents = $form_state->get('parents');
     if (empty($values['parents']['current']) && empty($parents)) {
       $form_state->setErrorByName('parents', 'Du skal tilføje mindst en forælder.');
@@ -523,6 +538,24 @@ class ApplicationForm extends FormBase {
           '#weight' => -1,
         ];
 
+      $form['parentsWrapper']['parents']['current']['left']['cpr']['#states'] = array(
+        // Only show this field when the 'nocpr' checkbox is disabled.
+        'visible' => array(
+          ':input[name="parents[current][left][nocpr]"]' => array(
+            'checked' => FALSE,
+          ),
+        ),
+      );
+
+      $form['parentsWrapper']['parents']['current']['left']['birthdate']['#states'] = array(
+        // Only show this field when the 'nocpr' checkbox is disabled.
+        'visible' => array(
+          ':input[name="parents[current][left][nocpr]"]' => array(
+            'checked' => TRUE,
+          ),
+        ),
+      );
+
       $form['parentsWrapper']['parents']['current']['left']['type'] = [
         '#type' => 'radios',
         '#title' => $this->t('Type of adult'),
@@ -614,15 +647,42 @@ class ApplicationForm extends FormBase {
     $cprHelpText  = (\Drupal::languageManager()->getCurrentLanguage()
         ->getId() === 'en') ? $config->get('vih_subscription_general_cpr_help_text_en') : $config->get('vih_subscription_general_cpr_help_text_da');
 
+    $personal_data['left']['nocpr'] = array(
+      '#type' => 'checkbox',
+      '#title' => $this->t('Jeg har ikke et dansk CPR nummer'),
+    );
+    
+    $personal_data['left']['birthdate'] = [
+      '#type' => 'date',
+      '#title' => $this->t('Birthdate'),
+      '#placeholder' => $this->t('Birthdate'),
+      '#date_date_format' => 'm-d-Y',
+      '#states' => array(
+        // Only show this field when the 'nocpr' checkbox is disabled.
+        'visible' => array(
+          ':input[name="nocpr"]' => array(
+            'checked' => TRUE,
+          ),
+        ),
+      ),
+    ];
+    
     $personal_data['left']['cpr'] = [
       '#type' => 'textfield',
       '#title' => 'CPR',
       '#placeholder' => 'xxxxxxxxxx',
-      '#required' => $required,
       '#default_value' => isset($default_values['cpr']) ? $default_values['cpr'] : NULL,
       '#pattern' => '[0-9]{10}',
-      '#field_suffix' => '<i type="button" class="icon icon-info-circle form-type-textfield__tooltip" data-trigger="hover" aria-hidden="true" data-toggle="popover" data-placement="top" data-content="' . $cprHelpText . '"></i>',
-    ];
+      '#field_suffix' => '<i type="button" class="icon icon-info-circle form-type-textfield__tooltip" aria-hidden="true" data-toggle="popover" data-placement="top" data-content="' . $cprHelpText . '"></i>',
+      '#states' => array(
+        // Only show this field when the 'nocpr' checkbox is disabled.
+        'visible' => array(
+          ':input[name="nocpr"]' => array(
+            'checked' => FALSE,
+          ),
+        ),
+      ),
+      ];
 
     $personal_data['left']['telefon'] = [
       '#type' => 'textfield',

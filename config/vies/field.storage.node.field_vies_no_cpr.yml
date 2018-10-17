@@ -1,0 +1,18 @@
+uuid: 5e8337a4-e3ab-49fa-87c4-b626a0d0ccd5
+langcode: da
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_vies_no_cpr
+field_name: field_vies_no_cpr
+entity_type: node
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

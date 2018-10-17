@@ -1,0 +1,23 @@
+uuid: e8c5124b-3795-4833-b898-7a180752b317
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_parent_no_cpr
+    - paragraphs.paragraphs_type.parent
+id: paragraph.parent.field_parent_no_cpr
+field_name: field_parent_no_cpr
+entity_type: paragraph
+bundle: parent
+label: 'Jeg har ikke et dansk CPR nummer'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean
