@@ -79,11 +79,7 @@ class EventOrderForm extends FormBase {
     //START GENERAL DATA //
     if(!empty($addedParticipants)){
       $form['price'] = array(
-      '#markup' => 'DKK ' . number_format($this->price, 0, ',', '.'),
-    );
-    } else {
-      $form['price'] = array(
-        '#markup' => 'DKK ' . '0' ,
+        '#markup' => 'DKK ' . number_format($this->price, 0, ',', '.'),
       );
     }
 
@@ -392,6 +388,12 @@ class EventOrderForm extends FormBase {
     $response->addCommand(new ReplaceCommand('#new-participant-container-wrapper', $form['newParticipantContainer']));
 
     //updating the price
+    if ($this->calculatePrice($form_state) == 0) {
+      $response->addCommand(new InvokeCommand('.boxy--price', 'addClass', ['hidden']));
+    } else {
+      $response->addCommand(new InvokeCommand('.boxy--price.hidden', 'removeClass', ['hidden']));
+    }
+
     $response->addCommand(new HtmlCommand('#vih-event-price', 'DKK ' . number_format($this->calculatePrice($form_state), 0, ',', '.')));
 
     //updating added participants
@@ -520,10 +522,8 @@ class EventOrderForm extends FormBase {
     $base_price = $this->event->field_vih_event_price->value;
 
     $addedParticipants = $form_state->get('addedParticipants');
-    if (count($addedParticipants) > 0) {
-      //calculating persons
-      $base_price *= count($addedParticipants);
-    }
+    //calculating persons
+    $base_price *= count($addedParticipants);
 
     $this->price = $base_price;
     return $this->price;
