@@ -255,17 +255,17 @@ class ApplicationForm extends FormBase {
     }
 
     if (0 == $form_state->getValues()['nocpr'] and NULL == $form_state->getValues()['cpr']) {
-      $form_state->setError($form['personalDataWrapper']['data']['left']['cpr'], $this->t('Please add, CPR.'));
+      $form_state->setError($form['personalDataWrapper']['data']['left']['cpr'], $this->t('Please provide CPR.'));
     }
     if (0 <> $form_state->getValues()['nocpr'] and NULL == $form_state->getValues()['birthdate']) {
-      $form_state->setError($form['personalDataWrapper']['data']['left']['birthdate'], $this->t('Pleaase, add birthdate.'));
+      $form_state->setError($form['personalDataWrapper']['data']['left']['birthdate'], $this->t('Please provide birthdate.'));
     }
     if (!empty($values['parents']['current'])) {
       if (0 == $form_state->getValues()['parents']['current']['left']['nocpr'] and NULL == $form_state->getValues()['parents']['current']['left']['cpr']) {
         $form_state->setErrorByName("parents][current][left][cpr", $this->t('Please add, CPR.'));
       }
       if (0 <> $form_state->getValues()['parents']['current']['left']['nocpr'] and NULL == $form_state->getValues()['parents']['current']['left']['birthdate']) {
-        $form_state->setErrorByName("parents][current][left][birthdate", $this->t('Pleaase, add birthdate.'));
+        $form_state->setErrorByName("parents][current][left][birthdate", $this->t('Please provide birthdate.'));
       }
     }
 

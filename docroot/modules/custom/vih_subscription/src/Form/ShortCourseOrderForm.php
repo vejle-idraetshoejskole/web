@@ -777,10 +777,10 @@ class ShortCourseOrderForm extends FormBase {
 
       if (!empty($form['newParticipantContainer']['newParticipantFieldset'])) {
         if (0 == $form_state->getValues()['newParticipantContainer']['newParticipantFieldset']['nocpr'] and NULL == $form_state->getValues()['newParticipantContainer']['newParticipantFieldset']['cpr']) {
-          $form_state->setError($form['newParticipantContainer']['newParticipantFieldset']['cpr'], $this->t('Please add, CPR.'));
+          $form_state->setError($form['newParticipantContainer']['newParticipantFieldset']['cpr'], $this->t('Please provide CPR.'));
         }
         if (0 <> $form_state->getValues()['newParticipantContainer']['newParticipantFieldset']['nocpr'] and NULL == $form_state->getValues()['newParticipantContainer']['newParticipantFieldset']['birthdate']) {
-          $form_state->setError($form['newParticipantContainer']['newParticipantFieldset']['birthdate'], $this->t('Pleaase, add birthdate.'));
+          $form_state->setError($form['newParticipantContainer']['newParticipantFieldset']['birthdate'], $this->t('Please provide birthdate.'));
         }
         // Checking that we don't have any option selected of option that reached the stock value limit.
         foreach ($this->course->field_vih_sc_option_groups->referencedEntities() as $optionGroupDelta => $optionGroup) {
