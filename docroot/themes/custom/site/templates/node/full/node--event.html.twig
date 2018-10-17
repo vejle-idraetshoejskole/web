@@ -111,7 +111,11 @@ view_mode ? view_mode|clean_class,
                                         </div>
 
                                         <div class="boxy__body">
-                                            {{ content.field_vih_event_price }}
+                                            {% if content.field_vih_event_price.value %}
+                                              {{ content.field_vih_event_price }}
+                                            {% else %}
+                                              {{ "Free" | trans }}
+                                            {% endif %}
                                         </div>
                                     </div>
                                     <!-- End - price -->
