@@ -34,8 +34,8 @@ class EventOrderForm extends FormBase {
   /**
    * Returns page title
    */
-  public function getTitle() {
-    return $this->t('Sign up');
+  public function getTitle($event) {
+    return $this->t('Sign up @label', ['@label' => $event->label()]);
   }
 
   /**
