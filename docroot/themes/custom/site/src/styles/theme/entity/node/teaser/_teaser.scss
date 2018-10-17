@@ -39,6 +39,10 @@ $entity-teaser-inner-left-right-spacing: floor( ( $grid-gutter-width / 2 ) );
   transition: none; // Remove link transitions
 }
 
+.entity-teaser__image {
+
+}
+
 .entity-teaser__heading {
   flex-shrink: 1;
 
@@ -65,9 +69,7 @@ $entity-teaser-inner-left-right-spacing: floor( ( $grid-gutter-width / 2 ) );
 }
 
 .entity-teaser__published-at {
-  font-weight: $font-weight-bold;
-
-  color: $brand-secondary;
+  color: $gray;
 }
 
 .entity-teaser__image {

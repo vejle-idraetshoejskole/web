@@ -25,6 +25,13 @@
 
   background-color: $body-bg-secondary;
 
+  .entity-teaser__image {
+    margin-top: -$entity-teaser-inner-top-bottom-spacing;
+    margin-left: -$entity-teaser-inner-left-right-spacing;
+    margin-right: -$entity-teaser-inner-left-right-spacing;
+    margin-bottom: $entity-teaser-inner-top-bottom-spacing;
+  }
+
   .entity-teaser__heading {
     min-height: 36px; // 2 lines
   }
