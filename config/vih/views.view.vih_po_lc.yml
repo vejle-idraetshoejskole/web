@@ -826,9 +826,9 @@ display:
         options:
           default_field_elements: true
           inline:
-            title: title
             field_vih_lco_status: field_vih_lco_status
-          separator: ''
+            title: title
+          separator: ' '
           hide_empty: false
       filters:
         type:

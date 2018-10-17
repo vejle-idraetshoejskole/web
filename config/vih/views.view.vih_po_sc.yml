@@ -841,7 +841,7 @@ display:
           inline:
             field_vih_sco_status: field_vih_sco_status
             title: title
-          separator: ''
+          separator: ' '
           hide_empty: false
       filters:
         type:

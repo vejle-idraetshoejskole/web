@@ -842,7 +842,7 @@ display:
           inline:
             field_vih_eo_status: field_vih_eo_status
             title: title
-          separator: ''
+          separator: ' '
           hide_empty: false
       filters:
         type:
