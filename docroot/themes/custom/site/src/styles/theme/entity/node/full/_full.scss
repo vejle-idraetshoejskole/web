@@ -44,8 +44,14 @@ article {
         text-align: center;
       }
     }
-
   }
+
+  &.news {
+    .field--name-field-vih-image {
+      margin-bottom: 20px;
+    }
+  }
+
   & .row.paragraphs{
     margin-top: 130px;
   }
@@ -86,6 +92,13 @@ article {
     .field {
       .field--label {
 //        @extend h3;
+      }
+    }
+    &.news {
+      .field--name-field-vih-image {
+        float: right;
+        width: 350px;
+        margin-left: 20px;
       }
     }
   }

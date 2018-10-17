@@ -1,0 +1,14 @@
+uuid: 5b5a4b2f-73e6-40ee-ac88-698e37fa4de8
+langcode: da
+status: true
+dependencies:
+  module:
+    - lightning_core
+    - media
+third_party_settings:
+  lightning_core:
+    description: ''
+id: media.vih_general_page_side_image
+label: 'VIH General Page Side Image'
+targetEntityType: media
+cache: true

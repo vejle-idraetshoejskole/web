@@ -1,0 +1,24 @@
+uuid: ad828142-2543-466f-83c9-debbcbf8eae4
+langcode: da
+status: true
+dependencies:
+  module:
+    - focal_point
+name: vih_general_page_side_image
+label: 'VIH General Page Side Image (525x225)'
+effects:
+  e7dbdf49-2c5d-4e8d-b69e-1ba5ff5db450:
+    uuid: e7dbdf49-2c5d-4e8d-b69e-1ba5ff5db450
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 525
+      height: 225
+      crop_type: focal_point
+  4ae0c72e-dbbd-4b60-8eb1-29e6e8c8dc08:
+    uuid: 4ae0c72e-dbbd-4b60-8eb1-29e6e8c8dc08
+    id: image_scale_and_crop
+    weight: 2
+    data:
+      width: 525
+      height: 225
