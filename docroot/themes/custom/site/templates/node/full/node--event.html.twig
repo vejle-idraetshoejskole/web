@@ -111,7 +111,7 @@ view_mode ? view_mode|clean_class,
                                         </div>
 
                                         <div class="boxy__body">
-                                            {% if content.field_vih_event_price.value %}
+                                            {% if node.field_vih_event_price.value != '0.00' %}
                                               {{ content.field_vih_event_price }}
                                             {% else %}
                                               {{ "Free" | trans }}
