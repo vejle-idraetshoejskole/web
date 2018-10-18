@@ -20,6 +20,12 @@
 
 .entity-list-advanced--class {
 
+  &.mandatory {
+    .price-addition {
+      display: none;
+    }
+  }
+
   .entity-list-advanced__image {
     cursor: pointer;
   }

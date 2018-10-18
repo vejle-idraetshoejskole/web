@@ -1,16 +1,18 @@
 <div class="all-classes-container">
 
     {% for delta, radio in radios['#options'] %}
-        <div {{ attributes.addClass('entity-list-advanced', 'entity-list-advanced--class') }}>
+        {# mandatory course slot, that does not have options. Creating some variables #}
+        {% if radios[delta] is not defined %}
+          {% set buttonClass = 'active disabled' %}
+          {% set buttonAttribures = 'disabled' %}
+          {% set entityListClass = 'mandatory' %}
+        {% endif %}
+        <div {{ attributes.addClass('entity-list-advanced', 'entity-list-advanced--class', entityListClass) }}>
             <a class="link-modal" data-toggle="modal" data-target="#class-modal-{{ radios[delta]['#id'] }}">  
                 {{ radios['#classes']['radio_selection'][delta] }}
             </a>
             <!-- Begin - action -->
             <div class="entity-list-advanced__action">
-                {% if radios[delta] is not defined %}
-                  {% set buttonClass = 'active disabled' %}
-                  {% set buttonAttribures = 'disabled' %}
-                {% endif %}
                 <span class="btn btn-default btn-radio-select {{ buttonClass }}" {{ buttonAttribures }}>
                     {{ radios[delta] }}
                 </span>

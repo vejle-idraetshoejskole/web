@@ -67,6 +67,11 @@ class LongCourseOrderForm extends FormBase {
       );
 
       foreach ($coursePeriod->field_vih_cp_course_slots->referencedEntities() as $slotDelta => $courseSlot) {
+        // Skipping all mandatory course slots, unless they are mandatory + travel.
+        if ($courseSlot->field_vih_cs_mandatory->value && !$courseSlot->field_vih_cs_travel->value) {
+          continue;
+        }
+
         $courseSlot = \Drupal::service('entity.repository')->getTranslationFromContext($courseSlot);
 
         //saving component id for future references
