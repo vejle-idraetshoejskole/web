@@ -8,11 +8,9 @@
         </h3>
     </div>
     <div class="entity-teaser__body">
-
-        {# Begin - body #}
-        {% set text = content.body|render %}
-        {{ text|striptags }}
-        {# End - body #}
+        {# Begin - short description #}
+        {{ content.field_short_description }}
+        {# End - short description #}
 
         {# Begin - published at #}
         <div class="entity-teaser__published-at">
