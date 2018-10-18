@@ -1,0 +1,19 @@
+uuid: 965ab6d3-49ba-4b3d-be96-f82a88d77bcf
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_short_description
+    - node.type.news
+id: node.news.field_short_description
+field_name: field_short_description
+entity_type: node
+bundle: news
+label: 'Forkortet beskrivelse'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

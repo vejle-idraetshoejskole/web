@@ -6,6 +6,7 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - field.field.node.news.body
     - field.field.node.news.field_metatag
+    - field.field.node.news.field_short_description
     - field.field.node.news.field_vih_course_subheading
     - field.field.node.news.field_vih_image
     - field.field.node.news.field_vih_news_tags
@@ -16,7 +17,6 @@ dependencies:
     - node.type.news
   module:
     - panelizer
-    - text
     - user
 third_party_settings:
   panelizer:
@@ -29,14 +29,13 @@ targetEntityType: node
 bundle: news
 mode: teaser
 content:
-  body:
-    label: hidden
-    type: text_summary_or_trimmed
+  field_short_description:
+    type: basic_string
     weight: 1
-    settings:
-      trim_length: 100
-    third_party_settings: {  }
     region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
   field_vih_image:
     type: entity_reference_entity_view
     weight: 0
@@ -47,6 +46,7 @@ content:
       link: false
     third_party_settings: {  }
 hidden:
+  body: true
   field_metatag: true
   field_vih_course_subheading: true
   field_vih_news_tags: true
