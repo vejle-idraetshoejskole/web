@@ -610,7 +610,9 @@ class LongCourseOrderForm extends FormBase {
       //student information
       $this->courseOrder->set('field_vih_lco_first_name', $form_state->getValue('firstName'));
       $this->courseOrder->set('field_vih_lco_last_name', $form_state->getValue('lastName'));
-      $this->courseOrder->set('field_vih_lco_cpr', $form_state->getValue('cpr'));//CPR will be deleted from database immediately, after order is confirmed
+      $this->courseOrder->set('field_vih_no_cpr', $form_state->getValue('nocpr'));
+      $this->courseOrder->set('field_vih_lco_cpr', (1 == $form_state->getValue('nocpr'))? NULL : $form_state->getValue('cpr'));//CPR will be deleted from database immediately, after order is confirmed
+      $this->courseOrder->set('field_vih_lco_birthdate', (1 == $form_state->getValue('nocpr'))? $form_state->getValue('birthdate') : NULL);
       $this->courseOrder->set('field_vih_lco_telefon', $form_state->getValue('telefon'));
       $this->courseOrder->set('field_vih_lco_email', $form_state->getValue('email'));
       $this->courseOrder->set('field_vih_lco_nationality', CourseOrderOptionsList::getNationalityList($form_state->getValue('nationality')));
@@ -687,6 +689,8 @@ class LongCourseOrderForm extends FormBase {
     //Personal data - left side
     $form['personalDataLeft']['firstName']['#default_value'] = $courseOrder->field_vih_lco_first_name->value;
     $form['personalDataLeft']['lastName']['#default_value'] = $courseOrder->field_vih_lco_last_name->value;
+    $form['personalDataLeft']['nocpr']['#default_value'] = $courseOrder->field_vih_no_cpr->value;
+    $form['personalDataLeft']['birthdate']['#default_value'] = $courseOrder->field_vih_lco_birthdate->value;
     $form['personalDataLeft']['cpr']['#default_value'] = $courseOrder->field_vih_lco_cpr->value;
     $form['personalDataLeft']['telefon']['#default_value'] = $courseOrder->field_vih_lco_telefon->value;
     $form['personalDataLeft']['email']['#default_value'] = $courseOrder->field_vih_lco_email->value;
