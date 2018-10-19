@@ -388,13 +388,14 @@ class EventOrderForm extends FormBase {
     $response->addCommand(new ReplaceCommand('#new-participant-container-wrapper', $form['newParticipantContainer']));
 
     //updating the price
-    if ($this->calculatePrice($form_state) == 0) {
+    $calculatedPrice = $this->calculatePrice($form_state);
+    if ($calculatedPrice == 0) {
       $response->addCommand(new InvokeCommand('.boxy--price', 'addClass', ['hidden']));
     } else {
       $response->addCommand(new InvokeCommand('.boxy--price.hidden', 'removeClass', ['hidden']));
     }
 
-    $response->addCommand(new HtmlCommand('#vih-event-price', 'DKK ' . number_format($this->calculatePrice($form_state), 0, ',', '.')));
+    $response->addCommand(new HtmlCommand('#vih-event-price', 'DKK ' . number_format($calculatedPrice, 0, ',', '.')));
 
     //updating added participants
     $response->addCommand(new ReplaceCommand('#added-participants-container-wrapper', $form['addedParticipantsContainer']));
