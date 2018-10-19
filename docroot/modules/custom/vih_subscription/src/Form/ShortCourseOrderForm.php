@@ -204,6 +204,11 @@ class ShortCourseOrderForm extends FormBase {
                 'checked' => TRUE,
               ),
             ),
+            'disabled' => array(
+              ':input[name="newParticipantContainer[newParticipantFieldset][nocpr]"]' => array(
+                'checked' => FALSE,
+              ),
+            ),
           ),
         );
         $form['newParticipantContainer']['newParticipantFieldset']['cpr'] = array(

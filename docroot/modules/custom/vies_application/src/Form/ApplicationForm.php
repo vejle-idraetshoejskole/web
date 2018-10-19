@@ -9,6 +9,7 @@ use Drupal\node\Entity\Node;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\vies_application\ApplicationHandler;
 use Drupal\vih_subscription\Form\CommonFormUtils;
+use Drupal\vih_subscription\Form\CourseOrderOptionsList;
 use Drupal\vih_subscription\Form\SubscriptionsGeneralSettingsForm;
 
 /**
@@ -776,7 +777,8 @@ class ApplicationForm extends FormBase {
       '#default_value' => isset($default_values['city']) ? $default_values['city'] : NULL,
     ];
     $personal_data['right']['municipality'] = [
-      '#type' => 'textfield',
+      '#type' => 'select',
+      '#options' => CourseOrderOptionsList::getMunicipalityList(),
       '#title' => 'Kommune',
       '#placeholder' => 'Kommune',
       '#required' => $required,
