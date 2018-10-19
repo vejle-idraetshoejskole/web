@@ -269,7 +269,8 @@ class LongCourseOrderForm extends FormBase {
       '#suffix' => '</div></div>',
     );
     $form['personalDataRight']['municipality'] = array(
-      '#type' => 'textfield',
+      '#type' => 'select',
+      '#options' => CourseOrderOptionsList::getMunicipalityList(),
       '#title' => $this->t('Municipality'),
       '#placeholder' => $this->t('Municipality'),
       '#required' => TRUE,
