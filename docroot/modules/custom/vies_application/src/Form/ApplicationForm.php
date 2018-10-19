@@ -254,12 +254,6 @@ class ApplicationForm extends FormBase {
       }
     }
 
-    if (0 == $form_state->getValues()['nocpr'] and NULL == $form_state->getValues()['cpr']) {
-      $form_state->setError($form['personalDataWrapper']['data']['left']['cpr'], $this->t('Please provide CPR.'));
-    }
-    if (0 <> $form_state->getValues()['nocpr'] and NULL == $form_state->getValues()['birthdate']) {
-      $form_state->setError($form['personalDataWrapper']['data']['left']['birthdate'], $this->t('Please provide birthdate.'));
-    }
     if (!empty($values['parents']['current'])) {
       if (0 == $form_state->getValues()['parents']['current']['left']['nocpr'] and NULL == $form_state->getValues()['parents']['current']['left']['cpr']) {
         $form_state->setErrorByName("parents][current][left][cpr", $this->t('Please add, CPR.'));
@@ -545,11 +539,26 @@ class ApplicationForm extends FormBase {
             'checked' => FALSE,
           ),
         ),
+        'required' => array(
+          ':input[name="parents[current][left][nocpr]"]' => array(
+            'checked' => FALSE,
+          ),
+        ),
+        'disabled' => array(
+          ':input[name="parents[current][left][nocpr]"]' => array(
+            'checked' => TRUE,
+          ),
+        ),
       );
 
       $form['parentsWrapper']['parents']['current']['left']['birthdate']['#states'] = array(
         // Only show this field when the 'nocpr' checkbox is disabled.
         'visible' => array(
+          ':input[name="parents[current][left][nocpr]"]' => array(
+            'checked' => TRUE,
+          ),
+        ),
+        'required' => array(
           ':input[name="parents[current][left][nocpr]"]' => array(
             'checked' => TRUE,
           ),
@@ -650,6 +659,7 @@ class ApplicationForm extends FormBase {
     $personal_data['left']['nocpr'] = array(
       '#type' => 'checkbox',
       '#title' => $this->t('Jeg har ikke et dansk CPR nummer'),
+      '#default_value' => isset($default_values['nocpr']) ? $default_values['nocpr'] : NULL,
     );
     
     $personal_data['left']['birthdate'] = [
@@ -657,9 +667,15 @@ class ApplicationForm extends FormBase {
       '#title' => $this->t('Birthdate'),
       '#placeholder' => $this->t('Birthdate'),
       '#date_date_format' => 'm-d-Y',
+      '#default_value' => isset($default_values['birthdate']) ? $default_values['birthdate'] : NULL,
       '#states' => array(
         // Only show this field when the 'nocpr' checkbox is disabled.
         'visible' => array(
+          ':input[name="nocpr"]' => array(
+            'checked' => TRUE,
+          ),
+        ),
+        'required' => array(
           ':input[name="nocpr"]' => array(
             'checked' => TRUE,
           ),
@@ -679,6 +695,16 @@ class ApplicationForm extends FormBase {
         'visible' => array(
           ':input[name="nocpr"]' => array(
             'checked' => FALSE,
+          ),
+        ),
+        'required' => array(
+          ':input[name="nocpr"]' => array(
+            'checked' => FALSE,
+          ),
+        ),
+        'disabled' => array(
+          ':input[name="nocpr"]' => array(
+            'checked' => TRUE,
           ),
         ),
       ),
