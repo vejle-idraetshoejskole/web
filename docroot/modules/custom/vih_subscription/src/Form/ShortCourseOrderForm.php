@@ -122,11 +122,7 @@ class ShortCourseOrderForm extends FormBase {
     //START GENERAL DATA //
     if(!empty($addedParticipants)){
       $form['price'] = array(
-      '#markup' => 'DKK ' . number_format($this->price, 0, ',', '.'),
-    );
-    } else {
-      $form['price'] = array(
-        '#markup' => 'DKK ' . '0' ,
+        '#markup' => 'DKK ' . number_format($this->price, 0, ',', '.'),
       );
     }
 
@@ -534,6 +530,9 @@ class ShortCourseOrderForm extends FormBase {
     $optionGroupOptionsPrices = $form_state->get('optionGroupOptionsPrices');
     $optionGroupSuboptions = $form_state->get('optionGroupSuboptions');
 
+    // Loaded option groups.
+    $optionGroupsLoaded = $this->course->field_vih_sc_option_groups->referencedEntities();
+
     //existing list of added participants
     $addedParticipants = $form_state->get('addedParticipants');
 
@@ -581,7 +580,9 @@ class ShortCourseOrderForm extends FormBase {
       $participant['orderedOptions'][$optionGroupDelta] = array(
         'optionGroup' => [
           'delta' => $optionGroupDelta,
-          'name' => $optionGroups[$optionGroupDelta]
+          'name' => $optionGroups[$optionGroupDelta],
+          'isMainPrice' => $optionGroupsLoaded[$optionGroupDelta]->field_vih_og_is_main_price->value,
+          'mainPrice' => $this->course->field_vih_sc_price->value,
         ],
         'option' => [
           'delta' => $optionDelta,
@@ -740,7 +741,15 @@ class ShortCourseOrderForm extends FormBase {
     $response->addCommand(new ReplaceCommand('#available-options-container-wrapper', $form['availableOptionsContainer']));
 
     //updating the price
-    $response->addCommand(new HtmlCommand('#vih-course-price', 'DKK ' . number_format($this->calculatePrice($form_state), 0, ',', '.')));
+    $calculatedPrice = $this->calculatePrice($form_state);
+    if ($calculatedPrice == 0) {
+      $response->addCommand(new InvokeCommand('.boxy--price', 'addClass', ['hidden']));
+    } else {
+      $response->addCommand(new InvokeCommand('.boxy--price.hidden', 'removeClass', ['hidden']));
+    }
+
+    //updating the price
+    $response->addCommand(new HtmlCommand('#vih-course-price', 'DKK ' . number_format($calculatedPrice, 0, ',', '.')));
 
     //updating added participants
     $response->addCommand(new ReplaceCommand('#added-participants-container-wrapper', $form['addedParticipantsContainer']));
@@ -977,22 +986,20 @@ class ShortCourseOrderForm extends FormBase {
 
     $addedParticipants = $form_state->get('addedParticipants');
 
-    if (count($addedParticipants) > 0) {
-      //calculating persons
-      $base_price *= count($addedParticipants);
+    //calculating persons
+    $base_price *= count($addedParticipants);
 
-      //calculating options
-      $optionGroups = $this->course->field_vih_sc_option_groups->referencedEntities();
-      foreach ($addedParticipants as $addedParticipant) {
-        foreach ($addedParticipant['orderedOptions'] as $orderedOption) {
-          if (isset($orderedOption['option']['delta'])) {
-            $selectedOptionGroup = $optionGroups[$orderedOption['optionGroup']['delta']];
+    //calculating options
+    $optionGroups = $this->course->field_vih_sc_option_groups->referencedEntities();
+    foreach ($addedParticipants as $addedParticipant) {
+      foreach ($addedParticipant['orderedOptions'] as $orderedOption) {
+        if (isset($orderedOption['option']['delta'])) {
+          $selectedOptionGroup = $optionGroups[$orderedOption['optionGroup']['delta']];
 
-            $options = $selectedOptionGroup->field_vih_og_options->referencedEntities();
-            $selectedOption = $options[$orderedOption['option']['delta']];
+          $options = $selectedOptionGroup->field_vih_og_options->referencedEntities();
+          $selectedOption = $options[$orderedOption['option']['delta']];
 
-            $base_price += $selectedOption->field_vih_option_price_addition->value;
-          }
+          $base_price += $selectedOption->field_vih_option_price_addition->value;
         }
       }
     }
@@ -1013,6 +1020,9 @@ class ShortCourseOrderForm extends FormBase {
     $optionGroups = $form_state->get('optionGroups');
     $optionGroupOptions = $form_state->get('optionGroupOptions');
     $optionGroupSuboptions = $form_state->get('optionGroupSuboptions');
+
+    // Loaded option groups.
+    $optionGroupsLoaded = $this->course->field_vih_sc_option_groups->referencedEntities();
 
     $addedParticipants = array();
 
@@ -1060,7 +1070,9 @@ class ShortCourseOrderForm extends FormBase {
         $participant['orderedOptions'][$optionGroupId] = [
           'optionGroup' => [
             'delta' => $optionGroupId,
-            'name' => $optionGroups[$optionGroupId]
+            'name' => $optionGroups[$optionGroupId],
+            'isMainPrice' => $optionGroupsLoaded[$optionGroupId]->field_vih_og_is_main_price->value,
+            'mainPrice' => $this->course->field_vih_sc_price->value,
           ],
           'option' => [
             'delta' => $optionId,
@@ -1151,11 +1163,22 @@ class ShortCourseOrderForm extends FormBase {
     foreach ($optionGroup->field_vih_og_options->referencedEntities() as $optionDelta => $option) {
       $option = \Drupal::service('entity.repository')->getTranslationFromContext($option);
 
+      $additionalPrice = $option->field_vih_option_price_addition->value;
+
       $optionGroupOptionsWithPrice[$optionDelta] = $option->field_vih_option_title->value;
 
-      $additionalPrice = $option->field_vih_option_price_addition->value;
-      if (isset($additionalPrice) && floatval($additionalPrice) !== 0.00) {
-        $optionGroupOptionsWithPrice[$optionDelta] .= " (+ kr. $additionalPrice)";
+
+      if ($optionGroup->field_vih_og_is_main_price->value) {
+        if (isset($additionalPrice) && floatval($additionalPrice) !== 0.00) {
+          $sum = number_format($this->course->field_vih_sc_price->value + $additionalPrice, 2, '.', '');
+          $optionGroupOptionsWithPrice[$optionDelta] .= " (kr. " . $sum . ")";
+        } else {
+          $optionGroupOptionsWithPrice[$optionDelta] .= " (kr. " . $this->course->field_vih_sc_price->value . ")";
+        }
+      } else {
+        if (isset($additionalPrice) && floatval($additionalPrice) !== 0.00) {
+          $optionGroupOptionsWithPrice[$optionDelta] .= " (+ kr. $additionalPrice)";
+        }
       }
 
       $stockAmount = $option->field_vih_option_stock_amount->value;
