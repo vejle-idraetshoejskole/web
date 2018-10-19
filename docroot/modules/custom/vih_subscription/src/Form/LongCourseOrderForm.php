@@ -180,6 +180,11 @@ class LongCourseOrderForm extends FormBase {
             'checked' => FALSE,
           ),
         ),
+        'disabled' => array(
+          ':input[name="nocpr"]' => array(
+            'checked' => TRUE,
+          ),
+        ),
       ),
     );
     $form['personalDataLeft']['telefon'] = array(
@@ -704,8 +709,8 @@ class LongCourseOrderForm extends FormBase {
 
     $form['personalDataRight']['address']['#default_value'] = $address_parts[0];
     $form['personalDataRight']['house']['houseNumber']['#default_value'] = $address_parts[1];
-    $form['personalDataRight']['house']['houseLetter']['#default_value'] = $address_parts[2];
-    $form['personalDataRight']['house']['houseFloor']['#default_value'] = $address_parts[3];
+    $form['personalDataRight']['house']['houseLetter']['#default_value'] = !empty($address_parts[2]) ? $address_parts[2] : NULL;
+    $form['personalDataRight']['house']['houseFloor']['#default_value'] = !empty($address_parts[3]) ? $address_parts[3] : NULL;
 
     $form['personalDataRight']['city']['#default_value'] = $courseOrder->field_vih_lco_city->value;
     $form['personalDataRight']['municipality']['#default_value'] = $courseOrder->field_vih_lco_municipality->value;
@@ -727,8 +732,8 @@ class LongCourseOrderForm extends FormBase {
     //Adult data - right side
     $form['adultDataRight']['adultAddress']['#default_value'] = $adult_address_parts[0];
     $form['adultDataRight']['adultHouse']['adultHouseNumber']['#default_value'] = $adult_address_parts[1];
-    $form['adultDataRight']['adultHouse']['adultHouseLetter']['#default_value'] = $adult_address_parts[2];
-    $form['adultDataRight']['adultHouse']['adultHouseFloor']['#default_value'] = $adult_address_parts[3];
+    $form['adultDataRight']['adultHouse']['adultHouseLetter']['#default_value'] = !empty($adult_address_parts[2]) ? $adult_address_parts[2] : NULL;
+    $form['adultDataRight']['adultHouse']['adultHouseFloor']['#default_value'] = !empty($adult_address_parts[3]) ? $adult_address_parts[3] : NULL;
     $form['adultDataRight']['adultCity']['#default_value'] = $courseOrder->field_vih_lco_adult_city->value;
     $form['adultDataRight']['adultZip']['#default_value'] = $courseOrder->field_vih_lco_adult_zip->value;
 
