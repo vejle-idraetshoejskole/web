@@ -160,6 +160,11 @@ class LongCourseOrderForm extends FormBase {
             'checked' => FALSE,
           ),
         ),
+        'disabled' => array(
+          ':input[name="nocpr"]' => array(
+            'checked' => FALSE,
+          ),
+        ),
       ),
     );
     $form['personalDataLeft']['cpr'] = array(
