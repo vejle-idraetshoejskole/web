@@ -155,6 +155,11 @@ class LongCourseOrderForm extends FormBase {
             'checked' => TRUE,
           ),
         ),
+        'required' => array(
+          ':input[name="nocpr"]' => array(
+            'checked' => FALSE,
+          ),
+        ),
       ),
     );
     $form['personalDataLeft']['cpr'] = array(
@@ -166,6 +171,11 @@ class LongCourseOrderForm extends FormBase {
       '#states' => array(
         // Only show this field when the 'nocpr' checkbox is disabled.
         'visible' => array(
+          ':input[name="nocpr"]' => array(
+            'checked' => FALSE,
+          ),
+        ),
+        'required' => array(
           ':input[name="nocpr"]' => array(
             'checked' => FALSE,
           ),
@@ -411,16 +421,6 @@ class LongCourseOrderForm extends FormBase {
           $form_state->setErrorByName($radioKey, $this->t('Please make a selection in %slotName.', array('%slotName' => $courseSlot->field_vih_cs_title->value)));
         }
       }
-      if ('cpr' === $radioKey) {
-        if (NULL == $form_state->getValue('cpr') and 0 == $form_state->getValue('nocpr')) {
-          $form_state->setErrorByName($radioKey, $this->t('Please enter CPR.'));
-        }
-      }
-      if ('birthdate' === $radioKey) {
-        if (NULL == $form_state->getValue('birthdate') and 1 == $form_state->getValue('nocpr')) {
-          $form_state->setErrorByName($radioKey, $this->t('Please enter birthdate.'));
-        }
-      }
     }
   }
 
@@ -554,14 +554,14 @@ class LongCourseOrderForm extends FormBase {
         //student information
         'field_vih_lco_first_name' => $form_state->getValue('firstName'),
         'field_vih_lco_last_name' => $form_state->getValue('lastName'),
-        'field_vih_lco_cpr' => $form_state->getValue('cpr'), //CPR will be deleted from database immediately, after order is confirmed
+        'field_vih_lco_cpr' => (1 == $form_state->getValue('nocpr'))? NULL : $form_state->getValue('cpr'), //CPR will be deleted from database immediately, after order is confirmed
         'field_vih_lco_telefon' => $form_state->getValue('telefon'),
         'field_vih_lco_email' => $form_state->getValue('email'),
         'field_vih_lco_country' => CourseOrderOptionsList::getNationalityList($form_state->getValue('country')),
         'field_vih_lco_nationality' => CourseOrderOptionsList::getNationalityList($form_state->getValue('nationality')),
         'field_vih_lco_newsletter' => $form_state->getValue('newsletter'),
         'field_vih_no_cpr' => $form_state->getValue('nocpr'),
-        'field_vih_lco_birthdate' => $form_state->getValue('birthdate'),
+        'field_vih_lco_birthdate' => (1 == $form_state->getValue('nocpr'))? $form_state->getValue('birthdate') : NULL,
         'field_vih_lco_address' => implode('; ', $address_array),
         'field_vih_lco_city' => $form_state->getValue('city'),
         'field_vih_lco_municipality' => $form_state->getValue('municipality'),
@@ -610,7 +610,9 @@ class LongCourseOrderForm extends FormBase {
       //student information
       $this->courseOrder->set('field_vih_lco_first_name', $form_state->getValue('firstName'));
       $this->courseOrder->set('field_vih_lco_last_name', $form_state->getValue('lastName'));
-      $this->courseOrder->set('field_vih_lco_cpr', $form_state->getValue('cpr'));//CPR will be deleted from database immediately, after order is confirmed
+      $this->courseOrder->set('field_vih_no_cpr', $form_state->getValue('nocpr'));
+      $this->courseOrder->set('field_vih_lco_cpr', (1 == $form_state->getValue('nocpr'))? NULL : $form_state->getValue('cpr'));//CPR will be deleted from database immediately, after order is confirmed
+      $this->courseOrder->set('field_vih_lco_birthdate', (1 == $form_state->getValue('nocpr'))? $form_state->getValue('birthdate') : NULL);
       $this->courseOrder->set('field_vih_lco_telefon', $form_state->getValue('telefon'));
       $this->courseOrder->set('field_vih_lco_email', $form_state->getValue('email'));
       $this->courseOrder->set('field_vih_lco_nationality', CourseOrderOptionsList::getNationalityList($form_state->getValue('nationality')));
@@ -687,6 +689,8 @@ class LongCourseOrderForm extends FormBase {
     //Personal data - left side
     $form['personalDataLeft']['firstName']['#default_value'] = $courseOrder->field_vih_lco_first_name->value;
     $form['personalDataLeft']['lastName']['#default_value'] = $courseOrder->field_vih_lco_last_name->value;
+    $form['personalDataLeft']['nocpr']['#default_value'] = $courseOrder->field_vih_no_cpr->value;
+    $form['personalDataLeft']['birthdate']['#default_value'] = $courseOrder->field_vih_lco_birthdate->value;
     $form['personalDataLeft']['cpr']['#default_value'] = $courseOrder->field_vih_lco_cpr->value;
     $form['personalDataLeft']['telefon']['#default_value'] = $courseOrder->field_vih_lco_telefon->value;
     $form['personalDataLeft']['email']['#default_value'] = $courseOrder->field_vih_lco_email->value;

@@ -199,6 +199,11 @@ class ShortCourseOrderForm extends FormBase {
                 'checked' => TRUE,
               ),
             ),
+            'required' => array(
+              ':input[name="newParticipantContainer[newParticipantFieldset][nocpr]"]' => array(
+                'checked' => TRUE,
+              ),
+            ),
           ),
         );
         $form['newParticipantContainer']['newParticipantFieldset']['cpr'] = array(
@@ -210,6 +215,11 @@ class ShortCourseOrderForm extends FormBase {
           '#states' => array(
             // Only show this field when the 'nocpr' checkbox is disabled.
             'visible' => array(
+              ':input[name="newParticipantContainer[newParticipantFieldset][nocpr]"]' => array(
+                'checked' => FALSE,
+              ),
+            ),
+            'required' => array(
               ':input[name="newParticipantContainer[newParticipantFieldset][nocpr]"]' => array(
                 'checked' => FALSE,
               ),
@@ -778,6 +788,17 @@ class ShortCourseOrderForm extends FormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
+    
+    if (0 <> $form_state->getValues()['newParticipantContainer']['newParticipantFieldset']['nocpr']) {
+      $form['newParticipantContainer']['newParticipantFieldset']['cpr']['#value'] = NULL;
+      $form_errors = $form_state->getErrors();
+      $form_state->clearErrors();
+      unset($form_errors['newParticipantContainer][newParticipantFieldset][cpr']);
+      foreach ($form_errors as $name => $error_message) {
+        $form_state->setErrorByName($name, $error_message);
+      }
+    }
+
     $triggeringElement = $form_state->getTriggeringElement();
 
     // Add participant button.
@@ -894,7 +915,7 @@ class ShortCourseOrderForm extends FormBase {
           'field_vih_ocp_first_name' => $addedParticipant['firstName'],
           'field_vih_ocp_last_name' => $addedParticipant['lastName'],
           'field_vih_ocp_email' => $addedParticipant['email'],
-          'field_vih_ocp_cpr' => $addedParticipant['cpr'],
+          'field_vih_ocp_cpr' => (1 == $addedParticipant['nocpr'])? NULL : $addedParticipant['cpr'],
           'field_vih_ocp_no_cpr' => $addedParticipant['nocpr'],
           //CPR will be deleted from database immediately, after order is confirmed
           'field_vih_ocp_address' => implode('; ', $adress_arr),
