@@ -122,7 +122,7 @@ class ShortCourseOrderForm extends FormBase {
     //START GENERAL DATA //
     if(!empty($addedParticipants)){
       $form['price'] = array(
-        '#markup' => 'DKK ' . number_format($this->price, 0, ',', '.'),
+        '#markup' => 'DKK ' . number_format($this->price, 2, ',', '.'),
       );
     }
 
@@ -769,7 +769,7 @@ class ShortCourseOrderForm extends FormBase {
     }
 
     //updating the price
-    $response->addCommand(new HtmlCommand('#vih-course-price', 'DKK ' . number_format($calculatedPrice, 0, ',', '.')));
+    $response->addCommand(new HtmlCommand('#vih-course-price', 'DKK ' . number_format($calculatedPrice, 2, ',', '.')));
 
     //updating added participants
     $response->addCommand(new ReplaceCommand('#added-participants-container-wrapper', $form['addedParticipantsContainer']));
@@ -1201,14 +1201,14 @@ class ShortCourseOrderForm extends FormBase {
 
       if ($optionGroup->field_vih_og_is_main_price->value) {
         if (isset($additionalPrice) && floatval($additionalPrice) !== 0.00) {
-          $sum = number_format($this->course->field_vih_sc_price->value + $additionalPrice, 2, '.', '');
+          $sum = number_format($this->course->field_vih_sc_price->value + $additionalPrice, 2, ',', '.');
           $optionGroupOptionsWithPrice[$optionDelta] .= " (kr. " . $sum . ")";
         } else {
-          $optionGroupOptionsWithPrice[$optionDelta] .= " (kr. " . $this->course->field_vih_sc_price->value . ")";
+          $optionGroupOptionsWithPrice[$optionDelta] .= " (kr. " . number_format($this->course->field_vih_sc_price->value, 2, ',', '.') . ")";
         }
       } else {
         if (isset($additionalPrice) && floatval($additionalPrice) !== 0.00) {
-          $optionGroupOptionsWithPrice[$optionDelta] .= " (+ kr. $additionalPrice)";
+          $optionGroupOptionsWithPrice[$optionDelta] .= " (+ kr. " . number_format($additionalPrice, 2, ',', '.') . ")";
         }
       }
 

@@ -22,12 +22,12 @@
 
                                     {% if addedParticipantOption['optionGroup']['isMainPrice'] %}
                                       {% if (addedParticipantOption['option']['additionalPrice']) %}
-                                        (kr. {{ (addedParticipantOption['option']['additionalPrice'] + addedParticipantOption['optionGroup']['mainPrice'])|number_format(2, '.', '') }})
+                                        (kr. {{ (addedParticipantOption['option']['additionalPrice'] + addedParticipantOption['optionGroup']['mainPrice'])|number_format(2, ',', '.') }})
                                       {% else %}
-                                        (kr. {{ (addedParticipantOption['optionGroup']['mainPrice'])|number_format(2, '.', '') }})
+                                        (kr. {{ (addedParticipantOption['optionGroup']['mainPrice'])|number_format(2, ',', '.') }})
                                       {% endif %}
                                     {% elseif (addedParticipantOption['option']['additionalPrice']) %}
-                                      (+ kr. {{ addedParticipantOption['option']['additionalPrice'] }})
+                                      (+ kr. {{ addedParticipantOption['option']['additionalPrice']|number_format(2, ',', '.') }})
                                     {% endif %}
                                 </li>
                             {% endif %}
