@@ -78,7 +78,8 @@
         "drupal/views_arg_order_sort": "1.x-dev",
         "drupal/date_popup": "^1.0",
         "drupal/views_autocomplete_filters": "^1.2",
-        "drupal/verf": "^1.0@beta"
+        "drupal/verf": "^1.0@beta",
+        "drupal/views_conditional": "^1.0"
     },
     "repositories": [
         {

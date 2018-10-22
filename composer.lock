@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f637c08a64a7fff74066d36e9fd50f8c",
+    "content-hash": "5fdbbb7beaf8382c3a5e15f9ab233ac8",
     "packages": [
         {
             "name": "acquia/lightning",
@@ -138,7 +138,7 @@
             "version": "v2.3.4",
             "source": {
                 "type": "git",
-                "url": "git@github.com:fengyuanchen/cropper.git",
+                "url": "https://github.com/fengyuanchen/cropper.git",
                 "reference": "30c58b29ee21010e17e58ebab165fbd84285c685"
             },
             "dist": {
@@ -7283,6 +7283,61 @@
             "homepage": "https://www.drupal.org/project/views_autocomplete_filters",
             "support": {
                 "source": "http://cgit.drupalcode.org/views_autocomplete_filters"
+            }
+        },
+        {
+            "name": "drupal/views_conditional",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/views_conditional",
+                "reference": "8.x-1.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/views_conditional-8.x-1.0.zip",
+                "reference": "8.x-1.0",
+                "shasum": "50a70b1120ab2e504485f4f9df6a8820fbb5e678"
+            },
+            "require": {
+                "drupal/core": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.0",
+                    "datestamp": "1522043885",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "MChittenden",
+                    "homepage": "https://www.drupal.org/user/2288348"
+                },
+                {
+                    "name": "anand.toshniwal93",
+                    "homepage": "https://www.drupal.org/user/3345088"
+                },
+                {
+                    "name": "ofry",
+                    "homepage": "https://www.drupal.org/user/2740599"
+                }
+            ],
+            "description": "Allows conditional views output.",
+            "homepage": "https://www.drupal.org/project/views_conditional",
+            "support": {
+                "source": "http://cgit.drupalcode.org/views_conditional"
             }
         },
         {
