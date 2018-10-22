@@ -1291,45 +1291,46 @@ ignored_config_entities:
   2578: ~views.view.content_recent
   2580: ~views.view.content
   2582: ~views.view.files
-  2584: ~views.view.frontpage
-  2586: ~views.view.glossary
-  2588: ~views.view.media
-  2590: ~views.view.moderation_history
-  2592: ~views.view.taxonomy_term
-  2594: ~views.view.user_admin_people
-  2596: ~views.view.vih_banner_slideshow
-  2598: ~views.view.vih_class_packages
-  2600: ~views.view.vih_cource_long_order_lists
-  2602: ~views.view.vih_cource_long_order_periods_lists
-  2604: ~views.view.vih_cource_short_order_lists
-  2606: ~views.view.vih_event_order_lists
-  2608: ~views.view.vih_cource_order_lists
-  2610: ~views.view.vih_period_class_order_lists
-  2612: ~views.view.vih_courses_related_to_learning
-  2614: ~views.view.vih_employees
-  2616: ~views.view.vih_events
-  2618: ~views.view.vih_long_course_list
-  2620: ~views.view.vih_long_courses
-  2622: ~views.view.vih_my_classes_nodes
-  2624: ~views.view.vih_my_classes_terms
-  2626: ~views.view.vih_news_list_advanced
-  2628: ~views.view.vih_news_teaser
-  2630: ~views.view.vih_content_grid
-  2632: ~views.view.vih_search
-  2634: ~views.view.vih_short_course_list
-  2636: ~views.view.vih_long_course_order_page
-  2638: ~views.view.vih_event_order_page
-  2640: ~views.view.vih_short_courses
-  2642: ~views.view.vies_application_list
-  2644: ~views.view.watchdog
-  2646: ~views.view.who_s_new
-  2648: ~views.view.who_s_online
-  2650: ~context.context.page_title
-  2652: ~views.view.short_course_order_page
-  2654: ~context.context.context_center_content
-  2656: '# No ignore config split'
-  2658: ~config_split.config_split.vih_functionality
-  2660: ~config_split.config_split.vies_functionality
+  2584: ~views.view.find_order
+  2586: ~views.view.frontpage
+  2588: ~views.view.glossary
+  2590: ~views.view.media
+  2592: ~views.view.moderation_history
+  2594: ~views.view.taxonomy_term
+  2596: ~views.view.user_admin_people
+  2598: ~views.view.vih_banner_slideshow
+  2600: ~views.view.vih_class_packages
+  2602: ~views.view.vih_cource_long_order_lists
+  2604: ~views.view.vih_cource_long_order_periods_lists
+  2606: ~views.view.vih_cource_short_order_lists
+  2608: ~views.view.vih_event_order_lists
+  2610: ~views.view.vih_cource_order_lists
+  2612: ~views.view.vih_period_class_order_lists
+  2614: ~views.view.vih_courses_related_to_learning
+  2616: ~views.view.vih_employees
+  2618: ~views.view.vih_events
+  2620: ~views.view.vih_long_course_list
+  2622: ~views.view.vih_long_courses
+  2624: ~views.view.vih_my_classes_nodes
+  2626: ~views.view.vih_my_classes_terms
+  2628: ~views.view.vih_news_list_advanced
+  2630: ~views.view.vih_news_teaser
+  2632: ~views.view.vih_content_grid
+  2634: ~views.view.vih_search
+  2636: ~views.view.vih_short_course_list
+  2638: ~views.view.vih_long_course_order_page
+  2640: ~views.view.vih_event_order_page
+  2642: ~views.view.vih_short_courses
+  2644: ~views.view.vies_application_list
+  2646: ~views.view.watchdog
+  2648: ~views.view.who_s_new
+  2650: ~views.view.who_s_online
+  2652: ~context.context.page_title
+  2654: ~views.view.short_course_order_page
+  2656: ~context.context.context_center_content
+  2658: '# No ignore config split'
+  2660: ~config_split.config_split.vih_functionality
+  2662: ~config_split.config_split.vies_functionality
 _core:
   default_config_hash: UVH1aJ4b44UM-VdPVN7hNNuuVqfReJxwfVeDQH1Hvsk
 langcode: da
