@@ -185,7 +185,7 @@ class ShortCourseOrderForm extends FormBase {
         );
         $form['newParticipantContainer']['newParticipantFieldset']['nocpr'] = array(
           '#type' => 'checkbox',
-          '#title' => $this->t('Jeg har ikke et dansk CPR nummer'),
+          '#title' => $this->t('I do not have a Danish social security number (CPR-number)'),
         );
         $form['newParticipantContainer']['newParticipantFieldset']['birthdate'] = array(
           '#type' => 'date',

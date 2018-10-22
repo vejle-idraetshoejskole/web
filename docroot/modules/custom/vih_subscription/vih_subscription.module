@@ -119,7 +119,7 @@ function vih_subscription_system_breadcrumb_alter(\Drupal\Core\Breadcrumb\Breadc
         $customLinks[] = \Drupal\Core\Link::fromTextAndUrl(t('Long courses'), \Drupal\Core\Url::fromUri('internal:/lange-hoejskolekurser'));
         $customLinks[] = $subject->toLink();
 
-        $customLinks[] = \Drupal\Core\Link::createFromRoute(t('Tilmeld'), 'vih_subscription.long_course_order_create', [
+        $customLinks[] = \Drupal\Core\Link::createFromRoute(t('Subscribe'), 'vih_subscription.long_course_order_create', [
           'course' => $subject->id(),
           'order' => $order->id(),
           'checksum' => $checksum
@@ -128,7 +128,7 @@ function vih_subscription_system_breadcrumb_alter(\Drupal\Core\Breadcrumb\Breadc
       } elseif ($subject->getType() == 'vih_short_course') {
         $customLinks[] = \Drupal\Core\Link::fromTextAndUrl(t('Short courses'), \Drupal\Core\Url::fromUri('internal:/kortekurser'));
         $customLinks[] = $subject->toLink();
-        $customLinks[] = \Drupal\Core\Link::createFromRoute(t('Tilmeld'), 'vih_subscription.short_course_order_create', [
+        $customLinks[] = \Drupal\Core\Link::createFromRoute(t('Subscribe'), 'vih_subscription.short_course_order_create', [
           'course' => $subject->id(),
           'order' => $order->id(),
           'checksum' => $checksum
@@ -136,7 +136,7 @@ function vih_subscription_system_breadcrumb_alter(\Drupal\Core\Breadcrumb\Breadc
       } elseif ($subject->getType() == 'event') {
         $customLinks[] = \Drupal\Core\Link::fromTextAndUrl(t('Events'), \Drupal\Core\Url::fromUri('internal:/kalender'));
         $customLinks[] = $subject->toLink();
-        $customLinks[] = \Drupal\Core\Link::createFromRoute(t('Tilmeld'), 'vih_subscription.event_order_create', [
+        $customLinks[] = \Drupal\Core\Link::createFromRoute(t('Subscribe'), 'vih_subscription.event_order_create', [
           'event' => $subject->id(),
           'order' => $order->id(),
           'checksum' => $checksum

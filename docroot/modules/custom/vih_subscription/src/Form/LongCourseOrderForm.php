@@ -52,7 +52,10 @@ class LongCourseOrderForm extends FormBase {
       if (Crypt::hashEquals($checksum, VihSubscriptionUtils::generateChecksum($course, $order))) {
         $this->courseOrder = $order;
       }
+    } else {
+      $form['#expand_first_course_slot'] = TRUE;
     }
+
 
     $form['#title'] = $course->getTitle();
 
@@ -82,7 +85,8 @@ class LongCourseOrderForm extends FormBase {
           'title' => $courseSlot->field_vih_cs_title->value . (($courseSlot->field_vih_cs_mandatory->value) ? ' ' . $this->t('(mandatory)') : ''),
           'availableClasses' => array(
             'cid' => $availableClassesCid
-          )
+          ),
+          'expanded' => FALSE,
         );
 
         //creating real input-ready fields
@@ -141,7 +145,7 @@ class LongCourseOrderForm extends FormBase {
     );
     $form['personalDataLeft']['nocpr'] = array(
       '#type' => 'checkbox',
-      '#title' => $this->t('Jeg har ikke et dansk CPR nummer'),
+      '#title' => $this->t('I do not have a Danish social security number (CPR-number)'),
     );
     $form['personalDataLeft']['birthdate'] = array(
       '#type' => 'date',
@@ -323,13 +327,6 @@ class LongCourseOrderForm extends FormBase {
       '#placeholder' => $this->t('E-mail address'),
       '#required' => TRUE,
     );
-    $form['adultDataLeft']['adultNationality'] = array(
-      '#type' => 'select',
-      '#title' => $this->t('Nationality'),
-      '#options' => CourseOrderOptionsList::getNationalityList(),
-      '#default_value' => 'DK',
-      '#required' => TRUE,
-    );
     $form['adultDataLeft']['adultNewsletter'] = array(
       '#type' => 'checkbox',
       '#title' => $this->t('Get updates from the school'),
@@ -379,6 +376,13 @@ class LongCourseOrderForm extends FormBase {
       '#prefix' => '<div class="col-xs-12 col-sm-8">',
       '#suffix' => '</div></div>',
     );
+    $form['adultDataRight']['adultNationality'] = array(
+      '#type' => 'select',
+      '#title' => $this->t('Country'),
+      '#options' => CourseOrderOptionsList::getNationalityList(),
+      '#default_value' => 'DK',
+      '#required' => TRUE,
+    );
 
     $form['message'] = array(
       '#type' => 'textarea',
@@ -417,6 +421,9 @@ class LongCourseOrderForm extends FormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
+    // Not expanding any courses slots, as there are some values in the form already.
+    $form['#expand_first_course_slot'] = FALSE;
+
     //going through the selected options
     foreach ($form_state->getValues() as $radioKey => $radioValue) {
       if (preg_match('/^course-period-(\d)-courseSlot-(\d)-availableClasses$/', $radioKey, $matches)) {
@@ -427,8 +434,10 @@ class LongCourseOrderForm extends FormBase {
         $courseSlotDelta = $matches[2];
         $courseSlots = $coursePeriod->field_vih_cp_course_slots->referencedEntities();
         $courseSlot = $courseSlots[$courseSlotDelta];
+        $courseSlot = \Drupal::service('entity.repository')->getTranslationFromContext($courseSlot);
 
         if (!is_numeric($radioValue)) {
+          $form['#coursePeriods'][$coursePeriodDelta]['courseSlots'][$courseSlotDelta]['expanded'] = TRUE;
           $form_state->setErrorByName($radioKey, $this->t('Please make a selection in %slotName.', array('%slotName' => $courseSlot->field_vih_cs_title->value)));
         }
       }
