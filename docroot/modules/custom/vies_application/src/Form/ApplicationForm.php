@@ -2,6 +2,9 @@
 
 namespace Drupal\vies_application\Form;
 
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\InvokeCommand;
+use Drupal\Core\Ajax\ReplaceCommand;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Locale\CountryManager;
@@ -208,9 +211,23 @@ class ApplicationForm extends FormBase {
       );
     }
 
+    $form['confirmOneParent'] = [
+      '#type' => 'checkbox',
+      '#title' => 'Jeg bekræfter, at jeg kun har tilføjet en forælder',
+      '#prefix' => '<div id="js-confirm-one-parent">',
+      '#suffix' => '</div>',
+    ];
+
     $form['submit'] = [
       '#type' => 'submit',
       '#value' => 'Send min ansøgning',
+      '#states' => [
+        'disabled' => [
+          ':input[name="confirmOneParent"]' => [
+            'checked' => FALSE,
+          ]
+        ]
+      ]
     ];
 
     $form_state->setCached(FALSE);
@@ -303,7 +320,21 @@ class ApplicationForm extends FormBase {
    * Callback for selects and returns the container with the parents in it.
    */
   public function parentsRefreshCallback(array &$form, FormStateInterface $form_state) {
-    return $form['parentsWrapper'];
+    $response = new AjaxResponse();
+
+    $parents = $form_state->get('parents');
+    if (count($parents) >= 2) {
+      $form['confirmOneParent']['#checked'] = TRUE;
+      $response->addCommand(new ReplaceCommand('#js-confirm-one-parent', $form['confirmOneParent']));
+      $response->addCommand(new InvokeCommand('#js-confirm-one-parent', 'addClass', ['hidden']));
+    } else {
+      $form['confirmOneParent']['#checked'] = FALSE;
+      $response->addCommand(new ReplaceCommand('#js-confirm-one-parent', $form['confirmOneParent']));
+      $response->addCommand(new InvokeCommand('#js-confirm-one-parent', 'removeClass', ['hidden']));
+    }
+
+    $response->addCommand(new ReplaceCommand('#parents-wrapper', $form['parentsWrapper']));
+    return $response;
   }
 
   /**
@@ -479,7 +510,6 @@ class ApplicationForm extends FormBase {
     $ajax_parent_button = [
       '#ajax' => [
         'callback' => '::parentsRefreshCallback',
-        'wrapper' => 'parents-wrapper',
       ],
       '#type' => 'submit',
       '#limit_validation_errors' => [],
