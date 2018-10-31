@@ -21,7 +21,6 @@ const babel = require('gulp-babel');
 const cssnano = require('gulp-cssnano');
 const styles = require('gulp-sass');
 const del = require('del');
-const modernizr = require('gulp-modernizr');
 const minify = require('gulp-minify');
 const autoprefixer = require('gulp-autoprefixer');
 const imagemin = require('gulp-imagemin');
@@ -32,9 +31,6 @@ const runSequence = require('run-sequence');
 
 
 // Builders
-gulp.task('build:modernizr', (callback) => {
-    runSequence(['build:javascripts', 'build:styles'], 'clean:modernizr', 'process:modernizr', callback);
-});
 gulp.task('build:styles', (callback) => {
     runSequence('clean:styles', 'process:styles_vih', 'process:styles_vies', callback);
 });
@@ -50,29 +46,6 @@ gulp.task('build:images', (callback) => {
 
 
 // Processors
-gulp.task('process:modernizr', () => {
-    return gulp.src(['dist/stylesheets/*.css', 'dist/javascripts/*.js', '!dist/javascripts/modernizr.js'])
-        .pipe(modernizr({
-            'cache': true,
-            'uglify': true,
-            'options': [
-                'setClasses',
-                'addTest',
-                'html5printshiv',
-                'testProp',
-                'fnBind'
-            ],
-            excludeTests: [
-                'hidden'
-            ]
-        }))
-        .pipe(minify({
-            ext:{
-                min:'.min.js'
-            }
-        }))
-        .pipe(gulp.dest('dist/javascripts'));
-});
 gulp.task('process:styles_vih', () => {
   return gulp.src(config.settings.styles_vih)
       .pipe(sourcemaps.init())
@@ -129,14 +102,11 @@ gulp.task('process:images', () => {
 
 
 // Cleaners
-gulp.task('clean:modernizr', () => {
-    return del(['dist/javascripts/modernizr.js']);
-});
 gulp.task('clean:styles', () => {
     return del(['dist/stylesheets']);
 });
 gulp.task('clean:javascripts', () => {
-    return del(['dist/javascripts/*.js', '!dist/javascripts/modernizr.js']);
+    return del(['dist/javascripts/*.js', '!dist/javascripts/modernizr.js', '!dist/javascripts/modernizr.min.js']);
 });
 gulp.task('clean:images', () => {
     return del(['dist/images']);
@@ -197,5 +167,5 @@ gulp.task('watch', ['build'], () => {
     });
 });
 gulp.task('build', (callback) => {
-    runSequence(['build:modernizr', 'build:images', 'build:fonts'], callback);
+    runSequence(['build:images', 'build:fonts'], callback);
 });
