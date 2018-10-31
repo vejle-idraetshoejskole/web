@@ -323,7 +323,7 @@ class ApplicationForm extends FormBase {
     $response = new AjaxResponse();
 
     $parents = $form_state->get('parents');
-    if (count($parents) >= 2) {
+    if ($parents && (count($parents) >= 2 || (count($parents) === 1 && $form_state->get('parent_index')))) {
       $form['confirmOneParent']['#checked'] = TRUE;
       $response->addCommand(new ReplaceCommand('#js-confirm-one-parent', $form['confirmOneParent']));
       $response->addCommand(new InvokeCommand('#js-confirm-one-parent', 'addClass', ['hidden']));
