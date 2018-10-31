@@ -75,7 +75,7 @@ class SubscriptionConfirmationController extends ControllerBase{
         '#paymentLink' => $paymentLink,
         '#backLink' => $backLink->setAbsolute()->toString(),
         '#order' => node_view($order, 'teaser'),
-        '#course-type' => $subject->getType(),
+        '#free' => (!isset($orderPrice) || $orderPrice == 0),
       );
 
       return $build;
