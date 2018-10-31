@@ -8,9 +8,16 @@
         </h3>
     </div>
     <div class="entity-teaser__body">
-        {# Begin - short description #}
-        {{ content.field_short_description }}
-        {# End - short description #}
+        {% if node.field_short_description.value %}
+          {# Begin - short description #}
+          {{ content.field_short_description }}
+          {# End - short description #}
+        {% else %}
+          {# Begin - body #}
+          {% set text = content.body|render %}
+          {{ text|striptags }}
+          {# End - body #}
+        {% endif %}
 
         {# Begin - published at #}
         <div class="entity-teaser__published-at">
