@@ -25,7 +25,6 @@ javascripts:
     dist/javascripts/modernizr.min.js: {}
     dist/javascripts/app.min.js: {}
     dist/jasny-bootstrap/js/jasny-bootstrap.js: {}
-    /core/misc/dialog/dialog.ajax.js: {}
   dependencies:
     - core/drupal
     - core/jquery
