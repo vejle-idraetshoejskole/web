@@ -147,11 +147,8 @@ class CourseOrderOptionsList {
    */
   public static function getEducationList($key = null) {
     $list = array(
-      'folkeskole' => \Drupal::translation()->translate('Folkeskole'),
-      'gymnasium' => \Drupal::translation()->translate('Gymnasium'),
-      'hf' => \Drupal::translation()->translate('HF'),
-      'handelsskole' => \Drupal::translation()->translate('Handelsskole'),
-      'andet' => \Drupal::translation()->translate('Andet')
+      'Finished_high_school' => \Drupal::translation()->translate('Finished high school at the time of course start'),
+      'Not_finished_high_school' => \Drupal::translation()->translate('Not finished high school at the time of course start'),
     );
     if ($key) {
       return $list[$key];
