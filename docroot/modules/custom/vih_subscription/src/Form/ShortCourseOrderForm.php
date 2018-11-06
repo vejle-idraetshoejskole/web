@@ -161,7 +161,7 @@ class ShortCourseOrderForm extends FormBase {
     }
 
     if ($participant_form) {
-      if (count($addedParticipants) + $personsSubscribed < $personsLimit) {
+      if (empty($addedParticipants) || count($addedParticipants) + $personsSubscribed < $personsLimit) {
         $form['newParticipantContainer']['newParticipantFieldset'] = [
           '#type' => 'container',
           '#attributes' => ['class' => ['partial__body']],
@@ -235,6 +235,11 @@ class ShortCourseOrderForm extends FormBase {
               ),
             ),
           ),
+        );
+        $form['newParticipantContainer']['newParticipantFieldset']['telephone'] = array(
+          '#type' => 'textfield',
+          '#title' => $this->t('Telephone'),
+          '#placeholder' => $this->t('Telephone'),
         );
 
         if (empty($addedParticipants)) {
@@ -506,6 +511,7 @@ class ShortCourseOrderForm extends FormBase {
       '#limit_validation_errors' => array(
         ['newParticipantContainer', 'newParticipantFieldset', 'firstName'],
         ['newParticipantContainer', 'newParticipantFieldset', 'lastName'],
+        ['newParticipantContainer', 'newParticipantFieldset', 'telephone'],
         ['newParticipantContainer', 'newParticipantFieldset', 'email'],
         ['newParticipantContainer', 'newParticipantFieldset', 'cpr'],
         ['newParticipantContainer', 'newParticipantFieldset', 'birthdate'],
@@ -564,6 +570,7 @@ class ShortCourseOrderForm extends FormBase {
     $participant['cpr'] = $userInput['newParticipantContainer']['newParticipantFieldset']['cpr'];
     $participant['birthdate'] = $userInput['newParticipantContainer']['newParticipantFieldset']['birthdate'];
     $participant['nocpr'] = $userInput['newParticipantContainer']['newParticipantFieldset']['nocpr'];
+    $participant['telephone'] = $userInput['newParticipantContainer']['newParticipantFieldset']['telephone'];
     $participant['address'] = $userInput['newParticipantContainer']['newParticipantFieldset']['address'];
     $participant['house']['houseNumber'] = $userInput['newParticipantContainer']['newParticipantFieldset']['house']['houseNumber'];
     $participant['house']['houseLetter'] = $userInput['newParticipantContainer']['newParticipantFieldset']['house']['houseLetter'];
@@ -659,6 +666,7 @@ class ShortCourseOrderForm extends FormBase {
       $userInput['newParticipantContainer']['newParticipantFieldset']['cpr'] = $participantToEdit['cpr'];
       $userInput['newParticipantContainer']['newParticipantFieldset']['nocpr'] = $participantToEdit['nocpr'];
       $userInput['newParticipantContainer']['newParticipantFieldset']['birthdate'] = $participantToEdit['birthdate'];
+      $userInput['newParticipantContainer']['newParticipantFieldset']['telephone'] = $participantToEdit['telephone'];
       $userInput['newParticipantContainer']['newParticipantFieldset']['address'] = $participantToEdit['address'];
       $userInput['newParticipantContainer']['newParticipantFieldset']['house']['houseNumber'] = $participantToEdit['house']['houseNumber'];
       $userInput['newParticipantContainer']['newParticipantFieldset']['house']['houseLetter'] = $participantToEdit['house']['houseLetter'];
@@ -928,6 +936,7 @@ class ShortCourseOrderForm extends FormBase {
           'field_vih_ocp_cpr' => (1 == $addedParticipant['nocpr'])? NULL : $addedParticipant['cpr'],
           'field_vih_ocp_no_cpr' => $addedParticipant['nocpr'],
           //CPR will be deleted from database immediately, after order is confirmed
+          'field_vih_ocp_telephone' => $addedParticipant['telephone'],
           'field_vih_ocp_address' => implode('; ', $adress_arr),
           'field_vih_ocp_city' => $addedParticipant['city'],
           'field_vih_ocp_zip' => $addedParticipant['zip'],
@@ -1072,6 +1081,7 @@ class ShortCourseOrderForm extends FormBase {
       $participant['cpr'] = $subscribedPerson->field_vih_ocp_cpr->value;
       $participant['birthdate'] = $subscribedPerson->field_vih_ocp_birthdate->value;
       $participant['nocpr'] = $subscribedPerson->field_vih_ocp_no_cpr->value;
+      $participant['telephone'] = $subscribedPerson->field_vih_ocp_telephone->value;
       $participant['address'] = $address_parts[0];
       $participant['house']['houseNumber'] = !empty($address_parts[1]) ? $address_parts[1] : '';
       $participant['house']['houseLetter'] = !empty($address_parts[2]) ? $address_parts[2] : '';

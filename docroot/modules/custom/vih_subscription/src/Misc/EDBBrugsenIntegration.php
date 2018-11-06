@@ -139,6 +139,8 @@ class EDBBrugsenIntegration {
       $registration['Elev.Postnr'] = $order_person->field_vih_ocp_zip->value;
       $registration['Elev.Bynavn'] = $order_person->field_vih_ocp_city->value;
       $registration['Elev.Land'] = $edb_utility->getCountryCode($order_person->field_vih_ocp_country->value);
+      $registration['Elev.Fastnet'] = $order_person->field_vih_ocp_telephone->value;
+      $registration['Elev.Mobil'] = $order_person->field_vih_ocp_telephone->value;
 
       //using only Booking number/Kartotek from default values
       $defaultValues = $this->getDefaultRegistrationValues();
