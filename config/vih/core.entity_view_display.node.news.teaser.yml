@@ -17,6 +17,7 @@ dependencies:
     - node.type.news
   module:
     - panelizer
+    - text
     - user
 third_party_settings:
   panelizer:
@@ -29,6 +30,14 @@ targetEntityType: node
 bundle: news
 mode: teaser
 content:
+  body:
+    type: text_summary_or_trimmed
+    weight: 2
+    region: content
+    label: hidden
+    settings:
+      trim_length: 100
+    third_party_settings: {  }
   field_short_description:
     type: basic_string
     weight: 1
@@ -46,7 +55,6 @@ content:
       link: false
     third_party_settings: {  }
 hidden:
-  body: true
   field_metatag: true
   field_vih_course_subheading: true
   field_vih_news_tags: true
