@@ -86,7 +86,7 @@ class LongCourseOrderForm extends FormBase {
           'availableClasses' => array(
             'cid' => $availableClassesCid
           ),
-          'expanded' => FALSE,
+          'expanded' => ($courseSlot->field_vih_cs_mandatory->value) ? TRUE : FALSE,
         );
 
         //creating real input-ready fields
