@@ -1220,7 +1220,7 @@ class ShortCourseOrderForm extends FormBase {
         if ($remainingAmount <= 0) {
           $optionGroupOptionsWithPrice[$optionDelta] .= ' - ' . $this->t('Sold out');
         }
-        else {
+        elseif ($remainingAmount <= 5) {
           $optionGroupOptionsWithPrice[$optionDelta] .= ' ' . $this->t("@remaining available", ['@remaining' => $remainingAmount]);
         }
       }
