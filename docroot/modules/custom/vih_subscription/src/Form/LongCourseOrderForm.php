@@ -278,6 +278,8 @@ class LongCourseOrderForm extends FormBase {
       '#title' => $this->t('Municipality'),
       '#placeholder' => $this->t('Municipality'),
       '#required' => TRUE,
+      '#disabled' => $cur_language_code === 'en' ? TRUE : NULL,
+      '#access' => $cur_language_code === 'en' ? FALSE : NULL,
     );
     $form['personalDataRight']['country'] = array(
       '#type' => 'select',
