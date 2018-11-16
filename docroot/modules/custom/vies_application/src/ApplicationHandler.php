@@ -90,7 +90,7 @@ class ApplicationHandler {
   /**
    * Helper function to prepare data,.
    */
-  private function prepareData() {
+  private function prepareData() {    
     $course = Node::load($this->data['course']);
     $this->data['courseTitle'] = $course->getTitle();
 
@@ -107,7 +107,18 @@ class ApplicationHandler {
     $class = Term::load($this->data['classes'][0]);
     $this->data['classTitle'] = $class->getName();
 
-    $this->data['birthday'] = substr($this->data['cpr'], 0, 6);
+    if(0 <> $this->data['nocpr']){
+      $this->data['birthday'] = $this->data['birthdate'];
+    }else{
+      //Get birthdate from CPR
+          // We need to convert 2 digit year to 4 digit year, not to get 2065 instead of 1965
+          $birthdate_year = \DateTime::createFromFormat('y', substr($this->data['cpr'], 4, 2));
+          if ($birthdate_year > date('Y')) {
+            $birthdate_year = \DateTime::createFromFormat('Y', '19' . substr($this->data['cpr'], 4, 2));
+          }
+          $this->data['birthday'] = substr($this->data['cpr'], 0, 4) . $birthdate_year->format('Y');
+          $this->data['birthday'] = \DateTime::createFromFormat('dmY', $this->data['birthday'])->format('Y-m-d');
+        }
 
     $this->data['fullAddress'] = VihSubscriptionUtils::formatAddressToString($this->data);
     foreach ($this->data['parents'] as $key => $parent) {
@@ -231,17 +242,33 @@ class ApplicationHandler {
       'field_vies_gender' => $this->data['gender'],
       'field_vies_country' => $this->data['country'],
       'field_vies_birthday' => $this->data['birthday'],
+      'field_vies_no_cpr' => $this->data['nocpr'],
     ];
 
     // Parents information.
     foreach ($this->data['parents'] as $parent_data) {
-      $parent = Paragraph::create([
+      if(0 <> $parent_data['nocpr']){
+        $birthdate = $parent_data['birthdate'];
+      }else{
+        //Get birthdate from CPR
+        // We need to convert 2 digit year to 4 digit year, not to get 2065 instead of 1965
+        $birthdate_year = \DateTime::createFromFormat('y', substr($parent_data['cpr'], 4, 2));
+        if ($birthdate_year > date('Y')) {
+          $birthdate_year = \DateTime::createFromFormat('Y', '19' . substr($parent_data['cpr'], 4, 2));
+        }
+          $birthdate = substr($parent_data['cpr'], 0, 4) . $birthdate_year->format('Y');
+          $birthdate = \DateTime::createFromFormat('dmY', $birthdate )->format('Y-m-d');
+      }
+    $parent = Paragraph::create([
         'type' => 'parent',
         'field_parent_type' => $parent_data['type'],
         'field_parent_first_name' => $parent_data['firstName'],
         'field_parent_last_name' => $parent_data['lastName'],
         'field_parent_telefon' => $parent_data['telefon'],
         'field_parent_email' => $parent_data['email'],
+        'field_parent_birthdate' => $birthdate,
+        'field_parent_no_cpr' => $parent_data['nocpr'],
+        'field_parent_country' => $this->data['country'],
         'field_parent_newsletter' => $parent_data['newsletter'],
         'field_parent_address' => $parent_data['fullAddress'],
         'field_parent_city' => $parent_data['city'],
@@ -258,7 +285,6 @@ class ApplicationHandler {
         VihSubscriptionUtils::subscribeToMailchimp($parent_data['firstName'], $parent_data['lastName'], $parent_data['email']);
       }
     }
-
     // Classes questions.
     foreach ($this->data['questions'] as $questions_data) {
       foreach ($questions_data as $question_data) {
@@ -337,7 +363,7 @@ class ApplicationHandler {
     $mail_subject = $config->get('vih_subscription_application_notifications_subject_da');
     $mail_body = $config->get('vih_subscription_application_notifications_body_da');
 
-    $token = ['@subject_name', '@person_name', '@url', '@application'];
+    $token = ['@subject_name', '@class_name', '@person_name', '@url', '@application'];
     $message = [
       'to' => $this->application->field_vies_email->value,
       'subject' => $mail_subject,
@@ -348,6 +374,7 @@ class ApplicationHandler {
     $application_url = Url::fromRoute('vies_application.application_form')->setAbsolute()->toString();
     $replacement = [
       $this->data['courseTitle'],
+      $this->data['classTitle'],
       $this->application->field_vies_first_name->value . ' ' . $this->application->field_vies_last_name->value,
       '<a href="' . $application_url . '"target=_blank >' . $application_url . '</a>',
       $application_rendered,

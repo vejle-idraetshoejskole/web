@@ -45,7 +45,10 @@
                 <div class="col-xs-12 col-sm-6">
 
                     <!-- Begin - price -->
-                    <div class="boxy boxy--price">
+                    {% if not form['price'] %}
+                      {% set priceVisibilityClass = 'hidden' %}
+                    {% endif %}
+                    <div class="boxy boxy--price {{ priceVisibilityClass }}">
                         <div class="boxy__heading">
                             <h4 class="boxy__heading__title">
                                 {{ 'Total price' | trans }}

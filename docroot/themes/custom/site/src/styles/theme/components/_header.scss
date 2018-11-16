@@ -109,6 +109,35 @@ $breakpoint-mobile-to-tablet: "screen and (max-width: #{$screen-sm-max})";
 
     border-bottom: 1px solid $border-color;
 
+    // Affix menu styles.
+    &.affix {
+      top: 0;
+      z-index: 2;
+      width: 100%;
+      padding-left: 0;
+
+      @include layout-header-row-height(50px, 50px, 50px);
+
+      .layout__header-logo {
+        display: block;
+        background-size: contain;
+        height: 50px;
+      }
+
+      .region-header-navigation {
+        padding-left: 105px;
+      }
+      .search-form-popover {
+        height: 50px;
+        form#search-form .form-group.add-on .form-submit.btn-search {
+          height: 51px;
+        }
+      }
+    }
+    .layout__header-logo {
+      display: none;
+    }
+
     .layout-navigation {
 
       > .layout-navigation__dropdown {
@@ -224,6 +253,30 @@ $breakpoint-mobile-to-tablet: "screen and (max-width: #{$screen-sm-max})";
     flex-wrap: wrap;
   }
 }
+
+// Affix menu when admin menu is visible.
+body {
+  &.toolbar-horizontal {
+    .layout__header {
+      .layout__header-row--bottom {
+        &.affix {
+          top: 39px;
+        }
+      }
+    }
+  }
+
+  &.toolbar-horizontal.toolbar-tray-open {
+    .layout__header {
+      .layout__header-row--bottom {
+        &.affix {
+          top: 79px;
+        }
+      }
+    }
+  }
+}
+
 // PopUp CTA
 .hideit {
   display: none !important;

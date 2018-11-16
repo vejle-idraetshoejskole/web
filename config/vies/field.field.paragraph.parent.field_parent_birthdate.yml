@@ -1,0 +1,21 @@
+uuid: 66cc3362-cf73-4175-9d7d-aed847fac223
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_parent_birthdate
+    - paragraphs.paragraphs_type.parent
+  module:
+    - datetime
+id: paragraph.parent.field_parent_birthdate
+field_name: field_parent_birthdate
+entity_type: paragraph
+bundle: parent
+label: Birthdate
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

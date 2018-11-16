@@ -29,6 +29,7 @@ view_mode ? view_mode|clean_class,
                         {{ content.group_col_right }}
                     </div>
                 </div>
+              <a href="{{ path('vies_application.application_mail_resend', {'order': node.id}) }}" class="btn-success btn btn-xs">{{ 'Resend Email' | trans }}</a>  
         </div>
     </section>
     <!-- End - content -->

@@ -1,7 +1,7 @@
 vih-subscription-accordion-class-selection:
   version: 1.x
   js:
-    js/vih_subscription.js: {}
+    js/vih_subscription.js: {attributes: { defer: true }}
   dependencies:
     - core/jquery
     - core/drupalSettings

@@ -7,8 +7,11 @@
         <div class="container">
           <div class="sectioned__heading">
             <h2 class="sectioned__heading__title">
-              {{ form['#title'] }}
+              {{ "Tailor your stay" | trans }}
             </h2>
+            <h3>
+              {{ form['#title'] }}
+            </h3>
           </div>
 
 
@@ -21,11 +24,10 @@
             {# Introduction information END #}
 
             {# Begin - course periods #}
-            {% set open_collapsible = true %}
-
             {% for periodDelta, coursePeriod in form['#coursePeriods'] %}
 
                 {% if coursePeriod['courseSlots'] | length %}
+
 
                     <div class="boxy boxy--course-periods course-periods-accordion">
                         <div class="boxy__body">
@@ -40,15 +42,19 @@
                                 <!-- End - heading -->
 
                                 {% for slotDelta, courseSlot in coursePeriod['courseSlots'] %}
-                                    <div class="panel panel-default">
+                                    {% if form['#expand_first_course_slot'] %}
+                                      {% set form = form|merge({'#expand_first_course_slot' : false}) %}
+                                      {% set courseSlot = courseSlot|merge({'expanded': true }) %}
+                                    {% endif %}
 
+                                    <div class="panel panel-default">
                                         <!-- Begin - heading -->
                                         <div class="panel-heading" id="heading-{{ periodDelta }}-{{ slotDelta }}">
                                             <h4 class="panel-title heading-h5">
                                                 <a role="button" data-toggle="collapse"
                                                    data-parent="#accordion"
                                                    href="#collapse-{{ periodDelta }}-{{ slotDelta }}"
-                                                   aria-expanded="{% if open_collapsible %}true{% else %}false{% endif %}"
+                                                   aria-expanded="{% if courseSlot['expanded'] %}true{% else %}false{% endif %}"
                                                    aria-controls="collapse-{{ periodDelta }}-{{ slotDelta }}">
                                                    {{ courseSlot['title'] }}
                                                 </a>
@@ -58,7 +64,7 @@
 
                                         <!-- Begin - body -->
                                         <div id="collapse-{{ periodDelta }}-{{ slotDelta }}"
-                                             class="panel-collapse collapse {% if open_collapsible %}in{% endif %}" role="tabpanel"
+                                             class="panel-collapse collapse {% if courseSlot['expanded'] == 'true' %}in{% endif %}" role="tabpanel"
                                              aria-labelledby="heading-{{ periodDelta }}-{{ slotDelta }}">
 
                                             <div class="panel-body">
@@ -68,7 +74,6 @@
                                         <!-- End - body -->
 
                                     </div>
-                                    {% set open_collapsible = false %}
                                 {% endfor %}
 
                             </div>

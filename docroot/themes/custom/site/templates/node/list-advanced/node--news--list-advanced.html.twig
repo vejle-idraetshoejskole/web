@@ -31,10 +31,16 @@
         class="entity-list-advanced__heading__title heading-h4">{{ label }}</h2>
     </div>
 
-    {# Begin - body #}
-    {% set text = content.body|render %}
-    {{ text|striptags }}
-    {# End - body #}
+    {% if node.field_short_description.value %}
+      {# Begin - short description #}
+      {{ content.field_short_description }}
+      {# End - short description #}
+    {% else %}
+      {# Begin - body #}
+      {% set text = content.body|render %}
+      {{ text|striptags }}
+      {# End - body #}
+    {% endif %}
 
   </div>
   <!-- End - body -->

@@ -21,6 +21,7 @@ dependencies:
     - field.field.node.vies_application_form.field_vies_last_name
     - field.field.node.vies_application_form.field_vies_municipality
     - field.field.node.vies_application_form.field_vies_newsletter
+    - field.field.node.vies_application_form.field_vies_no_cpr
     - field.field.node.vies_application_form.field_vies_parents
     - field.field.node.vies_application_form.field_vies_period
     - field.field.node.vies_application_form.field_vies_status
@@ -39,6 +40,7 @@ third_party_settings:
         - field_vies_last_name
         - field_vies_gender
         - field_vies_birthday
+        - field_vies_no_cpr
         - field_vies_email
         - field_vies_country
         - field_vies_address
@@ -95,7 +97,7 @@ third_party_settings:
         - field_vies_edb_synched
         - field_vies_edb_synch_message
       parent_name: ''
-      weight: 10
+      weight: 11
       format_type: tab
       format_settings:
         id: ''
@@ -127,7 +129,7 @@ content:
     type: inline_entity_form_complex
     region: content
   field_vies_address:
-    weight: 11
+    weight: 12
     settings:
       size: 60
       placeholder: ''
@@ -159,7 +161,7 @@ content:
     type: string_textfield
     region: content
   field_vies_city:
-    weight: 13
+    weight: 14
     settings:
       size: 60
       placeholder: ''
@@ -192,7 +194,7 @@ content:
     type: inline_entity_form_complex
     region: content
   field_vies_country:
-    weight: 10
+    weight: 11
     settings:
       size: 60
       placeholder: ''
@@ -224,7 +226,7 @@ content:
     type: boolean_checkbox
     region: content
   field_vies_email:
-    weight: 9
+    weight: 10
     settings:
       size: 60
       placeholder: ''
@@ -262,7 +264,7 @@ content:
     type: string_textfield
     region: content
   field_vies_municipality:
-    weight: 14
+    weight: 15
     settings:
       size: 60
       placeholder: ''
@@ -270,7 +272,14 @@ content:
     type: string_textfield
     region: content
   field_vies_newsletter:
-    weight: 16
+    weight: 17
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_vies_no_cpr:
+    weight: 9
     settings:
       display_label: true
     third_party_settings: {  }
@@ -308,7 +317,7 @@ content:
     type: options_buttons
     region: content
   field_vies_telefon:
-    weight: 15
+    weight: 16
     settings:
       size: 60
       placeholder: ''
@@ -316,7 +325,7 @@ content:
     type: string_textfield
     region: content
   field_vies_zip:
-    weight: 12
+    weight: 13
     settings:
       size: 60
       placeholder: ''
@@ -325,12 +334,12 @@ content:
     region: content
   moderation_state:
     type: moderation_state_default
-    weight: 9
+    weight: 10
     settings: {  }
     region: content
     third_party_settings: {  }
   url_redirects:
-    weight: 8
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }

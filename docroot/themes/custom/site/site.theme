@@ -217,9 +217,14 @@ function site_preprocess_node(array &$variables) {
     $variables['content']['is_closed'] = ($node->field_vih_sc_status->value == 'closed');
 
     foreach ($node->field_vih_sc_option_groups->referencedEntities() as $optionGroupDelta => $optionGroup) {
+      if ($optionGroup->field_vih_og_is_main_price->value) {
+        $variables['content']['main_price_index'] = $optionGroupDelta;
+      }
+
       $allOptionsSold = TRUE;
       foreach ($optionGroup->field_vih_og_options->referencedEntities() as $optionDelta => $option) {
         $stockAmount = $option->field_vih_option_stock_amount->value;
+
         if (isset($stockAmount)) {
           $optionCurrentUsageCount = \Drupal\vih_subscription\Misc\VihSubscriptionUtils::calculateOptionUsageCount($node, $optionGroup, $option);
           $remainingAmount = $stockAmount - $optionCurrentUsageCount;
@@ -230,6 +235,8 @@ function site_preprocess_node(array &$variables) {
           } else {
             $allOptionsSold = FALSE;
           }
+        } else {
+          $allOptionsSold = FALSE;
         }
       }
 

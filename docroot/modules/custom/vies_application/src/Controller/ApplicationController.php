@@ -6,6 +6,8 @@ use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Url;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\vih_subscription\Form\SubscriptionsGeneralSettingsForm;
+use Drupal\vih_subscription\Misc\VihSubscriptionUtils;
+use Drupal\vies_application\ApplicationHandler;
 use Drupal\node\Entity\Node;
 
 /**
@@ -38,4 +40,52 @@ class ApplicationController extends ControllerBase {
 
     return $build;
   }
+  
+  /**
+   * Resend email callback.
+   */
+  public function resend(Node $order) {
+
+        // Send email.
+    $node_view = node_view($order, 'email_teaser');
+    $application_rendered = render($node_view)->__toString();
+    $config = \Drupal::config(SubscriptionsGeneralSettingsForm::$configName);
+    $mail_bcc = $config->get('vih_subscription_application_notifications_bcc_da');
+    $mail_subject = $config->get('vih_subscription_application_notifications_subject_da');
+    $mail_body = $config->get('vih_subscription_application_notifications_body_da');
+    $token = ['@subject_name', '@class_name', '@person_name', '@url', '@application'];
+    $message = [
+      'to' => $order->field_vies_email->value,
+      'subject' => $mail_subject,
+      'body' => $mail_body,
+      'Bcc' => $mail_bcc,
+    ];
+    $application_url = Url::fromRoute('vies_application.application_form')->setAbsolute()->toString();
+    $replacement = [
+      $order->get('field_vies_course')->referencedEntities()[0]->getTitle(),
+      $order->get('field_vies_class')->referencedEntities()[0]->getName(),
+      $order->field_vies_first_name->value . ' ' . $order->field_vies_last_name->value,
+      '<a href="' . $application_url . '"target=_blank >' . $application_url . '</a>',
+      $application_rendered,
+    ];
+
+    // Add logo to message body.
+        $logo = '<div style="background-color:#ff6400; width:100%; text-align:center">'
+      . '<img src="'
+      . \Drupal::request()->getSchemeAndHttpHost()
+      . '/themes/custom/site/dist/images/layout-header-logo-vies.png" alt="VIH" />'
+      . '</div><br>';
+    $message['body'] = $logo . $message['body'];
+    if (!empty($message)) {
+      VihSubscriptionUtils::makeReplacements($message, $token, $replacement);
+      VihSubscriptionUtils::sendMail($message);
+
+    }
+
+    $build = array(
+      '#theme' => 'vies-application-email-resend-page'
+    );
+    return $build;
+  }
+
 }

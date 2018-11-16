@@ -2,6 +2,9 @@
 
 namespace Drupal\vies_application\Form;
 
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\InvokeCommand;
+use Drupal\Core\Ajax\ReplaceCommand;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Locale\CountryManager;
@@ -9,6 +12,7 @@ use Drupal\node\Entity\Node;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\vies_application\ApplicationHandler;
 use Drupal\vih_subscription\Form\CommonFormUtils;
+use Drupal\vih_subscription\Form\CourseOrderOptionsList;
 use Drupal\vih_subscription\Form\SubscriptionsGeneralSettingsForm;
 
 /**
@@ -206,9 +210,23 @@ class ApplicationForm extends FormBase {
       );
     }
 
+    $form['confirmOneParent'] = [
+      '#type' => 'checkbox',
+      '#title' => 'Jeg bekræfter, at jeg kun har tilføjet en forælder',
+      '#prefix' => '<div id="js-confirm-one-parent">',
+      '#suffix' => '</div>',
+    ];
+
     $form['submit'] = [
       '#type' => 'submit',
       '#value' => 'Send min ansøgning',
+      '#states' => [
+        'disabled' => [
+          ':input[name="confirmOneParent"]' => [
+            'checked' => FALSE,
+          ]
+        ]
+      ]
     ];
 
     $form_state->setCached(FALSE);
@@ -253,6 +271,15 @@ class ApplicationForm extends FormBase {
       }
     }
 
+    if (!empty($values['parents']['current'])) {
+      if (0 == $form_state->getValues()['parents']['current']['left']['nocpr'] and NULL == $form_state->getValues()['parents']['current']['left']['cpr']) {
+        $form_state->setErrorByName("parents][current][left][cpr", $this->t('Please add, CPR.'));
+      }
+      if (0 <> $form_state->getValues()['parents']['current']['left']['nocpr'] and NULL == $form_state->getValues()['parents']['current']['left']['birthdate']) {
+        $form_state->setErrorByName("parents][current][left][birthdate", $this->t('Please provide birthdate.'));
+      }
+    }
+
     $parents = $form_state->get('parents');
     if (empty($values['parents']['current']) && empty($parents)) {
       $form_state->setErrorByName('parents', 'Du skal tilføje mindst en forælder.');
@@ -292,7 +319,21 @@ class ApplicationForm extends FormBase {
    * Callback for selects and returns the container with the parents in it.
    */
   public function parentsRefreshCallback(array &$form, FormStateInterface $form_state) {
-    return $form['parentsWrapper'];
+    $response = new AjaxResponse();
+
+    $parents = $form_state->get('parents');
+    if ($parents && (count($parents) >= 2 || (count($parents) === 1 && $form_state->get('parent_index')))) {
+      $form['confirmOneParent']['#checked'] = TRUE;
+      $response->addCommand(new ReplaceCommand('#js-confirm-one-parent', $form['confirmOneParent']));
+      $response->addCommand(new InvokeCommand('#js-confirm-one-parent', 'addClass', ['hidden']));
+    } else {
+      $form['confirmOneParent']['#checked'] = FALSE;
+      $response->addCommand(new ReplaceCommand('#js-confirm-one-parent', $form['confirmOneParent']));
+      $response->addCommand(new InvokeCommand('#js-confirm-one-parent', 'removeClass', ['hidden']));
+    }
+
+    $response->addCommand(new ReplaceCommand('#parents-wrapper', $form['parentsWrapper']));
+    return $response;
   }
 
   /**
@@ -468,7 +509,6 @@ class ApplicationForm extends FormBase {
     $ajax_parent_button = [
       '#ajax' => [
         'callback' => '::parentsRefreshCallback',
-        'wrapper' => 'parents-wrapper',
       ],
       '#type' => 'submit',
       '#limit_validation_errors' => [],
@@ -521,6 +561,39 @@ class ApplicationForm extends FormBase {
           '#attributes' => ['class' => ['clearfix']],
           '#weight' => -1,
         ];
+
+      $form['parentsWrapper']['parents']['current']['left']['cpr']['#states'] = array(
+        // Only show this field when the 'nocpr' checkbox is disabled.
+        'visible' => array(
+          ':input[name="parents[current][left][nocpr]"]' => array(
+            'checked' => FALSE,
+          ),
+        ),
+        'required' => array(
+          ':input[name="parents[current][left][nocpr]"]' => array(
+            'checked' => FALSE,
+          ),
+        ),
+        'disabled' => array(
+          ':input[name="parents[current][left][nocpr]"]' => array(
+            'checked' => TRUE,
+          ),
+        ),
+      );
+
+      $form['parentsWrapper']['parents']['current']['left']['birthdate']['#states'] = array(
+        // Only show this field when the 'nocpr' checkbox is disabled.
+        'visible' => array(
+          ':input[name="parents[current][left][nocpr]"]' => array(
+            'checked' => TRUE,
+          ),
+        ),
+        'required' => array(
+          ':input[name="parents[current][left][nocpr]"]' => array(
+            'checked' => TRUE,
+          ),
+        ),
+      );
 
       $form['parentsWrapper']['parents']['current']['left']['type'] = [
         '#type' => 'radios',
@@ -613,15 +686,59 @@ class ApplicationForm extends FormBase {
     $cprHelpText  = (\Drupal::languageManager()->getCurrentLanguage()
         ->getId() === 'en') ? $config->get('vih_subscription_general_cpr_help_text_en') : $config->get('vih_subscription_general_cpr_help_text_da');
 
+    $personal_data['left']['nocpr'] = array(
+      '#type' => 'checkbox',
+      '#title' => $this->t('Jeg har ikke et dansk CPR nummer'),
+      '#default_value' => isset($default_values['nocpr']) ? $default_values['nocpr'] : NULL,
+    );
+    
+    $personal_data['left']['birthdate'] = [
+      '#type' => 'date',
+      '#title' => $this->t('Birthdate'),
+      '#placeholder' => $this->t('Birthdate'),
+      '#date_date_format' => 'm-d-Y',
+      '#default_value' => isset($default_values['birthdate']) ? $default_values['birthdate'] : NULL,
+      '#states' => array(
+        // Only show this field when the 'nocpr' checkbox is disabled.
+        'visible' => array(
+          ':input[name="nocpr"]' => array(
+            'checked' => TRUE,
+          ),
+        ),
+        'required' => array(
+          ':input[name="nocpr"]' => array(
+            'checked' => TRUE,
+          ),
+        ),
+      ),
+    ];
+    
     $personal_data['left']['cpr'] = [
       '#type' => 'textfield',
       '#title' => 'CPR',
       '#placeholder' => 'xxxxxxxxxx',
-      '#required' => $required,
       '#default_value' => isset($default_values['cpr']) ? $default_values['cpr'] : NULL,
       '#pattern' => '[0-9]{10}',
-      '#field_suffix' => '<i type="button" class="icon icon-info-circle form-type-textfield__tooltip" aria-hidden="true" data-toggle="popover" data-placement="top" data-content="' . $cprHelpText . '"></i>',
-    ];
+      '#field_suffix' => '<i type="button" class="icon icon-info-circle form-type-textfield__tooltip" aria-hidden="true" data-trigger="hover" data-toggle="popover" data-placement="top" data-content="' . $cprHelpText . '"></i>',
+      '#states' => array(
+        // Only show this field when the 'nocpr' checkbox is disabled.
+        'visible' => array(
+          ':input[name="nocpr"]' => array(
+            'checked' => FALSE,
+          ),
+        ),
+        'required' => array(
+          ':input[name="nocpr"]' => array(
+            'checked' => FALSE,
+          ),
+        ),
+        'disabled' => array(
+          ':input[name="nocpr"]' => array(
+            'checked' => TRUE,
+          ),
+        ),
+      ),
+      ];
 
     $personal_data['left']['telefon'] = [
       '#type' => 'textfield',
@@ -689,7 +806,8 @@ class ApplicationForm extends FormBase {
       '#default_value' => isset($default_values['city']) ? $default_values['city'] : NULL,
     ];
     $personal_data['right']['municipality'] = [
-      '#type' => 'textfield',
+      '#type' => 'select',
+      '#options' => CourseOrderOptionsList::getMunicipalityList(),
       '#title' => 'Kommune',
       '#placeholder' => 'Kommune',
       '#required' => $required,

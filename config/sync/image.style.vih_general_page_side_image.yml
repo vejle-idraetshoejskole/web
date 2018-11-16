@@ -1,0 +1,15 @@
+uuid: ad828142-2543-466f-83c9-debbcbf8eae4
+langcode: da
+status: true
+dependencies: {  }
+name: vih_general_page_side_image
+label: 'VIH General Page Side Image (525xauto)'
+effects:
+  53e2b8b4-fa89-433e-9272-700fd1c0267d:
+    uuid: 53e2b8b4-fa89-433e-9272-700fd1c0267d
+    id: image_scale
+    weight: 3
+    data:
+      width: 525
+      height: null
+      upscale: false

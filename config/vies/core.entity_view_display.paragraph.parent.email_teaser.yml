@@ -5,12 +5,14 @@ dependencies:
   config:
     - core.entity_view_mode.paragraph.email_teaser
     - field.field.paragraph.parent.field_parent_address
+    - field.field.paragraph.parent.field_parent_birthdate
     - field.field.paragraph.parent.field_parent_city
     - field.field.paragraph.parent.field_parent_country
     - field.field.paragraph.parent.field_parent_email
     - field.field.paragraph.parent.field_parent_first_name
     - field.field.paragraph.parent.field_parent_last_name
     - field.field.paragraph.parent.field_parent_newsletter
+    - field.field.paragraph.parent.field_parent_no_cpr
     - field.field.paragraph.parent.field_parent_telefon
     - field.field.paragraph.parent.field_parent_type
     - field.field.paragraph.parent.field_parent_zip
@@ -93,4 +95,6 @@ content:
     type: string
     region: content
 hidden:
+  field_parent_birthdate: true
   field_parent_newsletter: true
+  field_parent_no_cpr: true

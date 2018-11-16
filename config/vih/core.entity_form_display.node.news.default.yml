@@ -6,6 +6,7 @@ dependencies:
     - entity_browser.browser.media_browser
     - field.field.node.news.body
     - field.field.node.news.field_metatag
+    - field.field.node.news.field_short_description
     - field.field.node.news.field_vih_course_subheading
     - field.field.node.news.field_vih_image
     - field.field.node.news.field_vih_news_tags
@@ -44,6 +45,7 @@ third_party_settings:
       children:
         - title
         - field_vih_course_subheading
+        - field_short_description
         - body
         - field_vih_news_tags
         - field_vih_image
@@ -88,7 +90,7 @@ mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 17
+    weight: 18
     settings:
       rows: 9
       summary_rows: 3
@@ -107,6 +109,14 @@ content:
     third_party_settings: {  }
     type: metatag_firehose
     region: content
+  field_short_description:
+    weight: 17
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
   field_vih_course_subheading:
     weight: 16
     settings:
@@ -117,7 +127,7 @@ content:
     region: content
   field_vih_image:
     type: entity_browser_entity_reference
-    weight: 19
+    weight: 20
     settings:
       entity_browser: media_browser
       field_widget_display: rendered_entity
@@ -131,7 +141,7 @@ content:
     third_party_settings: {  }
   field_vih_news_tags:
     type: entity_reference_autocomplete
-    weight: 18
+    weight: 19
     region: content
     settings:
       match_operator: CONTAINS

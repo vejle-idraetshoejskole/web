@@ -15,11 +15,19 @@
                                 <li>
                                     <b>{{ addedParticipantOption['optionGroup']['name'] }}</b><br/>
                                     {{ addedParticipantOption['option']['name'] }}
+
                                     {% if addedParticipantOption['suboption']['name'] %}
                                         / {{ addedParticipantOption['suboption']['name'] }}
                                     {% endif %}
-                                    {% if (addedParticipantOption['option']['additionalPrice']) %}
-                                      (+ kr. {{ addedParticipantOption['option']['additionalPrice'] }})
+
+                                    {% if addedParticipantOption['optionGroup']['isMainPrice'] %}
+                                      {% if (addedParticipantOption['option']['additionalPrice']) %}
+                                        (kr. {{ (addedParticipantOption['option']['additionalPrice'] + addedParticipantOption['optionGroup']['mainPrice'])|number_format(2, ',', '.') }})
+                                      {% else %}
+                                        (kr. {{ (addedParticipantOption['optionGroup']['mainPrice'])|number_format(2, ',', '.') }})
+                                      {% endif %}
+                                    {% elseif (addedParticipantOption['option']['additionalPrice']) %}
+                                      (+ kr. {{ addedParticipantOption['option']['additionalPrice']|number_format(2, ',', '.') }})
                                     {% endif %}
                                 </li>
                             {% endif %}

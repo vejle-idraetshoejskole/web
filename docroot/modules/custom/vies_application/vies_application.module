@@ -53,6 +53,9 @@ function vies_application_theme() {
         'backlink' => NULL,
       ],
     ],
+    'vies-application-email-resend-page' => [
+      'render element' => 'page',
+    ],
     'vies_added_parents' => [
       'render element' => 'container',
     ],

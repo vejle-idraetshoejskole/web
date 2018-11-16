@@ -122,11 +122,7 @@ class ShortCourseOrderForm extends FormBase {
     //START GENERAL DATA //
     if(!empty($addedParticipants)){
       $form['price'] = array(
-      '#markup' => 'DKK ' . number_format($this->price, 0, ',', '.'),
-    );
-    } else {
-      $form['price'] = array(
-        '#markup' => 'DKK ' . '0' ,
+        '#markup' => 'DKK ' . number_format($this->price, 2, ',', '.'),
       );
     }
 
@@ -165,7 +161,7 @@ class ShortCourseOrderForm extends FormBase {
     }
 
     if ($participant_form) {
-      if (count($addedParticipants) + $personsSubscribed < $personsLimit) {
+      if (empty($addedParticipants) || count($addedParticipants) + $personsSubscribed < $personsLimit) {
         $form['newParticipantContainer']['newParticipantFieldset'] = [
           '#type' => 'container',
           '#attributes' => ['class' => ['partial__body']],
@@ -187,13 +183,63 @@ class ShortCourseOrderForm extends FormBase {
           '#prefix' => '<div class="col-xs-12 col-sm-6">',
           '#suffix' => '</div></div>',
         );
+        $form['newParticipantContainer']['newParticipantFieldset']['nocpr'] = array(
+          '#type' => 'checkbox',
+          '#title' => $this->t('I do not have a Danish social security number (CPR-number)'),
+        );
+        $form['newParticipantContainer']['newParticipantFieldset']['birthdate'] = array(
+          '#type' => 'date',
+          '#title' => $this->t('Birthdate'),
+          '#placeholder' => $this->t('Birthdate'),
+          '#date_date_format' => 'm-d-Y',
+          '#states' => array(
+            // Only show this field when the 'nocpr' checkbox is enabled.
+            'visible' => array(
+              ':input[name="newParticipantContainer[newParticipantFieldset][nocpr]"]' => array(
+                'checked' => TRUE,
+              ),
+            ),
+            'required' => array(
+              ':input[name="newParticipantContainer[newParticipantFieldset][nocpr]"]' => array(
+                'checked' => TRUE,
+              ),
+            ),
+            'disabled' => array(
+              ':input[name="newParticipantContainer[newParticipantFieldset][nocpr]"]' => array(
+                'checked' => FALSE,
+              ),
+            ),
+          ),
+        );
         $form['newParticipantContainer']['newParticipantFieldset']['cpr'] = array(
           '#type' => 'textfield',
           '#title' => $this->t('CPR'),
           '#placeholder' => $this->t('CPR'),
-          '#required' => TRUE,
           '#pattern' => '[0-9]{10}',
-          '#field_suffix' => '<i type="button" class="icon icon-info-circle form-type-textfield__tooltip" aria-hidden="true" data-toggle="popover" data-placement="top" data-content="' . $cprHelpText . '"></i>',
+          '#field_suffix' => '<i type="button" class="icon icon-info-circle form-type-textfield__tooltip" aria-hidden="true" data-trigger="hover" data-toggle="popover" data-placement="top" data-content="' . $cprHelpText . '"></i>',
+          '#states' => array(
+            // Only show this field when the 'nocpr' checkbox is disabled.
+            'visible' => array(
+              ':input[name="newParticipantContainer[newParticipantFieldset][nocpr]"]' => array(
+                'checked' => FALSE,
+              ),
+            ),
+            'required' => array(
+              ':input[name="newParticipantContainer[newParticipantFieldset][nocpr]"]' => array(
+                'checked' => FALSE,
+              ),
+            ),
+            'disabled' => array(
+              ':input[name="newParticipantContainer[newParticipantFieldset][nocpr]"]' => array(
+                'checked' => TRUE,
+              ),
+            ),
+          ),
+        );
+        $form['newParticipantContainer']['newParticipantFieldset']['telephone'] = array(
+          '#type' => 'textfield',
+          '#title' => $this->t('Telephone'),
+          '#placeholder' => $this->t('Telephone'),
         );
 
         if (empty($addedParticipants)) {
@@ -465,8 +511,10 @@ class ShortCourseOrderForm extends FormBase {
       '#limit_validation_errors' => array(
         ['newParticipantContainer', 'newParticipantFieldset', 'firstName'],
         ['newParticipantContainer', 'newParticipantFieldset', 'lastName'],
+        ['newParticipantContainer', 'newParticipantFieldset', 'telephone'],
         ['newParticipantContainer', 'newParticipantFieldset', 'email'],
         ['newParticipantContainer', 'newParticipantFieldset', 'cpr'],
+        ['newParticipantContainer', 'newParticipantFieldset', 'birthdate'],
         ['terms_and_conditions'],
         ['order_comment']
       ),
@@ -508,6 +556,9 @@ class ShortCourseOrderForm extends FormBase {
     $optionGroupOptionsPrices = $form_state->get('optionGroupOptionsPrices');
     $optionGroupSuboptions = $form_state->get('optionGroupSuboptions');
 
+    // Loaded option groups.
+    $optionGroupsLoaded = $this->course->field_vih_sc_option_groups->referencedEntities();
+
     //existing list of added participants
     $addedParticipants = $form_state->get('addedParticipants');
 
@@ -517,6 +568,9 @@ class ShortCourseOrderForm extends FormBase {
     $participant['lastName'] = $userInput['newParticipantContainer']['newParticipantFieldset']['lastName'];
     $participant['email'] = $userInput['newParticipantContainer']['newParticipantFieldset']['email'];
     $participant['cpr'] = $userInput['newParticipantContainer']['newParticipantFieldset']['cpr'];
+    $participant['birthdate'] = $userInput['newParticipantContainer']['newParticipantFieldset']['birthdate'];
+    $participant['nocpr'] = $userInput['newParticipantContainer']['newParticipantFieldset']['nocpr'];
+    $participant['telephone'] = $userInput['newParticipantContainer']['newParticipantFieldset']['telephone'];
     $participant['address'] = $userInput['newParticipantContainer']['newParticipantFieldset']['address'];
     $participant['house']['houseNumber'] = $userInput['newParticipantContainer']['newParticipantFieldset']['house']['houseNumber'];
     $participant['house']['houseLetter'] = $userInput['newParticipantContainer']['newParticipantFieldset']['house']['houseLetter'];
@@ -553,7 +607,9 @@ class ShortCourseOrderForm extends FormBase {
       $participant['orderedOptions'][$optionGroupDelta] = array(
         'optionGroup' => [
           'delta' => $optionGroupDelta,
-          'name' => $optionGroups[$optionGroupDelta]
+          'name' => $optionGroups[$optionGroupDelta],
+          'isMainPrice' => $optionGroupsLoaded[$optionGroupDelta]->field_vih_og_is_main_price->value,
+          'mainPrice' => $this->course->field_vih_sc_price->value,
         ],
         'option' => [
           'delta' => $optionDelta,
@@ -608,6 +664,9 @@ class ShortCourseOrderForm extends FormBase {
       $userInput['newParticipantContainer']['newParticipantFieldset']['lastName'] = $participantToEdit['lastName'];
       $userInput['newParticipantContainer']['newParticipantFieldset']['email'] = $participantToEdit['email'];
       $userInput['newParticipantContainer']['newParticipantFieldset']['cpr'] = $participantToEdit['cpr'];
+      $userInput['newParticipantContainer']['newParticipantFieldset']['nocpr'] = $participantToEdit['nocpr'];
+      $userInput['newParticipantContainer']['newParticipantFieldset']['birthdate'] = $participantToEdit['birthdate'];
+      $userInput['newParticipantContainer']['newParticipantFieldset']['telephone'] = $participantToEdit['telephone'];
       $userInput['newParticipantContainer']['newParticipantFieldset']['address'] = $participantToEdit['address'];
       $userInput['newParticipantContainer']['newParticipantFieldset']['house']['houseNumber'] = $participantToEdit['house']['houseNumber'];
       $userInput['newParticipantContainer']['newParticipantFieldset']['house']['houseLetter'] = $participantToEdit['house']['houseLetter'];
@@ -710,7 +769,15 @@ class ShortCourseOrderForm extends FormBase {
     $response->addCommand(new ReplaceCommand('#available-options-container-wrapper', $form['availableOptionsContainer']));
 
     //updating the price
-    $response->addCommand(new HtmlCommand('#vih-course-price', 'DKK ' . number_format($this->calculatePrice($form_state), 0, ',', '.')));
+    $calculatedPrice = $this->calculatePrice($form_state);
+    if ($calculatedPrice == 0) {
+      $response->addCommand(new InvokeCommand('.boxy--price', 'addClass', ['hidden']));
+    } else {
+      $response->addCommand(new InvokeCommand('.boxy--price.hidden', 'removeClass', ['hidden']));
+    }
+
+    //updating the price
+    $response->addCommand(new HtmlCommand('#vih-course-price', 'DKK ' . number_format($calculatedPrice, 2, ',', '.')));
 
     //updating added participants
     $response->addCommand(new ReplaceCommand('#added-participants-container-wrapper', $form['addedParticipantsContainer']));
@@ -739,33 +806,50 @@ class ShortCourseOrderForm extends FormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
+    
+    if (0 <> $form_state->getValues()['newParticipantContainer']['newParticipantFieldset']['nocpr']) {
+      $form['newParticipantContainer']['newParticipantFieldset']['cpr']['#value'] = NULL;
+      $form_errors = $form_state->getErrors();
+      $form_state->clearErrors();
+      unset($form_errors['newParticipantContainer][newParticipantFieldset][cpr']);
+      foreach ($form_errors as $name => $error_message) {
+        $form_state->setErrorByName($name, $error_message);
+      }
+    }
+
     $triggeringElement = $form_state->getTriggeringElement();
 
     // Add participant button.
     if ($triggeringElement['#id'] == 'add-participant-options') {
       $userInput = $form_state->getUserInput();
 
-      // Checking that we don't have any option selected of option that reached the stock value limit.
-      foreach ($this->course->field_vih_sc_option_groups->referencedEntities() as $optionGroupDelta => $optionGroup) {
-        $selectedOptionDelta = $userInput['availableOptionsContainer']['optionGroups'][$optionGroupDelta]['option'];
+      if (!empty($form['newParticipantContainer']['newParticipantFieldset'])) {
+        if (0 == $form_state->getValues()['newParticipantContainer']['newParticipantFieldset']['nocpr'] and NULL == $form_state->getValues()['newParticipantContainer']['newParticipantFieldset']['cpr']) {
+          $form_state->setError($form['newParticipantContainer']['newParticipantFieldset']['cpr'], $this->t('Please provide CPR.'));
+        }
+        if (0 <> $form_state->getValues()['newParticipantContainer']['newParticipantFieldset']['nocpr'] and NULL == $form_state->getValues()['newParticipantContainer']['newParticipantFieldset']['birthdate']) {
+          $form_state->setError($form['newParticipantContainer']['newParticipantFieldset']['birthdate'], $this->t('Please provide birthdate.'));
+        }
+        // Checking that we don't have any option selected of option that reached the stock value limit.
+        foreach ($this->course->field_vih_sc_option_groups->referencedEntities() as $optionGroupDelta => $optionGroup) {
+          $selectedOptionDelta = $userInput['availableOptionsContainer']['optionGroups'][$optionGroupDelta]['option'];
 
-        if (in_array($selectedOptionDelta, $this->getOptionGroupOptionsDisabled($form_state, $optionGroupDelta))) {
-          $form_state->setError($form['availableOptionsContainer']['optionGroups'][$optionGroupDelta]['option'], $this->t('This option exceeds limit and cannot be selected'));
+          if (in_array($selectedOptionDelta, $this->getOptionGroupOptionsDisabled($form_state, $optionGroupDelta))) {
+            $form_state->setError($form['availableOptionsContainer']['optionGroups'][$optionGroupDelta]['option'], $this->t('This option exceeds limit and cannot be selected'));
+          }
         }
       }
     }
-
     //submit button
     if ($triggeringElement['#id'] == 'vih-course-submit') {
       $form_state->clearErrors();
-
+     
       $addedParticipants = $form_state->get('addedParticipants');
       //not added participants
       if (!count($addedParticipants)) {
         $form_state->setError($form['newParticipantContainer']['newParticipantFieldset']['firstName'], $this->t('Please add, at least, one participant'));
         $form_state->setError($form['newParticipantContainer']['newParticipantFieldset']['lastName'], $this->t('Please add, at least, one participant'));
         $form_state->setError($form['newParticipantContainer']['newParticipantFieldset']['email'], $this->t('Please add, at least, one participant'));
-        $form_state->setError($form['newParticipantContainer']['newParticipantFieldset']['cpr'], $this->t('Please add, at least, one participant'));
       }
       $config = $this->config(SubscriptionsGeneralSettingsForm::$configName);
       if (empty($form_state->getValue('terms_and_conditions')['accepted']) && !empty($config->get('vih_subscription_short_course_terms_and_conditions_page'))) {
@@ -818,16 +902,19 @@ class ShortCourseOrderForm extends FormBase {
           ]);
           $orderedOptions[] = $orderedOption;
         }
-
-        //Get birthdate from CPR
-        // We need to convert 2 digit year to 4 digit year, not to get 2065 instead of 1965
-        $birthdate_year = \DateTime::createFromFormat('y', substr($addedParticipant['cpr'], 4, 2));
-        if ($birthdate_year > date('Y')) {
-          $birthdate_year = \DateTime::createFromFormat('Y', '19' . substr($addedParticipant['cpr'], 4, 2));
+        if (0 == $addedParticipant['nocpr']) {
+          //Get birthdate from CPR
+          // We need to convert 2 digit year to 4 digit year, not to get 2065 instead of 1965
+          $birthdate_year = \DateTime::createFromFormat('y', substr($addedParticipant['cpr'], 4, 2));
+          if ($birthdate_year > date('Y')) {
+            $birthdate_year = \DateTime::createFromFormat('Y', '19' . substr($addedParticipant['cpr'], 4, 2));
+          }
+          $birthdate = substr($addedParticipant['cpr'], 0, 4) . $birthdate_year->format('Y');
+          $birthdate = \DateTime::createFromFormat('dmY', $birthdate)->format('Y-m-d');
         }
-
-        $birthdate = substr($addedParticipant['cpr'], 0, 4) . $birthdate_year->format('Y');
-        $birthdate = \DateTime::createFromFormat('dmY', $birthdate)->format('Y-m-d');
+        else {
+          $birthdate = $addedParticipant['birthdate'];
+        }
         $adress_arr = [];
         foreach ([
           $addedParticipant['address'],
@@ -846,8 +933,10 @@ class ShortCourseOrderForm extends FormBase {
           'field_vih_ocp_first_name' => $addedParticipant['firstName'],
           'field_vih_ocp_last_name' => $addedParticipant['lastName'],
           'field_vih_ocp_email' => $addedParticipant['email'],
-          'field_vih_ocp_cpr' => $addedParticipant['cpr'],
+          'field_vih_ocp_cpr' => (1 == $addedParticipant['nocpr'])? NULL : $addedParticipant['cpr'],
+          'field_vih_ocp_no_cpr' => $addedParticipant['nocpr'],
           //CPR will be deleted from database immediately, after order is confirmed
+          'field_vih_ocp_telephone' => $addedParticipant['telephone'],
           'field_vih_ocp_address' => implode('; ', $adress_arr),
           'field_vih_ocp_city' => $addedParticipant['city'],
           'field_vih_ocp_zip' => $addedParticipant['zip'],
@@ -938,22 +1027,20 @@ class ShortCourseOrderForm extends FormBase {
 
     $addedParticipants = $form_state->get('addedParticipants');
 
-    if (count($addedParticipants) > 0) {
-      //calculating persons
-      $base_price *= count($addedParticipants);
+    //calculating persons
+    $base_price *= count($addedParticipants);
 
-      //calculating options
-      $optionGroups = $this->course->field_vih_sc_option_groups->referencedEntities();
-      foreach ($addedParticipants as $addedParticipant) {
-        foreach ($addedParticipant['orderedOptions'] as $orderedOption) {
-          if (isset($orderedOption['option']['delta'])) {
-            $selectedOptionGroup = $optionGroups[$orderedOption['optionGroup']['delta']];
+    //calculating options
+    $optionGroups = $this->course->field_vih_sc_option_groups->referencedEntities();
+    foreach ($addedParticipants as $addedParticipant) {
+      foreach ($addedParticipant['orderedOptions'] as $orderedOption) {
+        if (isset($orderedOption['option']['delta'])) {
+          $selectedOptionGroup = $optionGroups[$orderedOption['optionGroup']['delta']];
 
-            $options = $selectedOptionGroup->field_vih_og_options->referencedEntities();
-            $selectedOption = $options[$orderedOption['option']['delta']];
+          $options = $selectedOptionGroup->field_vih_og_options->referencedEntities();
+          $selectedOption = $options[$orderedOption['option']['delta']];
 
-            $base_price += $selectedOption->field_vih_option_price_addition->value;
-          }
+          $base_price += $selectedOption->field_vih_option_price_addition->value;
         }
       }
     }
@@ -975,6 +1062,9 @@ class ShortCourseOrderForm extends FormBase {
     $optionGroupOptions = $form_state->get('optionGroupOptions');
     $optionGroupSuboptions = $form_state->get('optionGroupSuboptions');
 
+    // Loaded option groups.
+    $optionGroupsLoaded = $this->course->field_vih_sc_option_groups->referencedEntities();
+
     $addedParticipants = array();
 
     //subscribed persons
@@ -990,6 +1080,9 @@ class ShortCourseOrderForm extends FormBase {
       $participant['lastName'] = $subscribedPerson->field_vih_ocp_last_name->value;
       $participant['email'] = $subscribedPerson->field_vih_ocp_email->value;
       $participant['cpr'] = $subscribedPerson->field_vih_ocp_cpr->value;
+      $participant['birthdate'] = $subscribedPerson->field_vih_ocp_birthdate->value;
+      $participant['nocpr'] = $subscribedPerson->field_vih_ocp_no_cpr->value;
+      $participant['telephone'] = $subscribedPerson->field_vih_ocp_telephone->value;
       $participant['address'] = $address_parts[0];
       $participant['house']['houseNumber'] = !empty($address_parts[1]) ? $address_parts[1] : '';
       $participant['house']['houseLetter'] = !empty($address_parts[2]) ? $address_parts[2] : '';
@@ -1019,7 +1112,9 @@ class ShortCourseOrderForm extends FormBase {
         $participant['orderedOptions'][$optionGroupId] = [
           'optionGroup' => [
             'delta' => $optionGroupId,
-            'name' => $optionGroups[$optionGroupId]
+            'name' => $optionGroups[$optionGroupId],
+            'isMainPrice' => $optionGroupsLoaded[$optionGroupId]->field_vih_og_is_main_price->value,
+            'mainPrice' => $this->course->field_vih_sc_price->value,
           ],
           'option' => [
             'delta' => $optionId,
@@ -1110,11 +1205,22 @@ class ShortCourseOrderForm extends FormBase {
     foreach ($optionGroup->field_vih_og_options->referencedEntities() as $optionDelta => $option) {
       $option = \Drupal::service('entity.repository')->getTranslationFromContext($option);
 
+      $additionalPrice = $option->field_vih_option_price_addition->value;
+
       $optionGroupOptionsWithPrice[$optionDelta] = $option->field_vih_option_title->value;
 
-      $additionalPrice = $option->field_vih_option_price_addition->value;
-      if (isset($additionalPrice) && floatval($additionalPrice) !== 0.00) {
-        $optionGroupOptionsWithPrice[$optionDelta] .= " (+ kr. $additionalPrice)";
+
+      if ($optionGroup->field_vih_og_is_main_price->value) {
+        if (isset($additionalPrice) && floatval($additionalPrice) !== 0.00) {
+          $sum = number_format($this->course->field_vih_sc_price->value + $additionalPrice, 2, ',', '.');
+          $optionGroupOptionsWithPrice[$optionDelta] .= " (kr. " . $sum . ")";
+        } else {
+          $optionGroupOptionsWithPrice[$optionDelta] .= " (kr. " . number_format($this->course->field_vih_sc_price->value, 2, ',', '.') . ")";
+        }
+      } else {
+        if (isset($additionalPrice) && floatval($additionalPrice) !== 0.00) {
+          $optionGroupOptionsWithPrice[$optionDelta] .= " (+ kr. " . number_format($additionalPrice, 2, ',', '.') . ")";
+        }
       }
 
       $stockAmount = $option->field_vih_option_stock_amount->value;
@@ -1125,7 +1231,7 @@ class ShortCourseOrderForm extends FormBase {
         if ($remainingAmount <= 0) {
           $optionGroupOptionsWithPrice[$optionDelta] .= ' - ' . $this->t('Sold out');
         }
-        else {
+        elseif ($remainingAmount <= 5) {
           $optionGroupOptionsWithPrice[$optionDelta] .= ' ' . $this->t("@remaining available", ['@remaining' => $remainingAmount]);
         }
       }

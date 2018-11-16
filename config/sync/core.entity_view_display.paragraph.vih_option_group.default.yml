@@ -3,6 +3,7 @@ langcode: da
 status: true
 dependencies:
   config:
+    - field.field.paragraph.vih_option_group.field_vih_og_is_main_price
     - field.field.paragraph.vih_option_group.field_vih_og_options
     - field.field.paragraph.vih_option_group.field_vih_og_title
     - paragraphs.paragraphs_type.vih_option_group
@@ -13,6 +14,16 @@ targetEntityType: paragraph
 bundle: vih_option_group
 mode: default
 content:
+  field_vih_og_is_main_price:
+    weight: 4
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
   field_vih_og_options:
     type: entity_reference_revisions_entity_view
     weight: 1

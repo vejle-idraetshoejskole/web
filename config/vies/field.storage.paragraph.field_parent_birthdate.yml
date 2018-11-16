@@ -1,0 +1,20 @@
+uuid: 181cbb16-9992-4036-87d6-108360061498
+langcode: da
+status: true
+dependencies:
+  module:
+    - datetime
+    - paragraphs
+id: paragraph.field_parent_birthdate
+field_name: field_parent_birthdate
+entity_type: paragraph
+type: datetime
+settings:
+  datetime_type: date
+module: datetime
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -16,6 +16,19 @@ vih_subscription.long_course_order_create:
   requirements:
     _permission: 'access content'
     course: \d+
+vih_subscription.order_mail_resend:
+  path: 'mailresend/{subject}/tilmelding/{order}'
+  options:
+    parameters:
+      subject:
+        type: entity:node
+      order:
+        type: entity:node
+  defaults:
+    _controller: '\Drupal\vih_subscription\Controller\SubscriptionSuccessfulController::resend'
+    _title_callback: '\Drupal\vih_subscription\Controller\SubscriptionSuccessfulController::getTitle'
+  requirements:
+    _permission: 'access administration pages'
 vih_subscription.short_course_order_create:
   path: '/kortkurser/{course}/tilmelding/{order}/{checksum}'
   options:

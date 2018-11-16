@@ -21,3 +21,15 @@ vies_application.application_form_error:
     _title: 'Application submission failed'
   requirements:
     _access: 'TRUE'
+
+vies_application.application_mail_resend:
+  path: '/ansogning/mailresend/{order}'
+  options:
+    parameters:
+      order:
+        type: entity:node
+  defaults:
+    _controller: '\Drupal\vies_application\Controller\ApplicationController::resend'
+    _title: 'Resend email'
+  requirements:
+    _permission: 'access administration pages'

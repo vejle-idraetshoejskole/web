@@ -26,8 +26,8 @@ class LongCourseOrderForm extends FormBase {
   /**
    * Returns page title
    */
-  public function getTitle() {
-    return $this->t('Tailor your stay');
+  public function getTitle($course) {
+    return $this->t('Tailor @label', ['@label' => $course->label()]);
   }
 
   /**
@@ -41,6 +41,7 @@ class LongCourseOrderForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $course = NULL, NodeInterface $order = NULL, $checksum = NULL) {
+    $cur_language_code = \Drupal::languageManager()->getCurrentLanguage()->getId();
     $form['#attached']['library'][] = 'vih_subscription/vih-subscription-accordion-class-selection';
     $form['#attached']['library'][] = 'vih_subscription/vih-subscription-terms-and-conditions-modal';
 
@@ -51,7 +52,10 @@ class LongCourseOrderForm extends FormBase {
       if (Crypt::hashEquals($checksum, VihSubscriptionUtils::generateChecksum($course, $order))) {
         $this->courseOrder = $order;
       }
+    } else {
+      $form['#expand_first_course_slot'] = TRUE;
     }
+
 
     $form['#title'] = $course->getTitle();
 
@@ -65,26 +69,24 @@ class LongCourseOrderForm extends FormBase {
         'courseSlots' => array(),
       );
 
-      $notMandatoryCourseSlots = array();
-      foreach ($coursePeriod->field_vih_cp_course_slots->referencedEntities() as $courseSlot) {
-        // Adding only not mandatory course slots.
-        if (!$courseSlot->field_vih_cs_mandatory->value) {
-          $courseSlot = \Drupal::service('entity.repository')->getTranslationFromContext($courseSlot);
-
-          $notMandatoryCourseSlots[] = $courseSlot;
+      foreach ($coursePeriod->field_vih_cp_course_slots->referencedEntities() as $slotDelta => $courseSlot) {
+        // Skipping all mandatory course slots, unless they are mandatory + travel.
+        if ($courseSlot->field_vih_cs_mandatory->value && !$courseSlot->field_vih_cs_travel->value) {
+          continue;
         }
-      }
 
-      foreach ($notMandatoryCourseSlots as $slotDelta => $courseSlot) {
+        $courseSlot = \Drupal::service('entity.repository')->getTranslationFromContext($courseSlot);
+
         //saving component id for future references
         $availableClassesCid = "course-period-$periodDelta-courseSlot-$slotDelta-availableClasses";
 
         //courseSlot render helping array
         $form['#coursePeriods'][$periodDelta]['courseSlots'][$slotDelta] = array(
-          'title' => $courseSlot->field_vih_cs_title->value,
+          'title' => $courseSlot->field_vih_cs_title->value . (($courseSlot->field_vih_cs_mandatory->value) ? ' ' . $this->t('(mandatory)') : ''),
           'availableClasses' => array(
             'cid' => $availableClassesCid
-          )
+          ),
+          'expanded' => ($courseSlot->field_vih_cs_mandatory->value) ? TRUE : FALSE,
         );
 
         //creating real input-ready fields
@@ -98,21 +100,31 @@ class LongCourseOrderForm extends FormBase {
           $classesRadioSelections[$class->id()] = taxonomy_term_view($class, 'radio_selection');
         }
 
-        $form[$availableClassesCid] = array(
-          '#type' => 'radios',
-          //'#title' => $this->t('Poll status'),
-          //'#default_value' => 1,
-          '#options' => $radiosOptions,
-          '#theme' => 'vih_subscription_class_selection_radios',
-          '#classes' => array(
-            'radio_selection' => $classesRadioSelections
-          ),
-        );
+        if (!$courseSlot->field_vih_cs_mandatory->value) {
+          $form[$availableClassesCid] = array(
+            '#type' => 'radios',
+            '#options' => $radiosOptions,
+            '#theme' => 'vih_subscription_class_selection_radios',
+            '#classes' => array(
+              'radio_selection' => $classesRadioSelections
+            ),
+          );
+        } else {
+          $form[$availableClassesCid] = array(
+            '#type' => 'container',
+            '#default_value' => 1,
+            '#disabled' => TRUE,
+            '#options' => $radiosOptions,
+            '#theme' => 'vih_subscription_class_selection_radios',
+            '#classes' => array(
+              'radio_selection' => $classesRadioSelections
+            ),
+          );
+        }
       }
     }
 
-    $cprHelpText  = (\Drupal::languageManager()->getCurrentLanguage()
-        ->getId() === 'en') ? $config->get('vih_subscription_general_cpr_help_text_en') : $config->get('vih_subscription_general_cpr_help_text_da');
+    $cprHelpText  = ($cur_language_code === 'en') ? $config->get('vih_subscription_general_cpr_help_text_en') : $config->get('vih_subscription_general_cpr_help_text_da');
 
     //Personal data - left side
     $form['personalDataLeft'] = array(
@@ -130,13 +142,58 @@ class LongCourseOrderForm extends FormBase {
       '#placeholder' => $this->t('Lastname'),
       '#required' => TRUE,
     );
+    $form['personalDataLeft']['nocpr'] = array(
+      '#type' => 'checkbox',
+      '#title' => $this->t('I do not have a Danish social security number (CPR-number)'),
+    );
+    $form['personalDataLeft']['birthdate'] = array(
+      '#type' => 'date',
+      '#title' => $this->t('Birthdate'),
+      '#placeholder' => $this->t('Birthdate'),
+      '#date_date_format' => 'm-d-Y',
+      '#states' => array(
+        // Only show this field when the 'nocpr' checkbox is disabled.
+        'visible' => array(
+          ':input[name="nocpr"]' => array(
+            'checked' => TRUE,
+          ),
+        ),
+        'required' => array(
+          ':input[name="nocpr"]' => array(
+            'checked' => FALSE,
+          ),
+        ),
+        'disabled' => array(
+          ':input[name="nocpr"]' => array(
+            'checked' => FALSE,
+          ),
+        ),
+      ),
+    );
     $form['personalDataLeft']['cpr'] = array(
       '#type' => 'textfield',
       '#title' => $this->t('CPR'),
       '#placeholder' => $this->t('CPR'),
-      '#required' => TRUE,
       '#pattern' => '[0-9]{10}',
-      '#field_suffix' => '<i type="button" class="icon icon-info-circle form-type-textfield__tooltip" aria-hidden="true" data-toggle="popover" data-placement="top" data-content="' . $cprHelpText . '"></i>',
+      '#field_suffix' => '<i type="button" class="icon icon-info-circle form-type-textfield__tooltip" aria-hidden="true" data-trigger="hover" data-toggle="popover" data-placement="top" data-content="' . $cprHelpText . '"></i>',
+      '#states' => array(
+        // Only show this field when the 'nocpr' checkbox is disabled.
+        'visible' => array(
+          ':input[name="nocpr"]' => array(
+            'checked' => FALSE,
+          ),
+        ),
+        'required' => array(
+          ':input[name="nocpr"]' => array(
+            'checked' => FALSE,
+          ),
+        ),
+        'disabled' => array(
+          ':input[name="nocpr"]' => array(
+            'checked' => TRUE,
+          ),
+        ),
+      ),
     );
     $form['personalDataLeft']['telefon'] = array(
       '#type' => 'textfield',
@@ -152,7 +209,7 @@ class LongCourseOrderForm extends FormBase {
     );
     $form['personalDataLeft']['nationality'] = array(
       '#type' => 'select',
-      '#title' => $this->t('Nationality'),
+      '#title' => $this->t('Citizenship'),
       '#options' => CourseOrderOptionsList::getNationalityList(),
       '#default_value' => 'DK',
       '#required' => TRUE,
@@ -161,7 +218,9 @@ class LongCourseOrderForm extends FormBase {
       '#type' => 'select',
       '#title' => $this->t('How are you planning to pay?'),
       '#options' => CourseOrderOptionsList::getPaymentList(),
-      '#required' => TRUE,
+      '#required' => $cur_language_code === 'en' ? FALSE : TRUE,
+      '#disabled' => $cur_language_code === 'en' ? TRUE : NULL,
+      '#access' => $cur_language_code === 'en' ? FALSE : NULL,
     );
     $form['personalDataLeft']['newsletter'] = array(
       '#type' => 'checkbox',
@@ -213,14 +272,24 @@ class LongCourseOrderForm extends FormBase {
       '#suffix' => '</div></div>',
     );
     $form['personalDataRight']['municipality'] = array(
-      '#type' => 'textfield',
+      '#type' => 'select',
+      '#options' => CourseOrderOptionsList::getMunicipalityList(),
       '#title' => $this->t('Municipality'),
       '#placeholder' => $this->t('Municipality'),
+      '#required' => TRUE,
+      '#disabled' => $cur_language_code === 'en' ? TRUE : NULL,
+      '#access' => $cur_language_code === 'en' ? FALSE : NULL,
+    );
+    $form['personalDataRight']['country'] = array(
+      '#type' => 'select',
+      '#title' => $this->t('Country'),
+      '#options' => CourseOrderOptionsList::getNationalityList(),
+      '#default_value' => 'DK',
       '#required' => TRUE,
     );
     $form['personalDataRight']['education'] = array(
       '#type' => 'select',
-      '#title' => $this->t('Education'),
+      '#title' => $this->t('Education at course start'),
       '#options' => CourseOrderOptionsList::getEducationList(),
       '#required' => TRUE,
     );
@@ -257,13 +326,6 @@ class LongCourseOrderForm extends FormBase {
       '#type' => 'email',
       '#title' => $this->t('E-mail address'),
       '#placeholder' => $this->t('E-mail address'),
-      '#required' => TRUE,
-    );
-    $form['adultDataLeft']['adultNationality'] = array(
-      '#type' => 'select',
-      '#title' => $this->t('Nationality'),
-      '#options' => CourseOrderOptionsList::getNationalityList(),
-      '#default_value' => 'DK',
       '#required' => TRUE,
     );
     $form['adultDataLeft']['adultNewsletter'] = array(
@@ -315,6 +377,13 @@ class LongCourseOrderForm extends FormBase {
       '#prefix' => '<div class="col-xs-12 col-sm-8">',
       '#suffix' => '</div></div>',
     );
+    $form['adultDataRight']['adultNationality'] = array(
+      '#type' => 'select',
+      '#title' => $this->t('Country'),
+      '#options' => CourseOrderOptionsList::getNationalityList(),
+      '#default_value' => 'DK',
+      '#required' => TRUE,
+    );
 
     $form['message'] = array(
       '#type' => 'textarea',
@@ -334,8 +403,7 @@ class LongCourseOrderForm extends FormBase {
 
     $form['#theme'] = 'vih_subscription_long_course_order_form';
 
-    $form['#registration_text'] = (\Drupal::languageManager()->getCurrentLanguage()
-        ->getId() === 'en') ? $config->get('vih_subscription_long_course_registration_page_text_en') : $config->get('vih_subscription_long_course_registration_page_text_da');
+    $form['#registration_text'] = ($cur_language_code === 'en') ? $config->get('vih_subscription_long_course_registration_page_text_en') : $config->get('vih_subscription_long_course_registration_page_text_da');
 
     if (!empty($terms_and_conditions_page_id = $config->get('vih_subscription_long_course_terms_and_conditions_page'))) {
       $terms_and_conditions_link = CommonFormUtils::getTermsAndConditionsLink($terms_and_conditions_page_id);
@@ -354,6 +422,9 @@ class LongCourseOrderForm extends FormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
+    // Not expanding any courses slots, as there are some values in the form already.
+    $form['#expand_first_course_slot'] = FALSE;
+
     //going through the selected options
     foreach ($form_state->getValues() as $radioKey => $radioValue) {
       if (preg_match('/^course-period-(\d)-courseSlot-(\d)-availableClasses$/', $radioKey, $matches)) {
@@ -364,8 +435,10 @@ class LongCourseOrderForm extends FormBase {
         $courseSlotDelta = $matches[2];
         $courseSlots = $coursePeriod->field_vih_cp_course_slots->referencedEntities();
         $courseSlot = $courseSlots[$courseSlotDelta];
+        $courseSlot = \Drupal::service('entity.repository')->getTranslationFromContext($courseSlot);
 
         if (!is_numeric($radioValue)) {
+          $form['#coursePeriods'][$coursePeriodDelta]['courseSlots'][$courseSlotDelta]['expanded'] = TRUE;
           $form_state->setErrorByName($radioKey, $this->t('Please make a selection in %slotName.', array('%slotName' => $courseSlot->field_vih_cs_title->value)));
         }
       }
@@ -502,11 +575,14 @@ class LongCourseOrderForm extends FormBase {
         //student information
         'field_vih_lco_first_name' => $form_state->getValue('firstName'),
         'field_vih_lco_last_name' => $form_state->getValue('lastName'),
-        'field_vih_lco_cpr' => $form_state->getValue('cpr'), //CPR will be deleted from database immediately, after order is confirmed
+        'field_vih_lco_cpr' => (1 == $form_state->getValue('nocpr'))? NULL : $form_state->getValue('cpr'), //CPR will be deleted from database immediately, after order is confirmed
         'field_vih_lco_telefon' => $form_state->getValue('telefon'),
         'field_vih_lco_email' => $form_state->getValue('email'),
+        'field_vih_lco_country' => CourseOrderOptionsList::getNationalityList($form_state->getValue('country')),
         'field_vih_lco_nationality' => CourseOrderOptionsList::getNationalityList($form_state->getValue('nationality')),
         'field_vih_lco_newsletter' => $form_state->getValue('newsletter'),
+        'field_vih_no_cpr' => $form_state->getValue('nocpr'),
+        'field_vih_lco_birthdate' => (1 == $form_state->getValue('nocpr'))? $form_state->getValue('birthdate') : NULL,
         'field_vih_lco_address' => implode('; ', $address_array),
         'field_vih_lco_city' => $form_state->getValue('city'),
         'field_vih_lco_municipality' => $form_state->getValue('municipality'),
@@ -556,7 +632,9 @@ class LongCourseOrderForm extends FormBase {
       //student information
       $this->courseOrder->set('field_vih_lco_first_name', $form_state->getValue('firstName'));
       $this->courseOrder->set('field_vih_lco_last_name', $form_state->getValue('lastName'));
-      $this->courseOrder->set('field_vih_lco_cpr', $form_state->getValue('cpr'));//CPR will be deleted from database immediately, after order is confirmed
+      $this->courseOrder->set('field_vih_no_cpr', $form_state->getValue('nocpr'));
+      $this->courseOrder->set('field_vih_lco_cpr', (1 == $form_state->getValue('nocpr'))? NULL : $form_state->getValue('cpr'));//CPR will be deleted from database immediately, after order is confirmed
+      $this->courseOrder->set('field_vih_lco_birthdate', (1 == $form_state->getValue('nocpr'))? $form_state->getValue('birthdate') : NULL);
       $this->courseOrder->set('field_vih_lco_telefon', $form_state->getValue('telefon'));
       $this->courseOrder->set('field_vih_lco_email', $form_state->getValue('email'));
       $this->courseOrder->set('field_vih_lco_nationality', CourseOrderOptionsList::getNationalityList($form_state->getValue('nationality')));
@@ -633,6 +711,8 @@ class LongCourseOrderForm extends FormBase {
     //Personal data - left side
     $form['personalDataLeft']['firstName']['#default_value'] = $courseOrder->field_vih_lco_first_name->value;
     $form['personalDataLeft']['lastName']['#default_value'] = $courseOrder->field_vih_lco_last_name->value;
+    $form['personalDataLeft']['nocpr']['#default_value'] = $courseOrder->field_vih_no_cpr->value;
+    $form['personalDataLeft']['birthdate']['#default_value'] = $courseOrder->field_vih_lco_birthdate->value;
     $form['personalDataLeft']['cpr']['#default_value'] = $courseOrder->field_vih_lco_cpr->value;
     $form['personalDataLeft']['telefon']['#default_value'] = $courseOrder->field_vih_lco_telefon->value;
     $form['personalDataLeft']['email']['#default_value'] = $courseOrder->field_vih_lco_email->value;
@@ -646,8 +726,8 @@ class LongCourseOrderForm extends FormBase {
 
     $form['personalDataRight']['address']['#default_value'] = $address_parts[0];
     $form['personalDataRight']['house']['houseNumber']['#default_value'] = $address_parts[1];
-    $form['personalDataRight']['house']['houseLetter']['#default_value'] = $address_parts[2];
-    $form['personalDataRight']['house']['houseFloor']['#default_value'] = $address_parts[3];
+    $form['personalDataRight']['house']['houseLetter']['#default_value'] = !empty($address_parts[2]) ? $address_parts[2] : NULL;
+    $form['personalDataRight']['house']['houseFloor']['#default_value'] = !empty($address_parts[3]) ? $address_parts[3] : NULL;
 
     $form['personalDataRight']['city']['#default_value'] = $courseOrder->field_vih_lco_city->value;
     $form['personalDataRight']['municipality']['#default_value'] = $courseOrder->field_vih_lco_municipality->value;
@@ -669,8 +749,8 @@ class LongCourseOrderForm extends FormBase {
     //Adult data - right side
     $form['adultDataRight']['adultAddress']['#default_value'] = $adult_address_parts[0];
     $form['adultDataRight']['adultHouse']['adultHouseNumber']['#default_value'] = $adult_address_parts[1];
-    $form['adultDataRight']['adultHouse']['adultHouseLetter']['#default_value'] = $adult_address_parts[2];
-    $form['adultDataRight']['adultHouse']['adultHouseFloor']['#default_value'] = $adult_address_parts[3];
+    $form['adultDataRight']['adultHouse']['adultHouseLetter']['#default_value'] = !empty($adult_address_parts[2]) ? $adult_address_parts[2] : NULL;
+    $form['adultDataRight']['adultHouse']['adultHouseFloor']['#default_value'] = !empty($adult_address_parts[3]) ? $adult_address_parts[3] : NULL;
     $form['adultDataRight']['adultCity']['#default_value'] = $courseOrder->field_vih_lco_adult_city->value;
     $form['adultDataRight']['adultZip']['#default_value'] = $courseOrder->field_vih_lco_adult_zip->value;
 

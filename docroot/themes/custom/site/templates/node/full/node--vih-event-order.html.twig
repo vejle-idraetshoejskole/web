@@ -48,6 +48,7 @@ view_mode ? view_mode|clean_class,
 
             </div>
         </div>
+      <a href="{{ path('vih_subscription.order_mail_resend', {'order': node.id, 'subject': node.field_vih_eo_event.target_id}) }}" class="btn-success btn btn-xs">{{ 'Resend Email' | trans }}</a>
     </section>
     <!-- End - content -->
 
