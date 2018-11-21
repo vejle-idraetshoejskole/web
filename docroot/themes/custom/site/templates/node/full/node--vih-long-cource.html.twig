@@ -66,10 +66,6 @@
                                 {# Begin - period #}
                                 {% if content.course_period_start or content.course_period_end %}
                                     <div class="boxy boxy--time-period">
-                                        {#<div class="boxy__heading">#}
-                                            {#<h2 class="boxy__heading__title heading-h4">{{ 'Course period' | trans }}</h2>#}
-                                        {#</div>#}
-
                                         <div class="boxy__body">
                                             <div class="time-period">
                                                 <div class="time-period__icon">
@@ -125,13 +121,13 @@
                                               {% set mandatoryImageClass = 'col-md-6' %}
 
                                               {% if content.travel_classes_mandatory|length == 1 %}
-                                                {% set mandatoryImageClass = 'col-xs-12' %}
+                                                {% set mandatoryImageClass = 'col-xs-12 travels--1' %}
                                               {% endif %}
                                               {% if content.travel_classes_mandatory|length == 2 %}
-                                                {% set mandatoryImageClass = 'col-md-6' %}
+                                                {% set mandatoryImageClass = 'col-md-6 travels--2' %}
                                               {% endif %}
                                               {% if content.travel_classes_mandatory|length == 3 %}
-                                                {% set mandatoryImageClass = 'col-md-4 col-sm-6' %}
+                                                {% set mandatoryImageClass = 'col-md-4 col-sm-6 travels--3' %}
                                               {% endif %}
 
                                               {% for travel_class in content.travel_classes_mandatory %}
@@ -155,13 +151,13 @@
                                               {% set optionalImageClass = 'col-md-6' %}
 
                                               {% if content.travel_classes_optional|length == 1 %}
-                                                {% set optionalImageClass = 'col-xs-12' %}
+                                                {% set optionalImageClass = 'col-xs-12 travels--1' %}
                                               {% endif %}
                                               {% if content.travel_classes_optional|length == 2 %}
-                                                {% set optionalImageClass = 'col-md-6' %}
+                                                {% set optionalImageClass = 'col-md-6 travels--2' %}
                                               {% endif %}
                                               {% if content.travel_classes_optional|length == 3 %}
-                                                {% set optionalImageClass = 'col-md-4 col-sm-6' %}
+                                                {% set optionalImageClass = 'col-md-4 col-sm-6 travels--3' %}
                                               {% endif %}
 
                                                 {% for travel_class in content.travel_classes_optional %}

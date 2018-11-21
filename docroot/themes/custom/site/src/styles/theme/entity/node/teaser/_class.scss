@@ -43,13 +43,6 @@ $entity-teaser-class-image-min-height: 250px;
       text-transform: uppercase;
     }
   }
-
-  .entity-teaser__image__overlay {
-
-    .field--name-name {
-      font-size: 12px;
-    }
-  }
 }
 
 // --------------------------------------------------
@@ -70,10 +63,38 @@ $entity-teaser-class-image-min-height: 250px;
 @media #{$breakpoint-tablet-and-up} {}
 
 // Tablet - only
-@media #{$breakpoint-tablet-only} {}
+@media #{$breakpoint-tablet-only} {
+
+  .travels--3 {
+
+    .entity-teaser--class {
+
+      .entity-teaser__image__overlay {
+
+        .field--name-name {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
 
 // Desktop - and up
-@media #{$breakpoint-desktop-and-up} {}
+@media #{$breakpoint-desktop-and-up} {
+
+  .travels--3 {
+
+    .entity-teaser--class {
+
+      .entity-teaser__image__overlay {
+
+        .field--name-name {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}
 
 // Desktop - only
 @media #{$breakpoint-desktop-only} {}
