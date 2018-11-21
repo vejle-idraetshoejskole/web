@@ -76,7 +76,7 @@ gulp.task('process:javascripts', () => {
             presets: ['env']
         }))
         .pipe(concat('app.js'))
-        .pipe(sourcemaps.write())
+        //.pipe(sourcemaps.write())
         .pipe(minify({
             ext:{
                 min:'.min.js'
@@ -167,5 +167,5 @@ gulp.task('watch', ['build'], () => {
     });
 });
 gulp.task('build', (callback) => {
-    runSequence(['build:images', 'build:fonts'], callback);
+    runSequence(['build:images', 'build:fonts', 'build:javascripts'], callback);
 });

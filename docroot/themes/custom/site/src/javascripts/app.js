@@ -70,6 +70,8 @@
 
   //Show search form block
   $(".search-button").click(function (event) {
+    event.preventDefault();
+
     if ($("#search-form-popover").hasClass("hidden")) {
       $("#search-form-popover").removeClass('hidden');
       $(".form-control").focus();
