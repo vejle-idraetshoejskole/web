@@ -127,82 +127,88 @@
                                   {# End - price #}
                                 {% else %}
 
-                                  {# Begin - price complex (MAIN price + base price) #}
-                                  {% set vih_sc_option = node.field_vih_sc_option_groups[content.main_price_index] %}
-                                  <div class="boxy boxy--price">
-                                    <div class="boxy__heading">
-                                      <h2 class="boxy__heading__title heading-h4">
-                                        {{ vih_sc_option.entity.field_vih_og_title.value }}
-                                        {% if content.main_price_index in content.sold_optionsGroups|keys %}
-                                          - {{ 'Sold out' | trans }}
-                                        {% endif %}
-                                      </h2>
-                                    </div>
+                                  <div class="boxy">
                                     <div class="boxy__body">
-                                      <table class="field-vih-og-price-addition-table">
-                                        {% for vih_og_option in vih_sc_option.entity.field_vih_og_options %}
-                                          <tr class="field-vih-og-price-addition-container">
-                                            <td>
-                                              {% if vih_og_option.entity.field_vih_option_price_addition.value %}
-                                                {% set optionPrice = vih_og_option.entity.field_vih_option_price_addition.value + node.field_vih_sc_price.value %}
-                                              {% else %}
-                                                {% set optionPrice = node.field_vih_sc_price.value %}
-                                              {% endif %}
 
-                                              {{ vih_og_option.entity.field_vih_option_title.value }}
-                                              {% if content.main_price_index in content.sold_options[optionGroupDelta]|keys %}
-                                                - {{ 'Sold out' | trans }}
-                                              {% endif %}
-                                            </td>
-                                            <td>
-                                              DKK&nbsp;{{ optionPrice | number_format(2, ',', '.') }}
-                                            </td>
-                                          </tr>
-                                        {% endfor %}
-                                      </table>
-                                    </div>
-                                  </div>
-                                  {# End - price complex (MAIN price + base price) #}
-                                {% endif %}
+                                      {# Begin - price complex (MAIN price + base price) #}
+                                      {% set vih_sc_option = node.field_vih_sc_option_groups[content.main_price_index] %}
+                                      <div class="partial partial--price">
+                                        <div class="partial__heading">
+                                          <h2 class="partial__heading__title heading-h4">
+                                            {{ vih_sc_option.entity.field_vih_og_title.value }}
+                                            {% if content.main_price_index in content.sold_optionsGroups|keys %}
+                                              - {{ 'Sold out' | trans }}
+                                            {% endif %}
+                                          </h2>
+                                        </div>
+                                        <div class="partial__body">
+                                          <table class="field-vih-og-price-addition-table">
+                                            {% for vih_og_option in vih_sc_option.entity.field_vih_og_options %}
+                                              <tr class="field-vih-og-price-addition-container">
+                                                <td>
+                                                  {% if vih_og_option.entity.field_vih_option_price_addition.value %}
+                                                    {% set optionPrice = vih_og_option.entity.field_vih_option_price_addition.value + node.field_vih_sc_price.value %}
+                                                  {% else %}
+                                                    {% set optionPrice = node.field_vih_sc_price.value %}
+                                                  {% endif %}
 
-                                <h3 class="">{{ 'Additional options' | trans }}</h3>
-
-                                {# Begin - price addition #}
-                                {% for vih_sc_option in node.field_vih_sc_option_groups%}
-                                  {%  set optionGroupDelta = loop.index0 %}
-
-                                  {# Skipping the option group with main price - already printed above #}
-                                  {% if content.main_price_index is not defined or optionGroupDelta != content.main_price_index %}
-                                    <div class="boxy boxy--price">
-                                      <div class="boxy__heading">
-                                        <h2 class="boxy__heading__title heading-h4">
-                                          {{ vih_sc_option.entity.field_vih_og_title.value }}
-                                          {% if loop.index0 in content.sold_optionsGroups|keys %}
-                                            - {{ 'Sold out' | trans }}
-                                          {% endif %}
-                                        </h2>
+                                                  {{ vih_og_option.entity.field_vih_option_title.value }}
+                                                  {% if content.main_price_index in content.sold_options[optionGroupDelta]|keys %}
+                                                    - {{ 'Sold out' | trans }}
+                                                  {% endif %}
+                                                </td>
+                                                <td>
+                                                  DKK&nbsp;{{ optionPrice | number_format(2, ',', '.') }}
+                                                </td>
+                                              </tr>
+                                            {% endfor %}
+                                          </table>
+                                        </div>
                                       </div>
-                                      <div class="boxy__body">
-                                        <table class="field-vih-og-price-addition-table">
-                                          {% for vih_og_option in vih_sc_option.entity.field_vih_og_options %}
-                                            <tr class="field-vih-og-price-addition-container">
-                                              <td>
-                                                {{ vih_og_option.entity.field_vih_option_title.value }}
-                                                {% if loop.index0 in content.sold_options[optionGroupDelta]|keys %}
+                                      {# End - price complex (MAIN price + base price) #}
+                                      {% endif %}
+
+                                      <h3 class="">{{ 'Additional options' | trans }}</h3>
+
+                                      {# Begin - price addition #}
+                                      {% for vih_sc_option in node.field_vih_sc_option_groups%}
+                                        {%  set optionGroupDelta = loop.index0 %}
+
+                                        {# Skipping the option group with main price - already printed above #}
+                                        {% if content.main_price_index is not defined or optionGroupDelta != content.main_price_index %}
+                                          <div class="partial partial--price" style="margin-bottom: 0;">
+                                            <div class="partial__heading">
+                                              <h2 class="partial__heading__title heading-h4">
+                                                {{ vih_sc_option.entity.field_vih_og_title.value }}
+                                                {% if loop.index0 in content.sold_optionsGroups|keys %}
                                                   - {{ 'Sold out' | trans }}
                                                 {% endif %}
-                                              </td>
-                                              <td>
-                                                DKK&nbsp;{{ vih_og_option.entity.field_vih_option_price_addition.value | number_format(2, ',', '.') }}
-                                              </td>
-                                            </tr>
-                                          {% endfor %}
-                                        </table>
-                                      </div>
+                                              </h2>
+                                            </div>
+                                            <div class="partial__body">
+                                              <table class="field-vih-og-price-addition-table">
+                                                {% for vih_og_option in vih_sc_option.entity.field_vih_og_options %}
+                                                  <tr class="field-vih-og-price-addition-container">
+                                                    <td>
+                                                      {{ vih_og_option.entity.field_vih_option_title.value }}
+                                                      {% if loop.index0 in content.sold_options[optionGroupDelta]|keys %}
+                                                        - {{ 'Sold out' | trans }}
+                                                      {% endif %}
+                                                    </td>
+                                                    <td>
+                                                      DKK&nbsp;{{ vih_og_option.entity.field_vih_option_price_addition.value | number_format(2, ',', '.') }}
+                                                    </td>
+                                                  </tr>
+                                                {% endfor %}
+                                              </table>
+                                            </div>
+                                          </div>
+                                        {% endif %}
+                                      {% endfor %}
+                                      {# End - price addition #}
+
                                     </div>
-                                  {% endif %}
-                                {% endfor %}
-                                {# End - price addition #}
+                                  </div>
 
                             </div>
                         </div>

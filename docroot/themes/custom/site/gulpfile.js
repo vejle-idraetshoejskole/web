@@ -167,5 +167,5 @@ gulp.task('watch', ['build'], () => {
     });
 });
 gulp.task('build', (callback) => {
-    runSequence(['build:images', 'build:fonts', 'build:javascripts'], callback);
+    runSequence(['build:images', 'build:fonts', 'build:javascripts', 'build:styles'], callback);
 });
