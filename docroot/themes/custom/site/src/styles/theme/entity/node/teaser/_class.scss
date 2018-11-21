@@ -43,6 +43,13 @@ $entity-teaser-class-image-min-height: 250px;
       text-transform: uppercase;
     }
   }
+
+  .entity-teaser__image__overlay {
+
+    .field--name-name {
+      font-size: 12px;
+    }
+  }
 }
 
 // --------------------------------------------------
