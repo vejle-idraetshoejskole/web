@@ -973,6 +973,7 @@ class ShortCourseOrderForm extends FormBase {
         'field_vih_sco_price' => $orderPrice,
         'field_vih_sco_comment' => $form_state->getValue('order_comment')
       ));
+      $this->courseOrder->setPromoted(FALSE);
     }
     else {
       //removing old participants paragraphs, and replacing with new ones

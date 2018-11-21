@@ -163,7 +163,6 @@ class ApplicationForm extends FormBase {
           $radios_options[$class->id()] = '';
 
           $classes_radio_selections[$class->id()] = taxonomy_term_view($class, 'radio_selection');
-          $classes_radio_selections[$class->id()]['#modal'] = taxonomy_term_view($class, 'modal_window');
         }
 
         $form['periodsWrapper']['coursePeriods']['classes'][$available_classes_cid] = [

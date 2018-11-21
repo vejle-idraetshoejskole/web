@@ -278,6 +278,7 @@ display:
           relationship: none
           view_mode: rss
       display_extenders: {  }
+      enabled: false
     cache_metadata:
       contexts:
         - 'languages:language_interface'
@@ -289,6 +290,7 @@ display:
     display_options:
       path: node
       display_extenders: {  }
+      enabled: false
     display_plugin: page
     display_title: Page
     id: page_1

@@ -58,9 +58,15 @@ class SubscriptionConfirmationController extends ControllerBase{
           ]);
         }
 
-        //generating quickpay payment URL
-        $client = new BellcomQuickpayClient();
-        $paymentLink = $client->getPaymentLink($order, $subject, $orderPrice, $successUrl->toString(), $cancelUrl->toString());
+
+        if ($orderPrice != 0) {
+          //generating quickpay payment URL
+          $client = new BellcomQuickpayClient();
+          $paymentLink = $client->getPaymentLink($order, $subject, $orderPrice, $successUrl->toString(), $cancelUrl->toString());
+        } else {
+          //there is not payment integrated for long course, therefore paymentlink = successUrl
+          $paymentLink = $successUrl;
+        }
       }
 
       //the actual content comes from template file: templates/vih_subscription_confirmation_page.html.twig
@@ -69,7 +75,7 @@ class SubscriptionConfirmationController extends ControllerBase{
         '#paymentLink' => $paymentLink,
         '#backLink' => $backLink->setAbsolute()->toString(),
         '#order' => node_view($order, 'teaser'),
-        '#course-type' => $subject->getType(),
+        '#free' => (!isset($orderPrice) || $orderPrice == 0),
       );
 
       return $build;

@@ -98,7 +98,6 @@ class LongCourseOrderForm extends FormBase {
           $radiosOptions[$class->id()] = ''; //$this->t('Vælg');
 
           $classesRadioSelections[$class->id()] = taxonomy_term_view($class, 'radio_selection');
-          $classesRadioSelections[$class->id()]['#modal'] = taxonomy_term_view($class, 'modal_window');
         }
 
         if (!$courseSlot->field_vih_cs_mandatory->value) {
@@ -605,6 +604,7 @@ class LongCourseOrderForm extends FormBase {
         'field_vih_lco_adult_zip' => $form_state->getValue('adultZip'),
         'field_vih_lco_adult_newsletter' => $form_state->getValue('adultNewsletter'),
       ));
+      $this->courseOrder->setPromoted(FALSE);
     } else {
       // Removing old ordered course periods START.
       $orderedCoursePeriodsIds = $this->courseOrder->get('field_vih_lco_order_course_perio')->getValue();

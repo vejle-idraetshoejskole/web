@@ -298,7 +298,7 @@ class EDBBrugsenIntegration {
       // 0 = No, 1 = Yes
       'Voksen.Email' => 'kontor@vih.dk',
       'Voksen.Land' => $edb_utility->getCountryCode('Danmark'),
-      'EgneFelter.EgetFelt7' => '[Fri1082]' . date('d.m.Y'),
+      'EgneFelter.EgetFelt7' => '[Fri082]' . date('d.m.Y'),
     );
   }
 }

@@ -17,40 +17,12 @@
                     {{ radios[delta] }}
                 </span>
 
-                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#class-modal-{{ radios[delta]['#id'] }}">
-                    <i class="icon icon-info-circle" aria-hidden="true"></i>
-                </button>
+                <a data-dialog-type="modal"  class="use-ajax btn btn-default" href="{{ path('vih_subscription.vih_cs_classes_modal', {'class': delta}) }}">
+                  <span class="icon icon-info-circle"></span>
+                </a>
 
             </div>
             <!-- End - action -->
-
-            {# Begin - modal #}
-            <div class="modal fade" id="class-modal-{{ radios[delta]['#id'] }}" tabindex="-1" role="dialog">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-
-                        {# Begin - header #}
-                        <div class="modal-header" style="background-image: url('{{ radios['#classes']['radio_selection'][delta]['#taxonomy_term'].field_vih_class_image.entity.image.entity.fileuri | image_style('modal') }}');">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="{{ 'Close' | trans }}">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-
-                            <h3 class="modal-title heading-h1">
-                                {{ radios['#classes']['radio_selection'][delta]['#taxonomy_term'].getName }}
-                            </h3>
-                        </div>
-                        {# End - header #}
-
-                        {# Begin - body #}
-                        <div class="modal-body">
-                            {{ radios['#classes']['radio_selection'][delta]['#modal'] }}
-                        </div>
-                        {# End - body #}
-
-                    </div>
-                </div>
-            </div>
-            {# End - modal #}
 
         </div>
     {% endfor %}

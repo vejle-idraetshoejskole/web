@@ -79,6 +79,7 @@
         "drupal/date_popup": "^1.0",
         "drupal/views_autocomplete_filters": "^1.2",
         "drupal/verf": "^1.0@beta",
+        "drupal/views_conditional": "^1.0",
         "drupal/views_field_view": "^1.0@beta"
     },
     "repositories": [

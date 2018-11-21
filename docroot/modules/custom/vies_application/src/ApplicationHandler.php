@@ -339,6 +339,7 @@ class ApplicationHandler {
 
     // Saving the application.
     $this->application = Node::create($application_node);
+    $this->application->setPromoted(FALSE);
     $this->application->isNew();
     return $this->application->save();
   }

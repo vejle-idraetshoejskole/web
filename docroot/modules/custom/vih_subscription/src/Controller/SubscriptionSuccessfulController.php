@@ -121,14 +121,14 @@ class SubscriptionSuccessfulController extends ControllerBase {
         $courseDate = NULL;
         if ($subject->field_vih_sc_start_date->value) {
           $courseDate = \Drupal::service('date.formatter')
-              ->format(strtotime($subject->field_vih_sc_start_date->value), "long");
+            ->format($subject->field_vih_sc_start_date->date->getTimestamp(), "long");
         }
         if ($subject->field_vih_sc_end_date->value) {
           if (!(empty($courseDate))) {
             $courseDate .= ' - ';
           }
           $courseDate .= \Drupal::service('date.formatter')
-              ->format(strtotime($subject->field_vih_sc_end_date->value), "long");
+            ->format($subject->field_vih_sc_end_date->date->getTimestamp(), "long");
         }
         $notification_template = $notificationsConfig->get('vih_subscription_short_course_notifications_body_' . $currentLangId);
         $notification_template = preg_replace("/\r\n|\r|\n/", '<br/>', $notification_template);
@@ -167,14 +167,14 @@ class SubscriptionSuccessfulController extends ControllerBase {
         $eventDate = NULL;
         if ($subject->field_vih_event_start_date->value) {
           $eventDate = \Drupal::service('date.formatter')
-              ->format(strtotime($subject->field_vih_event_start_date->value), "long");
+            ->format($subject->field_vih_event_start_date->date->getTimestamp(), "long");
         }
         if ($subject->field_vih_event_end_date->value) {
           if (!(empty($eventDate))) {
             $eventDate .= ' - ';
           }
           $eventDate .= \Drupal::service('date.formatter')
-              ->format(strtotime($subject->field_vih_event_end_date->value), "long");
+            ->format($subject->field_vih_event_end_date->date->getTimestamp(), "long");
         }
         $notification_template = $notificationsConfig->get('vih_subscription_event_notifications_body_' . $currentLangId);
         $notification_template = preg_replace("/\r\n|\r|\n/", '<br/>', $notification_template);

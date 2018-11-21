@@ -485,6 +485,7 @@ class EventOrderForm extends FormBase {
         'field_vih_eo_status' => 'pending',
         'field_vih_eo_price' => $orderPrice,
       ));
+      $this->eventOrder->setPromoted(FALSE);
     } else {
       //removing old participants paragraphs, and replacing with new ones
       $subscribedPersonsIds = $this->eventOrder->get('field_vih_eo_persons')->getValue();
