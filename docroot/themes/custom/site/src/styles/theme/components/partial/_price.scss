@@ -58,7 +58,11 @@
   }
 
   .field-vih-sc-price-container{
-    display: inline-flex;
+    text-align: left;
+
+    div {
+      display: inline-block;
+    }
   }
 }
 
