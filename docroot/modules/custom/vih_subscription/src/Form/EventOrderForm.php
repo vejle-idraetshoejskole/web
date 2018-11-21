@@ -175,6 +175,7 @@ class EventOrderForm extends FormBase {
           ]
         ],
         '#limit_validation_errors' => [],
+        '#suffix' => '&nbsp;&nbsp;&nbsp;&nbsp;<strong>' . $readable_price . '</strong>',
       ];
     }
     //END ADD NEW PARTICIPANT CONTAINER //
