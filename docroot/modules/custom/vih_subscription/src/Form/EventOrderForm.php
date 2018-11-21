@@ -109,6 +109,7 @@ class EventOrderForm extends FormBase {
     if (empty($addedParticipants)) {
       $participant_form = TRUE;
     }
+    $readable_price = (!isset($this->price) || $this->price == 0) ? $this->t('Gratis') : '+ DKK ' . number_format($this->price, 0, ',', '.');
 
     if ($participant_form) {
       if (count($addedParticipants) + $personsSubscribed < $personsLimit) { //not allowing to have more fieldsets that the event have capacity for
@@ -152,6 +153,7 @@ class EventOrderForm extends FormBase {
               'type' => 'none',
             ],
           ],
+          '#suffix' => '&nbsp;&nbsp;&nbsp;&nbsp;<strong>' . $readable_price . '</strong>',
         );
       }
       else {
