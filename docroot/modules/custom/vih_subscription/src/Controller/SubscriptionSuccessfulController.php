@@ -245,7 +245,6 @@ class SubscriptionSuccessfulController extends ControllerBase {
    */
   private function registerOrder(NodeInterface $subject, NodeInterface $order) {
     $currentLangId = \Drupal::languageManager()->getCurrentLanguage()->getId();
-    $notificationsConfig = \Drupal::configFactory()->getEditable(SubscriptionsGeneralSettingsForm::$configName);
 
     if ($subject->getType() == 'vih_long_cource') {
       // Mailchimp integration
@@ -291,7 +290,6 @@ class SubscriptionSuccessfulController extends ControllerBase {
       $order->save();
     }
     elseif ($subject->getType() == 'vih_short_course') {
-
       $order_persons = $order->field_vih_sco_persons->referencedEntities();
       foreach ($order_persons as $order_person) {
         // Mailchimp integration.
@@ -333,14 +331,13 @@ class SubscriptionSuccessfulController extends ControllerBase {
       $order->save();
     }
     elseif ($subject->getType() == 'event') {
-
-
       //updating event order status
       $order->set('field_vih_eo_status', 'confirmed');
       $order->save();
     }
 
-
+    // Finally, sending a confirmation email.
+    $this->_sendConfirmationEmail($subject, $order);
   }
 }
 
