@@ -378,6 +378,8 @@ class ApplicationForm extends FormBase {
     $parents = $form_state->get('parents');
     $triggering_element = $form_state->getTriggeringElement();
     if (isset($triggering_element['#parent_index'])) {
+      $this->removeInputValue('parents', $form_state);
+
       $parent_index = $triggering_element['#parent_index'];
       $form_state->set('parent_current', $parents[$parent_index]);
     }
