@@ -172,8 +172,8 @@ class LongCourseOrderForm extends FormBase {
     );
     $form['personalDataLeft']['cpr'] = array(
       '#type' => 'textfield',
-      '#title' => $this->t('CPR'),
-      '#placeholder' => $this->t('CPR'),
+      '#title' => $this->t('Danish social security number (CPR-number)'),
+      '#placeholder' => $this->t('Danish social security number (CPR-number)'),
       '#pattern' => '[0-9]{10}',
       '#field_suffix' => '<i type="button" class="icon icon-info-circle form-type-textfield__tooltip" aria-hidden="true" data-trigger="hover" data-toggle="popover" data-placement="top" data-content="' . $cprHelpText . '"></i>',
       '#states' => array(

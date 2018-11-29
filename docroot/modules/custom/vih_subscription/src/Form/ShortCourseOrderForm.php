@@ -213,8 +213,8 @@ class ShortCourseOrderForm extends FormBase {
         );
         $form['newParticipantContainer']['newParticipantFieldset']['cpr'] = array(
           '#type' => 'textfield',
-          '#title' => $this->t('CPR'),
-          '#placeholder' => $this->t('CPR'),
+          '#title' => $this->t('Danish social security number (CPR-number)'),
+          '#placeholder' => $this->t('Danish social security number (CPR-number)'),
           '#pattern' => '[0-9]{10}',
           '#field_suffix' => '<i type="button" class="icon icon-info-circle form-type-textfield__tooltip" aria-hidden="true" data-trigger="hover" data-toggle="popover" data-placement="top" data-content="' . $cprHelpText . '"></i>',
           '#states' => array(
@@ -825,7 +825,7 @@ class ShortCourseOrderForm extends FormBase {
 
       if (!empty($form['newParticipantContainer']['newParticipantFieldset'])) {
         if (0 == $form_state->getValues()['newParticipantContainer']['newParticipantFieldset']['nocpr'] and NULL == $form_state->getValues()['newParticipantContainer']['newParticipantFieldset']['cpr']) {
-          $form_state->setError($form['newParticipantContainer']['newParticipantFieldset']['cpr'], $this->t('Please provide CPR.'));
+          $form_state->setError($form['newParticipantContainer']['newParticipantFieldset']['cpr'], $this->t('Please provide your Danish social security number (CPR-number).'));
         }
         if (0 <> $form_state->getValues()['newParticipantContainer']['newParticipantFieldset']['nocpr'] and NULL == $form_state->getValues()['newParticipantContainer']['newParticipantFieldset']['birthdate']) {
           $form_state->setError($form['newParticipantContainer']['newParticipantFieldset']['birthdate'], $this->t('Please provide birthdate.'));
