@@ -184,19 +184,59 @@ class EDBBrugsenIntegration {
       $registration['Elev.Notat'] = $data['afterSchoolComment']['answer'];
     }
     
-    // Adult information.
-    $parent = array_shift($data['parents']);
-    $registration['Voksen.Fornavn'] = $parent['firstName'];
-    $registration['Voksen.Efternavn'] = $parent['lastName'];
-    $registration['Voksen.Adresse'] = $parent['fullAddress'];
+    // Adults information.
+
+    $voksen = NULL;
+    $mor = NULL;
+    $far = NULL;
+    
+    foreach($data['parents'] as $adult){
+      if($adult['type'] == 'andre'  AND is_null($voksen)){
+        $voksen = $adult;
+      }
+      if($adult['type'] == 'mor' AND is_null($mor)){
+        $mor = $adult;
+      }
+      if($adult['type'] == 'far' AND is_null($far)){
+        $far = $adult;
+      }
+    }
+    
+    $registration['Voksen.Fornavn'] = $voksen['firstName'];
+    $registration['Voksen.Efternavn'] = $voksen['lastName'];
+    $registration['Voksen.Adresse'] = $voksen['fullAddress'];
     $registration['Voksen.Lokalby'] = NULL;
-    $registration['Voksen.Postnr'] = $parent['zip'];
-    $registration['Voksen.Bynavn'] = $parent['city'];
-    $registration['Voksen.Fastnet'] = $parent['telefon'];
-    $registration['Voksen.Mobil'] = $parent['telefon'];
-    $registration['Voksen.Email'] = $parent['email'];
-    $registration['Voksen.CprNr'] = $parent['cpr'];
-    $registration['Voksen.Land'] = $edb_utility->getCountryCode($parent['country']);
+    $registration['Voksen.Postnr'] = $voksen['zip'];
+    $registration['Voksen.Bynavn'] = $voksen['city'];
+    $registration['Voksen.Fastnet'] = $voksen['telefon'];
+    $registration['Voksen.Mobil'] = $voksen['telefon'];
+    $registration['Voksen.Email'] = $voksen['email'];
+    $registration['Voksen.CprNr'] = $voksen['cpr'];
+    $registration['Voksen.Land'] = $edb_utility->getCountryCode($voksen['country']);
+    
+    $registration['Mor.Fornavn'] = $mor['firstName'];
+    $registration['Mor.Efternavn'] = $mor['lastName'];
+    $registration['Mor.Adresse'] = $mor['fullAddress'];
+    $registration['Mor.Lokalby'] = NULL;
+    $registration['Mor.Postnr'] = $mor['zip'];
+    $registration['Mor.Bynavn'] = $mor['city'];
+    $registration['Mor.Fastnet'] = $mor['telefon'];
+    $registration['Mor.Mobil'] = $mor['telefon'];
+    $registration['Mor.Email'] = $mor['email'];
+    $registration['Mor.CprNr'] = $mor['cpr'];
+    $registration['Mor.Land'] = $edb_utility->getCountryCode($mor['country']);
+    
+    $registration['Far.Fornavn'] = $far['firstName'];
+    $registration['Far.Efternavn'] = $far['lastName'];
+    $registration['Far.Adresse'] = $far['fullAddress'];
+    $registration['Far.Lokalby'] = NULL;
+    $registration['Far.Postnr'] = $far['zip'];
+    $registration['Far.Bynavn'] = $far['city'];
+    $registration['Far.Fastnet'] = $far['telefon'];
+    $registration['Far.Mobil'] = $far['telefon'];
+    $registration['Far.Email'] = $far['email'];
+    $registration['Far.CprNr'] = $far['cpr'];
+    $registration['Far.Land'] = $edb_utility->getCountryCode($far['country']);
      
     $registration['Elev.TidlSkole'] = $data['schoolFrom']['answer'];
 
