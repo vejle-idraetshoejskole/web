@@ -906,7 +906,7 @@ class ShortCourseOrderForm extends FormBase {
           //Get birthdate from CPR
           // We need to convert 2 digit year to 4 digit year, not to get 2065 instead of 1965
           $birthdate_year = \DateTime::createFromFormat('y', substr($addedParticipant['cpr'], 4, 2));
-          if ($birthdate_year > date('Y')) {
+          if ($birthdate_year->format('Y') > date('Y')) {
             $birthdate_year = \DateTime::createFromFormat('Y', '19' . substr($addedParticipant['cpr'], 4, 2));
           }
           $birthdate = substr($addedParticipant['cpr'], 0, 4) . $birthdate_year->format('Y');

@@ -112,8 +112,8 @@ class ApplicationHandler {
     }else{
       //Get birthdate from CPR
           // We need to convert 2 digit year to 4 digit year, not to get 2065 instead of 1965
-          $birthdate_year = \DateTime::createFromFormat('y', substr($this->data['cpr'], 4, 2));
-          if ($birthdate_year > date('Y')) {
+          $birthdate_year = \DateTime::createFromFormat('y', substr($this->data['cpr'], 4, 2));          
+          if ($birthdate_year->format('Y') > date('Y')) {
             $birthdate_year = \DateTime::createFromFormat('Y', '19' . substr($this->data['cpr'], 4, 2));
           }
           $this->data['birthday'] = substr($this->data['cpr'], 0, 4) . $birthdate_year->format('Y');
@@ -253,7 +253,7 @@ class ApplicationHandler {
         //Get birthdate from CPR
         // We need to convert 2 digit year to 4 digit year, not to get 2065 instead of 1965
         $birthdate_year = \DateTime::createFromFormat('y', substr($parent_data['cpr'], 4, 2));
-        if ($birthdate_year > date('Y')) {
+        if ($birthdate_year->format('Y') > date('Y')) {
           $birthdate_year = \DateTime::createFromFormat('Y', '19' . substr($parent_data['cpr'], 4, 2));
         }
           $birthdate = substr($parent_data['cpr'], 0, 4) . $birthdate_year->format('Y');
