@@ -45,7 +45,17 @@ class ApplicationForm extends FormBase {
 
     $default_value = $form_state->getValue('course');
     if (empty($default_value)) {
-      $default_value = empty($options) ? NULL : key($options);
+      if (empty($options)) {
+        $default_value = NULL;
+      }
+      else {
+        if(!empty($config->get('vih_subscription_application_default_course'))){
+          $default_value = $config->get('vih_subscription_application_default_course');
+        }else{
+          $default_value = key($options);
+        }
+
+      }
     }
     $form['course'] = [
       '#type' => 'select',
@@ -85,7 +95,18 @@ class ApplicationForm extends FormBase {
 
     $periods_default_value = $form_state->getValue('period');
     if (empty($periods_default_value)) {
-      $periods_default_value = empty($options) ? NULL : key($options);
+
+      if (empty($options)) {
+        $periods_default_value = NULL;
+      }
+      else {
+        if (!empty($options[$config->get('vih_subscription_application_default_period')])) {
+          $periods_default_value = $config->get('vih_subscription_application_default_period');
+        }
+        else {
+          $periods_default_value = key($options);
+        }
+      }
     }
     $form['periodsWrapper']['period'] = [
       '#type' => 'select',

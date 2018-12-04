@@ -524,6 +524,37 @@ class SubscriptionsGeneralSettingsForm extends ConfigFormBase {
         '#description' => t("You can use any 'page' node as '/ansogning/success' page"),
       ];
 
+      // Application form default Course.
+
+    $courses = \Drupal::entityQuery('node')->condition('type', 'vih_long_cource')->execute();
+    $courses_options[0] = $this->t('None');
+    foreach (Node::loadMultiple($courses) as $course_node) {
+      $courses_options[$course_node->id()] = $course_node->getTitle();
+    }
+
+    $form['vih_subscription_settings_application_fs']['vih_subscription_application_default_course'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Application form default course'),
+      '#options' => $courses_options,
+      '#empty_label' => 'None',
+      '#default_value' => !empty($config->get('vih_subscription_application_default_course')) ? $config->get('vih_subscription_application_default_course') : NULL,
+    ];
+
+    $periods = \Drupal::entityQuery('node')->condition('type', 'vih_course_period')->execute();
+    $periods_options[0] = $this->t('None');
+    foreach (Node::loadMultiple($periods) as $period_node) {
+      $periods_options[$period_node->id()] = $period_node->getTitle();
+    }
+
+      // Application form default Period.
+    $form['vih_subscription_settings_application_fs']['vih_subscription_application_default_period'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Application form default course period'),
+      '#options' => $periods_options,
+      '#empty_label' => 'None',
+      '#default_value' => !empty($config->get('vih_subscription_application_default_period')) ? $config->get('vih_subscription_application_default_period') : NULL,
+    ];
+
       $form['vih_subscription_settings_application_fs']['vih_subscription_application_language_specific'] = array(
         '#type' => 'vertical_tabs',
         '#default_tab' => 'edit-vih-subscription-application-da',
