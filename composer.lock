@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4e4ca5971b8aed50b39d861dee05510f",
+    "content-hash": "f8bef78bebe7c437986625b643075aea",
     "packages": [
         {
             "name": "acquia/lightning",
@@ -8532,16 +8532,16 @@
         },
         {
             "name": "lsolesen/edbbrugs-php-sdk",
-            "version": "0.4.0",
+            "version": "0.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lsolesen/edbbrugs-php-sdk.git",
-                "reference": "bc115f30f7214f5deff87081eaaf581790bba6a0"
+                "reference": "cabccb051932f67db4ebb4c0d26ee232309ced0d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lsolesen/edbbrugs-php-sdk/zipball/bc115f30f7214f5deff87081eaaf581790bba6a0",
-                "reference": "bc115f30f7214f5deff87081eaaf581790bba6a0",
+                "url": "https://api.github.com/repos/lsolesen/edbbrugs-php-sdk/zipball/cabccb051932f67db4ebb4c0d26ee232309ced0d",
+                "reference": "cabccb051932f67db4ebb4c0d26ee232309ced0d",
                 "shasum": ""
             },
             "require": {
@@ -8576,7 +8576,7 @@
             "keywords": [
                 "webservice"
             ],
-            "time": "2018-08-09T11:21:12+00:00"
+            "time": "2018-11-30T11:22:18+00:00"
         },
         {
             "name": "masterminds/html5",
