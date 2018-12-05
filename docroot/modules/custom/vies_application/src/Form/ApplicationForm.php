@@ -91,6 +91,7 @@ class ApplicationForm extends FormBase {
       '#type' => 'select',
       '#title' => 'Klasse',
       '#options' => $options,
+      '#validated' => TRUE,
       '#empty_label' => 'None',
       '#default_value' => $periods_default_value,
       '#required' => TRUE,
@@ -245,6 +246,7 @@ class ApplicationForm extends FormBase {
    * Ajax callback for the Periods dropdown.
    */
   public function updateAvailablePeriods(array $form, FormStateInterface $form_state) {
+    drupal_get_messages();
     return $form['periodsWrapper'];
   }
 
