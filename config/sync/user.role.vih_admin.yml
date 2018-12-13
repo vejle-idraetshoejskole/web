@@ -175,7 +175,6 @@ permissions:
   - 'administer webform element access'
   - 'administer webform submission'
   - 'administer workflows'
-  - administer_mailsystem
   - 'assign roles'
   - 'attachments with views_send'
   - 'bypass honeypot protection'
