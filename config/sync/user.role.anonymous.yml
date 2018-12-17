@@ -12,5 +12,8 @@ permissions:
   - 'access content'
   - 'access site-wide contact form'
   - 'access user profiles'
+  - 'create vih_event_order content'
+  - 'create vih_long_course_order content'
+  - 'create vih_short_course_order content'
   - 'display eu cookie compliance popup'
   - 'view media'
