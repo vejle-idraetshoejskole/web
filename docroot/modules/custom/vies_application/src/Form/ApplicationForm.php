@@ -341,8 +341,9 @@ class ApplicationForm extends FormBase {
    */
   public function parentsRefreshCallback(array &$form, FormStateInterface $form_state) {
     $response = new AjaxResponse();
-
+    $submit_handlers = $form_state->getSubmitHandlers();
     $parents = $form_state->get('parents');
+
     if ($parents && (count($parents) >= 2 || (count($parents) === 1 && $form_state->get('parent_index')))) {
       $form['confirmOneParent']['#checked'] = TRUE;
       $response->addCommand(new ReplaceCommand('#js-confirm-one-parent', $form['confirmOneParent']));
@@ -353,7 +354,22 @@ class ApplicationForm extends FormBase {
       $response->addCommand(new InvokeCommand('#js-confirm-one-parent', 'removeClass', ['hidden']));
     }
 
+    // Currently editing parent.
+    if (in_array('::showParentForm', $submit_handlers)) {
+      $form['parentsWrapper']['#attributes']['class'][] = 'boxy--parent-hide-edit-button';
+    }
+
+    // Not editing parent - show edit button.
+    else {
+
+      // Remove class.
+      if (($key = array_search('boxy--parent-hide-edit-button', $form['parentsWrapper']['#attributes']['class'])) !== false) {
+        unset($form['parentsWrapper']['#attributes']['class'][$key]);
+      }
+    }
+
     $response->addCommand(new ReplaceCommand('#parents-wrapper', $form['parentsWrapper']));
+
     return $response;
   }
 
@@ -388,6 +404,7 @@ class ApplicationForm extends FormBase {
       $form_state->set('parents', $parents);
       $form_state->set('parent_current', NULL);
     }
+    $form_state->set('parent_index', NULL);
     $form_state->set('parent_index', NULL);
     $form_state->setRebuild();
   }
@@ -544,23 +561,22 @@ class ApplicationForm extends FormBase {
       foreach ($parents as $key => $parent) {
         $form['parentsWrapper']['parents']['added']['control-buttons'][$key] = [
           'edit' => [
-            '#id' => 'edit-parents-' . $key,
-            '#name' => 'edit-parents-' . $key,
-            '#value' => $this->t('Edit'),
-            '#submit' => ['::showParentForm'],
-            '#attributes' => ['class' => ['btn-sm']],
-            '#parent_index' => $key,
-          ] + $ajax_parent_button,
+                      '#id' => 'edit-parents-' . $key,
+                      '#name' => 'edit-parents-' . $key,
+                      '#value' => $this->t('Edit'),
+                      '#submit' => ['::showParentForm'],
+                      '#attributes' => ['class' => ['btn-sm']],
+                      '#parent_index' => $key,
+                    ] + $ajax_parent_button,
           'remove' => [
-            '#id' => 'remove-parents-' . $key,
-            '#name' => 'remove-parents-' . $key,
-            '#value' => $this->t('Remove'),
-            '#submit' => ['::removeParent'],
-            '#attributes' => ['class' => ['btn-sm']],
-            '#parent_index' => $key,
-          ] + $ajax_parent_button,
+                        '#id' => 'remove-parents-' . $key,
+                        '#name' => 'remove-parents-' . $key,
+                        '#value' => $this->t('Remove'),
+                        '#submit' => ['::removeParent'],
+                        '#attributes' => ['class' => ['btn-sm']],
+                        '#parent_index' => $key,
+                      ] + $ajax_parent_button,
         ];
-        $parents[$key]['type_value'] = ApplicationHandler::$adultType[$parent['type']];
       }
       $form['parentsWrapper']['parents']['added']['#list'] = $parents;
     }
@@ -888,5 +904,4 @@ class ApplicationForm extends FormBase {
 
     return $questions;
   }
-
 }
