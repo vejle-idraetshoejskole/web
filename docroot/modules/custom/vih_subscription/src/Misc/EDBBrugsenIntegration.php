@@ -143,10 +143,10 @@ class EDBBrugsenIntegration {
       $registration['Elev.Mobil'] = $order_person->field_vih_ocp_telephone->value;
 
       if ($shortCourseOrder->field_vih_sco_pic_mark_consent->value) {
-        $registration['EgneFelter.EgetFelt65'] = '[Fri084]Ja';
+        $registration['EgneFelter.EgetFelt30'] = '[Fri084]Ja';
       }
       else {
-        $registration['EgneFelter.EgetFelt65'] = '[Fri084]Nej';
+        $registration['EgneFelter.EgetFelt30'] = '[Fri084]Nej';
       }
 
       //using only Booking number/Kartotek from default values
