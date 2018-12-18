@@ -203,7 +203,7 @@ function site_preprocess_node(array &$variables) {
   // Orders
   elseif (in_array($node->getType(), ['vih_short_course_order', 'vih_long_course_order', 'vih_event_order', 'vies_application_form'])) {
     if(!in_array($variables['view_mode'], ['teaser','email_teaser'])){
-      if(!$variables['user']->hasPermission('Access the Content overview page')){
+      if(!$variables['user']->hasPermission('access content overview')){
         throw new AccessDeniedHttpException();
       }
     }

@@ -1357,6 +1357,7 @@ ignored_config_entities:
   2710: '# No ignore config split'
   2712: ~config_split.config_split.vih_functionality
   2714: ~config_split.config_split.vies_functionality
+  2716: ~user.role.vih_admin
 _core:
   default_config_hash: UVH1aJ4b44UM-VdPVN7hNNuuVqfReJxwfVeDQH1Hvsk
 langcode: da
