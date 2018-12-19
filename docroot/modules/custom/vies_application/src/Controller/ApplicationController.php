@@ -82,7 +82,7 @@ class ApplicationController extends ControllerBase {
     }
 
     if ($result == true) {
-        drupal_set_message(t('Mail sended to %mail% successfully.', array('%mail%' => $order->field_vies_email->value)), 'status', TRUE);
+        drupal_set_message(t('Mail sent to %mail% successfully.', array('%mail%' => $order->field_vies_email->value)), 'status', TRUE);
       }
       else {
         drupal_set_message(t('Mail send error. Not sended to %mail%.', array('%mail%' => $order->field_vies_email->value)), 'error', TRUE);

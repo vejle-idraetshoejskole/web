@@ -233,7 +233,7 @@ class SubscriptionSuccessfulController extends ControllerBase {
 
     if ('vih_long_course_order' == $order->getType()) {
       if ($result == true) {
-        drupal_set_message(t('Mail sended to %mail% successfully.', array('%mail%' => $order->field_vih_lco_email->value)), 'status', TRUE);
+        drupal_set_message(t('Mail sent to %mail% successfully.', array('%mail%' => $order->field_vih_lco_email->value)), 'status', TRUE);
       }
       else {
         drupal_set_message(t('Mail send error. Not sended to %mail%.', array('%mail%' => $order->field_vih_lco_email->value)), 'error', TRUE);
@@ -250,7 +250,7 @@ class SubscriptionSuccessfulController extends ControllerBase {
         $email = $firstParticipantParagraph->field_vih_ocp_email->value;
       }
       if ($result == true) {
-        drupal_set_message(t('Mail sended to %mail% successfully.', array('%mail%' => $email)), 'status', TRUE);
+        drupal_set_message(t('Mail sent to %mail% successfully.', array('%mail%' => $email)), 'status', TRUE);
       }
       else {
         drupal_set_message(t('Mail send error. Not sended to %mail%.', array('%mail%' => $email)), 'error', TRUE);
@@ -267,7 +267,7 @@ class SubscriptionSuccessfulController extends ControllerBase {
         $email = $firstParticipantParagraph->field_vih_oe_email->value;
       }
       if ($result == true) {
-        drupal_set_message(t('Mail sended to %mail% successfully.', array('%mail%' => $email)), 'status', TRUE);
+        drupal_set_message(t('Mail sent to %mail% successfully.', array('%mail%' => $email)), 'status', TRUE);
       }
       else {
         drupal_set_message(t('Mail send error. Not sended to %mail%.', array('%mail%' => $email)), 'error', TRUE);
