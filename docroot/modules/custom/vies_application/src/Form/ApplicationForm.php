@@ -560,6 +560,7 @@ class ApplicationForm extends FormBase {
                         '#parent_index' => $key,
                       ] + $ajax_parent_button,
         ];
+        $parents[$key]['type_value'] = ApplicationHandler::$adultType[$parent['type']];
       }
       $form['parentsWrapper']['parents']['added']['#list'] = $parents;
     }
