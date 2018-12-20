@@ -489,8 +489,6 @@ class ShortCourseOrderForm extends FormBase {
 
     $form['picture_marketing_consent'] = array(
       '#type' => 'radios',
-      '#title' => $this
-          ->t('Consent for pictures and marketing'),
       '#options' => array(
         1 => $this
             ->t('Yes'),
@@ -498,7 +496,6 @@ class ShortCourseOrderForm extends FormBase {
             ->t('No'),
       ),
       '#required' => TRUE,
-      '#description' => $this->t('During your stay we will take pictures and video, which we will share with the participants, and some footage might also be used in digital marketing on our website, social media and printed marketing. Will that be alright with you?'),
     );
 
     // Making sure that default value stays if it's there
