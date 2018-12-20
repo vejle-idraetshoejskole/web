@@ -30,8 +30,12 @@ display:
         options:
           perm: 'access content'
       cache:
-        type: tag
-        options: {  }
+        type: time
+        options:
+          results_lifespan: 300
+          results_lifespan_custom: 0
+          output_lifespan: 300
+          output_lifespan_custom: 0
       query:
         type: views_query
         options:
@@ -394,7 +398,8 @@ display:
           break_phrase: true
           not: false
           plugin_id: numeric
-      display_extenders: {  }
+      display_extenders:
+        metatag_display_extender: {  }
       css_class: ''
     cache_metadata:
       max-age: -1
