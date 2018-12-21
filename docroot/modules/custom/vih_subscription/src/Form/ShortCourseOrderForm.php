@@ -475,17 +475,28 @@ class ShortCourseOrderForm extends FormBase {
         ->getId() === 'en') ? $config->get('vih_subscription_short_course_registration_page_text_en') : $config->get('vih_subscription_short_course_registration_page_text_da');
 
     if (!empty($terms_and_conditions_page_id = $config->get('vih_subscription_short_course_terms_and_conditions_page'))) {
-      $terms_and_conditions_link = CommonFormUtils::getTermsAndConditionsLink($terms_and_conditions_page_id);
+      $terms_and_conditions_link = CommonFormUtils::getTermsAndConditionsLink($terms_and_conditions_page_id, 'terms, conditions and treatment of personal information');
       $form['terms_and_conditions'] = array(
         '#type' => 'checkboxes',
-        '#options' => array('accepted' => $this->t('I agree to the @terms_and_conditions', array('@terms_and_conditions' => $terms_and_conditions_link))),
-        '#title' => $this->t('Terms and conditions'),
+        '#options' => array('accepted' => $this->t('I have read and accept the @terms_and_conditions', array('@terms_and_conditions' => $terms_and_conditions_link))),
+        '#title' => $this->t('Terms, conditions and treatment of personal information'),
         '#required' => TRUE,
         '#attributes' => [
           'required' => ''
         ],
       );
     }
+
+    $form['picture_marketing_consent'] = array(
+      '#type' => 'radios',
+      '#options' => array(
+        1 => $this
+            ->t('Yes'),
+        0 => $this
+            ->t('No'),
+      ),
+      '#required' => TRUE,
+    );
 
     // Making sure that default value stays if it's there
     if (!isset($form['order_comment'])) {
@@ -516,6 +527,7 @@ class ShortCourseOrderForm extends FormBase {
         ['newParticipantContainer', 'newParticipantFieldset', 'cpr'],
         ['newParticipantContainer', 'newParticipantFieldset', 'birthdate'],
         ['terms_and_conditions'],
+        ['picture_marketing_consent'],
         ['order_comment']
       ),
       '#submit' => array('::submitForm')
@@ -855,6 +867,11 @@ class ShortCourseOrderForm extends FormBase {
       if (empty($form_state->getValue('terms_and_conditions')['accepted']) && !empty($config->get('vih_subscription_short_course_terms_and_conditions_page'))) {
         $form_state->setError($form['terms_and_conditions'], $this->t('Before you can proceed you must accept the terms and conditions'));
       }
+
+      $pictures_marketing_consent = $form_state->getValue('picture_marketing_consent');
+      if (!isset($pictures_marketing_consent)) {
+        $form_state->setError($form['picture_marketing_consent'], $this->t('Before you can proceed you must answer the pictures and marketing consent'));
+      }
     }
   }
 
@@ -971,7 +988,8 @@ class ShortCourseOrderForm extends FormBase {
         'field_vih_sco_course' => $this->course->id(),
         'field_vih_sco_status' => 'pending',
         'field_vih_sco_price' => $orderPrice,
-        'field_vih_sco_comment' => $form_state->getValue('order_comment')
+        'field_vih_sco_comment' => $form_state->getValue('order_comment'),
+        'field_vih_sco_pic_mark_consent' => $form_state->getValue('picture_marketing_consent')
       ));
       $this->courseOrder->setPromoted(FALSE);
     }

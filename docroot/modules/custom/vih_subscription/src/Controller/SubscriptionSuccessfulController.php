@@ -121,14 +121,14 @@ class SubscriptionSuccessfulController extends ControllerBase {
         $courseDate = NULL;
         if ($subject->field_vih_sc_start_date->value) {
           $courseDate = \Drupal::service('date.formatter')
-            ->format($subject->field_vih_sc_start_date->date->getTimestamp(), "long");
+              ->format($subject->field_vih_sc_start_date->date->getTimestamp(), "long");
         }
         if ($subject->field_vih_sc_end_date->value) {
           if (!(empty($courseDate))) {
             $courseDate .= ' - ';
           }
           $courseDate .= \Drupal::service('date.formatter')
-            ->format($subject->field_vih_sc_end_date->date->getTimestamp(), "long");
+              ->format($subject->field_vih_sc_end_date->date->getTimestamp(), "long");
         }
         $notification_template = $notificationsConfig->get('vih_subscription_short_course_notifications_body_' . $currentLangId);
         $notification_template = preg_replace("/\r\n|\r|\n/", '<br/>', $notification_template);
@@ -167,14 +167,14 @@ class SubscriptionSuccessfulController extends ControllerBase {
         $eventDate = NULL;
         if ($subject->field_vih_event_start_date->value) {
           $eventDate = \Drupal::service('date.formatter')
-            ->format($subject->field_vih_event_start_date->date->getTimestamp(), "long");
+              ->format($subject->field_vih_event_start_date->date->getTimestamp(), "long");
         }
         if ($subject->field_vih_event_end_date->value) {
           if (!(empty($eventDate))) {
             $eventDate .= ' - ';
           }
           $eventDate .= \Drupal::service('date.formatter')
-            ->format($subject->field_vih_event_end_date->date->getTimestamp(), "long");
+              ->format($subject->field_vih_event_end_date->date->getTimestamp(), "long");
         }
         $notification_template = $notificationsConfig->get('vih_subscription_event_notifications_body_' . $currentLangId);
         $notification_template = preg_replace("/\r\n|\r|\n/", '<br/>', $notification_template);
@@ -218,7 +218,10 @@ class SubscriptionSuccessfulController extends ControllerBase {
     $token = ['@subject_name', '@person_name', '@date', '@url', '@order_id', '@order'];
     if (!empty($message)) {
       VihSubscriptionUtils::makeReplacements($message, $token, $replacement);
-      VihSubscriptionUtils::sendMail($message);
+      return VihSubscriptionUtils::sendMail($message);
+    }
+    else {
+      return FALSE;
     }
   }
 
@@ -226,16 +229,57 @@ class SubscriptionSuccessfulController extends ControllerBase {
    * {@inheritdoc}
    */
   public function resend(NodeInterface $subject, NodeInterface $order) {
-    $this->_sendConfirmationEmail($subject, $order);
-    $build = array(
-      '#theme' => 'vih-subscription-email-resend-page'
-    );
-    return $build;
+    $result = $this->_sendConfirmationEmail($subject, $order);
+
+    if ('vih_long_course_order' == $order->getType()) {
+      if ($result == true) {
+        drupal_set_message(t('Mail sent to %mail% successfully.', array('%mail%' => $order->field_vih_lco_email->value)), 'status', TRUE);
+      }
+      else {
+        drupal_set_message(t('Mail send error. Not sended to %mail%.', array('%mail%' => $order->field_vih_lco_email->value)), 'error', TRUE);
+      }
+      return new RedirectResponse('/node/' . $order->id() . '/long-course---order-page');
+    }
+
+    if ('vih_short_course_order' == $order->getType()) {
+      $allParticipants = $order->get('field_vih_sco_persons')->getValue();
+      if (!empty($allParticipants)) {
+        //getting first participant
+        $firstParticipantTargetId = $allParticipants[0]['target_id'];
+        $firstParticipantParagraph = Paragraph ::load($firstParticipantTargetId);
+        $email = $firstParticipantParagraph->field_vih_ocp_email->value;
+      }
+      if ($result == true) {
+        drupal_set_message(t('Mail sent to %mail% successfully.', array('%mail%' => $email)), 'status', TRUE);
+      }
+      else {
+        drupal_set_message(t('Mail send error. Not sended to %mail%.', array('%mail%' => $email)), 'error', TRUE);
+      }
+      return new RedirectResponse('/node/' . $order->id() . '/short-course---order-page');
+    }
+    
+    if ('vih_event_order' == $order->getType()) {
+      $allParticipants = $order->get('field_vih_eo_persons')->getValue();
+      if (!empty($allParticipants)) {
+        //getting first participant
+        $firstParticipantTargetId = $allParticipants[0]['target_id'];
+        $firstParticipantParagraph = Paragraph ::load($firstParticipantTargetId);
+        $email = $firstParticipantParagraph->field_vih_oe_email->value;
+      }
+      if ($result == true) {
+        drupal_set_message(t('Mail sent to %mail% successfully.', array('%mail%' => $email)), 'status', TRUE);
+      }
+      else {
+        drupal_set_message(t('Mail send error. Not sended to %mail%.', array('%mail%' => $email)), 'error', TRUE);
+      }
+      return new RedirectResponse('/node/' . $order->id() . '/event---order-page');
+    }
   }
 
   public function getTitle() {
     return $this->t('Tak for din tilmelding');
   }
+
   /**
    * Wrapper function register order:
    * Sending notification email, changing order status, registering on EDB system
@@ -339,6 +383,7 @@ class SubscriptionSuccessfulController extends ControllerBase {
     // Finally, sending a confirmation email.
     $this->_sendConfirmationEmail($subject, $order);
   }
+
 }
 
 /**

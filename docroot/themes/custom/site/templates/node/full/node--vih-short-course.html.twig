@@ -104,12 +104,14 @@
                                                 </div>
                                             </div>
 
-                                            <div class="text-center partial__body">
-                                                <a href="{{ url('vih_subscription.short_course_order_create', {'course': node.id}) }}"
-                                                   class="btn btn-primary">
-                                                    {{ "Join course" | trans }}
-                                                </a>
-                                            </div>
+                                            {% if content.is_active and content.can_be_subscribed and not content.is_outdated %}
+                                              <div class="text-center partial__body">
+                                                  <a href="{{ url('vih_subscription.short_course_order_create', {'course': node.id}) }}"
+                                                     class="btn btn-primary">
+                                                      {{ "Join course" | trans }}
+                                                  </a>
+                                              </div>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 {% endif %}

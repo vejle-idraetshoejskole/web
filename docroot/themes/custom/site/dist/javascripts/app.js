@@ -3,10 +3,10 @@
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 /* ========================================================================
- * Bootstrap: affix.js v3.3.7
- * http://getbootstrap.com/javascript/#affix
+ * Bootstrap: affix.js v3.4.0
+ * https://getbootstrap.com/docs/3.4/javascript/#affix
  * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
+ * Copyright 2011-2018 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
@@ -19,7 +19,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   var Affix = function Affix(element, options) {
     this.options = $.extend({}, Affix.DEFAULTS, options);
 
-    this.$target = $(this.options.target).on('scroll.bs.affix.data-api', $.proxy(this.checkPosition, this)).on('click.bs.affix.data-api', $.proxy(this.checkPositionWithEventLoop, this));
+    var target = this.options.target === Affix.DEFAULTS.target ? $(this.options.target) : $(document).find(this.options.target);
+
+    this.$target = target.on('scroll.bs.affix.data-api', $.proxy(this.checkPosition, this)).on('click.bs.affix.data-api', $.proxy(this.checkPositionWithEventLoop, this));
 
     this.$element = $(element);
     this.affixed = null;
@@ -29,7 +31,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.checkPosition();
   };
 
-  Affix.VERSION = '3.3.7';
+  Affix.VERSION = '3.4.0';
 
   Affix.RESET = 'affix affix-top affix-bottom';
 
@@ -157,10 +159,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 'use strict';
 
 /* ========================================================================
- * Bootstrap: tab.js v3.3.7
- * http://getbootstrap.com/javascript/#tabs
+ * Bootstrap: tab.js v3.4.0
+ * https://getbootstrap.com/docs/3.4/javascript/#tabs
  * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
+ * Copyright 2011-2018 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
@@ -176,7 +178,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     // jscs:enable requireDollarBeforejQueryAssignment
   };
 
-  Tab.VERSION = '3.3.7';
+  Tab.VERSION = '3.4.0';
 
   Tab.TRANSITION_DURATION = 150;
 
@@ -205,7 +207,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     if (showEvent.isDefaultPrevented() || hideEvent.isDefaultPrevented()) return;
 
-    var $target = $(selector);
+    var $target = $(document).find(selector);
 
     this.activate($this.closest('li'), $ul);
     this.activate($target, $target.parent(), function () {
@@ -289,10 +291,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 /* ========================================================================
- * Bootstrap: collapse.js v3.3.7
- * http://getbootstrap.com/javascript/#collapse
+ * Bootstrap: collapse.js v3.4.0
+ * https://getbootstrap.com/docs/3.4/javascript/#collapse
  * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
+ * Copyright 2011-2018 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
@@ -319,7 +321,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     if (this.options.toggle) this.toggle();
   };
 
-  Collapse.VERSION = '3.3.7';
+  Collapse.VERSION = '3.4.0';
 
   Collapse.TRANSITION_DURATION = 350;
 
@@ -405,7 +407,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   };
 
   Collapse.prototype.getParent = function () {
-    return $(this.options.parent).find('[data-toggle="collapse"][data-parent="' + this.options.parent + '"]').each($.proxy(function (i, element) {
+    return $(document).find(this.options.parent).find('[data-toggle="collapse"][data-parent="' + this.options.parent + '"]').each($.proxy(function (i, element) {
       var $element = $(element);
       this.addAriaAndCollapsedClass(getTargetFromTrigger($element), $element);
     }, this)).end();
@@ -422,7 +424,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     var href;
     var target = $trigger.attr('data-target') || (href = $trigger.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, ''); // strip for ie7
 
-    return $(target);
+    return $(document).find(target);
   }
 
   // COLLAPSE PLUGIN DEFINITION
@@ -471,17 +473,17 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 'use strict';
 
 /* ========================================================================
- * Bootstrap: transition.js v3.3.7
- * http://getbootstrap.com/javascript/#transitions
+ * Bootstrap: transition.js v3.4.0
+ * https://getbootstrap.com/docs/3.4/javascript/#transitions
  * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
+ * Copyright 2011-2018 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
 +function ($) {
   'use strict';
 
-  // CSS TRANSITION SUPPORT (Shoutout: http://www.modernizr.com/)
+  // CSS TRANSITION SUPPORT (Shoutout: https://modernizr.com/)
   // ============================================================
 
   function transitionEnd() {
@@ -503,7 +505,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     return false; // explicit for ie8 (  ._.)
   }
 
-  // http://blog.alexmaccaw.com/css-transitions
+  // https://blog.alexmaccaw.com/css-transitions
   $.fn.emulateTransitionEnd = function (duration) {
     var called = false;
     var $el = this;
@@ -536,11 +538,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 /* ========================================================================
- * Bootstrap: tooltip.js v3.3.7
- * http://getbootstrap.com/javascript/#tooltip
+ * Bootstrap: tooltip.js v3.4.0
+ * https://getbootstrap.com/docs/3.4/javascript/#tooltip
  * Inspired by the original jQuery.tipsy by Jason Frame
  * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
+ * Copyright 2011-2018 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
@@ -562,7 +564,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.init('tooltip', element, options);
   };
 
-  Tooltip.VERSION = '3.3.7';
+  Tooltip.VERSION = '3.4.0';
 
   Tooltip.TRANSITION_DURATION = 150;
 
@@ -587,7 +589,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.type = type;
     this.$element = $(element);
     this.options = this.getOptions(options);
-    this.$viewport = this.options.viewport && $($.isFunction(this.options.viewport) ? this.options.viewport.call(this, this.$element) : this.options.viewport.selector || this.options.viewport);
+    this.$viewport = this.options.viewport && $(document).find($.isFunction(this.options.viewport) ? this.options.viewport.call(this, this.$element) : this.options.viewport.selector || this.options.viewport);
     this.inState = { click: false, hover: false, focus: false };
 
     if (this.$element[0] instanceof document.constructor && !this.options.selector) {
@@ -730,7 +732,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
       $tip.detach().css({ top: 0, left: 0, display: 'block' }).addClass(placement).data('bs.' + this.type, this);
 
-      this.options.container ? $tip.appendTo(this.options.container) : $tip.insertAfter(this.$element);
+      this.options.container ? $tip.appendTo($(document).find(this.options.container)) : $tip.insertAfter(this.$element);
       this.$element.trigger('inserted.bs.' + this.type);
 
       var pos = this.getPosition();
@@ -1028,10 +1030,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 /* ========================================================================
- * Bootstrap: popover.js v3.3.7
- * http://getbootstrap.com/javascript/#popovers
+ * Bootstrap: popover.js v3.4.0
+ * https://getbootstrap.com/docs/3.4/javascript/#popovers
  * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
+ * Copyright 2011-2018 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
@@ -1047,7 +1049,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
   if (!$.fn.tooltip) throw new Error('Popover requires tooltip.js');
 
-  Popover.VERSION = '3.3.7';
+  Popover.VERSION = '3.4.0';
 
   Popover.DEFAULTS = $.extend({}, $.fn.tooltip.Constructor.DEFAULTS, {
     placement: 'right',
@@ -1131,10 +1133,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 /* ========================================================================
- * Bootstrap: modal.js v3.3.7
- * http://getbootstrap.com/javascript/#modals
+ * Bootstrap: modal.js v3.4.0
+ * https://getbootstrap.com/docs/3.4/javascript/#modals
  * ========================================================================
- * Copyright 2011-2016 Twitter, Inc.
+ * Copyright 2011-2018 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
@@ -1154,6 +1156,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     this.originalBodyPad = null;
     this.scrollbarWidth = 0;
     this.ignoreBackdropClick = false;
+    this.fixedContent = '.navbar-fixed-top, .navbar-fixed-bottom';
 
     if (this.options.remote) {
       this.$element.find('.modal-content').load(this.options.remote, $.proxy(function () {
@@ -1162,7 +1165,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     }
   };
 
-  Modal.VERSION = '3.3.7';
+  Modal.VERSION = '3.4.0';
 
   Modal.TRANSITION_DURATION = 300;
   Modal.BACKDROP_TRANSITION_DURATION = 150;
@@ -1370,11 +1373,24 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   Modal.prototype.setScrollbar = function () {
     var bodyPad = parseInt(this.$body.css('padding-right') || 0, 10);
     this.originalBodyPad = document.body.style.paddingRight || '';
-    if (this.bodyIsOverflowing) this.$body.css('padding-right', bodyPad + this.scrollbarWidth);
+    var scrollbarWidth = this.scrollbarWidth;
+    if (this.bodyIsOverflowing) {
+      this.$body.css('padding-right', bodyPad + scrollbarWidth);
+      $(this.fixedContent).each(function (index, element) {
+        var actualPadding = element.style.paddingRight;
+        var calculatedPadding = $(element).css('padding-right');
+        $(element).data('padding-right', actualPadding).css('padding-right', parseFloat(calculatedPadding) + scrollbarWidth + 'px');
+      });
+    }
   };
 
   Modal.prototype.resetScrollbar = function () {
     this.$body.css('padding-right', this.originalBodyPad);
+    $(this.fixedContent).each(function (index, element) {
+      var padding = $(element).data('padding-right');
+      $(element).removeData('padding-right');
+      element.style.paddingRight = padding ? padding : '';
+    });
   };
 
   Modal.prototype.measureScrollbar = function () {
@@ -1420,7 +1436,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   $(document).on('click.bs.modal.data-api', '[data-toggle="modal"]', function (e) {
     var $this = $(this);
     var href = $this.attr('href');
-    var $target = $($this.attr('data-target') || href && href.replace(/.*(?=#[^\s]+$)/, '')); // strip for ie7
+    var target = $this.attr('data-target') || href && href.replace(/.*(?=#[^\s]+$)/, ''); // strip for ie7
+
+    var $target = $(document).find(target);
     var option = $target.data('bs.modal') ? 'toggle' : $.extend({ remote: !/#/.test(href) && href }, $target.data(), $this.data());
 
     if ($this.is('a')) e.preventDefault();

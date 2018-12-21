@@ -142,6 +142,13 @@ class EDBBrugsenIntegration {
       $registration['Elev.Fastnet'] = $order_person->field_vih_ocp_telephone->value;
       $registration['Elev.Mobil'] = $order_person->field_vih_ocp_telephone->value;
 
+      if ($shortCourseOrder->field_vih_sco_pic_mark_consent->value) {
+        $registration['EgneFelter.EgetFelt30'] = '[Fri084]Ja';
+      }
+      else {
+        $registration['EgneFelter.EgetFelt30'] = '[Fri084]Nej';
+      }
+
       //using only Booking number/Kartotek from default values
       $defaultValues = $this->getDefaultRegistrationValues();
       $registration['Kartotek'] = $defaultValues['Kartotek'];

@@ -78,14 +78,16 @@ class ApplicationController extends ControllerBase {
     $message['body'] = $logo . $message['body'];
     if (!empty($message)) {
       VihSubscriptionUtils::makeReplacements($message, $token, $replacement);
-      VihSubscriptionUtils::sendMail($message);
-
+      $result = VihSubscriptionUtils::sendMail($message);
     }
 
-    $build = array(
-      '#theme' => 'vies-application-email-resend-page'
-    );
-    return $build;
+    if ($result == true) {
+        drupal_set_message(t('Mail sent to %mail% successfully.', array('%mail%' => $order->field_vies_email->value)), 'status', TRUE);
+      }
+      else {
+        drupal_set_message(t('Mail send error. Not sended to %mail%.', array('%mail%' => $order->field_vies_email->value)), 'error', TRUE);
+      }
+    
+    return new RedirectResponse('/node/' . $order->id() );
   }
-
 }

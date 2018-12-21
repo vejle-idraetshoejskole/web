@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.vih_short_course_order.field_vih_sco_edb_synch_message
     - field.field.node.vih_short_course_order.field_vih_sco_edb_synched
     - field.field.node.vih_short_course_order.field_vih_sco_persons
+    - field.field.node.vih_short_course_order.field_vih_sco_pic_mark_consent
     - field.field.node.vih_short_course_order.field_vih_sco_price
     - field.field.node.vih_short_course_order.field_vih_sco_status
     - node.type.vih_short_course_order
@@ -24,7 +25,7 @@ third_party_settings:
         - field_vih_sco_edb_synched
         - field_vih_sco_edb_synch_message
       parent_name: ''
-      weight: 15
+      weight: 16
       format_type: tab
       format_settings:
         id: ''
@@ -88,6 +89,13 @@ content:
       form_display_mode: default
       default_paragraph_type: _none
     third_party_settings: {  }
+    region: content
+  field_vih_sco_pic_mark_consent:
+    weight: 15
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
     region: content
   field_vih_sco_price:
     weight: 9
