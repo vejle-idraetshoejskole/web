@@ -12,37 +12,40 @@
 ]
 %}
 {% set class_modal_id = 'modal-class--'~term.id~'--'~random() %}
+{% if term.field_vih_hide_on_lists.value and term.field_vih_hide_on_lists.value == 1 %}
 
-<div {{ attributes.addClass(classes) }}>
+{% else %}
+  <div {{ attributes.addClass(classes) }}>
 
-    {# Begin - image #}
-    {% if term.field_vih_class_image.value %}
-        <div class="entity-list-advanced__image" style="background-image: url({{ term.field_vih_class_image.entity.image.entity.fileuri | image_style('list_advanced') }});" data-toggle="modal" data-target="#{{ class_modal_id }}" data-backdrop="static">
-            <a data-dialog-type="modal"  class="use-ajax" href="{{ path('vih_subscription.vih_cs_classes_modal', {'class': term.id}) }}">  
-                <div class="entity-list-advanced__image__overlay entity-list-advanced__image__overlay--{{ term.field_vih_class_color.value }}">
-                    {{ name }}
-                </div>
-            </a>
-        </div>
-    {% endif %}
-    {# End - image #}
+      {# Begin - image #}
+      {% if term.field_vih_class_image.value %}
+          <div class="entity-list-advanced__image" style="background-image: url({{ term.field_vih_class_image.entity.image.entity.fileuri | image_style('list_advanced') }});" data-toggle="modal" data-target="#{{ class_modal_id }}" data-backdrop="static">
+              <a data-dialog-type="modal"  class="use-ajax" href="{{ path('vih_subscription.vih_cs_classes_modal', {'class': term.id}) }}">  
+                  <div class="entity-list-advanced__image__overlay entity-list-advanced__image__overlay--{{ term.field_vih_class_color.value }}">
+                      {{ name }}
+                  </div>
+              </a>
+          </div>
+      {% endif %}
+      {# End - image #}
 
-    <!-- Begin - body -->
-    <div class="entity-list-advanced__body">
+      <!-- Begin - body -->
+      <div class="entity-list-advanced__body">
 
-        {# Begin - short description #}
-        {{ content.field_short_description }}
-        {# End - short description #}
+          {# Begin - short description #}
+          {{ content.field_short_description }}
+          {# End - short description #}
 
-    </div>
-    <!-- End - body -->
+      </div>
+      <!-- End - body -->
 
-    <!-- Begin - action -->
-    <div class="entity-list-advanced__action">
-        <a data-dialog-type="modal"  class="use-ajax btn btn-default" href="{{ path('vih_subscription.vih_cs_classes_modal', {'class': term.id}) }}">
-            <span class="icon icon-info-circle"></span>
-        </a>
-    </div>
-    <!-- End - action -->
+      <!-- Begin - action -->
+      <div class="entity-list-advanced__action">
+          <a data-dialog-type="modal"  class="use-ajax btn btn-default" href="{{ path('vih_subscription.vih_cs_classes_modal', {'class': term.id}) }}">
+              <span class="icon icon-info-circle"></span>
+          </a>
+      </div>
+      <!-- End - action -->
 
-</div>
+  </div>
+{% endif %}
