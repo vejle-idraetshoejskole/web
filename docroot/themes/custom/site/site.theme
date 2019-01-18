@@ -778,11 +778,18 @@ function site_preprocess_select(array &$variables) {
  * Implements hook_preprocess_field().
  */
 function site_preprocess_field(array &$variables, $hook) {
+
   switch ($variables['element']['#field_name']) {
     // Unsetting unpublished paragraphs.
     case 'field_vih_paragraphs':
+      $currentLang = \Drupal::languageManager()->getCurrentLanguage()->getId();
       foreach($variables['items'] as $delta => $paragraphItem) {
-        if (!$paragraphItem['content']['#paragraph']->isPublished()) {
+        $paragraph = $paragraphItem['content']['#paragraph'];
+        if ($paragraph->hasTranslation($currentLang)) {
+          $paragraph = $paragraphItem['content']['#paragraph']->getTranslation($currentLang);
+        }
+
+        if (!$paragraph->isPublished()) {
           unset($variables['items'][$delta]);
         }
       }
