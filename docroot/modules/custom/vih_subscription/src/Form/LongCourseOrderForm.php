@@ -425,6 +425,13 @@ class LongCourseOrderForm extends FormBase {
     // Not expanding any courses slots, as there are some values in the form already.
     $form['#expand_first_course_slot'] = FALSE;
 
+    if (0 == $form_state->getValue('nocpr') and NULL == $form_state->getValue('cpr')) {
+      $form_state->setError($form['personalDataLeft']['cpr'], $this->t('Please provide your Danish social security number (CPR-number).'));
+    }
+    if (0 <> $form_state->getValue('nocpr') and NULL == $form_state->getValue('birthdate')) {
+      $form_state->setError($form['personalDataLeft']['birthdate'], $this->t('Please provide birthdate.'));
+    }
+
     //going through the selected options
     foreach ($form_state->getValues() as $radioKey => $radioValue) {
       if (preg_match('/^course-period-(\d)-courseSlot-(\d)-availableClasses$/', $radioKey, $matches)) {
