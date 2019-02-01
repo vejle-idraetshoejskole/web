@@ -93,6 +93,8 @@ class LongCourseOrderForm extends FormBase {
         $radiosOptions = array();
         $classesRadioSelections = array();
         foreach ($courseSlot->field_vih_cs_classes->referencedEntities() as $class) {
+          // skip if hide in list selected
+          if ($class->get('field_vih_hide_on_lists')->getValue()[0]['value'] == 1) continue;
           //Title is being handled in css depending on button
           //state and active language: see _radio-selection/_vih-class.scss
           $radiosOptions[$class->id()] = ''; //$this->t('Vælg');
@@ -550,7 +552,7 @@ class LongCourseOrderForm extends FormBase {
 
     //checking if we need to create a new order or edit the existing
     if ($this->courseOrder == NULL) {
-      
+
       $address_array = array();
       array_push($address_array, $form_state->getValue('address'));
       array_push($address_array, $form_state->getValue('houseNumber'));
@@ -558,7 +560,7 @@ class LongCourseOrderForm extends FormBase {
       array_push($address_array, $form_state->getValue('houseFloor'));
       // We do not need empty elements on the array.
       $address_array = array_diff($address_array, array(''));
-      
+
       $address_adult_array = array();
       array_push($address_adult_array, $form_state->getValue('adultAddress'));
       array_push($address_adult_array, $form_state->getValue('adultHouseNumber'));
@@ -566,7 +568,7 @@ class LongCourseOrderForm extends FormBase {
       array_push($address_adult_array, $form_state->getValue('adultHouseFloor'));
       // We do not need empty elements on the array.
       $address_adult_array = array_diff($address_adult_array, array(''));
-      
+
       $this->courseOrder = Node::create(array(
         'type' => 'vih_long_course_order',
         'status' => 1, //We restrict direct access to the node in site_preprocess_node hook
