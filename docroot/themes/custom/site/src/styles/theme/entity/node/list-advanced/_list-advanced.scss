@@ -108,14 +108,16 @@ $list-advanced-inner-left-right-spacing: floor( ( $grid-gutter-width / 2 ) );
 }
 
 .entity-list-advanced__body {
-  display: flex;
+  display: block;
 
   padding: $list-advanced-inner-top-bottom-spacing $list-advanced-inner-left-right-spacing;
 
   flex-direction: column;
   justify-content: center;
 }
-
+@supports(display:contents){
+  .entity-list-advanced__body{display:flex;}
+}
 .entity-list-advanced__action {
   display: flex;
 
