@@ -50,6 +50,13 @@
     display: none;
   }
 }
+@supports ( display:contents ) {
+  .entity-list-advanced--class {
+    & > a.link-modal {
+      display: contents;
+    }
+  }
+}
 
 // --------------------------------------------------
 // Variants
