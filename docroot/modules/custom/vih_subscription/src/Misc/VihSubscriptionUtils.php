@@ -29,25 +29,6 @@ class VihSubscriptionUtils {
    * @return BOOLEAN
    */
   public static function sendMail($message) {
-    $send_mail = new \Drupal\Core\Mail\Plugin\Mail\PhpMail();
-
-    if (!isset($message['from'])) {
-      $message['from'] = \Drupal::config('system.site')->get('mail');
-    }
-
-    if (!isset($message['sender'])) {
-      $message['sender'] = \Drupal::config('system.site')->get('name');
-    }
-
-    $message['sender'] = '=?UTF-8?B?' . base64_encode($message['sender']) . '?=';
-
-    $message['headers'] = array(
-      'content-type' => 'text/html; charset=UTF-8; format=flowed; delsp=yes',
-      'MIME-Version' => '1.0',
-      'reply-to' => $message['from'],
-      'from' => $message['sender'] . ' <' . $message['from'] . '>'
-    );
-
     if (isset($message['Cc'])) {
       $message['headers']['Cc'] = $message['Cc'];
       unset($message['Cc']);
@@ -58,7 +39,7 @@ class VihSubscriptionUtils {
       unset($message['Bcc']);
     }
 
-    return $send_mail->mail($message);
+    return \Drupal::service('plugin.manager.mail')->mail('vih_subscription', 'order', $message['to'], \Drupal::languageManager()->getDefaultLanguage()->getId(), $message);
   }
 
   /**
