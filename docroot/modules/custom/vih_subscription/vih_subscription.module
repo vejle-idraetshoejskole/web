@@ -260,7 +260,7 @@ function vih_subscription_mail($key, &$message, $params) {
       }
       
       if (isset($params['Bcc'])) {
-        $message['headers']['Bcc'] = $message['Bcc'];
+        $message['headers']['Bcc'] = $params['Bcc'];
       }
       break;
   }
