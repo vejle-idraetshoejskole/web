@@ -6,9 +6,13 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - field.field.node.news.body
     - field.field.node.news.field_metatag
+    - field.field.node.news.field_short_description
+    - field.field.node.news.field_vih_course_subheading
+    - field.field.node.news.field_vih_image
     - field.field.node.news.field_vih_news_tags
     - field.field.node.news.field_vih_paragraphs
     - field.field.node.news.field_vih_top_banner
+    - field.field.node.news.field_vih_top_banner_text
     - field.field.node.news.scheduled_update
     - node.type.news
   module:
@@ -27,17 +31,32 @@ bundle: news
 mode: teaser
 content:
   body:
-    label: hidden
     type: text_summary_or_trimmed
-    weight: 0
+    weight: 2
+    region: content
+    label: hidden
     settings:
       trim_length: 100
     third_party_settings: {  }
+  field_short_description:
+    type: basic_string
+    weight: 1
     region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  field_vih_image:
+    type: entity_reference_entity_view
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      view_mode: vih_general_teaser_image
+      link: false
+    third_party_settings: {  }
 hidden:
   field_metatag: true
   field_vih_course_subheading: true
-  field_vih_image: true
   field_vih_news_tags: true
   field_vih_paragraphs: true
   field_vih_top_banner: true
