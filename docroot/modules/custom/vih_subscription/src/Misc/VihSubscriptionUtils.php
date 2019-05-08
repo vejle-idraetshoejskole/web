@@ -29,16 +29,6 @@ class VihSubscriptionUtils {
    * @return BOOLEAN
    */
   public static function sendMail($message) {
-    if (isset($message['Cc'])) {
-      $message['headers']['Cc'] = $message['Cc'];
-      unset($message['Cc']);
-    }
-
-    if (isset($message['Bcc'])) {
-      $message['headers']['Bcc'] = $message['Bcc'];
-      unset($message['Bcc']);
-    }
-
     return \Drupal::service('plugin.manager.mail')->mail('vih_subscription', 'order', $message['to'], \Drupal::languageManager()->getDefaultLanguage()->getId(), $message);
   }
 
