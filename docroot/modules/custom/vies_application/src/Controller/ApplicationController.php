@@ -73,12 +73,19 @@ class ApplicationController extends ControllerBase {
         $logo = '<div style="background-color:#ff6400; width:100%; text-align:center">'
       . '<img src="'
       . \Drupal::request()->getSchemeAndHttpHost()
-      . '/themes/custom/site/dist/images/layout-header-logo-vies.png" alt="VIH" />'
+      . '/themes/custom/site/dist/images/layout-header-logo-vies.png" alt="VIES" />'
       . '</div><br>';
     $message['body'] = $logo . $message['body'];
     if (!empty($message)) {
       VihSubscriptionUtils::makeReplacements($message, $token, $replacement);
       $result = VihSubscriptionUtils::sendMail($message);
+
+      foreach ($order->get('field_vies_parents')->referencedEntities() as $parent) {
+        if (!empty($parent->field_parent_email->value)) {
+          $message['to'] = $parent->field_parent_email->value;
+          VihSubscriptionUtils::sendMail($message);
+        }
+      }
     }
 
     if ($result == true) {
