@@ -32,6 +32,20 @@
   }
 }
 
+
+.modal {
+
+  .field--name-field-vih-course-periods {
+
+    .sectioned--content {
+
+      &:after {
+        display: none;
+      }
+    }
+  }
+}
+
 // --------------------------------------------------
 // Variants
 // --------------------------------------------------
