@@ -158,7 +158,7 @@ class EventOrderForm extends FormBase {
       }
       else {
         $form['newParticipantContainer']['message'] = array(
-          '#markup' => $this->t('Denne begivenhed kan ikke allokere flere deltagere')
+          '#markup' => $this->t('This event does not have any available spots')
         );
       }
     }
