@@ -2561,6 +2561,45 @@ display:
           entity_type: node
           entity_field: langcode
           plugin_id: language
+        field_vih_sco_status_value:
+          id: field_vih_sco_status_value
+          table: node__field_vih_sco_status
+          field: field_vih_sco_status_value
+          relationship: reverse__node__field_vih_sco_course
+          group_type: group
+          admin_label: ''
+          operator: or
+          value:
+            confirmed: confirmed
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          plugin_id: list_field
       filter_groups:
         operator: AND
         groups:
