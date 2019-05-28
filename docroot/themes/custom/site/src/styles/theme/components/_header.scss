@@ -118,14 +118,8 @@ $breakpoint-mobile-to-tablet: "screen and (max-width: #{$screen-sm-max})";
 
       @include layout-header-row-height(50px, 50px, 50px);
 
-      .layout__header-logo {
-        display: block;
-        background-size: contain;
-        height: 50px;
-      }
-
       .region-header-navigation {
-        padding-left: 105px;
+        display: none;
       }
       .search-form-popover {
         height: 50px;
