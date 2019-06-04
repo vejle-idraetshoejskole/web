@@ -960,6 +960,8 @@ class ShortCourseOrderForm extends FormBase {
           'field_vih_ocp_country' => $addedParticipant['country'],
           'field_vih_ocp_newsletter' => $addedParticipant['newsletter'],
           'field_vih_ocp_comment' => $addedParticipant['comment'],
+          // For foreigners birthdate will be send in CPR field.
+          // See SubscriptionSuccessfulController::registerOrder().
           'field_vih_ocp_birthdate' => $birthdate,
           'field_vih_ocp_ordered_options' => $orderedOptions
         ]);

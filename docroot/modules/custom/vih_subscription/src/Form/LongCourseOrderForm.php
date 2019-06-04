@@ -591,6 +591,8 @@ class LongCourseOrderForm extends FormBase {
         'field_vih_lco_nationality' => CourseOrderOptionsList::getNationalityList($form_state->getValue('nationality')),
         'field_vih_lco_newsletter' => $form_state->getValue('newsletter'),
         'field_vih_no_cpr' => $form_state->getValue('nocpr'),
+        // For foreigners birthdate will be send in CPR field.
+        // See SubscriptionSuccessfulController::registerOrder().
         'field_vih_lco_birthdate' => (1 == $form_state->getValue('nocpr'))? $form_state->getValue('birthdate') : NULL,
         'field_vih_lco_address' => implode('; ', $address_array),
         'field_vih_lco_city' => $form_state->getValue('city'),
@@ -643,6 +645,8 @@ class LongCourseOrderForm extends FormBase {
       $this->courseOrder->set('field_vih_lco_last_name', $form_state->getValue('lastName'));
       $this->courseOrder->set('field_vih_no_cpr', $form_state->getValue('nocpr'));
       $this->courseOrder->set('field_vih_lco_cpr', (1 == $form_state->getValue('nocpr'))? NULL : $form_state->getValue('cpr'));//CPR will be deleted from database immediately, after order is confirmed
+      // For foreigners birthdate will be send in CPR field.
+      // See SubscriptionSuccessfulController::registerOrder().
       $this->courseOrder->set('field_vih_lco_birthdate', (1 == $form_state->getValue('nocpr'))? $form_state->getValue('birthdate') : NULL);
       $this->courseOrder->set('field_vih_lco_telefon', $form_state->getValue('telefon'));
       $this->courseOrder->set('field_vih_lco_email', $form_state->getValue('email'));
