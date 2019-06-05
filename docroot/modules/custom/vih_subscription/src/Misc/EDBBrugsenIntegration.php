@@ -185,7 +185,6 @@ class EDBBrugsenIntegration {
     $registration['Elev.Fastnet'] = $data['telefon'];
     $registration['Elev.Mobil'] = $data['telefon'];
     $registration['Elev.Email'] = $data['email'];
-    $registration['Elev.CprNr'] = $data['cpr'];
     $registration['Elev.Land'] = $edb_utility->getCountryCode($data['country']);
     if (isset($data['afterSchoolComment']) && isset($data['afterSchoolComment']['answer'])) {
       $registration['Elev.Notat'] = $data['afterSchoolComment']['answer'];
@@ -244,7 +243,7 @@ class EDBBrugsenIntegration {
     $registration['Far.Email'] = $far['email'];
     $registration['Far.CprNr'] = $far['cpr'];
     $registration['Far.Land'] = $edb_utility->getCountryCode($far['country']);
-     
+
     $registration['Elev.TidlSkole'] = $data['schoolFrom']['answer'];
 
     // Fill in the rest key values;

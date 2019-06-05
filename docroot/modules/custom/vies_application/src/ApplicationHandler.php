@@ -90,7 +90,7 @@ class ApplicationHandler {
   /**
    * Helper function to prepare data,.
    */
-  private function prepareData() {    
+  private function prepareData() {
     $course = Node::load($this->data['course']);
     $this->data['courseTitle'] = $course->getTitle();
 
@@ -112,7 +112,7 @@ class ApplicationHandler {
     }else{
       //Get birthdate from CPR
           // We need to convert 2 digit year to 4 digit year, not to get 2065 instead of 1965
-          $birthdate_year = \DateTime::createFromFormat('y', substr($this->data['cpr'], 4, 2));          
+          $birthdate_year = \DateTime::createFromFormat('y', substr($this->data['cpr'], 4, 2));
           if ($birthdate_year->format('Y') > date('Y')) {
             $birthdate_year = \DateTime::createFromFormat('Y', '19' . substr($this->data['cpr'], 4, 2));
           }
@@ -203,6 +203,14 @@ class ApplicationHandler {
 
       $edb_brugsen_integration = new EDBBrugsenIntegration($username, $password, $school_code, $book_number);
       $registration = $edb_brugsen_integration->convertApplicationToRegistration($this->data);
+
+      $studentCpr = $this->data['cpr'];
+      // For foreign students with empty CPR we have to send birhtday date.
+      // We using CPR field to send this data.
+      if (empty($studentCpr)) {
+        $studentCpr = date('dmy', strtotime($this->data['birthdate'])) . '1111';
+      }
+      $registration = $edb_brugsen_integration->addStudentCprNr($registration, $studentCpr);
 
       $synchReply = $edb_brugsen_integration->addRegistration($registration);
       $this->application->set('field_vies_edb_synched', $synchReply['status']);
