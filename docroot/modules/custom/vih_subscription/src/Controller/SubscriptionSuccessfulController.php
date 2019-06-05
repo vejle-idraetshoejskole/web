@@ -317,7 +317,7 @@ class SubscriptionSuccessfulController extends ControllerBase {
 
         $studentCpr = $order->field_vih_lco_cpr->value;
 
-        // For foreign students with empty CPR we have to send birhtday date.
+        // For foreign students with empty CPR we have to send birthday date.
         // We using CPR field to send this data.
         if (empty($studentCpr)) {
           $studentCpr = date('dmy', strtotime($order->field_vih_lco_birthdate->value)) . '1111';
@@ -363,7 +363,7 @@ class SubscriptionSuccessfulController extends ControllerBase {
           $registration = $edbBrugsenIntegration->convertShortCourseOrderPersonToRegistration($order, $order_person);
           $studentCpr = $order_person->field_vih_ocp_cpr->value;
 
-          // For foreign students with empty CPR we have to send birhtday date.
+          // For foreign students with empty CPR we have to send birthday date.
           // We using CPR field to send this data.
           if (empty($studentCpr)) {
             $studentCpr = date('dmy', strtotime($order_person->field_vih_ocp_birthdate->value)) . '1111';

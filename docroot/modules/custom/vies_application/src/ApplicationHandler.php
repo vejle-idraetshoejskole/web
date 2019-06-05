@@ -205,7 +205,7 @@ class ApplicationHandler {
       $registration = $edb_brugsen_integration->convertApplicationToRegistration($this->data);
 
       $studentCpr = $this->data['cpr'];
-      // For foreign students with empty CPR we have to send birhtday date.
+      // For foreign students with empty CPR we have to send birthday date.
       // We using CPR field to send this data.
       if (empty($studentCpr)) {
         $studentCpr = date('dmy', strtotime($this->data['birthdate'])) . '1111';
