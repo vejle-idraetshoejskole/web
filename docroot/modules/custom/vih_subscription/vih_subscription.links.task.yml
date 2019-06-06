@@ -1,0 +1,9 @@
+vih_subscription.admin.orders.available_spots.events:
+  route_name: vih_subscription.admin.orders.available_spots.events
+  base_route: vih_subscription.admin.orders.available_spots
+  title: Events
+
+vih_subscription.admin.orders.available_spots.short_courses:
+  route_name: vih_subscription.admin.orders.available_spots.short_courses
+  base_route: vih_subscription.admin.orders.available_spots
+  title: Short courses
