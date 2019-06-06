@@ -87,22 +87,25 @@ class AvailableSpots extends ControllerBase {
     $rows = [];
     foreach ($nids as $nid) {
       $node = Node::load($nid);
-      $stock_amount = 0;
+      $available_spots = [];
       foreach ($node->field_vih_sc_option_groups->referencedEntities() as $optionGroup) {
+        $spots_items = [];
         foreach ($optionGroup->field_vih_og_options->referencedEntities() as $optionDelta => $option) {
           $option = \Drupal::service('entity.repository')->getTranslationFromContext($option);
-          $stock_amount += $option->field_vih_option_stock_amount->value;
+          if (!empty($option->field_vih_option_stock_amount->value)) {
+            $spots_items[] = $option->field_vih_option_title->value . ': ' . ($option->field_vih_option_stock_amount->value - VihSubscriptionUtils::calculateOptionUsageCount($node, $optionGroup, $option));
+          }
         }
+        $available_spots[$optionGroup->id()] = [
+          '#theme' => 'item_list',
+          '#title' => $optionGroup->field_vih_og_title->value,
+          '#items' => $spots_items,
+        ];
       }
 
-      $order_subscribed = VihSubscriptionUtils::calculateSubscribedPeopleNumber($node);
-      $available_spots = 'N/A';
-      if (!empty($stock_amount)) {
-        $available_spots = $stock_amount - $order_subscribed;
-      }
       $rows[] = [
         Link::fromTextAndUrl($node->title->value, $node->toUrl('canonical', ['language' => $node->language()])),
-        $available_spots,
+        empty($available_spots) ? 'N/A' : ['data' => $available_spots],
       ];
     }
     $build = array(
