@@ -34,6 +34,10 @@ class SubscriptionSuccessfulController extends ControllerBase {
       switch ($order_type) {
         case "vih_short_course_order":
           $redirection_page_id = $config->get('vih_subscription_short_course_redirection_page');
+          // Invalidating page cache for anonymous users
+          // to get all counters updated.
+          $url = Url::fromUri('internal:/kortkurser/' . $subject-> id(). '/tilmelding', ['absolute' => TRUE])->toString();
+          \Drupal::cache('page')->invalidate($url . ':html');
           break;
         case "vih_long_course_order":
           $redirection_page_id = $config->get('vih_subscription_long_course_redirection_page');
