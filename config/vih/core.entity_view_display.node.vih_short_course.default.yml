@@ -13,6 +13,7 @@ dependencies:
     - field.field.node.vih_short_course.field_vih_sc_option_groups
     - field.field.node.vih_short_course.field_vih_sc_persons_limit
     - field.field.node.vih_short_course.field_vih_sc_price
+    - field.field.node.vih_short_course.field_vih_sc_qa
     - field.field.node.vih_short_course.field_vih_sc_start_date
     - field.field.node.vih_short_course.field_vih_sc_status
     - field.field.node.vih_short_course.field_vih_top_banner
@@ -122,6 +123,15 @@ content:
       prefix_suffix: true
     third_party_settings: {  }
     type: number_decimal
+    region: content
+  field_vih_sc_qa:
+    type: entity_reference_revisions_entity_view
+    weight: 19
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
     region: content
   field_vih_sc_start_date:
     weight: 8

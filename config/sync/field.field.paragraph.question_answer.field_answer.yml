@@ -1,0 +1,19 @@
+uuid: 9673c774-aed5-4a4c-b7c3-a7ba1bfc5fb4
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_answer
+    - paragraphs.paragraphs_type.question_answer
+id: paragraph.question_answer.field_answer
+field_name: field_answer
+entity_type: paragraph
+bundle: question_answer
+label: 'Svar fra deltager'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,12 +1,12 @@
-uuid: 8c3376ef-05e0-4de8-ad05-19c8814dbc44
+uuid: f07d1558-133e-4915-8068-5ed753190dca
 langcode: da
 status: true
 dependencies:
   module:
-    - taxonomy
-id: taxonomy_term.field_vih_hide_on_lists
-field_name: field_vih_hide_on_lists
-entity_type: taxonomy_term
+    - paragraphs
+id: paragraph.field_question_required
+field_name: field_question_required
+entity_type: paragraph
 type: boolean
 settings: {  }
 module: core

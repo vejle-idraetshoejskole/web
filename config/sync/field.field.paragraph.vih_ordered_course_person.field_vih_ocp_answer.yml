@@ -1,0 +1,127 @@
+uuid: 58b44c13-676c-4370-bbbb-7cad28abe482
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_vih_ocp_answer
+    - paragraphs.paragraphs_type.question_answer
+    - paragraphs.paragraphs_type.vih_ordered_course_person
+  module:
+    - entity_reference_revisions
+id: paragraph.vih_ordered_course_person.field_vih_ocp_answer
+field_name: field_vih_ocp_answer
+entity_type: paragraph
+bundle: vih_ordered_course_person
+label: 'Svar på spørgsmål fra deltager'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      question_answer: question_answer
+    target_bundles_drag_drop:
+      1_column_action_centered:
+        weight: 34
+        enabled: false
+      article:
+        weight: 35
+        enabled: false
+      class_packages:
+        weight: 36
+        enabled: false
+      employee:
+        weight: 37
+        enabled: false
+      event_list:
+        weight: 38
+        enabled: false
+      file:
+        weight: 39
+        enabled: false
+      gallery:
+        weight: 40
+        enabled: false
+      list_of_news_teasers:
+        weight: 41
+        enabled: false
+      long_course_list_:
+        weight: 42
+        enabled: false
+      long_course_list_contain_class:
+        weight: 43
+        enabled: false
+      question_answer:
+        enabled: true
+        weight: 44
+      short_course_list_:
+        weight: 45
+        enabled: false
+      social_media_embed:
+        weight: 46
+        enabled: false
+      user_quote:
+        weight: 47
+        enabled: false
+      video:
+        weight: 48
+        enabled: false
+      vih_banner_slide:
+        weight: 49
+        enabled: false
+      vih_class_groups_accordion:
+        weight: 50
+        enabled: false
+      vih_contact_person:
+        weight: 51
+        enabled: false
+      vih_content_grid:
+        weight: 52
+        enabled: false
+      vih_course_slot:
+        weight: 53
+        enabled: false
+      vih_grid_with_subjects:
+        weight: 54
+        enabled: false
+      vih_list_of_news_list_advanced:
+        weight: 55
+        enabled: false
+      vih_option:
+        weight: 56
+        enabled: false
+      vih_option_group:
+        weight: 57
+        enabled: false
+      vih_ordered_course_period:
+        weight: 58
+        enabled: false
+      vih_ordered_course_person:
+        weight: 59
+        enabled: false
+      vih_ordered_course_slot:
+        weight: 60
+        enabled: false
+      vih_ordered_event_person:
+        weight: 61
+        enabled: false
+      vih_ordered_option:
+        weight: 62
+        enabled: false
+      vih_single_class_group:
+        weight: 63
+        enabled: false
+      vih_teacher_class_description:
+        weight: 64
+        enabled: false
+      vih_webform:
+        weight: 65
+        enabled: false
+      vih_wrapper:
+        weight: 66
+        enabled: false
+field_type: entity_reference_revisions

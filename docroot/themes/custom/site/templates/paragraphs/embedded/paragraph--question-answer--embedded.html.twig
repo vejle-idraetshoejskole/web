@@ -1,0 +1,12 @@
+{%
+    set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+]
+%}
+{% if paragraph.field_answer.value %}
+<div{{ attributes.addClass(classes) }}>
+    {{ paragraph.field_question.value }} : {{ paragraph.field_answer.value }}
+</div>
+{% endif %}

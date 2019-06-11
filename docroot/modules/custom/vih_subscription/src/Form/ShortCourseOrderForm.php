@@ -254,6 +254,22 @@ class ShortCourseOrderForm extends FormBase {
           $collapse_toggle_class = NULL;
           $collapsed_elements_class = 'class = "collapse"';
         }
+
+        foreach ($course->field_vih_sc_qa->referencedEntities() as $delta => $qa_paragraph) {
+          $form['newParticipantContainer']['newParticipantFieldset']['qa'][$delta] = [
+            'answer' => [
+              '#type' => 'textfield',
+              '#title' => $qa_paragraph->field_question->value,
+              '#placeholder' => $qa_paragraph->field_question->value,
+              '#required' => !empty($qa_paragraph->field_question_required->value),
+            ],
+            'qa_id' => [
+              '#type' => 'hidden',
+              '#value' => $qa_paragraph->id(),
+            ],
+          ];
+        }
+
         $form['newParticipantContainer']['newParticipantFieldset']['email'] = array(
           '#type' => 'textfield',
           '#title' => $this->t('E-mail address'),
@@ -523,6 +539,7 @@ class ShortCourseOrderForm extends FormBase {
         ['newParticipantContainer', 'newParticipantFieldset', 'firstName'],
         ['newParticipantContainer', 'newParticipantFieldset', 'lastName'],
         ['newParticipantContainer', 'newParticipantFieldset', 'telephone'],
+        ['newParticipantContainer', 'newParticipantFieldset', 'qa'],
         ['newParticipantContainer', 'newParticipantFieldset', 'email'],
         ['newParticipantContainer', 'newParticipantFieldset', 'cpr'],
         ['newParticipantContainer', 'newParticipantFieldset', 'birthdate'],
@@ -583,6 +600,7 @@ class ShortCourseOrderForm extends FormBase {
     $participant['birthdate'] = $userInput['newParticipantContainer']['newParticipantFieldset']['birthdate'];
     $participant['nocpr'] = $userInput['newParticipantContainer']['newParticipantFieldset']['nocpr'];
     $participant['telephone'] = $userInput['newParticipantContainer']['newParticipantFieldset']['telephone'];
+    $participant['qa'] = $userInput['newParticipantContainer']['newParticipantFieldset']['qa'];
     $participant['address'] = $userInput['newParticipantContainer']['newParticipantFieldset']['address'];
     $participant['house']['houseNumber'] = $userInput['newParticipantContainer']['newParticipantFieldset']['house']['houseNumber'];
     $participant['house']['houseLetter'] = $userInput['newParticipantContainer']['newParticipantFieldset']['house']['houseLetter'];
@@ -679,6 +697,7 @@ class ShortCourseOrderForm extends FormBase {
       $userInput['newParticipantContainer']['newParticipantFieldset']['nocpr'] = $participantToEdit['nocpr'];
       $userInput['newParticipantContainer']['newParticipantFieldset']['birthdate'] = $participantToEdit['birthdate'];
       $userInput['newParticipantContainer']['newParticipantFieldset']['telephone'] = $participantToEdit['telephone'];
+      $userInput['newParticipantContainer']['newParticipantFieldset']['qa'] = $participantToEdit['qa'];
       $userInput['newParticipantContainer']['newParticipantFieldset']['address'] = $participantToEdit['address'];
       $userInput['newParticipantContainer']['newParticipantFieldset']['house']['houseNumber'] = $participantToEdit['house']['houseNumber'];
       $userInput['newParticipantContainer']['newParticipantFieldset']['house']['houseLetter'] = $participantToEdit['house']['houseLetter'];
@@ -944,6 +963,20 @@ class ShortCourseOrderForm extends FormBase {
           }
         }
 
+        $qa_answers = [];
+        if (!empty($addedParticipant['qa'])) {
+          foreach ($addedParticipant['qa'] as $delta => $values) {
+            $qa_question = Paragraph::load($values['qa_id']);
+            if (empty($qa_question)) {
+              continue;
+            }
+            $qa_answer = $qa_question->createDuplicate();
+            $qa_answer->field_answer = $values['answer'];
+            $qa_answer->save();
+            $qa_answers[] = $qa_answer;
+          }
+        }
+
         //creating participant paragraph
         $subscribedParticipant = Paragraph::create([
           'type' => 'vih_ordered_course_person',
@@ -954,6 +987,7 @@ class ShortCourseOrderForm extends FormBase {
           'field_vih_ocp_no_cpr' => $addedParticipant['nocpr'],
           //CPR will be deleted from database immediately, after order is confirmed
           'field_vih_ocp_telephone' => $addedParticipant['telephone'],
+          'field_vih_ocp_answer' => $qa_answers,
           'field_vih_ocp_address' => implode('; ', $adress_arr),
           'field_vih_ocp_city' => $addedParticipant['city'],
           'field_vih_ocp_zip' => $addedParticipant['zip'],
@@ -1093,6 +1127,11 @@ class ShortCourseOrderForm extends FormBase {
       //filling personal information
       $address_parts = explode('; ', $subscribedPerson->field_vih_ocp_address->value);
 
+      $qa_answers = [];
+      foreach ($subscribedPerson->field_vih_ocp_answer->referencedEntities() as $delta => $qa_paragraph) {
+        $qa_answers[$delta]['answer'] = $qa_paragraph->field_answer->value;
+      }
+
       $participant = array();
       $participant['firstName'] = $subscribedPerson->field_vih_ocp_first_name->value;
       $participant['lastName'] = $subscribedPerson->field_vih_ocp_last_name->value;
@@ -1101,6 +1140,7 @@ class ShortCourseOrderForm extends FormBase {
       $participant['birthdate'] = $subscribedPerson->field_vih_ocp_birthdate->value;
       $participant['nocpr'] = $subscribedPerson->field_vih_ocp_no_cpr->value;
       $participant['telephone'] = $subscribedPerson->field_vih_ocp_telephone->value;
+      $participant['qa'] = $qa_answers;
       $participant['address'] = $address_parts[0];
       $participant['house']['houseNumber'] = !empty($address_parts[1]) ? $address_parts[1] : '';
       $participant['house']['houseLetter'] = !empty($address_parts[2]) ? $address_parts[2] : '';
