@@ -925,7 +925,6 @@ ignored_config_entities:
   1846: ~field.field.taxonomy_term.vih_class_package.field_vih_subheading
   1848: ~field.field.taxonomy_term.vih_class_package.field_vih_top_banner_text
   1850: ~field.field.taxonomy_term.vih_class_package.field_vih_top_banner
-  1852: ~field.field.taxonomy_term.vih_class.field_vih_hide_on_lists
   1854: ~field.field.user.user.field_metatag
   1856: ~field.field.user.user.field_vih_top_banner_text
   1858: ~field.field.user.user.field_vih_top_banner

@@ -21,6 +21,7 @@ graylist:
   - field.field.node.vih_long_cource.field_vih_paragraphs
   - field.field.paragraph.vih_wrapper.field_vih_paragraphs
   - field.field.taxonomy_term.vih_class.field_vih_paragraphs
+  - field.field.taxonomy_term.vih_class.field_vih_hide_on_lists
   - field.field.taxonomy_term.vih_class_package.field_vih_paragraphs
   - field.field.user.user.field_vih_user_paragraphs
   - 'core.entity_form_display.user.user.*'
