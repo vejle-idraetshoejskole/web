@@ -1,0 +1,41 @@
+uuid: 4ab37bed-2fe6-4016-b575-0d2835243865
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.question_answer.field_answer
+    - field.field.paragraph.question_answer.field_question
+    - field.field.paragraph.question_answer.field_question_required
+    - paragraphs.paragraphs_type.question_answer
+id: paragraph.question_answer.default
+targetEntityType: paragraph
+bundle: question_answer
+mode: default
+content:
+  field_answer:
+    weight: 1
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_question:
+    weight: 0
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_question_required:
+    weight: 2
+    label: inline
+    settings:
+      format: yes-no
+      format_custom_true: ''
+      format_custom_false: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+hidden: {  }

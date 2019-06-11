@@ -4,12 +4,21 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.paragraph.email_teaser
+    - field.field.paragraph.vih_ordered_course_person.field_vih_ocp_address
+    - field.field.paragraph.vih_ordered_course_person.field_vih_ocp_answer
     - field.field.paragraph.vih_ordered_course_person.field_vih_ocp_birthdate
+    - field.field.paragraph.vih_ordered_course_person.field_vih_ocp_city
+    - field.field.paragraph.vih_ordered_course_person.field_vih_ocp_comment
+    - field.field.paragraph.vih_ordered_course_person.field_vih_ocp_country
     - field.field.paragraph.vih_ordered_course_person.field_vih_ocp_cpr
     - field.field.paragraph.vih_ordered_course_person.field_vih_ocp_email
     - field.field.paragraph.vih_ordered_course_person.field_vih_ocp_first_name
     - field.field.paragraph.vih_ordered_course_person.field_vih_ocp_last_name
+    - field.field.paragraph.vih_ordered_course_person.field_vih_ocp_newsletter
+    - field.field.paragraph.vih_ordered_course_person.field_vih_ocp_no_cpr
     - field.field.paragraph.vih_ordered_course_person.field_vih_ocp_ordered_options
+    - field.field.paragraph.vih_ordered_course_person.field_vih_ocp_telephone
+    - field.field.paragraph.vih_ordered_course_person.field_vih_ocp_zip
     - paragraphs.paragraphs_type.vih_ordered_course_person
   module:
     - entity_reference_revisions
@@ -18,6 +27,15 @@ targetEntityType: paragraph
 bundle: vih_ordered_course_person
 mode: email_teaser
 content:
+  field_vih_ocp_answer:
+    type: entity_reference_revisions_entity_view
+    weight: 5
+    region: content
+    label: hidden
+    settings:
+      view_mode: embedded
+      link: ''
+    third_party_settings: {  }
   field_vih_ocp_cpr:
     type: string
     weight: 3
@@ -66,4 +84,6 @@ hidden:
   field_vih_ocp_country: true
   field_vih_ocp_municipality: true
   field_vih_ocp_newsletter: true
+  field_vih_ocp_no_cpr: true
+  field_vih_ocp_telephone: true
   field_vih_ocp_zip: true

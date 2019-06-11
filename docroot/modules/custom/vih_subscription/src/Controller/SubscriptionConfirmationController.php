@@ -87,4 +87,4 @@ class SubscriptionConfirmationController extends ControllerBase{
   public function getTitle() {
     return $this->t('Bekræft venligst din ordre');
   }
-} 
+}

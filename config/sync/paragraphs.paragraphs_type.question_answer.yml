@@ -1,0 +1,9 @@
+uuid: 74c36e5f-7a82-443f-8bd6-a0f8347eaae4
+langcode: da
+status: true
+dependencies: {  }
+id: question_answer
+label: Spørgsmål/Svar
+icon_uuid: null
+description: ''
+behavior_plugins: {  }
