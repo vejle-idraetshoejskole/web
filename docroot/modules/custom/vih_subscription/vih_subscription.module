@@ -1,5 +1,7 @@
 <?php
 
+use Drupal\Core\Url;
+
 /**
  * Implements hook_form_alter()
  *
@@ -211,6 +213,13 @@ function vih_subscription_node_presave(Drupal\Core\Entity\EntityInterface $entit
     if(empty($entity->get('field_vih_lc_end_date')->getValue()) or $entity->get('field_vih_lc_end_date')->getValue()[0]['value'] <> $course_start_date){
       $entity->set('field_vih_lc_end_date', $course_end_date);
     }
+  }
+  
+  if ($entity->type->entity->id() == 'vih_short_course') {
+    // Invalidating page cache for anonymous users
+    // to get all counters updated.
+    $url = Url::fromUri('internal:/kortkurser/' . $entity-> id(). '/tilmelding', ['absolute' => TRUE])->toString();
+    \Drupal::cache('page')->invalidate($url . ':html');
   }
 }
 
