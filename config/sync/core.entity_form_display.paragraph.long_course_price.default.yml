@@ -1,0 +1,33 @@
+uuid: f6632d4b-e658-48cf-b531-928d5c3ca74a
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.long_course_price.field_vih_lc
+    - paragraphs.paragraphs_type.long_course_price
+  module:
+    - content_moderation
+id: paragraph.long_course_price.default
+targetEntityType: paragraph
+bundle: long_course_price
+mode: default
+content:
+  field_vih_lc:
+    weight: 101
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  moderation_state:
+    type: moderation_state_default
+    weight: 100
+    settings: {  }
+    region: content
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true
+  uid: true

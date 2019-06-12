@@ -1,0 +1,19 @@
+uuid: b55ebd2d-1d9f-45a2-9738-7885f0fac50d
+langcode: da
+status: true
+dependencies:
+  module:
+    - node
+    - text
+id: node.field_vih_lc_payment_terms
+field_name: field_vih_lc_payment_terms
+entity_type: node
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

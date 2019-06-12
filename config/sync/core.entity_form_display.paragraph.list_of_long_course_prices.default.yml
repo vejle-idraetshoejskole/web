@@ -1,0 +1,33 @@
+uuid: 29988bdf-e381-4d3e-b7de-1c8c25e8015a
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.list_of_long_course_prices.field_vih_lc_list
+    - paragraphs.paragraphs_type.list_of_long_course_prices
+  module:
+    - content_moderation
+id: paragraph.list_of_long_course_prices.default
+targetEntityType: paragraph
+bundle: list_of_long_course_prices
+mode: default
+content:
+  field_vih_lc_list:
+    weight: 101
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  moderation_state:
+    type: moderation_state_default
+    weight: 100
+    settings: {  }
+    region: content
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true
+  uid: true

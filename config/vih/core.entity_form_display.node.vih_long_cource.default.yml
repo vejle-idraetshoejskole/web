@@ -15,8 +15,13 @@ dependencies:
     - field.field.node.vih_long_cource.field_vih_course_subheading
     - field.field.node.vih_long_cource.field_vih_course_subsc_price
     - field.field.node.vih_long_cource.field_vih_course_week_price
+    - field.field.node.vih_long_cource.field_vih_lc_add_txt
+    - field.field.node.vih_long_cource.field_vih_lc_add_txt_header
+    - field.field.node.vih_long_cource.field_vih_lc_add_txt_link
     - field.field.node.vih_long_cource.field_vih_lc_end_date
+    - field.field.node.vih_long_cource.field_vih_lc_payment_terms
     - field.field.node.vih_long_cource.field_vih_lc_start_date
+    - field.field.node.vih_long_cource.field_vih_lc_weeks_quantity
     - field.field.node.vih_long_cource.field_vih_paragraphs
     - field.field.node.vih_long_cource.field_vih_top_banner
     - field.field.node.vih_long_cource.field_vih_top_banner_text
@@ -26,6 +31,7 @@ dependencies:
     - entity_browser
     - field_group
     - inline_entity_form
+    - link
     - metatag
     - paragraphs
     - path
@@ -69,9 +75,14 @@ third_party_settings:
         - field_vih_course_status
         - field_vih_course_periods
         - field_vih_course_persons_limit
+        - field_vih_lc_weeks_quantity
         - field_vih_course_week_price
         - field_vih_course_subsc_price
         - field_vih_course_price
+        - field_vih_lc_payment_terms
+        - field_vih_lc_add_txt_header
+        - field_vih_lc_add_txt
+        - field_vih_lc_add_txt_link
         - field_vih_course_image
       parent_name: ''
       weight: 3
@@ -143,7 +154,7 @@ content:
     region: content
   field_vih_course_image:
     type: entity_browser_entity_reference
-    weight: 13
+    weight: 16
     settings:
       entity_browser: media_browser
       field_widget_display: rendered_entity
@@ -200,6 +211,45 @@ content:
     type: number
     region: content
   field_vih_course_week_price:
+    weight: 9
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_vih_lc_add_txt:
+    weight: 14
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_vih_lc_add_txt_header:
+    weight: 13
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_vih_lc_add_txt_link:
+    weight: 15
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_vih_lc_payment_terms:
+    weight: 12
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_vih_lc_weeks_quantity:
     weight: 8
     settings:
       placeholder: ''

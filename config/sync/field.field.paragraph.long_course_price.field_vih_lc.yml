@@ -1,0 +1,28 @@
+uuid: c5c6f864-6f37-403b-b7f3-3bf3244ae1e2
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_vih_lc
+    - node.type.vih_long_cource
+    - paragraphs.paragraphs_type.long_course_price
+id: paragraph.long_course_price.field_vih_lc
+field_name: field_vih_lc
+entity_type: paragraph
+bundle: long_course_price
+label: 'Long course'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      vih_long_cource: vih_long_cource
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

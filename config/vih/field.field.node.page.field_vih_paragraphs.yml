@@ -12,8 +12,10 @@ dependencies:
     - paragraphs.paragraphs_type.event_list
     - paragraphs.paragraphs_type.file
     - paragraphs.paragraphs_type.gallery
+    - paragraphs.paragraphs_type.list_of_long_course_prices
     - paragraphs.paragraphs_type.list_of_news_teasers
     - paragraphs.paragraphs_type.long_course_list_
+    - paragraphs.paragraphs_type.long_course_price
     - paragraphs.paragraphs_type.short_course_list_
     - paragraphs.paragraphs_type.social_media_embed
     - paragraphs.paragraphs_type.user_quote
@@ -56,12 +58,14 @@ settings:
       list_of_news_teasers: list_of_news_teasers
       long_course_list_: long_course_list_
       short_course_list_: short_course_list_
+      list_of_long_course_prices: list_of_long_course_prices
       social_media_embed: social_media_embed
       user_quote: user_quote
       video: video
       vih_class_groups_accordion: vih_class_groups_accordion
-      vih_teacher_class_description: vih_teacher_class_description
+      long_course_price: long_course_price
       vih_contact_person: vih_contact_person
+      vih_teacher_class_description: vih_teacher_class_description
       vih_webform: vih_webform
       vih_grid_with_subjects: vih_grid_with_subjects
     target_bundles_drag_drop:
@@ -104,15 +108,18 @@ settings:
       short_course_list_:
         enabled: true
         weight: 35
+      list_of_long_course_prices:
+        enabled: true
+        weight: 36
       social_media_embed:
         enabled: true
         weight: 36
-      long_course_list_contain_class:
-        weight: 37
-        enabled: false
       user_quote:
         enabled: true
         weight: 37
+      long_course_list_contain_class:
+        weight: 37
+        enabled: false
       video:
         enabled: true
         weight: 38
@@ -134,11 +141,17 @@ settings:
       vih_ordered_course_person:
         weight: 44
         enabled: false
+      long_course_price:
+        enabled: true
+        weight: 45
+      vih_ordered_course_slot:
+        weight: 45
+        enabled: false
       vih_banner_slide:
         weight: 45
         enabled: false
-      vih_ordered_course_slot:
-        weight: 45
+      question_answer:
+        weight: 46
         enabled: false
       vih_ordered_event_person:
         weight: 46
@@ -149,10 +162,10 @@ settings:
       vih_single_class_group:
         weight: 48
         enabled: false
-      vih_teacher_class_description:
+      vih_contact_person:
         enabled: true
         weight: 49
-      vih_contact_person:
+      vih_teacher_class_description:
         enabled: true
         weight: 49
       vih_webform:

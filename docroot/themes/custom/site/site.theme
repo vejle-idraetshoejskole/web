@@ -339,6 +339,53 @@ function site_preprocess_node(array &$variables) {
           }
         }
       }
+      elseif (in_array($variables['view_mode'], ['price', 'price_with_details'])) {
+        $extra_options = [];
+        foreach ($period->field_vih_cp_course_slots->referencedEntities() as $slot) {
+          $slot = \Drupal::service('entity.repository')->getTranslationFromContext($slot);
+    
+          $travel = array_pop($slot->field_vih_cs_travel->getValue()[0]);
+          $mandatory = array_pop($slot->field_vih_cs_mandatory->getValue()[0]);
+          $options = [];
+          foreach ($slot->field_vih_cs_classes->referencedEntities() as $class) {
+            if (empty($class->field_vih_class_price_addition->value)) {
+              continue;
+            }
+            $options[] = [
+              'title' => $class->label(),
+              'price' => $class->field_vih_class_price_addition->value,
+            ];
+            
+            if ($travel && $mandatory) {
+              $course_travel_price += $class->field_vih_class_price_addition->value;
+            }
+          }
+          
+          if (!empty($options)) {
+            $extra_options[] = [
+              'title' => $slot->field_vih_cs_title->value,
+              'options' => $options,
+            ];
+          }
+        }
+
+        $quantity = 1;
+        if (!empty($node->field_vih_lc_weeks_quantity->value)) {
+          $quantity = $node->field_vih_lc_weeks_quantity->value;
+        }
+
+        // Setting total price.
+        $variables['content']['total_price'] =  $quantity * $node->field_vih_course_week_price->value
+          + $node->field_vih_course_subsc_price->value
+          + $node->field_vih_course_price->value
+          + $course_travel_price;
+  
+        $variables['content']['course_title'] = $node->title->value . ' ' . \Drupal::translation()->formatPlural($node->field_vih_lc_weeks_quantity->value, '1 week', '@count weeks', [
+          '@count' => $node->field_vih_lc_weeks_quantity->value,
+        ]);
+
+        $variables['content']['extra_options'] = $extra_options;
+      }
     }
 
     // Setting travel price.

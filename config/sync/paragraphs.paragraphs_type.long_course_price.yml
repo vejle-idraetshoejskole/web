@@ -1,0 +1,9 @@
+uuid: 9f6dbe0e-9f26-47c5-a5e4-70975822fe93
+langcode: da
+status: true
+dependencies: {  }
+id: long_course_price
+label: 'Long course price'
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

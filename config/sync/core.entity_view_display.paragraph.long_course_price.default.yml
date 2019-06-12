@@ -1,0 +1,22 @@
+uuid: 79a68704-46f1-4473-8b77-9dbbc0a4e632
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.long_course_price.field_vih_lc
+    - paragraphs.paragraphs_type.long_course_price
+id: paragraph.long_course_price.default
+targetEntityType: paragraph
+bundle: long_course_price
+mode: default
+content:
+  field_vih_lc:
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: price_with_details
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+hidden: {  }
