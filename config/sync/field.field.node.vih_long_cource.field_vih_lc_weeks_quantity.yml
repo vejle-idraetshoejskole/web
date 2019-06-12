@@ -1,0 +1,23 @@
+uuid: aecd2ea9-c7f0-4341-8085-3306a01a59e3
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_vih_lc_weeks_quantity
+    - node.type.vih_long_cource
+id: node.vih_long_cource.field_vih_lc_weeks_quantity
+field_name: field_vih_lc_weeks_quantity
+entity_type: node
+bundle: vih_long_cource
+label: 'Antal uger'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

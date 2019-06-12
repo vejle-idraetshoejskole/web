@@ -1,0 +1,87 @@
+                <div class="price-table">
+                    <table>
+                        <tr>
+                            <th colspan="2">
+                                {{ content.course_title }}
+                            </th>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">
+                                {{ "Avg. weekly payment"|trans }}
+                            </td>
+                            <td class="table-cell">
+                                {{ content.field_vih_course_week_price }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">
+                                {{ "Signup fee"|trans }}
+                            </td>
+                            <td class="table-cell">
+                                {{ content.field_vih_course_subsc_price }}
+                            </td>                        </tr>
+                        <tr>
+                            <td class="table-cell">
+                                {{ "Material fee"|trans }}
+                            </td>
+                            <td class="table-cell">
+                                {{ content.field_vih_course_price }}
+                            </td>
+                        </tr>
+                        {% if content.travel_price > 0 %}
+                            <tr>
+                                <td class="table-cell">
+                                    {{ "Travel payment"|trans }}
+                                </td>
+                                <td class="table-cell">
+                                    DKK {{ content.travel_price|number_format(0, ',', '.') }}
+                                </td>
+                            </tr>
+                        {% endif %}
+                        <tr>
+                            <td class="table-cell">
+                                <strong>{{ "Total base price"|trans }}</strong>
+                            </td>
+                            <td class="table-cell">
+                                DKK {{ content.total_price|number_format(0, ',', '.') }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell" colspan="2">
+                                <div class="text-center partial__body">
+                                    <a href="{{ url('vih_subscription.long_course_order_create', {'course': node.id}) }}"
+                                       class="btn btn-primary">
+                                        {{ "Sign up and choose your subjects" | trans }}
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+
+                        {% if content.extra_options %}
+                            <tr>
+                                <th colspan="2">
+                                    {{ "Extra options"|trans }}
+                                </th>
+                            </tr>
+                            {% for extra_option in content.extra_options %}
+                                <tr>
+                                    <td class="table-heading" colspan="2">
+                                        <strong>{{ extra_option.title }}</strong>
+                                    </td>
+                                </tr>
+                                {% set options_prefix = extra_option.options|length > 1 ? ' - ' : '' %}
+                                {% for option in extra_option.options %}
+                                    <tr>
+                                        <td class="table-cell">
+                                            {{ options_prefix }}{{ option.title }}
+                                        </td>
+                                        <td class="table-cell">
+                                            +{{ option.price }}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            {% endfor %}
+                        {% endif %}
+                    </table>
+                </div>
+

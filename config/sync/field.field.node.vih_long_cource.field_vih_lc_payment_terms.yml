@@ -1,0 +1,21 @@
+uuid: b7515b10-5de0-4531-aed7-7de76707de40
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_vih_lc_payment_terms
+    - node.type.vih_long_cource
+  module:
+    - text
+id: node.vih_long_cource.field_vih_lc_payment_terms
+field_name: field_vih_lc_payment_terms
+entity_type: node
+bundle: vih_long_cource
+label: Betalingsbetingelser
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

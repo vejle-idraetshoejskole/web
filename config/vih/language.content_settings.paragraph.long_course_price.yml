@@ -1,0 +1,18 @@
+uuid: 3850ffeb-3015-44ce-93f5-6f0a4d00eb9d
+langcode: da
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.long_course_price
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+    bundle_settings:
+      untranslatable_fields_hide: '0'
+id: paragraph.long_course_price
+target_entity_type_id: paragraph
+target_bundle: long_course_price
+default_langcode: site_default
+language_alterable: true

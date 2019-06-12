@@ -1,0 +1,14 @@
+uuid: 669af92a-1c4e-46e0-a40e-7ff22938ab6d
+langcode: da
+status: true
+dependencies:
+  module:
+    - lightning_core
+    - node
+third_party_settings:
+  lightning_core:
+    description: ''
+id: node.price
+label: Price
+targetEntityType: node
+cache: true

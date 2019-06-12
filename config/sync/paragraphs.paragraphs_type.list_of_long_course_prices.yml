@@ -1,0 +1,9 @@
+uuid: 27a0b204-1eab-4a5f-9693-b7560888ec7f
+langcode: da
+status: true
+dependencies: {  }
+id: list_of_long_course_prices
+label: 'Liste af lange kurse priser'
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

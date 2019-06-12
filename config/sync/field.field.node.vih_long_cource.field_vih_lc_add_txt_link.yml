@@ -1,0 +1,23 @@
+uuid: 538c8f14-e670-4830-bed9-0bddda14b458
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_vih_lc_add_txt_link
+    - node.type.vih_long_cource
+  module:
+    - link
+id: node.vih_long_cource.field_vih_lc_add_txt_link
+field_name: field_vih_lc_add_txt_link
+entity_type: node
+bundle: vih_long_cource
+label: 'Mersalg link'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 1
+field_type: link
