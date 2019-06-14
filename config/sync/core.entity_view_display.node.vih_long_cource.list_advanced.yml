@@ -15,6 +15,13 @@ dependencies:
     - field.field.node.vih_long_cource.field_vih_course_subheading
     - field.field.node.vih_long_cource.field_vih_course_subsc_price
     - field.field.node.vih_long_cource.field_vih_course_week_price
+    - field.field.node.vih_long_cource.field_vih_lc_add_txt
+    - field.field.node.vih_long_cource.field_vih_lc_add_txt_header
+    - field.field.node.vih_long_cource.field_vih_lc_add_txt_link
+    - field.field.node.vih_long_cource.field_vih_lc_end_date
+    - field.field.node.vih_long_cource.field_vih_lc_payment_terms
+    - field.field.node.vih_long_cource.field_vih_lc_start_date
+    - field.field.node.vih_long_cource.field_vih_lc_weeks_quantity
     - field.field.node.vih_long_cource.field_vih_paragraphs
     - field.field.node.vih_long_cource.field_vih_top_banner
     - field.field.node.vih_long_cource.field_vih_top_banner_text
@@ -255,6 +262,13 @@ hidden:
   field_vih_course_subheading: true
   field_vih_course_subsc_price: true
   field_vih_course_week_price: true
+  field_vih_lc_add_txt: true
+  field_vih_lc_add_txt_header: true
+  field_vih_lc_add_txt_link: true
+  field_vih_lc_end_date: true
+  field_vih_lc_payment_terms: true
+  field_vih_lc_start_date: true
+  field_vih_lc_weeks_quantity: true
   field_vih_paragraphs: true
   field_vih_top_banner: true
   field_vih_top_banner_text: true

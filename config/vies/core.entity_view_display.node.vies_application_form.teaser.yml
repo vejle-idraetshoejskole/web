@@ -4,6 +4,30 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
+    - field.field.node.vies_application_form.field_vies_about_school
+    - field.field.node.vies_application_form.field_vies_address
+    - field.field.node.vies_application_form.field_vies_afterschool
+    - field.field.node.vies_application_form.field_vies_birthday
+    - field.field.node.vies_application_form.field_vies_city
+    - field.field.node.vies_application_form.field_vies_class
+    - field.field.node.vies_application_form.field_vies_class_questions
+    - field.field.node.vies_application_form.field_vies_country
+    - field.field.node.vies_application_form.field_vies_course
+    - field.field.node.vies_application_form.field_vies_edb_synch_message
+    - field.field.node.vies_application_form.field_vies_edb_synched
+    - field.field.node.vies_application_form.field_vies_email
+    - field.field.node.vies_application_form.field_vies_first_name
+    - field.field.node.vies_application_form.field_vies_gender
+    - field.field.node.vies_application_form.field_vies_label
+    - field.field.node.vies_application_form.field_vies_last_name
+    - field.field.node.vies_application_form.field_vies_municipality
+    - field.field.node.vies_application_form.field_vies_newsletter
+    - field.field.node.vies_application_form.field_vies_no_cpr
+    - field.field.node.vies_application_form.field_vies_parents
+    - field.field.node.vies_application_form.field_vies_period
+    - field.field.node.vies_application_form.field_vies_status
+    - field.field.node.vies_application_form.field_vies_telefon
+    - field.field.node.vies_application_form.field_vies_zip
     - node.type.vies_application_form
   module:
     - user
@@ -15,6 +39,8 @@ content:
   links:
     weight: 100
     region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   field_vies_about_school: true
   field_vies_address: true
@@ -25,6 +51,8 @@ hidden:
   field_vies_class_questions: true
   field_vies_country: true
   field_vies_course: true
+  field_vies_edb_synch_message: true
+  field_vies_edb_synched: true
   field_vies_email: true
   field_vies_first_name: true
   field_vies_gender: true
@@ -32,6 +60,7 @@ hidden:
   field_vies_last_name: true
   field_vies_municipality: true
   field_vies_newsletter: true
+  field_vies_no_cpr: true
   field_vies_parents: true
   field_vies_period: true
   field_vies_sex: true

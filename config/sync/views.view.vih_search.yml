@@ -238,7 +238,7 @@ display:
           parse_mode: terms
           min_length: null
           fields:
-            rendered_item: rendered_item
+            - rendered_item
           plugin_id: search_api_fulltext
         search_api_language:
           id: search_api_language
