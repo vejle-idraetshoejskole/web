@@ -5,5 +5,4 @@ dependencies: {  }
 name: 'Nyheds tags'
 vid: news_tags
 description: ''
-hierarchy: 0
 weight: 0

@@ -56,10 +56,10 @@ display:
           id: 0
           total_pages: null
           tags:
-            previous: '‹ previous'
-            next: 'next ›'
-            first: '« first'
-            last: 'last »'
+            previous: '‹ forrige'
+            next: 'næste ›'
+            first: '« første'
+            last: 'sidste »'
           expose:
             items_per_page: false
             items_per_page_label: 'Items per page'
@@ -280,7 +280,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: Created
+          label: Oprettet
           exclude: false
           alter:
             alter_text: false

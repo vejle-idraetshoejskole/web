@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.vih_course_period.field_vih_cp_course_slots
     - field.field.node.vih_course_period.field_vih_cp_end_date
     - field.field.node.vih_course_period.field_vih_cp_start_date
+    - field.field.node.vih_course_period.scheduled_update
     - node.type.vih_course_period
   module:
     - text
@@ -28,6 +29,8 @@ content:
   links:
     weight: 100
     region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   field_vih_cp_course_slots: true
   field_vih_cp_end_date: true

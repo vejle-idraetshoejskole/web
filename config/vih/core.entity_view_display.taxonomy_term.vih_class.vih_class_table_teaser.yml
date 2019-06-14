@@ -11,9 +11,11 @@ dependencies:
     - field.field.taxonomy_term.vih_class.field_vih_class_image
     - field.field.taxonomy_term.vih_class.field_vih_class_material_price
     - field.field.taxonomy_term.vih_class.field_vih_class_price_addition
+    - field.field.taxonomy_term.vih_class.field_vih_hide_on_lists
     - field.field.taxonomy_term.vih_class.field_vih_paragraphs
     - field.field.taxonomy_term.vih_class.field_vih_subheading
     - field.field.taxonomy_term.vih_class.field_vih_top_banner
+    - field.field.taxonomy_term.vih_class.field_vih_top_banner_text
     - taxonomy.vocabulary.vih_class
   module:
     - panelizer
@@ -52,6 +54,7 @@ hidden:
   field_vih_class_color: true
   field_vih_class_material_price: true
   field_vih_class_price_addition: true
+  field_vih_hide_on_lists: true
   field_vih_paragraphs: true
   field_vih_subheading: true
   field_vih_top_banner: true

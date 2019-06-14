@@ -14,6 +14,7 @@ dependencies:
     - field.field.node.vih_short_course.field_vih_sc_option_groups
     - field.field.node.vih_short_course.field_vih_sc_persons_limit
     - field.field.node.vih_short_course.field_vih_sc_price
+    - field.field.node.vih_short_course.field_vih_sc_qa
     - field.field.node.vih_short_course.field_vih_sc_start_date
     - field.field.node.vih_short_course.field_vih_sc_status
     - field.field.node.vih_short_course.field_vih_top_banner
@@ -81,6 +82,7 @@ hidden:
   field_vih_sc_option_groups: true
   field_vih_sc_persons_limit: true
   field_vih_sc_price: true
+  field_vih_sc_qa: true
   field_vih_sc_status: true
   field_vih_top_banner: true
   field_vih_top_banner_text: true

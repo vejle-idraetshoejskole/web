@@ -8,7 +8,6 @@ dependencies:
     - field.field.media.instagram.field_media_in_library
     - media.type.instagram
   module:
-    - content_moderation
     - path
 _core:
   default_config_hash: u-N2MuYnrDGzZl-ApOrQUcObS4Otz1uk01fI6LYtJQg
@@ -46,7 +45,7 @@ content:
     settings: {  }
     third_party_settings: {  }
   preview:
-    weight: null
+    weight: 101
     settings: {  }
     third_party_settings: {  }
     region: content

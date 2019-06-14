@@ -1,0 +1,33 @@
+uuid: f8aaabee-3420-4edb-b34b-16c544165d37
+langcode: da
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.media_library
+    - field.field.media.facebook.embed_code
+    - field.field.media.facebook.field_media_in_library
+    - image.style.medium
+    - media.type.facebook
+  module:
+    - image
+id: media.facebook.media_library
+targetEntityType: media
+bundle: facebook
+mode: media_library
+content:
+  thumbnail:
+    type: image
+    label: hidden
+    settings:
+      image_style: medium
+      image_link: ''
+    weight: 0
+    third_party_settings: {  }
+    region: content
+hidden:
+  created: true
+  embed_code: true
+  field_media_in_library: true
+  langcode: true
+  name: true
+  uid: true

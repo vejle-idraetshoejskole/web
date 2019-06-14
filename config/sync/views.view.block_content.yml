@@ -5,6 +5,7 @@ dependencies:
   module:
     - block_content
     - user
+    - views_autocomplete_filters
 _core:
   default_config_hash: msYnighLW1IbiBfyQbwbQwb2cU-5LECiFryt60k0Nfk
 id: block_content
@@ -479,6 +480,42 @@ display:
           entity_type: block_content
           entity_field: langcode
           plugin_id: language
+        reusable:
+          id: reusable
+          table: block_content_field_data
+          field: reusable
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: '1'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: block_content
+          entity_field: reusable
+          plugin_id: boolean
       sorts: {  }
       title: 'Brugerdefineret blokbibliotek'
       header: {  }

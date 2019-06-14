@@ -5,5 +5,4 @@ dependencies: {  }
 name: 'Bruger typer'
 vid: user_types
 description: ''
-hierarchy: 0
 weight: 0
