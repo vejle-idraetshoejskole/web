@@ -6,6 +6,8 @@ dependencies:
     - core.entity_view_mode.taxonomy_term.list_advanced
     - field.field.taxonomy_term.vih_class.field_metatag
     - field.field.taxonomy_term.vih_class.field_short_description
+    - field.field.taxonomy_term.vih_class.field_vies_questions
+    - field.field.taxonomy_term.vih_class.field_vies_valuation_labels
     - field.field.taxonomy_term.vih_class.field_vih_class_class_packages
     - field.field.taxonomy_term.vih_class.field_vih_class_color
     - field.field.taxonomy_term.vih_class.field_vih_class_image
@@ -66,6 +68,7 @@ content:
 hidden:
   field_metatag: true
   field_vies_questions: true
+  field_vies_valuation_labels: true
   field_vih_class_class_packages: true
   field_vih_class_color: true
   field_vih_class_material_price: true

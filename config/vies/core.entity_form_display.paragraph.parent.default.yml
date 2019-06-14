@@ -17,7 +17,6 @@ dependencies:
     - field.field.paragraph.parent.field_parent_zip
     - paragraphs.paragraphs_type.parent
   module:
-    - content_moderation
     - datetime
 id: paragraph.parent.default
 targetEntityType: paragraph
@@ -116,12 +115,6 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
-  moderation_state:
-    type: moderation_state_default
-    weight: 12
-    settings: {  }
-    region: content
-    third_party_settings: {  }
 hidden:
   created: true
   status: true

@@ -5,6 +5,7 @@ dependencies:
   module:
     - redirect_404
     - user
+    - views_autocomplete_filters
 _core:
   default_config_hash: kAe9LN5CFd5dvECtV8RZtKnyvURX37zd7nIMOURm-U0
 id: redirect_404

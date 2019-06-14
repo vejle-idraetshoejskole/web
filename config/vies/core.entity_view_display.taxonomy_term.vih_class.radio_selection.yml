@@ -6,6 +6,8 @@ dependencies:
     - core.entity_view_mode.taxonomy_term.radio_selection
     - field.field.taxonomy_term.vih_class.field_metatag
     - field.field.taxonomy_term.vih_class.field_short_description
+    - field.field.taxonomy_term.vih_class.field_vies_questions
+    - field.field.taxonomy_term.vih_class.field_vies_valuation_labels
     - field.field.taxonomy_term.vih_class.field_vih_class_class_packages
     - field.field.taxonomy_term.vih_class.field_vih_class_color
     - field.field.taxonomy_term.vih_class.field_vih_class_image
@@ -14,6 +16,7 @@ dependencies:
     - field.field.taxonomy_term.vih_class.field_vih_paragraphs
     - field.field.taxonomy_term.vih_class.field_vih_subheading
     - field.field.taxonomy_term.vih_class.field_vih_top_banner
+    - field.field.taxonomy_term.vih_class.field_vih_top_banner_text
     - taxonomy.vocabulary.vih_class
   module:
     - panelizer
@@ -70,6 +73,7 @@ hidden:
   description: true
   field_metatag: true
   field_vies_questions: true
+  field_vies_valuation_labels: true
   field_vih_class_class_packages: true
   field_vih_class_color: true
   field_vih_paragraphs: true

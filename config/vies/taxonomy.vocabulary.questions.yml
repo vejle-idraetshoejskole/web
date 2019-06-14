@@ -5,5 +5,4 @@ dependencies: {  }
 name: Spørgsmål
 vid: questions
 description: ''
-hierarchy: 0
 weight: 0

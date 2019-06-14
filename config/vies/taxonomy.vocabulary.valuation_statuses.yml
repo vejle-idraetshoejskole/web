@@ -5,5 +5,4 @@ dependencies: {  }
 name: 'Valuation statuses'
 vid: valuation_statuses
 description: ''
-hierarchy: 0
 weight: 0

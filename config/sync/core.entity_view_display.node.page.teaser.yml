@@ -10,6 +10,7 @@ dependencies:
     - field.field.node.page.field_vih_paragraphs
     - field.field.node.page.field_vih_small_image
     - field.field.node.page.field_vih_top_banner
+    - field.field.node.page.field_vih_top_banner_text
     - field.field.node.page.panelizer
     - field.field.node.page.scheduled_update
     - image.style.large
