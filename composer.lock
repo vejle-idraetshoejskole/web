@@ -5034,17 +5034,17 @@
         },
         {
             "name": "drupal/lightning_media",
-            "version": "3.9.0",
+            "version": "3.10.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/lightning_media.git",
-                "reference": "8.x-3.9"
+                "reference": "8.x-3.10"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/lightning_media-8.x-3.9.zip",
-                "reference": "8.x-3.9",
-                "shasum": "0ec4773fe7807cba669f47f3f9ac557032da0acd"
+                "url": "https://ftp.drupal.org/files/projects/lightning_media-8.x-3.10.zip",
+                "reference": "8.x-3.10",
+                "shasum": "aba2102b9ddafafa762d7425d8833736280d4ce5"
             },
             "require": {
                 "bower-asset/cropper": "^2.3",
@@ -5087,8 +5087,8 @@
                     "dev-8.x-3.x": "3.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-3.9",
-                    "datestamp": "1559228288",
+                    "version": "8.x-3.10",
+                    "datestamp": "1560453487",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
