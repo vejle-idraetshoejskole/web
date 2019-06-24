@@ -152,6 +152,14 @@ class EDBBrugsenIntegration {
       //using only Booking number/Kartotek from default values
       $defaultValues = $this->getDefaultRegistrationValues();
       $registration['Kartotek'] = $defaultValues['Kartotek'];
+
+      $questions = [];
+      foreach ($order_person->field_vih_ocp_answer->referencedEntities() as $qa_paragraph) {
+        $questions[] = $qa_paragraph->field_question->value . ' : ' . $qa_paragraph->field_answer->value;
+      }
+      if (!empty($questions)) {
+        $registration['Elev.Sporgsmal'] = $questions;
+      }
     }
 
     return $registration;

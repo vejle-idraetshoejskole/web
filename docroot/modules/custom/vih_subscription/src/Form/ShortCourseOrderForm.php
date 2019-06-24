@@ -255,21 +255,6 @@ class ShortCourseOrderForm extends FormBase {
           $collapsed_elements_class = 'class = "collapse"';
         }
 
-        foreach ($course->field_vih_sc_qa->referencedEntities() as $delta => $qa_paragraph) {
-          $form['newParticipantContainer']['newParticipantFieldset']['qa'][$delta] = [
-            'answer' => [
-              '#type' => 'textfield',
-              '#title' => $qa_paragraph->field_question->value,
-              '#placeholder' => $qa_paragraph->field_question->value,
-              '#required' => !empty($qa_paragraph->field_question_required->value),
-            ],
-            'qa_id' => [
-              '#type' => 'hidden',
-              '#value' => $qa_paragraph->id(),
-            ],
-          ];
-        }
-
         $form['newParticipantContainer']['newParticipantFieldset']['email'] = array(
           '#type' => 'textfield',
           '#title' => $this->t('E-mail address'),
@@ -334,6 +319,22 @@ class ShortCourseOrderForm extends FormBase {
           '#default_value' => 'DK',
           '#required' => TRUE,
         );
+
+        foreach ($course->field_vih_sc_qa->referencedEntities() as $delta => $qa_paragraph) {
+          $form['newParticipantContainer']['newParticipantFieldset']['qa'][$delta] = [
+            'answer' => [
+              '#type' => 'textfield',
+              '#title' => $qa_paragraph->field_question->value,
+              '#placeholder' => $qa_paragraph->field_question->value,
+              '#required' => !empty($qa_paragraph->field_question_required->value),
+            ],
+            'qa_id' => [
+              '#type' => 'hidden',
+              '#value' => $qa_paragraph->id(),
+            ],
+          ];
+        }
+
         $form['newParticipantContainer']['newParticipantFieldset']['comment'] = array(
           '#type' => 'textarea',
           '#title' => $this->t('Comment'),
