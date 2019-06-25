@@ -14,6 +14,7 @@ dependencies:
     - paragraphs.paragraphs_type.gallery
     - paragraphs.paragraphs_type.list_of_news_teasers
     - paragraphs.paragraphs_type.long_course_list_
+    - paragraphs.paragraphs_type.long_course_price
     - paragraphs.paragraphs_type.short_course_list_
     - paragraphs.paragraphs_type.social_media_embed
     - paragraphs.paragraphs_type.user_quote
@@ -54,14 +55,15 @@ settings:
       vih_content_grid: vih_content_grid
       social_media_embed: social_media_embed
       long_course_list_: long_course_list_
-      vih_list_of_news_list_advanced: vih_list_of_news_list_advanced
       employee: employee
+      vih_list_of_news_list_advanced: vih_list_of_news_list_advanced
       gallery: gallery
       vih_wrapper: vih_wrapper
       short_course_list_: short_course_list_
       user_quote: user_quote
       vih_class_groups_accordion: vih_class_groups_accordion
       vih_webform: vih_webform
+      long_course_price: long_course_price
       vih_contact_person: vih_contact_person
       vih_grid_with_subjects: vih_grid_with_subjects
     target_bundles_drag_drop:
@@ -116,10 +118,10 @@ settings:
       long_course_list_:
         enabled: true
         weight: 29
-      vih_list_of_news_list_advanced:
+      employee:
         enabled: true
         weight: 30
-      employee:
+      vih_list_of_news_list_advanced:
         enabled: true
         weight: 30
       gallery:
@@ -146,6 +148,9 @@ settings:
       vih_ordered_event_person:
         weight: 42
         enabled: false
+      list_of_long_course_prices:
+        weight: 43
+        enabled: false
       vih_single_class_group:
         weight: 44
         enabled: false
@@ -155,6 +160,12 @@ settings:
       vih_webform:
         enabled: true
         weight: 46
+      long_course_price:
+        enabled: true
+        weight: 47
+      question_answer:
+        weight: 48
+        enabled: false
       vih_contact_person:
         enabled: true
         weight: 49
