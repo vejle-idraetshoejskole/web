@@ -46,6 +46,7 @@
                                 DKK {{ content.total_price|number_format(0, ',', '.') }}
                             </td>
                         </tr>
+                        {% if view_mode == 'price' %}
                         <tr>
                             <td class="table-cell" colspan="2">
                                 <div class="text-center partial__body">
@@ -56,29 +57,31 @@
                                 </div>
                             </td>
                         </tr>
-
+                        {% endif %}
                         {% if content.extra_options %}
                             <tr>
                                 <th colspan="2">
                                     {{ "Extra options"|trans }}
                                 </th>
                             </tr>
-                            {% for extra_option in content.extra_options %}
-                                <tr>
-                                    <td class="table-heading" colspan="2">
-                                        <strong>{{ extra_option.title }}</strong>
-                                    </td>
-                                </tr>
-                                {% set options_prefix = extra_option.options|length > 1 ? ' - ' : '' %}
-                                {% for option in extra_option.options %}
+                            {% for period_extra_options in content.extra_options %}
+                                {% for extra_option in period_extra_options %}
                                     <tr>
-                                        <td class="table-cell">
-                                            {{ options_prefix }}{{ option.title }}
-                                        </td>
-                                        <td class="table-cell">
-                                            +{{ option.price }}
+                                        <td class="table-heading" colspan="2">
+                                            <strong>{{ extra_option.title }}</strong>
                                         </td>
                                     </tr>
+                                    {% set options_prefix = extra_option.options|length > 1 ? ' - ' : '' %}
+                                    {% for option in extra_option.options %}
+                                        <tr>
+                                            <td class="table-cell">
+                                                {{ options_prefix }}{{ option.title }}
+                                            </td>
+                                            <td class="table-cell">
+                                                +{{ option.price }}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
                                 {% endfor %}
                             {% endfor %}
                         {% endif %}

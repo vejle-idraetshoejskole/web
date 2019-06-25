@@ -18,14 +18,14 @@
                     <h3 class="sectioned__subheading__title heading-h4">{{ content.field_vih_lc_add_txt_header.0 }}</h3>
                     <div class="partial__body">{{ content.field_vih_lc_add_txt }}</div>
                     <div class="partial__body">{{ content.field_vih_lc_add_txt_link }}</div>
+                    <div class="text-center partial__body cta-button partial__body">
+                        <a href="{{ url('vih_subscription.long_course_order_create', {'course': node.id}) }}"
+                           class="btn btn-primary">
+                            {{ "Sign up and choose your subjects" | trans }}
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="text-center partial__body cta-button">
-        <a href="{{ url('vih_subscription.long_course_order_create', {'course': node.id}) }}"
-           class="btn btn-primary">
-            {{ "Sign up and choose your subjects" | trans }}
-        </a>
     </div>
 </article>
