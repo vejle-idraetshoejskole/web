@@ -2,6 +2,7 @@
 
 namespace Drupal\vih_subscription\Controller;
 
+use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Core\Access\AccessResultAllowed;
 use Drupal\Core\Access\AccessResultForbidden;
 use Drupal\Core\Controller\ControllerBase;
@@ -82,31 +83,44 @@ class AvailableSpots extends ControllerBase {
 
     $headers = [
       'Title',
-      'Available spots',
+      'Group',
+      'Option',
+      'Available',
+      'Pending',
+      'Confirmed',
+      'Total',
     ];
     $rows = [];
     foreach ($nids as $nid) {
       $node = Node::load($nid);
-      $available_spots = [];
+      $row = [];
+      $row[] = [
+        'data' => Link::fromTextAndUrl($node->title->value, $node->toUrl('canonical', ['language' => $node->language()])),
+      ];
       foreach ($node->field_vih_sc_option_groups->referencedEntities() as $optionGroup) {
-        $spots_items = [];
+        $option_group_row = $row;
+        $row = [''];
+        $option_group_row[] = [
+          'data' => $optionGroup->field_vih_og_title->value,
+        ];
         foreach ($optionGroup->field_vih_og_options->referencedEntities() as $optionDelta => $option) {
           $option = \Drupal::service('entity.repository')->getTranslationFromContext($option);
+          $oprion_row = $option_group_row;
+          $option_group_row = ['', ''];
+          $oprion_row[] = [
+            'data' => $option->field_vih_option_title->value,
+          ];
           if (!empty($option->field_vih_option_stock_amount->value)) {
-            $spots_items[] = $option->field_vih_option_title->value . ': ' . ($option->field_vih_option_stock_amount->value - VihSubscriptionUtils::calculateOptionUsageCount($node, $optionGroup, $option));
+            $confirmed = VihSubscriptionUtils::calculateOptionUsageCount($node, $optionGroup, $option);
+            $pending = VihSubscriptionUtils::calculateOptionUsageCount($node, $optionGroup, $option, 'pending');
+            $oprion_row[] = $option->field_vih_option_stock_amount->value - $confirmed;
+            $oprion_row[] = $pending;
+            $oprion_row[] = $confirmed;
+            $oprion_row[] = $option->field_vih_option_stock_amount->value;
+            $rows[] = $oprion_row;
           }
         }
-        $available_spots[$optionGroup->id()] = [
-          '#theme' => 'item_list',
-          '#title' => $optionGroup->field_vih_og_title->value,
-          '#items' => $spots_items,
-        ];
       }
-
-      $rows[] = [
-        Link::fromTextAndUrl($node->title->value, $node->toUrl('canonical', ['language' => $node->language()])),
-        empty($available_spots) ? 'N/A' : ['data' => $available_spots],
-      ];
     }
     $build = array(
       '#theme' => 'table',

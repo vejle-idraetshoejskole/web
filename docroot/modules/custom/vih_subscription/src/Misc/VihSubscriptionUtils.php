@@ -248,7 +248,7 @@ class VihSubscriptionUtils {
    *
    * @return int
    */
-  public static function calculateOptionUsageCount($course, $optionGroup, $option) {
+  public static function calculateOptionUsageCount($course, $optionGroup, $option, $status = 'confirmed') {
     $optionGroupTitleDa = NULL;
     $optionGroupTitleEn = NULL;
     if ($optionGroup->hasTranslation('da')) {
@@ -272,7 +272,7 @@ class VihSubscriptionUtils {
       ->condition('type', 'vih_short_course_order')
       //->condition('status', '1')new nodes are saved as unpublished
       ->condition('field_vih_sco_course', $course->id())
-      ->condition('field_vih_sco_status', 'confirmed')
+      ->condition('field_vih_sco_status', $status)
       ->execute();
 
     $courseOrders = Node::loadMultiple($courseOrderNids);
