@@ -18,6 +18,8 @@ dependencies:
     - field.field.node.vih_long_cource.field_vih_lc_add_txt
     - field.field.node.vih_long_cource.field_vih_lc_add_txt_header
     - field.field.node.vih_long_cource.field_vih_lc_add_txt_link
+    - field.field.node.vih_long_cource.field_vih_lc_discount_amount
+    - field.field.node.vih_long_cource.field_vih_lc_discount_label
     - field.field.node.vih_long_cource.field_vih_lc_end_date
     - field.field.node.vih_long_cource.field_vih_lc_payment_terms
     - field.field.node.vih_long_cource.field_vih_lc_start_date
@@ -296,6 +298,25 @@ content:
       url_plain: false
       rel: ''
       target: ''
+    third_party_settings: {  }
+  field_vih_lc_discount_amount:
+    type: number_decimal
+    weight: 8
+    region: content
+    label: hidden
+    settings:
+      thousand_separator: .
+      decimal_separator: ','
+      scale: 0
+      prefix_suffix: true
+    third_party_settings: {  }
+  field_vih_lc_discount_label:
+    type: string
+    weight: 7
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
     third_party_settings: {  }
   field_vih_lc_payment_terms:
     type: text_default

@@ -3,6 +3,8 @@ langcode: da
 status: true
 dependencies:
   config:
+    - field.field.paragraph.list_of_long_course_prices.field_vih_background_color
+    - field.field.paragraph.list_of_long_course_prices.field_vih_background_img
     - field.field.paragraph.list_of_long_course_prices.field_vih_lc_list
     - paragraphs.paragraphs_type.list_of_long_course_prices
 id: paragraph.list_of_long_course_prices.default
@@ -10,6 +12,27 @@ targetEntityType: paragraph
 bundle: list_of_long_course_prices
 mode: default
 content:
+  field_vih_background_color:
+    weight: 102
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_vih_background_img:
+    type: entity_browser_entity_reference
+    weight: 103
+    settings:
+      entity_browser: media_browser
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: thumbnail
+      open: true
+      field_widget_replace: false
+    region: content
+    third_party_settings: {  }
   field_vih_lc_list:
     weight: 101
     settings:

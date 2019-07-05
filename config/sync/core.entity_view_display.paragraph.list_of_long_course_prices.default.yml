@@ -3,8 +3,12 @@ langcode: da
 status: true
 dependencies:
   config:
+    - field.field.paragraph.list_of_long_course_prices.field_vih_background_color
+    - field.field.paragraph.list_of_long_course_prices.field_vih_background_img
     - field.field.paragraph.list_of_long_course_prices.field_vih_lc_list
     - paragraphs.paragraphs_type.list_of_long_course_prices
+  module:
+    - bellcom_common
 id: paragraph.list_of_long_course_prices.default
 targetEntityType: paragraph
 bundle: list_of_long_course_prices
@@ -17,6 +21,8 @@ content:
       view_mode: price
       link: false
     third_party_settings: {  }
-    type: entity_reference_entity_view
+    type: vih_lc_price_list_view
     region: content
-hidden: {  }
+hidden:
+  field_vih_background_color: true
+  field_vih_background_img: true

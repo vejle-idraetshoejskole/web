@@ -3,13 +3,39 @@ langcode: da
 status: true
 dependencies:
   config:
+    - entity_browser.browser.media_browser
+    - field.field.paragraph.long_course_price.field_vih_background_color
+    - field.field.paragraph.long_course_price.field_vih_background_img
     - field.field.paragraph.long_course_price.field_vih_lc
     - paragraphs.paragraphs_type.long_course_price
+  module:
+    - entity_browser
 id: paragraph.long_course_price.default
 targetEntityType: paragraph
 bundle: long_course_price
 mode: default
 content:
+  field_vih_background_color:
+    weight: 103
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_vih_background_img:
+    type: entity_browser_entity_reference
+    weight: 102
+    settings:
+      entity_browser: media_browser
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: thumbnail
+      open: true
+      field_widget_replace: false
+    region: content
+    third_party_settings: {  }
   field_vih_lc:
     weight: 101
     settings:

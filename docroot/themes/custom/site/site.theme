@@ -381,6 +381,13 @@ function site_preprocess_node(array &$variables) {
         $variables['content']['course_title'] = $node->title->value;
 
         $variables['content']['extra_options'][$period->id()] = $extra_options;
+
+        if (!empty($node->field_vih_lc_discount_amount->value)) {
+          $variables['content']['discount_amount'] = $node->field_vih_lc_discount_amount->value;
+        }
+        if (!empty($node->field_vih_lc_discount_label->value)) {
+          $variables['content']['discount_label'] = $node->field_vih_lc_discount_label->value;
+        }
       }
     }
 
@@ -389,6 +396,10 @@ function site_preprocess_node(array &$variables) {
       + $node->field_vih_course_subsc_price->value
       + $node->field_vih_course_price->value
       + $course_travel_price;
+
+    if (!empty($variables['content']['discount_amount'])) {
+      $variables['content']['final_price'] = $variables['content']['total_price'] - $variables['content']['discount_amount'];
+    }
 
     // Setting travel price.
     $variables['content']['travel_price'] = $course_travel_price;

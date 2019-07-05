@@ -2,10 +2,7 @@ uuid: d7de0579-9481-4450-82c0-b6f7cbdff646
 langcode: da
 status: true
 dependencies:
-  config:
-    - crop.type.focal_point
   module:
-    - crop
     - focal_point
 name: vih_class_package_accordion
 label: 'VIH Class package accordion (472x212)'
@@ -25,10 +22,4 @@ effects:
     data:
       width: 472
       height: 212
-      crop_type: focal_point
-  a4a6433e-8056-492c-983a-7ebad90ee756:
-    uuid: a4a6433e-8056-492c-983a-7ebad90ee756
-    id: crop_crop
-    weight: -10
-    data:
       crop_type: focal_point

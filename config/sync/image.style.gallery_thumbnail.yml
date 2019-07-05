@@ -2,22 +2,11 @@ uuid: 783292d1-9588-4247-8ec2-d8319d4eed22
 langcode: da
 status: true
 dependencies:
-  config:
-    - crop.type.focal_point
   module:
-    - crop
     - focal_point
 name: gallery_thumbnail
 label: 'Galleri - thumbnail'
 effects:
-  a05a564b-142e-4d70-ba9b-ca7a54687c8e:
-    uuid: a05a564b-142e-4d70-ba9b-ca7a54687c8e
-    id: image_scale_and_crop
-    weight: -8
-    data:
-      width: 220
-      height: 150
-      anchor: center-center
   d81807ed-ed7a-42a7-af19-aed401de9af7:
     uuid: d81807ed-ed7a-42a7-af19-aed401de9af7
     id: focal_point_scale_and_crop
@@ -26,9 +15,11 @@ effects:
       width: 220
       height: 150
       crop_type: focal_point
-  6824ef71-9a62-406d-8bde-dfc095611762:
-    uuid: 6824ef71-9a62-406d-8bde-dfc095611762
-    id: crop_crop
-    weight: -10
+  a05a564b-142e-4d70-ba9b-ca7a54687c8e:
+    uuid: a05a564b-142e-4d70-ba9b-ca7a54687c8e
+    id: image_scale_and_crop
+    weight: -8
     data:
-      crop_type: focal_point
+      width: 220
+      height: 150
+      anchor: center-center

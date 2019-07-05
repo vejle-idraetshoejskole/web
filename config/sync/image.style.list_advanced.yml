@@ -2,10 +2,7 @@ uuid: b374a796-164b-4e9f-a769-17814c793f2c
 langcode: da
 status: true
 dependencies:
-  config:
-    - crop.type.focal_point
   module:
-    - crop
     - focal_point
 name: list_advanced
 label: 'List - advanced'
@@ -25,10 +22,4 @@ effects:
     data:
       width: 500
       height: 330
-      crop_type: focal_point
-  d6502146-1544-4904-b4a3-08be7710f23f:
-    uuid: d6502146-1544-4904-b4a3-08be7710f23f
-    id: crop_crop
-    weight: -10
-    data:
       crop_type: focal_point

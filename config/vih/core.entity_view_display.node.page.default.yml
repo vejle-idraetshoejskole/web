@@ -14,7 +14,7 @@ dependencies:
     - field.field.node.page.scheduled_update
     - node.type.page
   module:
-    - entity_reference_revisions
+    - bellcom_common
     - metatag
     - panelizer
     - text
@@ -61,7 +61,7 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    type: entity_reference_revisions_entity_view
+    type: vih_entity_reference_revisions_entity_view
     region: content
   field_vih_small_image:
     weight: 7

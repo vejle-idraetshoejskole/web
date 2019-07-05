@@ -4,6 +4,7 @@ status: true
 dependencies: {  }
 id: vih_functionality
 label: 'VIH functionality'
+description: ''
 folder: ../config/vih
 module:
   language: 0

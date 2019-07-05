@@ -3,6 +3,8 @@ langcode: da
 status: true
 dependencies:
   config:
+    - field.field.paragraph.long_course_price.field_vih_background_color
+    - field.field.paragraph.long_course_price.field_vih_background_img
     - field.field.paragraph.long_course_price.field_vih_lc
     - paragraphs.paragraphs_type.long_course_price
 id: paragraph.long_course_price.default
@@ -19,4 +21,6 @@ content:
     third_party_settings: {  }
     type: entity_reference_entity_view
     region: content
-hidden: {  }
+hidden:
+  field_vih_background_color: true
+  field_vih_background_img: true

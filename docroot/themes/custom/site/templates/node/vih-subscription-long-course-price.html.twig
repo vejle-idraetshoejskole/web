@@ -46,6 +46,28 @@
                                 DKK {{ content.total_price|number_format(0, ',', '.') }}
                             </td>
                         </tr>
+                        {% if content.discount_amount > 0 %}
+                            <tr>
+                                <td class="table-cell">
+                                    {% if content.discount_label %}
+                                        {{ content.discount_label  }}
+                                    {% else %}
+                                        {{ "Discount"|trans }}
+                                    {% endif %}
+                                </td>
+                                <td class="table-cell">
+                                    DKK {{ content.discount_amount|number_format(0, ',', '.') }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="table-cell">
+                                    <strong>{{ "Final price"|trans }}</strong>
+                                </td>
+                                <td class="table-cell">
+                                    <strong> DKK {{ content.final_price|number_format(0, ',', '.') }}</strong>
+                                </td>
+                            </tr>
+                        {% endif %}
                         {% if view_mode == 'price' %}
                         <tr>
                             <td class="table-cell" colspan="2">

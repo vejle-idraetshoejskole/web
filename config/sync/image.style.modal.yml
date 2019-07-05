@@ -2,10 +2,7 @@ uuid: 04f9a448-c47c-44ee-a203-af926caaa4c7
 langcode: da
 status: true
 dependencies:
-  config:
-    - crop.type.focal_point
   module:
-    - crop
     - focal_point
 name: modal
 label: Modal
@@ -18,12 +15,6 @@ effects:
       width: 900
       height: 400
       anchor: center-center
-  fa8bd976-bba2-42c3-9d53-d7e1259af358:
-    uuid: fa8bd976-bba2-42c3-9d53-d7e1259af358
-    id: crop_crop
-    weight: -10
-    data:
-      crop_type: focal_point
   4e7abd09-2e0c-472c-bfdf-2d919a220e27:
     uuid: 4e7abd09-2e0c-472c-bfdf-2d919a220e27
     id: focal_point_scale_and_crop

@@ -2,10 +2,7 @@ uuid: 342f47e1-d094-4d0d-ada9-d78df8e2865a
 langcode: da
 status: true
 dependencies:
-  config:
-    - crop.type.focal_point
   module:
-    - crop
     - focal_point
 name: banner
 label: Banner
@@ -25,10 +22,4 @@ effects:
     data:
       width: 1920
       height: 900
-      crop_type: focal_point
-  34d16594-bec8-487a-9b7d-0b170d77a17f:
-    uuid: 34d16594-bec8-487a-9b7d-0b170d77a17f
-    id: crop_crop
-    weight: -10
-    data:
       crop_type: focal_point

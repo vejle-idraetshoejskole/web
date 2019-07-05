@@ -1,0 +1,19 @@
+uuid: 93b5df19-d92a-4a63-9187-d157d70461b6
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_vih_lc_discount_label
+    - node.type.vih_long_cource
+id: node.vih_long_cource.field_vih_lc_discount_label
+field_name: field_vih_lc_discount_label
+entity_type: node
+bundle: vih_long_cource
+label: 'Discount label'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

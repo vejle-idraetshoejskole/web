@@ -1,0 +1,23 @@
+uuid: 6e6ba7a8-b581-4082-80e6-d9ffe3e66ede
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_vih_background_color
+    - paragraphs.paragraphs_type.long_course_price
+  module:
+    - options
+id: paragraph.long_course_price.field_vih_background_color
+field_name: field_vih_background_color
+entity_type: paragraph
+bundle: long_course_price
+label: Baggrundsfarve
+description: "Vælg hvilken baggrundsfarve denne sektion skal have.<br>\r\n<span class=\"primary\">Primær</span>\r\n<span class=\"secondary\">Sekundær</span>\r\n<span class=\"light-gray\">Lys grå</span>\r\n<span class=\"gray\">Grå</span>\r\n<span class=\"white\">Hvid</span>"
+required: false
+translatable: true
+default_value:
+  -
+    value: white
+default_value_callback: ''
+settings: {  }
+field_type: list_string
