@@ -100,7 +100,7 @@
                                                 {{ options_prefix }}{{ option.title }}
                                             </td>
                                             <td class="table-cell">
-                                                +{{ option.price }}
+                                                +{{ option.price|number_format(0, ',', '.') }}
                                             </td>
                                         </tr>
                                     {% endfor %}
