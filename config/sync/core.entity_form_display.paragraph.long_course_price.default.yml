@@ -6,6 +6,7 @@ dependencies:
     - entity_browser.browser.media_browser
     - field.field.paragraph.long_course_price.field_vih_background_color
     - field.field.paragraph.long_course_price.field_vih_background_img
+    - field.field.paragraph.long_course_price.field_vih_heading
     - field.field.paragraph.long_course_price.field_vih_lc
     - paragraphs.paragraphs_type.long_course_price
   module:
@@ -16,14 +17,14 @@ bundle: long_course_price
 mode: default
 content:
   field_vih_background_color:
-    weight: 103
+    weight: 4
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_vih_background_img:
     type: entity_browser_entity_reference
-    weight: 102
+    weight: 3
     settings:
       entity_browser: media_browser
       field_widget_display: rendered_entity
@@ -36,8 +37,16 @@ content:
       field_widget_replace: false
     region: content
     third_party_settings: {  }
+  field_vih_heading:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
   field_vih_lc:
-    weight: 101
+    weight: 2
     settings:
       match_operator: CONTAINS
       size: 60
@@ -46,7 +55,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   translation:
-    weight: 10
+    weight: 0
     region: content
     settings: {  }
     third_party_settings: {  }

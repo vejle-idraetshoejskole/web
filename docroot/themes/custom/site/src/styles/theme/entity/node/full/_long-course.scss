@@ -61,7 +61,48 @@
 // --------------------------------------------------
 // Variants
 // --------------------------------------------------
+// Primary
+  .paragraph {
+    &.sectioned--skewed--background-color-primary {
 
+      .vih-price-box {
+        color: $btn-primary-color;
+        .btn-primary {
+          background: $btn-primary-border;
+         }
+      }
+      .price-with-details.vih-long-cource  {
+        .price-table {
+          .table-heading {
+            background: $button-primary-icon-background;
+          }
+          th {
+            background-color: $btn-primary-border;
+            border-color: $btn-primary-bg;
+          }
+        }
+      }
+    }
+
+    // Secondary
+    &.sectioned--skewed--background-color-secondary {
+
+      .vih-price-box {
+        color: $btn-secondary-color;
+      }
+      .price-with-details.vih-long-cource  {
+            .price-table {
+              .table-heading {
+                 background:  $btn-secondary-border; 
+              }
+              th {
+                background-color: $button-secondary-icon-background;
+                border-color: $btn-secondary-bg;
+              }
+            }
+        }
+    }
+  }
 // --------------------------------------------------
 // Responsive
 // --------------------------------------------------

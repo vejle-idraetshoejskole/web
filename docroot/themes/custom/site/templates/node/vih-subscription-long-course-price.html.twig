@@ -1,4 +1,4 @@
-                <div class="price-table">
+                <div class="price-table partial__body">
                     <table>
                         <tr>
                             <th colspan="2">
@@ -80,14 +80,18 @@
                             </td>
                         </tr>
                         {% endif %}
-                        {% if content.extra_options %}
-                            <tr>
-                                <th colspan="2">
-                                    {{ "Extra options"|trans }}
-                                </th>
-                            </tr>
+                        {% if content.extra_options %}                            
                             {% for period_extra_options in content.extra_options %}
+                              {% if (period_extra_options|length >0 ) %}
+                              <tr>
+                                    <th colspan="2">
+                                        {{ "Extra options"|trans }}
+                                    </th>
+                                </tr>
+                                {% endif %}
                                 {% for extra_option in period_extra_options %}
+                                  
+                                  
                                     <tr>
                                         <td class="table-heading" colspan="2">
                                             <strong>{{ extra_option.title }}</strong>
