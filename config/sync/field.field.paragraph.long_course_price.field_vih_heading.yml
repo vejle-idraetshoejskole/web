@@ -1,0 +1,19 @@
+uuid: bc09db7d-30d1-4752-bae0-2792e11ec963
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_vih_heading
+    - paragraphs.paragraphs_type.long_course_price
+id: paragraph.long_course_price.field_vih_heading
+field_name: field_vih_heading
+entity_type: paragraph
+bundle: long_course_price
+label: Overskrift
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

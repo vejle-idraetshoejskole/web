@@ -358,59 +358,6 @@
                         </div>
                     {% endif %}
                     {# End - enquire button #}
-
-                    {# Begin - price #}
-                    <div class="partial partial--price-table">
-                        <div class="partial__heading">
-                            <h2 class="partial__heading__title heading-h4">{{ 'Price overview' | trans }}</h2>
-                        </div>
-                        <div class="partial__body">
-
-                            <div class="vih-price-box">
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        <div class="price-table col-sm-12 col-md-3">
-                                            <div class="table-heading">
-                                                {{ "Material fee"|trans }}
-                                            </div>
-                                            <div class="table-cell">
-                                                {{ content.field_vih_course_price }}
-                                            </div>
-                                        </div>
-                                        <div class="price-table col-sm-12 col-md-3">
-                                            <div class="table-heading">
-                                                {{ "Signup fee"|trans }}
-                                            </div>
-                                            <div class="table-cell">
-                                                {{ content.field_vih_course_subsc_price }}
-                                            </div>
-                                        </div>
-                                        <div class="price-table col-sm-12 col-md-3">
-                                            <div class="table-heading">
-                                                {{ "Weekly payment"|trans }}
-                                            </div>
-                                            <div class="table-cell">
-                                                {{ content.field_vih_course_week_price }}
-                                            </div>
-                                        </div>
-                                      {% if content.travel_price > 0 %}
-                                          <div class="price-table col-sm-12 col-md-3">
-                                              <div class="table-heading">
-                                                  {{ "Travel payment"|trans }}
-                                              </div>
-                                              <div class="table-cell">
-                                                  DKK {{ content.travel_price|number_format(2, ',', '.') }}
-                                              </div>
-                                          </div>
-                                      {% endif %}
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    {# End - price #}
-
                 </div>
             </div>
         </div>
