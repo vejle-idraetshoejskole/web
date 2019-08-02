@@ -69,13 +69,7 @@
         color: $btn-primary-color;
         .btn-primary {
           background: $btn-primary-border;
-          &:before {
-            background: $button-primary-icon-background;
-          }
-          &:after {
-            background: $button-primary-icon-background;
-          }
-        }
+         }
       }
       .price-with-details.vih-long-cource  {
         .price-table {
