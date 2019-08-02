@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.paragraph.list_of_long_course_prices.field_vih_background_color
     - field.field.paragraph.list_of_long_course_prices.field_vih_background_img
+    - field.field.paragraph.list_of_long_course_prices.field_vih_heading
     - field.field.paragraph.list_of_long_course_prices.field_vih_lc_list
     - paragraphs.paragraphs_type.list_of_long_course_prices
   module:
@@ -14,8 +15,16 @@ targetEntityType: paragraph
 bundle: list_of_long_course_prices
 mode: default
 content:
-  field_vih_lc_list:
+  field_vih_heading:
     weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_vih_lc_list:
+    weight: 1
     label: hidden
     settings:
       view_mode: price
