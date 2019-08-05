@@ -178,7 +178,6 @@ function site_preprocess_node(array &$variables) {
 
   $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
   $variables['language'] = $language;
-
   // Event
   if ($node->getType() == 'event') {
     $variables['content']['can_be_subscribed'] = \Drupal\vih_subscription\Misc\VihSubscriptionUtils::acceptsMoreSubscriptions($node);
@@ -265,7 +264,7 @@ function site_preprocess_node(array &$variables) {
 
     $start_course_date = $node->field_vih_lc_start_date;
     $end_course_date = $node->field_vih_lc_end_date;
-    
+
     foreach ($node->field_vih_course_periods->referencedEntities() as $period) {
       $period = \Drupal::service('entity.repository')->getTranslationFromContext($period);
 
@@ -344,7 +343,7 @@ function site_preprocess_node(array &$variables) {
         $extra_options = [];
         foreach ($period->field_vih_cp_course_slots->referencedEntities() as $slot) {
           $slot = \Drupal::service('entity.repository')->getTranslationFromContext($slot);
-    
+
           $travel = array_pop($slot->field_vih_cs_travel->getValue()[0]);
           $mandatory = array_pop($slot->field_vih_cs_mandatory->getValue()[0]);
           $options = [];
@@ -353,7 +352,7 @@ function site_preprocess_node(array &$variables) {
             if (empty($class->field_vih_class_price_addition->value)) {
               continue;
             }
-            
+
             if ($travel && $mandatory) {
               $course_travel_price += $class->field_vih_class_price_addition->value;
               continue;
@@ -365,7 +364,7 @@ function site_preprocess_node(array &$variables) {
               'price' => $class->field_vih_class_price_addition->value,
             ];
           }
-          
+
           if (!empty($options)) {
             $extra_options[] = [
               'title' => $slot->field_vih_cs_title->value,
@@ -377,7 +376,7 @@ function site_preprocess_node(array &$variables) {
         if (!empty($node->field_vih_lc_weeks_quantity->value)) {
           $quantity = $node->field_vih_lc_weeks_quantity->value;
         }
-  
+
         $variables['content']['course_title'] = $node->title->value;
 
         $variables['content']['extra_options'][$period->id()] = $extra_options;
@@ -628,7 +627,6 @@ function site_preprocess_paragraph__short_course_list_(&$variables) {
 function site_preprocess_paragraph__long_course_list_(&$variables) {
   $paragraph = $variables['paragraph'];
   $ids = [];
-
   if ($fields = $paragraph->get('field_vih_course_id')->getValue()) {
 
     foreach($fields as $field) {
@@ -651,6 +649,18 @@ function site_preprocess_paragraph__long_course_list_(&$variables) {
       unset($variables['content']['field_vih_empty_message']);
       $variables['content']['embedded_view'] = views_embed_view('vih_long_courses', 'embed_list_advanced_future');
     }
+  }
+}
+
+/**
+ * Implements hook_preprocess_hook().
+ */
+function site_preprocess_paragraph__long_course_price(&$variables) {
+  $paragraph = $variables['paragraph'];
+  if (empty($paragraph->get('field_vih_lc')->getValue())) {
+    $view_builder = \Drupal::entityTypeManager()->getViewBuilder('node');
+    $entity = $variables['paragraph']->getParentEntity();
+    $variables['content']['field_vih_lc'] =  $view_builder->view($entity, 'price_with_details');
   }
 }
 
