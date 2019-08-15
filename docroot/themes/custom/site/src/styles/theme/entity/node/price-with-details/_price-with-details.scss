@@ -31,12 +31,14 @@
     background: none;
     padding: 0;
     margin-right: -1px;
+    text-align: left;
 
     .table-cell {
       padding: 12px 10px;
     }
     .table-heading {
       padding: 12px 10px;
+      text-transform: none;
       background-color: rgb(238, 238, 238);
       font-weight: bold;
     }
