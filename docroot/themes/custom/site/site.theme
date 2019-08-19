@@ -425,6 +425,8 @@ function site_preprocess_node(array &$variables) {
  * Implements hook_preprocess_paragraph().
  */
 function site_preprocess_paragraph(&$variables) {
+  $variables['language'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  
   $paragraph = $variables['paragraph'];
 
   // Default

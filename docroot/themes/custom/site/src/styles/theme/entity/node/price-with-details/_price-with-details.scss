@@ -40,6 +40,9 @@
       text-transform: none;
       background-color: rgb(238, 238, 238);
       font-weight: bold;
+      &.total-price {
+        font-size: 18px;
+      }
     }
 
     table, tr {

@@ -39,10 +39,10 @@
                             </tr>
                         {% endif %}
                         <tr>
-                            <td class="table-cell">
+                            <td class="table-heading total-price">
                                 <strong>{{ "Total base price"|trans }}</strong>
                             </td>
-                            <td class="table-cell">
+                            <td class="table-heading">
                                 DKK {{ content.total_price|number_format(0, ',', '.') }}
                             </td>
                         </tr>
@@ -60,10 +60,10 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="table-cell">
-                                    <strong>{{ "Final price"|trans }}</strong>
+                                <td class="table-heading total-price">
+                                    <strong>{{ "Total price"|trans }}</strong>
                                 </td>
-                                <td class="table-cell">
+                                <td class="table-headingb">
                                     <strong> DKK {{ content.final_price|number_format(0, ',', '.') }}</strong>
                                 </td>
                             </tr>

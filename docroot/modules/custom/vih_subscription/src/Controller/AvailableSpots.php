@@ -35,7 +35,7 @@ class AvailableSpots extends ControllerBase {
 
     $query = \Drupal::entityQuery('node')
       ->condition('type', 'event')
-      ->condition('field_vih_event_start_date', $now->format(DATETIME_DATETIME_STORAGE_FORMAT), '>=')
+      //->condition('field_vih_event_start_date', $now->format(DATETIME_DATETIME_STORAGE_FORMAT), '>=')
       ->sort('field_vih_event_start_date', 'ASC');
     $nids = $query->execute();
 
@@ -48,7 +48,6 @@ class AvailableSpots extends ControllerBase {
     foreach ($nids as $nid) {
       $node = Node::load($nid);
       $available_spots = 'N/A';
-
       $stock_amount = $node->field_vih_event_persons_limit->value;
       if (!empty($stock_amount)) {
         $available_spots = $stock_amount - VihSubscriptionUtils::calculateSubscribedPeopleNumber($node);
@@ -77,7 +76,7 @@ class AvailableSpots extends ControllerBase {
 
     $query = \Drupal::entityQuery('node')
       ->condition('type', 'vih_short_course')
-      ->condition('field_vih_sc_start_date', $now->format(DATETIME_DATETIME_STORAGE_FORMAT), '>=')
+      //->condition('field_vih_sc_start_date', $now->format(DATETIME_DATETIME_STORAGE_FORMAT), '>=')
       ->sort('field_vih_sc_start_date', 'ASC');
     $nids = $query->execute();
 
