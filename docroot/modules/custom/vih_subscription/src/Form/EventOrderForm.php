@@ -135,7 +135,7 @@ class EventOrderForm extends FormBase {
           '#suffix' => '</div></div>',
         );
         $form['newParticipantContainer']['newParticipantFieldset']['email'] = array(
-          '#type' => 'textfield',
+          '#type' => 'email',
           '#title' => $this->t('E-mail address'),
           '#placeholder' => $this->t('E-mail address'),
           '#required' => TRUE,

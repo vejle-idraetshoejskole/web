@@ -271,7 +271,7 @@ class ShortCourseOrderForm extends FormBase {
         }
 
         $form['newParticipantContainer']['newParticipantFieldset']['email'] = array(
-          '#type' => 'textfield',
+          '#type' => 'email',
           '#title' => $this->t('E-mail address'),
           '#placeholder' => $this->t('E-mail address'),
           '#required' => TRUE,
