@@ -30,13 +30,24 @@ class AvailableSpots extends ControllerBase {
    * Events available spots list.
    */
   public function events() {
-    $now = new DrupalDateTime('now');
-    $now->setTimezone(new \DateTimeZone(DATETIME_STORAGE_TIMEZONE));
+    $form = \Drupal::formBuilder()->getForm('Drupal\vih_subscription\Form\EventsSearchForm');
+    $date_from = \Drupal::request()->query->get('date_from');
+    $date_to = \Drupal::request()->query->get('date_to');
 
     $query = \Drupal::entityQuery('node')
-      ->condition('type', 'event')
-      //->condition('field_vih_event_start_date', $now->format(DATETIME_DATETIME_STORAGE_FORMAT), '>=')
-      ->sort('field_vih_event_start_date', 'ASC');
+      ->condition('type', 'event');
+    if ($date_from) {
+      $date_from_obj = DrupalDateTime::createFromTimestamp(strtotime($date_from));
+      $date_from_obj->setTimezone(new \DateTimeZone(DATETIME_STORAGE_TIMEZONE));
+      $query->condition('field_vih_event_start_date', $date_from_obj->format(DATETIME_DATETIME_STORAGE_FORMAT), '>=');
+    }
+    if ($date_to) {
+      $date_to_obj = DrupalDateTime::createFromTimestamp(strtotime($date_to));
+      $date_to_obj->setTimezone(new \DateTimeZone(DATETIME_STORAGE_TIMEZONE));
+      $query->condition('field_vih_event_start_date', $date_to_obj->format(DATETIME_DATETIME_STORAGE_FORMAT), '<=');
+    }
+
+    $query->sort('field_vih_event_start_date', 'ASC');
     $nids = $query->execute();
 
     $headers = [
@@ -57,27 +68,45 @@ class AvailableSpots extends ControllerBase {
         $available_spots,
       ];
     }
-    $build = array(
+    $form['table'] = array(
+      '#type' => 'table',
+      '#header' => $headers,
+      '#rows' => $rows,
+      '#empty' => $this->t('There are no future events'),
+
+      );
+   /* $form = array(
       '#theme' => 'table',
       '#header' => $headers,
       '#rows' => $rows,
       '#empty' => $this->t('There are no future events'),
-    );
+    );*/
 
-    return $build;
+    return $form;
   }
 
   /**
    * Events available spots list.
    */
   public function short_courses() {
-    $now = new DrupalDateTime('now');
-    $now->setTimezone(new \DateTimeZone(DATETIME_STORAGE_TIMEZONE));
+    $form = \Drupal::formBuilder()->getForm('Drupal\vih_subscription\Form\EventsSearchForm');
+    $date_from = \Drupal::request()->query->get('date_from');
+    $date_to = \Drupal::request()->query->get('date_to');
 
     $query = \Drupal::entityQuery('node')
-      ->condition('type', 'vih_short_course')
-      //->condition('field_vih_sc_start_date', $now->format(DATETIME_DATETIME_STORAGE_FORMAT), '>=')
-      ->sort('field_vih_sc_start_date', 'ASC');
+      ->condition('type', 'vih_short_course');
+    if ($date_from) {
+      $date_from_obj = DrupalDateTime::createFromTimestamp(strtotime($date_from));
+      $date_from_obj->setTimezone(new \DateTimeZone(DATETIME_STORAGE_TIMEZONE));
+      $query->condition('field_vih_sc_start_date', $date_from_obj->format(DATETIME_DATETIME_STORAGE_FORMAT), '>=');
+    }
+    if ($date_to) {
+      $date_to_obj = DrupalDateTime::createFromTimestamp(strtotime($date_to));
+      $date_to_obj->setTimezone(new \DateTimeZone(DATETIME_STORAGE_TIMEZONE));
+      $query->condition('field_vih_sc_start_date', $date_to_obj->format(DATETIME_DATETIME_STORAGE_FORMAT), '<=');
+    }
+    $query->sort('field_vih_sc_start_date', 'ASC');
+
     $nids = $query->execute();
 
     $headers = [
@@ -121,14 +150,14 @@ class AvailableSpots extends ControllerBase {
         }
       }
     }
-    $build = array(
-      '#theme' => 'table',
+    $form['table'] = array (
+      '#type' => 'table',
       '#header' => $headers,
       '#rows' => $rows,
       '#empty' => $this->t('There are no future short courses'),
     );
 
-    return $build;
+    return $form;
   }
 
   /**
