@@ -36,16 +36,25 @@ class AvailableSpots extends ControllerBase {
 
     $query = \Drupal::entityQuery('node')
       ->condition('type', 'event');
-    if ($date_from) {
-      $date_from_obj = DrupalDateTime::createFromTimestamp(strtotime($date_from));
-      $date_from_obj->setTimezone(new \DateTimeZone(DATETIME_STORAGE_TIMEZONE));
-      $query->condition('field_vih_event_start_date', $date_from_obj->format(DATETIME_DATETIME_STORAGE_FORMAT), '>=');
+    if (empty($date_to) && empty($date_form)){
+
+      $now = new DrupalDateTime('now');
+      $now->setTimezone(new \DateTimeZone(DATETIME_STORAGE_TIMEZONE));
+      dump($now->format('Y-m-d'));
+      $query->condition('field_vih_event_start_date', $now->format(DATETIME_DATETIME_STORAGE_FORMAT), '>=');
+    } else {
+      if ($date_from) {
+        $date_from_obj = DrupalDateTime::createFromTimestamp(strtotime($date_from));
+        $date_from_obj->setTimezone(new \DateTimeZone(DATETIME_STORAGE_TIMEZONE));
+        $query->condition('field_vih_event_start_date', $date_from_obj->format(DATETIME_DATETIME_STORAGE_FORMAT), '>=');
+      }
+      if ($date_to) {
+        $date_to_obj = DrupalDateTime::createFromTimestamp(strtotime($date_to));
+        $date_to_obj->setTimezone(new \DateTimeZone(DATETIME_STORAGE_TIMEZONE));
+        $query->condition('field_vih_event_start_date', $date_to_obj->format(DATETIME_DATETIME_STORAGE_FORMAT), '<=');
+      }
     }
-    if ($date_to) {
-      $date_to_obj = DrupalDateTime::createFromTimestamp(strtotime($date_to));
-      $date_to_obj->setTimezone(new \DateTimeZone(DATETIME_STORAGE_TIMEZONE));
-      $query->condition('field_vih_event_start_date', $date_to_obj->format(DATETIME_DATETIME_STORAGE_FORMAT), '<=');
-    }
+
 
     $query->sort('field_vih_event_start_date', 'ASC');
     $nids = $query->execute();
@@ -95,15 +104,23 @@ class AvailableSpots extends ControllerBase {
 
     $query = \Drupal::entityQuery('node')
       ->condition('type', 'vih_short_course');
-    if ($date_from) {
-      $date_from_obj = DrupalDateTime::createFromTimestamp(strtotime($date_from));
-      $date_from_obj->setTimezone(new \DateTimeZone(DATETIME_STORAGE_TIMEZONE));
-      $query->condition('field_vih_sc_start_date', $date_from_obj->format(DATETIME_DATETIME_STORAGE_FORMAT), '>=');
+    if (empty($date_to) && empty($date_form)){
+      $now = new DrupalDateTime('now');
+      $now->setTimezone(new \DateTimeZone(DATETIME_STORAGE_TIMEZONE));
+      dump($now->format('Y-m-d'));
+      $query->condition('field_vih_event_start_date', $now->format(DATETIME_DATETIME_STORAGE_FORMAT), '>=');
     }
-    if ($date_to) {
-      $date_to_obj = DrupalDateTime::createFromTimestamp(strtotime($date_to));
-      $date_to_obj->setTimezone(new \DateTimeZone(DATETIME_STORAGE_TIMEZONE));
-      $query->condition('field_vih_sc_start_date', $date_to_obj->format(DATETIME_DATETIME_STORAGE_FORMAT), '<=');
+    else {
+      if ($date_from) {
+        $date_from_obj = DrupalDateTime::createFromTimestamp(strtotime($date_from));
+        $date_from_obj->setTimezone(new \DateTimeZone(DATETIME_STORAGE_TIMEZONE));
+        $query->condition('field_vih_sc_start_date', $date_from_obj->format(DATETIME_DATETIME_STORAGE_FORMAT), '>=');
+      }
+      if ($date_to) {
+        $date_to_obj = DrupalDateTime::createFromTimestamp(strtotime($date_to));
+        $date_to_obj->setTimezone(new \DateTimeZone(DATETIME_STORAGE_TIMEZONE));
+        $query->condition('field_vih_sc_start_date', $date_to_obj->format(DATETIME_DATETIME_STORAGE_FORMAT), '<=');
+      }
     }
     $query->sort('field_vih_sc_start_date', 'ASC');
 

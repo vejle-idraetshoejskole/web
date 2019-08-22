@@ -36,6 +36,9 @@ class EventsSearchForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     $date_from = \Drupal::request()->query->get('date_from');
     $date_to = \Drupal::request()->query->get('date_to');
+    $now = new DrupalDateTime('now');
+    $now->setTimezone(new \DateTimeZone(DATETIME_STORAGE_TIMEZONE));
+
     $form['filters'] = [
       '#type' => 'fieldset',
     ];
@@ -44,7 +47,7 @@ class EventsSearchForm extends FormBase {
       '#prefix' => '<div class="form--inline clearfix">',
       '#title'         => t('Date from'),
       '#type'          => 'date',
-      '#default_value' =>  isset($date_from) ? $date_from : ''
+      '#default_value' =>  isset($date_from) ? $date_from : $now->format('Y-m-d')
     ];
 
     $form['filters']['date_to'] = [
