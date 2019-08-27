@@ -1,0 +1,19 @@
+uuid: 7fc531fc-f29e-4ace-9e79-35e65f341bf3
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_edbbrugsen_field_name
+    - paragraphs.paragraphs_type.question_answer
+id: paragraph.question_answer.field_edbbrugsen_field_name
+field_name: field_edbbrugsen_field_name
+entity_type: paragraph
+bundle: question_answer
+label: 'Machinename for edbbrugsen API'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
