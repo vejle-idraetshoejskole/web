@@ -149,7 +149,9 @@ class EDBBrugsenIntegration {
         $registration['EgneFelter.EgetFelt30'] = '[Fri084]Nej';
       }
       foreach ($order_person->field_vih_ocp_answer->referencedEntities() as $delta => $qa_paragraph) {
-        $registration[$qa_paragraph->field_edbbrugsen_field_name->value] = $qa_paragraph->field_answer->value;
+        if (!empty($qa_paragraph->field_edbbrugsen_field_name->value) && isset($qa_paragraph->field_answer->value)) {
+          $registration[$qa_paragraph->field_edbbrugsen_field_name->value] = $qa_paragraph->field_answer->value;
+        }
       }
       //using only Booking number/Kartotek from default values
       $defaultValues = $this->getDefaultRegistrationValues();
