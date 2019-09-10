@@ -200,7 +200,9 @@ class ApplicationHandler {
       $password = $edb_brugsen_config->get('password');
       $school_code = $edb_brugsen_config->get('school_code');
       $book_number = $edb_brugsen_config->get('book_number');
-
+      if (!empty($this->data['municipality'])) {
+        $this->data['municipality'] = 'Vejle';
+      }
       $edb_brugsen_integration = new EDBBrugsenIntegration($username, $password, $school_code, $book_number);
       $registration = $edb_brugsen_integration->convertApplicationToRegistration($this->data);
 
@@ -208,8 +210,9 @@ class ApplicationHandler {
       // For foreign students with empty CPR we have to send birthday date.
       // We using CPR field to send this data.
       if (empty($studentCpr)) {
-        $studentCpr = date('dmy', strtotime($this->data['birthdate']));
+        $studentCpr = date('dmy', strtotime($this->data['birthdate'])) . '-1111';
       }
+
       $registration = $edb_brugsen_integration->addStudentCprNr($registration, $studentCpr);
 
       $synchReply = $edb_brugsen_integration->addRegistration($registration);
@@ -245,7 +248,7 @@ class ApplicationHandler {
       'field_vies_newsletter' => $this->data['newsletter'],
       'field_vies_address' => $this->data['fullAddress'],
       'field_vies_city' => $this->data['city'],
-      'field_vies_municipality' => $this->data['municipality'],
+      'field_vies_municipality' => !empty($this->data['municipality']) ? $this->data['municipality'] : 'Vejle',
       'field_vies_zip' => $this->data['zip'],
       'field_vies_gender' => $this->data['gender'],
       'field_vies_country' => $this->data['country'],
@@ -280,7 +283,7 @@ class ApplicationHandler {
         'field_parent_newsletter' => $parent_data['newsletter'],
         'field_parent_address' => $parent_data['fullAddress'],
         'field_parent_city' => $parent_data['city'],
-        'field_parent_municipality' => $parent_data['municipality'],
+        'field_parent_municipality' => !empty($parent_data['municipality']) ? $$parent_data['municipality'] : 'Vejle',
         'field_parent_zip' => $this->data['zip'],
         'field_parent_country' => $this->data['country'],
       ]);
