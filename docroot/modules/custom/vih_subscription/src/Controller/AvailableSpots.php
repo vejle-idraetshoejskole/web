@@ -40,7 +40,6 @@ class AvailableSpots extends ControllerBase {
 
       $now = new DrupalDateTime('now');
       $now->setTimezone(new \DateTimeZone(DATETIME_STORAGE_TIMEZONE));
-      dump($now->format('Y-m-d'));
       $query->condition('field_vih_event_start_date', $now->format(DATETIME_DATETIME_STORAGE_FORMAT), '>=');
     } else {
       if ($date_from) {

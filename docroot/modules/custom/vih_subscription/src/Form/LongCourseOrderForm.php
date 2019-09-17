@@ -273,15 +273,6 @@ class LongCourseOrderForm extends FormBase {
       '#prefix' => '<div class="col-xs-12 col-sm-8">',
       '#suffix' => '</div></div>',
     );
-    $form['personalDataRight']['municipality'] = array(
-      '#type' => 'select',
-      '#options' => CourseOrderOptionsList::getMunicipalityList(),
-      '#title' => $this->t('Municipality'),
-      '#placeholder' => $this->t('Municipality'),
-      '#required' => TRUE,
-      '#disabled' => $cur_language_code === 'en' ? TRUE : NULL,
-      '#access' => $cur_language_code === 'en' ? FALSE : NULL,
-    );
     $form['personalDataRight']['country'] = array(
       '#type' => 'select',
       '#title' => $this->t('Country'),
@@ -289,6 +280,23 @@ class LongCourseOrderForm extends FormBase {
       '#default_value' => 'DK',
       '#required' => TRUE,
     );
+    $form['personalDataRight']['municipality'] = array(
+      '#type' => 'select',
+      '#options' => CourseOrderOptionsList::getMunicipalityList(),
+      '#title' => $this->t('Municipality'),
+      '#placeholder' => $this->t('Municipality'),
+      '#disabled' => $cur_language_code === 'en' ? TRUE : NULL,
+      '#access' => $cur_language_code === 'en' ? FALSE : NULL,
+      '#states' => array(
+        'visible' => array (
+          ':input[name="country"]' => array('value' => 'DK'),
+        ),
+        'required' => array(
+          ':input[name="country"]' => array('value' => 'DK')
+        ),
+      ),
+    );
+
     $form['personalDataRight']['education'] = array(
       '#type' => 'select',
       '#title' => $this->t('Education at course start'),
@@ -575,7 +583,6 @@ class LongCourseOrderForm extends FormBase {
       array_push($address_adult_array, $form_state->getValue('adultHouseFloor'));
       // We do not need empty elements on the array.
       $address_adult_array = array_diff($address_adult_array, array(''));
-
       $this->courseOrder = Node::create(array(
         'type' => 'vih_long_course_order',
         'status' => 1, //We restrict direct access to the node in site_preprocess_node hook
@@ -596,7 +603,7 @@ class LongCourseOrderForm extends FormBase {
         'field_vih_lco_birthdate' => (1 == $form_state->getValue('nocpr'))? $form_state->getValue('birthdate') : NULL,
         'field_vih_lco_address' => implode('; ', $address_array),
         'field_vih_lco_city' => $form_state->getValue('city'),
-        'field_vih_lco_municipality' => $form_state->getValue('municipality'),
+        'field_vih_lco_municipality' =>  !empty($form_state->getValue('municipality')) ? $form_state->getValue('municipality') : 'Vejle',
         'field_vih_lco_zip' => $form_state->getValue('zip'),
         'field_vih_lco_education' => CourseOrderOptionsList::getEducationList($form_state->getValue('education')),
         'field_vih_lco_payment' => CourseOrderOptionsList::getPaymentList($form_state->getValue('payment')),
