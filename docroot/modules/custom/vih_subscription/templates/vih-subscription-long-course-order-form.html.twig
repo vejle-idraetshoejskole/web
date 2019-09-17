@@ -158,6 +158,16 @@
             <!-- End - adult data -->
 
             <hr>
+            <div class="partial partial--form">
+                <div class="partial__heading">
+                    <h3 class="partial__heading__title heading-h4">
+                      <span class="fieldset-legend js-form-required form-required">
+                        {{ 'Samtykke til billeder og markedsføring' | trans }}
+                      </span>
+                    </h3>
+                </div>
+              {{ form['gdpr_agreement'] }}
+            </div>
             <div class="terms_and_conditions">
               {{ form['terms_and_conditions'] }}
             </div>

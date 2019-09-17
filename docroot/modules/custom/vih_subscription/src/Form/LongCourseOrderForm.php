@@ -414,7 +414,20 @@ class LongCourseOrderForm extends FormBase {
     $form['#theme'] = 'vih_subscription_long_course_order_form';
 
     $form['#registration_text'] = ($cur_language_code === 'en') ? $config->get('vih_subscription_long_course_registration_page_text_en') : $config->get('vih_subscription_long_course_registration_page_text_da');
-
+    if (!empty($gdpr_page_id = $config->get('vih_subscription_long_course_gdpr_page'))) {
+      $gdpr_page_node = \Drupal::entityManager()->getStorage('node')->load($gdpr_page_id);
+      $gdprText = $gdpr_page_node->get('body')->summary;
+      $form['gdpr_agreement'] = array(
+        '#type' => 'container',
+         '#required' => TRUE,
+      );
+      $gdprTextLink = CommonFormUtils::getGdprReadMoreText($gdpr_page_id);
+      $form['gdpr_agreement']['gdpr_accept'] = array(
+        '#type' => 'radios',
+        '#prefix' => t($gdprText) . ' ' . $gdprTextLink,
+        '#options' => array('Ja' => $this->t('Yes'), 'Nej' => $this->t('No')),
+      );
+    }
     if (!empty($terms_and_conditions_page_id = $config->get('vih_subscription_long_course_terms_and_conditions_page'))) {
       $terms_and_conditions_link = CommonFormUtils::getTermsAndConditionsLink($terms_and_conditions_page_id);
       $form['terms_and_conditions']['accepted'] = array(
@@ -440,6 +453,9 @@ class LongCourseOrderForm extends FormBase {
     }
     if (0 <> $form_state->getValue('nocpr') and NULL == $form_state->getValue('birthdate')) {
       $form_state->setError($form['personalDataLeft']['birthdate'], $this->t('Please provide birthdate.'));
+    }
+    if (!$form_state->getValue('gdpr_accept')) {
+      $form_state->setError($form['gdpr_agreement']['gdpr_accept'], $this->t('GDPR agreement field is required.'));
     }
 
     //going through the selected options
@@ -621,6 +637,8 @@ class LongCourseOrderForm extends FormBase {
         'field_vih_lco_adult_city' => $form_state->getValue('adultCity'),
         'field_vih_lco_adult_zip' => $form_state->getValue('adultZip'),
         'field_vih_lco_adult_newsletter' => $form_state->getValue('adultNewsletter'),
+
+        'field_vih_lco_gdpr_agr' => $form_state->getValue('gdpr_accept'),
       ));
       $this->courseOrder->setPromoted(FALSE);
     } else {
@@ -687,6 +705,8 @@ class LongCourseOrderForm extends FormBase {
       )));
       $this->courseOrder->set('field_vih_lco_adult_city', $form_state->getValue('adultCity'));
       $this->courseOrder->set('field_vih_lco_adult_zip', $form_state->getValue('adultZip'));
+
+      $this->courseOrder->set('field_vih_lco_gdpr_agr', $form_state->getValue('gdpr_accept'));
     }
 
     //saving the order (works for both new/edited)
@@ -775,6 +795,7 @@ class LongCourseOrderForm extends FormBase {
     $form['adultDataRight']['adultZip']['#default_value'] = $courseOrder->field_vih_lco_adult_zip->value;
 
     $form['message']['#default_value'] = $courseOrder->field_vih_lco_message->value;
+    $form['gdpr_agreement']['gdpr_accept']['#default_value'] = $courseOrder->field_vih_lco_gdpr_agr->value;
   }
 }
 

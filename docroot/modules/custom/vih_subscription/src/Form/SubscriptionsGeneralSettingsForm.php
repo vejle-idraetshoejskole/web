@@ -162,6 +162,16 @@ class SubscriptionsGeneralSettingsForm extends ConfigFormBase {
         '#description' => $this->t('Provide a page, which allows international users to enquiry the price.'),
       ];
 
+      // Long course redirection settings.
+      $form['vih_subscription_settings_long_course_fs']['vih_subscription_long_course_gdpr_page'] = [
+        '#type' => 'entity_autocomplete',
+        '#target_type' => 'node',
+        '#selection_settings' => ['target_bundles' => ['page']],
+        '#title' => $this->t('GDPR page'),
+        '#default_value' => !empty($config->get('vih_subscription_long_course_redirection_page')) ? Node::load($config->get('vih_subscription_long_course_gdpr_page')) : NULL,
+        '#description' => $this->t("You can use any 'page' node as GDPR page"),
+      ];
+
       // Long course language specific START.
       $form['vih_subscription_settings_long_course_fs']['vih_subscription_long_course_language_specific'] = array(
         '#type' => 'vertical_tabs',

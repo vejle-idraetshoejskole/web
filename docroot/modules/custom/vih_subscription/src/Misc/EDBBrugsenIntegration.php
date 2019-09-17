@@ -97,7 +97,9 @@ class EDBBrugsenIntegration {
       $registration['Voksen.Land'] = $edb_utility->getCountryCode($longCourseOrder->get('field_vih_lco_adult_nationality')->value);
 
       $registration['EgneFelter.EgetFelt1'] = '[Fri132]' . $longCourseOrder->get('field_vih_lco_education')->value;
-      
+      $gdpr_agr =$longCourseOrder->get('field_vih_lco_gdpr_agr')->value ? 'Ja' : 'Nej';
+      $registration['EgneFelter.EgetFelt29'] = '[Forening4501]' . date('d.m.Y') . ' Web ' . $gdpr_agr;
+      $registration['EgneFelter.EgetFelt28'] = '[Forening4502]' . date('d.m.Y') . ' Web ' . 'Ja';
       $registration += $this->getDefaultRegistrationValues();
     }
     elseif ($longCourseOrder->getType() == 'vih_short_course_order') {
