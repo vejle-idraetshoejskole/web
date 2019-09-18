@@ -25,6 +25,7 @@ dependencies:
     - field.field.node.vih_long_course_order.field_vih_lco_email
     - field.field.node.vih_long_course_order.field_vih_lco_first_name
     - field.field.node.vih_long_course_order.field_vih_lco_found_from
+    - field.field.node.vih_long_course_order.field_vih_lco_gdpr_agr
     - field.field.node.vih_long_course_order.field_vih_lco_last_name
     - field.field.node.vih_long_course_order.field_vih_lco_message
     - field.field.node.vih_long_course_order.field_vih_lco_municipality
@@ -240,6 +241,13 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+    region: content
+  field_vih_lco_gdpr_agr:
+    weight: 33
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
     region: content
   field_vih_lco_last_name:
     weight: 3
