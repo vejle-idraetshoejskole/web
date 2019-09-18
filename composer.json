@@ -156,6 +156,9 @@
             },
             "drupal/verf": {
                 "2871758 - InvalidArgumentException": "https://www.drupal.org/files/issues/2871758-1.patch"
+            },
+            "drupal/paragraphs": {
+                "2907094 - Paragraphs field groups field layout": "https://www.drupal.org/files/issues/2019-08-04/2907094_76.patch"
             }
         }
     }
