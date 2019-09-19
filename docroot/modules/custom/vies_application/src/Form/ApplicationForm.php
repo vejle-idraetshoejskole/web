@@ -210,6 +210,31 @@ class ApplicationForm extends FormBase {
         '#required' => TRUE,
       );
     }
+    if (!empty($gdpr_page_id = $config->get('vih_subscription_event_course_gdpr_page'))) {
+      $gdpr_page_node = \Drupal::entityManager()->getStorage('node')->load($gdpr_page_id);
+      $gdprText = $gdpr_page_node->get('body')->summary;
+      $form['gdpr_agreement'] = array(
+        '#type' => 'container',
+         '#required' => TRUE,
+      );
+      $gdprTextLink = CommonFormUtils::getGdprReadMoreText($gdpr_page_id);
+      $form['gdpr_agreement']['gdpr_accept'] = array(
+        '#type' => 'radios',
+        '#prefix' => t($gdprText) . ' ' . $gdprTextLink,
+        '#options' => array('Ja' => $this->t('Yes'), 'Nej' => $this->t('No')),
+      );
+    }
+    $form['private_car_agreement'] = array(
+      '#type' => 'container',
+      '#required' => TRUE,
+    );
+
+    $form['private_car_agreement']['driving_in_private_car_accept'] = array(
+        '#type' => 'radios',
+        '#prefix' => $this->t('Skolen har af og til brug for at transportere elever i privatbiler. Vi har brug for en tilladelse til, at vi må køre jeres barn i privatbiler. Vi sørger naturligvis for, at der er en sele til hvert barn i bilen.'),
+        '#options' => array('Ja' => $this->t('Yes'), 'Nej' => $this->t('No')),
+      );
+
 
     $form['confirmOneParent'] = [
       '#type' => 'checkbox',
@@ -280,6 +305,12 @@ class ApplicationForm extends FormBase {
       if (0 <> $form_state->getValues()['parents']['currentWrapper']['current']['left']['nocpr'] and NULL == $form_state->getValues()['parents']['currentWrapper']['current']['left']['birthdate']) {
         $form_state->setErrorByName("parents][current][left][birthdate", $this->t('Please provide birthdate.'));
       }
+    }
+    if (!$form_state->getValue('gdpr_accept')) {
+      $form_state->setError($form['gdpr_agreement']['gdpr_accept'], $this->t('GDPR agreement field is required.'));
+    }
+    if (!$form_state->getValue('driving_in_private_car_accept')) {
+      $form_state->setError($form['private_car_agreement']['driving_in_private_car_accept'] , $this->t('"Consent to driving in private cars" field is required.'));
     }
 
     $parents = $form_state->get('parents');

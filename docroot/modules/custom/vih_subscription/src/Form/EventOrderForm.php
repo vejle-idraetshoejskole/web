@@ -49,7 +49,7 @@ class EventOrderForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state, NodeInterface $event = NULL, NodeInterface $order = NULL, $checksum = NULL) {
-    $form['#attached']['library'][] = 'vih_subscription/vih-subscription-terms-and-conditions-modal';    
+    $form['#attached']['library'][] = 'vih_subscription/vih-subscription-terms-and-conditions-modal';
     //START VARIABLES INIT //
     $this->event = $event;
     $this->price = $event->field_vih_event_price->value;
@@ -405,7 +405,7 @@ class EventOrderForm extends FormBase {
 
     //resetting the error, if any
     $response->addCommand(new HtmlCommand('#status_messages', $form['status_messages']));
-    
+
     // Enable submit button if participants added.
     if (!empty($form['addedParticipantsContainer']['#addedParticipants'])) {
       $response->addCommand(new InvokeCommand('#vih-event-submit', 'removeClass', ['disabled']));

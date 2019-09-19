@@ -213,6 +213,11 @@ class ApplicationHandler {
         $studentCpr = date('dmy', strtotime($this->data['birthdate'])) . '-1111';
       }
 
+      $gdpr_agr =$this->data['gdpr_accept'];
+      $private_car_accept = $this->data['driving_in_private_car_accept'];
+      $registration['EgneFelter.EgetFelt29'] = '[Forening4501]' . date('d.m.Y') . ' Web ' . $gdpr_agr;
+      $registration['EgneFelter.EgetFelt27'] = '[Forening4503]' . date('d.m.Y') . ' Web ' . $private_car_accept;
+      $registration['EgneFelter.EgetFelt28'] = '[Forening4502]' . date('d.m.Y') . ' Web ' . 'Ja';
       $registration = $edb_brugsen_integration->addStudentCprNr($registration, $studentCpr);
 
       $synchReply = $edb_brugsen_integration->addRegistration($registration);
@@ -254,6 +259,8 @@ class ApplicationHandler {
       'field_vies_country' => $this->data['country'],
       'field_vies_birthday' => $this->data['birthday'],
       'field_vies_no_cpr' => $this->data['nocpr'],
+      'field_vies_gdpr_agreement' => $this->data['gdpr_agreement'],
+      'field_vies_private_car_accept' => $this->data['driving_in_private_car_accept']
     ];
 
     // Parents information.
