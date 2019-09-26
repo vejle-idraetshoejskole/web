@@ -440,10 +440,7 @@ class ApplicationForm extends FormBase {
         $parent_index = max(array_keys($parents)) + 1;
       }
 
-      $values = $form_state->getValues();
-      if (!empty($values['same_address'])) {
-        $form_state->set('parent_same_address', TRUE);
-      }
+      $form_state->set('parent_same_address', TRUE);
     }
     $form_state->set('parent_index', $parent_index);
     $form_state->setRebuild();
@@ -680,6 +677,7 @@ class ApplicationForm extends FormBase {
             '#submit' => ['::hideParentForm'],
           ] + $ajax_parent_button;
         $form['parentsWrapper']['parents']['currentWrapper']['#title'] = t('Add parent');
+        $form['parentsWrapper']['parents']['currentWrapper']['#prefix'] = "<div class='clearfix'></div>";
         $form['parentsWrapper']['parents']['currentWrapper']['#theme'] = 'vies_application_section';
       }
     }
