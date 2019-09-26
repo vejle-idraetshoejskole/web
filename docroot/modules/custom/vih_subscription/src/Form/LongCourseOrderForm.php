@@ -416,6 +416,9 @@ class LongCourseOrderForm extends FormBase {
     $form['#registration_text'] = ($cur_language_code === 'en') ? $config->get('vih_subscription_long_course_registration_page_text_en') : $config->get('vih_subscription_long_course_registration_page_text_da');
     if (!empty($gdpr_page_id = $config->get('vih_subscription_long_course_gdpr_page'))) {
       $gdpr_page_node = \Drupal::entityManager()->getStorage('node')->load($gdpr_page_id);
+      if ($gdpr_page_node->hasTranslation($cur_language_code)) {
+        $gdpr_page_node = $gdpr_page_node->getTranslation($cur_language_code);
+      }
       $gdprText = $gdpr_page_node->get('body')->summary;
       $form['gdpr_agreement'] = array(
         '#type' => 'container',

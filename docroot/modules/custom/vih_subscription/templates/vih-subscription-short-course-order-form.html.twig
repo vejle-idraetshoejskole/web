@@ -78,15 +78,17 @@
 
                 <hr>
 
-                <fieldset required="required" data-drupal-selector="edit-picture-marketing-consent" class="fieldgroup form-composite required js-form-item form-item js-form-wrapper form-wrapper" id="edit-picture-marketing-consent--wrapper" aria-required="true">
-                  <legend>
-                    <span class="fieldset-legend js-form-required form-required">{{ 'Consent for pictures and marketing' | trans }}</span>
-                  </legend>
-                  <div id="edit-picture-marketing-consent--wrapper--description" class="description">{{ 'During your stay we will take pictures and video, which we will share with the participants, and some footage might also be used in digital marketing on our website, social media and printed marketing. Will that be alright with you?' | trans }}</div>
-                  <div class="fieldset-wrapper">
-                    {{ form['picture_marketing_consent'] }}
-                  </div>
-                </fieldset>
+                <div class="partial partial--form">
+                <div class="partial__heading">
+                    <h3 class="partial__heading__title heading-h4">
+                      <span class="fieldset-legend js-form-required form-required">
+                        {{ 'Consent for pictures and marketing' | trans }}
+                      </span>
+                    </h3>
+                </div>
+              {{ form['gdpr_agreement'] }}
+            </div>
+
 
                 <div class="terms_and_conditions">
                   {{ form['terms_and_conditions'] }}

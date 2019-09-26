@@ -502,17 +502,23 @@ class ShortCourseOrderForm extends FormBase {
         ],
       );
     }
-
-    $form['picture_marketing_consent'] = array(
-      '#type' => 'radios',
-      '#options' => array(
-        1 => $this
-            ->t('Yes'),
-        0 => $this
-            ->t('No'),
-      ),
-      '#required' => TRUE,
-    );
+    if (!empty($gdpr_page_id = $config->get('vih_subscription_short_course_gdpr_page'))) {
+      $gdpr_page_node = \Drupal::entityManager()->getStorage('node')->load($gdpr_page_id);
+      if ($gdpr_page_node->hasTranslation($cur_language_code)) {
+        $gdpr_page_node = $gdpr_page_node->getTranslation($cur_language_code);
+      }
+      $gdprText = $gdpr_page_node->get('body')->summary;
+      $form['gdpr_agreement'] = array(
+        '#type' => 'container',
+         '#required' => TRUE,
+      );
+      $gdprTextLink = CommonFormUtils::getGdprReadMoreText($gdpr_page_id);
+      $form['gdpr_agreement']['gdpr_accept'] = array(
+        '#type' => 'radios',
+        '#prefix' => t($gdprText) . ' ' . $gdprTextLink,
+        '#options' => array('Ja' => $this->t('Yes'), 'Nej' => $this->t('No')),
+      );
+    }
 
     // Making sure that default value stays if it's there
     if (!isset($form['order_comment'])) {
@@ -549,7 +555,7 @@ class ShortCourseOrderForm extends FormBase {
       ),
       '#submit' => array('::submitForm')
     );
-    
+
     // Disable submit button if no participants added.
     if(empty($addedParticipants)){
       $form['actions']['submit']['#attributes']['class'][] = 'disabled';
@@ -818,7 +824,7 @@ class ShortCourseOrderForm extends FormBase {
 
     //move suboptions containers to the right places in DOM
     $response->addCommand(new InvokeCommand(NULL, 'moveSuboptionsContainer'));
-    
+
     // Enable submit button if participants added.
     if (!empty($form['addedParticipantsContainer']['#addedParticipants'])) {
       $response->addCommand(new InvokeCommand('#vih-course-submit', 'removeClass', ['disabled']));
@@ -837,7 +843,7 @@ class ShortCourseOrderForm extends FormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    
+
     if (0 <> $form_state->getValues()['newParticipantContainer']['newParticipantFieldset']['nocpr']) {
       $form['newParticipantContainer']['newParticipantFieldset']['cpr']['#value'] = NULL;
       $form_errors = $form_state->getErrors();
@@ -874,7 +880,7 @@ class ShortCourseOrderForm extends FormBase {
     //submit button
     if ($triggeringElement['#id'] == 'vih-course-submit') {
       $form_state->clearErrors();
-     
+
       $addedParticipants = $form_state->get('addedParticipants');
       //not added participants
       if (!count($addedParticipants)) {
