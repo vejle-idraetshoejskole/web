@@ -93,7 +93,7 @@
       .price-with-details.vih-long-cource  {
             .price-table {
               .table-heading {
-                 background:  $btn-secondary-border; 
+                 background:  $btn-secondary-border;
               }
               th {
                 background-color: $button-secondary-icon-background;
@@ -103,6 +103,23 @@
         }
     }
   }
+
+  // gray
+  .paragraph {
+    &.sectioned--skewed--background-color-gray {
+    .price.vih-long-cource {
+        .price-table {
+          th.extra-option{
+            background-color: #888;
+          }
+          table {
+            background: #fff;
+          }
+        }
+      }
+    }
+  }
+
 // --------------------------------------------------
 // Responsive
 // --------------------------------------------------
