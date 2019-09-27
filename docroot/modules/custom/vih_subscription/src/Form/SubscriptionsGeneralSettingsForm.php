@@ -424,16 +424,6 @@ class SubscriptionsGeneralSettingsForm extends ConfigFormBase {
         '#description' => $this->t("You can use any 'page' node to redirect after order submitted successfully"),
       ];
 
-      // Event GDPR page
-      $form['vih_subscription_settings_event_fs']['vih_subscription_event_course_gdpr_page'] = [
-        '#type' => 'entity_autocomplete',
-        '#target_type' => 'node',
-        '#selection_settings' => ['target_bundles' => ['page']],
-        '#title' => $this->t('GDPR page'),
-        '#default_value' => !empty($config->get('vih_subscription_event_course_gdpr_page')) ? Node::load($config->get('vih_subscription_event_course_gdpr_page')) : NULL,
-        '#description' => $this->t("You can use any 'page' node as GDPR page"),
-      ];
-
       // Event language specific START.
       $form['vih_subscription_settings_event_fs']['vih_subscription_event_language_specific'] = array(
         '#type' => 'vertical_tabs',
@@ -554,6 +544,15 @@ class SubscriptionsGeneralSettingsForm extends ConfigFormBase {
         '#description' => t("You can use any 'page' node as '/ansogning/success' page"),
       ];
 
+      // vies_application GDPR page
+      $form['vih_subscription_settings_application_fs']['vih_subscription_application_gdpr_page'] = [
+        '#type' => 'entity_autocomplete',
+        '#target_type' => 'node',
+        '#selection_settings' => ['target_bundles' => ['page']],
+        '#title' => $this->t('GDPR page'),
+        '#default_value' => !empty($config->get('vih_subscription_application_gdpr_page')) ? Node::load($config->get('vih_subscription_application_gdpr_page')) : NULL,
+        '#description' => $this->t("You can use any 'page' node as GDPR page"),
+      ];
       $form['vih_subscription_settings_application_fs']['vih_subscription_application_language_specific'] = array(
         '#type' => 'vertical_tabs',
         '#default_tab' => 'edit-vih-subscription-application-da',

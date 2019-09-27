@@ -210,7 +210,7 @@ class ApplicationForm extends FormBase {
         '#required' => TRUE,
       );
     }
-    if (!empty($gdpr_page_id = $config->get('vih_subscription_event_course_gdpr_page'))) {
+    if (!empty($gdpr_page_id = $config->get('vih_subscription_application_gdpr_page'))) {
       $gdpr_page_node = \Drupal::entityManager()->getStorage('node')->load($gdpr_page_id);
       $gdprText = $gdpr_page_node->get('body')->summary;
       $form['gdpr_agreement'] = array(
