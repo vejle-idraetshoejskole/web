@@ -394,6 +394,22 @@ class LongCourseOrderForm extends FormBase {
       '#default_value' => 'DK',
       '#required' => TRUE,
     );
+    $form['adultDataRight']['adultMunicipality'] = array(
+      '#type' => 'select',
+      '#options' => CourseOrderOptionsList::getMunicipalityList(),
+      '#title' => $this->t('Municipality'),
+      '#placeholder' => $this->t('Municipality'),
+      '#disabled' => $cur_language_code === 'en' ? TRUE : NULL,
+      '#access' => $cur_language_code === 'en' ? FALSE : NULL,
+      '#states' => array(
+        'visible' => array (
+          ':input[name="adultNationality"]' => array('value' => 'DK'),
+        ),
+        'required' => array(
+          ':input[name="adultNationality"]' => array('value' => 'DK')
+        ),
+      ),
+    );
 
     $form['message'] = array(
       '#type' => 'textarea',
@@ -639,6 +655,7 @@ class LongCourseOrderForm extends FormBase {
         'field_vih_lco_adult_address' => implode('; ', $address_adult_array),
         'field_vih_lco_adult_city' => $form_state->getValue('adultCity'),
         'field_vih_lco_adult_zip' => $form_state->getValue('adultZip'),
+        'field_vih_lco_adult_municipality' =>  !empty($form_state->getValue('adultMunicipality')) ? $form_state->getValue('adultMunicipality') : 'Vejle',
         'field_vih_lco_adult_newsletter' => $form_state->getValue('adultNewsletter'),
 
         'field_vih_lco_gdpr_agr' => $form_state->getValue('gdpr_accept'),
@@ -700,6 +717,8 @@ class LongCourseOrderForm extends FormBase {
       $this->courseOrder->set('field_vih_lco_adult_telefon', $form_state->getValue('adultTelefon'));
       $this->courseOrder->set('field_vih_lco_adult_email', $form_state->getValue('adultEmail'));
       $this->courseOrder->set('field_vih_lco_adult_nationality', CourseOrderOptionsList::getNationalityList($form_state->getValue('adultNationality')));
+      $this->courseOrder->set('field_vih_lco_adult_municipality', $form_state->getValue('adultMunicipality'));
+
       $this->courseOrder->set('field_vih_lco_adult_address', implode('; ', array(
         $form_state->getValue('adultAddress'),
         $form_state->getValue('adultHouseNumber'),
@@ -783,7 +802,6 @@ class LongCourseOrderForm extends FormBase {
     $form['adultDataLeft']['adultLastName']['#default_value'] = $courseOrder->field_vih_lco_adult_last_name->value;
     $form['adultDataLeft']['adultTelefon']['#default_value'] = $courseOrder->field_vih_lco_adult_telefon->value;
     $form['adultDataLeft']['adultEmail']['#default_value'] = $courseOrder->field_vih_lco_adult_email->value;
-    $form['adultDataLeft']['adultNationality']['#default_value'] = array_search($courseOrder->field_vih_lco_adult_nationality->value, CourseOrderOptionsList::getNationalityList());
     $form['adultDataLeft']['adultNewsletter']['#default_value'] = $courseOrder->field_vih_lco_adult_newsletter->value ;
 
     $adult_address = $courseOrder->field_vih_lco_adult_address->value;
@@ -796,6 +814,9 @@ class LongCourseOrderForm extends FormBase {
     $form['adultDataRight']['adultHouse']['adultHouseFloor']['#default_value'] = !empty($adult_address_parts[3]) ? $adult_address_parts[3] : NULL;
     $form['adultDataRight']['adultCity']['#default_value'] = $courseOrder->field_vih_lco_adult_city->value;
     $form['adultDataRight']['adultZip']['#default_value'] = $courseOrder->field_vih_lco_adult_zip->value;
+    $form['adultDataRight']['adultMunicipality']['#default_value'] = $courseOrder->field_vih_lco_adult_municipality->value ;
+    $form['adultDataRight']['adultNationality']['#default_value'] = array_search($courseOrder->field_vih_lco_adult_nationality->value, CourseOrderOptionsList::getNationalityList());
+
 
     $form['message']['#default_value'] = $courseOrder->field_vih_lco_message->value;
     $form['gdpr_agreement']['gdpr_accept']['#default_value'] = $courseOrder->field_vih_lco_gdpr_agr->value;
