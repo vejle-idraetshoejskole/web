@@ -516,7 +516,7 @@ class ShortCourseOrderForm extends FormBase {
       $form['gdpr_agreement']['gdpr_accept'] = array(
         '#type' => 'radios',
         '#prefix' => t($gdprText) . ' ' . $gdprTextLink,
-        '#options' => array('Ja' => $this->t('Yes'), 'Nej' => $this->t('No')),
+        '#options' => array(1 => $this->t('Yes'), 0 => $this->t('No')),
       );
     }
 
@@ -550,7 +550,7 @@ class ShortCourseOrderForm extends FormBase {
         ['newParticipantContainer', 'newParticipantFieldset', 'cpr'],
         ['newParticipantContainer', 'newParticipantFieldset', 'birthdate'],
         ['terms_and_conditions'],
-        ['picture_marketing_consent'],
+        ['gdpr_accept'],
         ['order_comment']
       ),
       '#submit' => array('::submitForm')
@@ -893,9 +893,9 @@ class ShortCourseOrderForm extends FormBase {
         $form_state->setError($form['terms_and_conditions'], $this->t('Before you can proceed you must accept the terms and conditions'));
       }
 
-      $pictures_marketing_consent = $form_state->getValue('picture_marketing_consent');
+      $pictures_marketing_consent = $form_state->getValue('gdpr_accept');
       if (!isset($pictures_marketing_consent)) {
-        $form_state->setError($form['picture_marketing_consent'], $this->t('Before you can proceed you must answer the pictures and marketing consent'));
+        $form_state->setError($form['gdpr_agreement']['gdpr_accept'], $this->t('Before you can proceed you must answer the pictures and marketing consent'));
       }
     }
   }
@@ -1031,7 +1031,7 @@ class ShortCourseOrderForm extends FormBase {
         'field_vih_sco_status' => 'pending',
         'field_vih_sco_price' => $orderPrice,
         'field_vih_sco_comment' => $form_state->getValue('order_comment'),
-        'field_vih_sco_pic_mark_consent' => $form_state->getValue('picture_marketing_consent')
+        'field_vih_sco_pic_mark_consent' => $form_state->getValue('gdpr_accept')
       ));
       $this->courseOrder->setPromoted(FALSE);
     }
