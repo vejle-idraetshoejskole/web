@@ -33,7 +33,7 @@ class AvailableSpots extends ControllerBase {
     $form = \Drupal::formBuilder()->getForm('Drupal\vih_subscription\Form\EventsSearchForm');
     $date_from = \Drupal::request()->query->get('date_from');
     $date_to = \Drupal::request()->query->get('date_to');
-    $min_available_spots = empty(\Drupal::request()->query->get('min_available_spots')) ? 10 : \Drupal::request()->query->get('min_available_spots');
+    $available_spots_filter = empty(\Drupal::request()->query->get('available_spots')) ? 10 : \Drupal::request()->query->get('available_spots');
 
     $query = \Drupal::entityQuery('node')
       ->condition('type', 'event');
@@ -71,7 +71,7 @@ class AvailableSpots extends ControllerBase {
       if (!empty($stock_amount)) {
         $available_spots = $stock_amount - VihSubscriptionUtils::calculateSubscribedPeopleNumber($node);
       }
-      if ($min_available_spots <= $available_spots) {
+      if ($available_spots_filter >= $available_spots) {
         $rows[] = [
           Link::fromTextAndUrl($node->title->value, $node->toUrl('canonical', ['language' => $node->language()])),
           $available_spots,
