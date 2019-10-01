@@ -657,8 +657,7 @@ class LongCourseOrderForm extends FormBase {
         'field_vih_lco_adult_zip' => $form_state->getValue('adultZip'),
         'field_vih_lco_adult_municipality' =>  !empty($form_state->getValue('adultMunicipality')) ? $form_state->getValue('adultMunicipality') : 'Vejle',
         'field_vih_lco_adult_newsletter' => $form_state->getValue('adultNewsletter'),
-
-        'field_vih_lco_gdpr_agr' => $form_state->getValue('gdpr_accept'),
+        'field_vih_lco_gdpr_agr' => ($form_state->getValue('gdpr_accept') == 'Ja')? 0 : 1,
       ));
       $this->courseOrder->setPromoted(FALSE);
     } else {
@@ -727,8 +726,8 @@ class LongCourseOrderForm extends FormBase {
       )));
       $this->courseOrder->set('field_vih_lco_adult_city', $form_state->getValue('adultCity'));
       $this->courseOrder->set('field_vih_lco_adult_zip', $form_state->getValue('adultZip'));
-
-      $this->courseOrder->set('field_vih_lco_gdpr_agr', $form_state->getValue('gdpr_accept'));
+      $gdpr_agr = ($form_state->getValue('gdpr_accept') == 'Ja')? 0 : 1;
+      $this->courseOrder->set('field_vih_lco_gdpr_agr', $gdpr_agr);
     }
 
     //saving the order (works for both new/edited)

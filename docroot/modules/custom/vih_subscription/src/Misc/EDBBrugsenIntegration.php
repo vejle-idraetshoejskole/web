@@ -97,7 +97,7 @@ class EDBBrugsenIntegration {
       $registration['Voksen.Land'] = $edb_utility->getCountryCode($longCourseOrder->get('field_vih_lco_adult_nationality')->value);
 
       $registration['EgneFelter.EgetFelt1'] = '[Fri132]' . $longCourseOrder->get('field_vih_lco_education')->value;
-      $gdpr_agr =$longCourseOrder->get('field_vih_lco_gdpr_agr')->value ? 'Ja' : 'Nej';
+      $gdpr_agr =$longCourseOrder->get('field_vih_lco_gdpr_agr')->value ? 'Nej' : 'Ja';
       $registration['EgneFelter.EgetFelt29'] = '[Forening4501]' . date('d.m.Y') . ' Web ' . $gdpr_agr;
       $registration['EgneFelter.EgetFelt28'] = '[Forening4502]' . date('d.m.Y') . ' Web ' . 'Ja';
       $registration += $this->getDefaultRegistrationValues();
@@ -195,13 +195,13 @@ class EDBBrugsenIntegration {
     if (isset($data['afterSchoolComment']) && isset($data['afterSchoolComment']['answer'])) {
       $registration['Elev.Notat'] = $data['afterSchoolComment']['answer'];
     }
-    
+
     // Adults information.
 
     $voksen = NULL;
     $mor = NULL;
     $far = NULL;
-    
+
     foreach($data['parents'] as $adult){
       if($adult['type'] == 'andre'  AND is_null($voksen)){
         $voksen = $adult;
@@ -213,7 +213,7 @@ class EDBBrugsenIntegration {
         $far = $adult;
       }
     }
-    
+
     $registration['Voksen.Fornavn'] = $voksen['firstName'];
     $registration['Voksen.Efternavn'] = $voksen['lastName'];
     $registration['Voksen.Adresse'] = $voksen['fullAddress'];
@@ -225,7 +225,7 @@ class EDBBrugsenIntegration {
     $registration['Voksen.Email'] = $voksen['email'];
     $registration['Voksen.CprNr'] = $voksen['cpr'];
     $registration['Voksen.Land'] = $edb_utility->getCountryCode($voksen['country']);
-    
+
     $registration['Mor.Fornavn'] = $mor['firstName'];
     $registration['Mor.Efternavn'] = $mor['lastName'];
     $registration['Mor.Adresse'] = $mor['fullAddress'];
@@ -237,7 +237,7 @@ class EDBBrugsenIntegration {
     $registration['Mor.Email'] = $mor['email'];
     $registration['Mor.CprNr'] = $mor['cpr'];
     $registration['Mor.Land'] = $edb_utility->getCountryCode($mor['country']);
-    
+
     $registration['Far.Fornavn'] = $far['firstName'];
     $registration['Far.Efternavn'] = $far['lastName'];
     $registration['Far.Adresse'] = $far['fullAddress'];
