@@ -259,8 +259,8 @@ class ApplicationHandler {
       'field_vies_country' => $this->data['country'],
       'field_vies_birthday' => $this->data['birthday'],
       'field_vies_no_cpr' => $this->data['nocpr'],
-      'field_vies_gdpr_agreement' => $this->data['gdpr_agreement'],
-      'field_vies_private_car_accept' => $this->data['driving_in_private_car_accept']
+      'field_vies_gdpr_agreement' => ($this->data['gdpr_accept'] == 'Ja')? 0 : 1,
+      'field_vies_private_car_accept' => ($this->data['driving_in_private_car_accept'] == 'Ja')? 0 : 1,
     ];
 
     // Parents information.
