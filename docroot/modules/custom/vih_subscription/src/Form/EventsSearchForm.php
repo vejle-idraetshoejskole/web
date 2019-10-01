@@ -36,6 +36,7 @@ class EventsSearchForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     $date_from = \Drupal::request()->query->get('date_from');
     $date_to = \Drupal::request()->query->get('date_to');
+    $min_available_spots = \Drupal::request()->query->get('min_available_spots');
     $now = new DrupalDateTime('now');
     $now->setTimezone(new \DateTimeZone(DATETIME_STORAGE_TIMEZONE));
 
@@ -55,7 +56,12 @@ class EventsSearchForm extends FormBase {
       '#type'          => 'date',
       '#format' => 'd-m-Y',
       '#default_value' =>  isset($date_to) ? $date_to : '',
-      '#suffix' => '</div>'
+    ];
+     $form['filters']['min_available_spots'] = [
+      '#title'         => t('Available spots'),
+      '#type'          => 'number',
+      '#default_value' =>  isset($min_available_spots) ? $min_available_spots : 10,
+       '#suffix' => '</div>'
     ];
     $form['filters']['submit'] = [
       '#type'  => 'submit',
@@ -76,8 +82,9 @@ class EventsSearchForm extends FormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $date_from = $form_state->getValue('date_from');
     $date_to = $form_state->getValue('date_to');
+    $min_available_spots = $form_state->getValue('min_available_spots');
     $url = parse_url(\Drupal::request()->getRequestUri(), PHP_URL_PATH);
-    $response = Url::fromUserInput($url . '?date_from=' . $date_from . '&date_to='. $date_to );
+    $response = Url::fromUserInput($url . '?date_from=' . $date_from . '&date_to='. $date_to . '&min_available_spots=' . $min_available_spots);
     $form_state->setRedirectUrl($response);
   }
 

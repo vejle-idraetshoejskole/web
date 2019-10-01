@@ -33,11 +33,11 @@ class AvailableSpots extends ControllerBase {
     $form = \Drupal::formBuilder()->getForm('Drupal\vih_subscription\Form\EventsSearchForm');
     $date_from = \Drupal::request()->query->get('date_from');
     $date_to = \Drupal::request()->query->get('date_to');
+    $min_available_spots = empty(\Drupal::request()->query->get('min_available_spots')) ? 10 : \Drupal::request()->query->get('min_available_spots');
 
     $query = \Drupal::entityQuery('node')
       ->condition('type', 'event');
-    if (empty($date_to) && empty($date_form)){
-
+    if (empty($date_to) && empty($date_from)){
       $now = new DrupalDateTime('now');
       $now->setTimezone(new \DateTimeZone(DATETIME_STORAGE_TIMEZONE));
       $query->condition('field_vih_event_start_date', $now->format(DATETIME_DATETIME_STORAGE_FORMAT), '>=');
@@ -71,10 +71,12 @@ class AvailableSpots extends ControllerBase {
       if (!empty($stock_amount)) {
         $available_spots = $stock_amount - VihSubscriptionUtils::calculateSubscribedPeopleNumber($node);
       }
-      $rows[] = [
-        Link::fromTextAndUrl($node->title->value, $node->toUrl('canonical', ['language' => $node->language()])),
-        $available_spots,
-      ];
+      if ($min_available_spots <= $available_spots) {
+        $rows[] = [
+          Link::fromTextAndUrl($node->title->value, $node->toUrl('canonical', ['language' => $node->language()])),
+          $available_spots,
+        ];
+      }
     }
     $form['table'] = array(
       '#type' => 'table',
