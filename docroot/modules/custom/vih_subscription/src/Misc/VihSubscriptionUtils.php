@@ -260,7 +260,6 @@ class VihSubscriptionUtils {
 
     $optionTitleDa = NULL;
     $optionTitleEn = NULL;
-
     if ($option->hasTranslation('da')) {
       $optionTitleDa = $option->getTranslation('da')->field_vih_option_title->value;
     }
@@ -279,17 +278,27 @@ class VihSubscriptionUtils {
 
     $count = 0;
     foreach ($courseOrders as $courseOrder) {
-      foreach ($courseOrder->field_vih_sco_persons->referencedEntities() as $orderedPerson) {
-        foreach ($orderedPerson->field_vih_ocp_ordered_options->referencedEntities() as $orderedOption) {
-          if ((($optionGroupTitleDa && $orderedOption->field_vih_oo_group_name->value === $optionGroupTitleDa) ||
-              ($optionGroupTitleEn && $orderedOption->field_vih_oo_group_name->value === $optionGroupTitleEn))
-            &&
-            (($optionTitleDa && $orderedOption->field_vih_oo_option_name->value === $optionTitleDa) || ($optionTitleEn && $orderedOption->field_vih_oo_option_name->value === $optionTitleEn))
-          ) {
-            $count++;
-          }
-        }
-      }
+      $orderedPersonsIds = array_column($courseOrder->field_vih_sco_persons->getValue(), 'target_id');
+
+      $countQuery = \Drupal::entityQuery('paragraph');
+
+      $groupNameConditionGroup = $countQuery
+        ->orConditionGroup()
+        ->condition('field_vih_oo_group_name', $optionGroupTitleDa)
+        ->condition('field_vih_oo_group_name', $optionGroupTitleEn);
+
+      $optionNameConditionGroup = $countQuery
+        ->orConditionGroup()
+        ->condition('field_vih_oo_option_name', $optionTitleDa)
+        ->condition('field_vih_oo_option_name', $optionTitleEn);
+
+      $count += $countQuery
+        ->condition('type', 'vih_ordered_option')
+        ->condition('parent_id', $orderedPersonsIds, 'IN')
+        ->condition($groupNameConditionGroup)
+        ->condition($optionNameConditionGroup)
+        ->count()
+        ->execute();
     }
 
     return $count;

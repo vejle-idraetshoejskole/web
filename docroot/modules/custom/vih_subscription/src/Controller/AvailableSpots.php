@@ -103,6 +103,17 @@ class AvailableSpots extends ControllerBase {
     $date_from = \Drupal::request()->query->get('date_from');
     $date_to = \Drupal::request()->query->get('date_to');
 
+    $headers = [
+      'Title',
+      'Group',
+      'Option',
+      'Available',
+      'Pending',
+      'Confirmed',
+      'Total',
+    ];
+    $rows = [];
+
     $query = \Drupal::entityQuery('node')
       ->condition('type', 'vih_short_course');
     if (empty($date_to) && empty($date_form)){
@@ -125,48 +136,41 @@ class AvailableSpots extends ControllerBase {
     $query->sort('field_vih_sc_start_date', 'ASC');
 
     $nids = $query->execute();
+    $shortCourses = Node::loadMultiple($nids);
 
-    $headers = [
-      'Title',
-      'Group',
-      'Option',
-      'Available',
-      'Pending',
-      'Confirmed',
-      'Total',
-    ];
-    $rows = [];
-    foreach ($nids as $nid) {
-      $node = Node::load($nid);
-      $row = [];
-      $row[] = [
-        'data' => Link::fromTextAndUrl($node->title->value, $node->toUrl('canonical', ['language' => $node->language()])),
-      ];
-      foreach ($node->field_vih_sc_option_groups->referencedEntities() as $optionGroup) {
-        $option_group_row = $row;
-        $row = [''];
-        $option_group_row[] = [
-          'data' => $optionGroup->field_vih_og_title->value,
+    if (!empty($shortCourses)) {
+      foreach ($shortCourses as $shortCourse) {
+        $row = [];
+        $row[] = [
+          'data' => Link::fromTextAndUrl($shortCourse->title->value, $shortCourse->toUrl('canonical', ['language' => $shortCourse->language()])),
         ];
-        foreach ($optionGroup->field_vih_og_options->referencedEntities() as $optionDelta => $option) {
-          $option = \Drupal::service('entity.repository')->getTranslationFromContext($option);
-          $oprion_row = $option_group_row;
-          $option_group_row = ['', ''];
-          $oprion_row[] = [
-            'data' => $option->field_vih_option_title->value,
+        foreach ($shortCourse->field_vih_sc_option_groups->referencedEntities() as $optionGroup) {
+          $option_group_row = $row;
+          $row = [''];
+          $option_group_row[] = [
+            'data' => $optionGroup->field_vih_og_title->value,
           ];
-          if (!empty($option->field_vih_option_stock_amount->value)) {
-            $confirmed = VihSubscriptionUtils::calculateOptionUsageCount($node, $optionGroup, $option);
-            $pending = VihSubscriptionUtils::calculateOptionUsageCount($node, $optionGroup, $option, 'pending');
-            $oprion_row[] = $option->field_vih_option_stock_amount->value - $confirmed;
-            $oprion_row[] = $pending;
-            $oprion_row[] = $confirmed;
-            $oprion_row[] = $option->field_vih_option_stock_amount->value;
-            $rows[] = $oprion_row;
+          foreach ($optionGroup->field_vih_og_options->referencedEntities() as $optionDelta => $option) {
+            $option = \Drupal::service('entity.repository')->getTranslationFromContext($option);
+            $option_row = $option_group_row;
+            $option_group_row = ['', ''];
+            $option_row[] = [
+              'data' => $option->field_vih_option_title->value,
+            ];
+            if (!empty($option->field_vih_option_stock_amount->value)) {
+              $confirmed = VihSubscriptionUtils::calculateOptionUsageCount($shortCourse, $optionGroup, $option);
+              $pending = VihSubscriptionUtils::calculateOptionUsageCount($shortCourse, $optionGroup, $option, 'pending');
+              $option_row[] = $option->field_vih_option_stock_amount->value - $confirmed;
+              $option_row[] = $pending;
+              $option_row[] = $confirmed;
+              $option_row[] = $option->field_vih_option_stock_amount->value;
+              $rows[] = $option_row;
+            }
           }
         }
       }
     }
+
     $form['table'] = array (
       '#type' => 'table',
       '#header' => $headers,
