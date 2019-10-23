@@ -38,18 +38,15 @@ class AvailableSpots extends ControllerBase {
     $query = \Drupal::entityQuery('node')
       ->condition('type', 'event');
     if (empty($date_to) && empty($date_from)){
-      $now = new DrupalDateTime('now');
-      $now->setTimezone(new \DateTimeZone(DATETIME_STORAGE_TIMEZONE));
+      $now = new DrupalDateTime('today');
       $query->condition('field_vih_event_start_date', $now->format(DATETIME_DATETIME_STORAGE_FORMAT), '>=');
     } else {
       if ($date_from) {
         $date_from_obj = DrupalDateTime::createFromTimestamp(strtotime($date_from));
-        $date_from_obj->setTimezone(new \DateTimeZone(DATETIME_STORAGE_TIMEZONE));
         $query->condition('field_vih_event_start_date', $date_from_obj->format(DATETIME_DATETIME_STORAGE_FORMAT), '>=');
       }
       if ($date_to) {
         $date_to_obj = DrupalDateTime::createFromTimestamp(strtotime($date_to));
-        $date_to_obj->setTimezone(new \DateTimeZone(DATETIME_STORAGE_TIMEZONE));
         $query->condition('field_vih_event_start_date', $date_to_obj->format(DATETIME_DATETIME_STORAGE_FORMAT), '<=');
       }
     }
@@ -118,24 +115,21 @@ class AvailableSpots extends ControllerBase {
     $query = \Drupal::entityQuery('node')
       ->condition('type', 'vih_short_course');
     if (empty($date_to) && empty($date_from)){
-      $now = new DrupalDateTime('now');
-      $now->setTimezone(new \DateTimeZone(DATETIME_STORAGE_TIMEZONE));
+      $now = new DrupalDateTime('today');
       $query->condition('field_vih_event_start_date', $now->format(DATETIME_DATETIME_STORAGE_FORMAT), '>=');
     }
     else {
       if ($date_from) {
         $date_from_obj = DrupalDateTime::createFromTimestamp(strtotime($date_from));
-        $date_from_obj->setTimezone(new \DateTimeZone(DATETIME_STORAGE_TIMEZONE));
         $query->condition('field_vih_sc_start_date', $date_from_obj->format(DATETIME_DATETIME_STORAGE_FORMAT), '>=');
       }
       if ($date_to) {
         $date_to_obj = DrupalDateTime::createFromTimestamp(strtotime($date_to));
-        $date_to_obj->setTimezone(new \DateTimeZone(DATETIME_STORAGE_TIMEZONE));
         $query->condition('field_vih_sc_start_date', $date_to_obj->format(DATETIME_DATETIME_STORAGE_FORMAT), '<=');
       }
     }
     $query->sort('field_vih_sc_start_date', 'ASC');
-
+    
     $nids = $query->execute();
     $shortCourses = Node::loadMultiple($nids);
 
@@ -165,7 +159,7 @@ class AvailableSpots extends ControllerBase {
               if ($available_spots > $available_spots_filter ) {
                 continue;
               }
-              $option_row[] = $option->field_vih_option_stock_amount->value - $confirmed;
+              $option_row[] = $available_spots;
               $option_row[] = $pending;
               $option_row[] = $confirmed;
               $option_row[] = $option->field_vih_option_stock_amount->value;
