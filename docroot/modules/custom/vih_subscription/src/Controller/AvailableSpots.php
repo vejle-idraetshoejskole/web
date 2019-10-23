@@ -102,6 +102,7 @@ class AvailableSpots extends ControllerBase {
     $form = \Drupal::formBuilder()->getForm('Drupal\vih_subscription\Form\EventsSearchForm');
     $date_from = \Drupal::request()->query->get('date_from');
     $date_to = \Drupal::request()->query->get('date_to');
+    $available_spots_filter = empty(\Drupal::request()->query->get('available_spots')) ? 10 : \Drupal::request()->query->get('available_spots');
 
     $headers = [
       'Title',
@@ -116,7 +117,7 @@ class AvailableSpots extends ControllerBase {
 
     $query = \Drupal::entityQuery('node')
       ->condition('type', 'vih_short_course');
-    if (empty($date_to) && empty($date_form)){
+    if (empty($date_to) && empty($date_from)){
       $now = new DrupalDateTime('now');
       $now->setTimezone(new \DateTimeZone(DATETIME_STORAGE_TIMEZONE));
       $query->condition('field_vih_event_start_date', $now->format(DATETIME_DATETIME_STORAGE_FORMAT), '>=');
@@ -160,6 +161,10 @@ class AvailableSpots extends ControllerBase {
             if (!empty($option->field_vih_option_stock_amount->value)) {
               $confirmed = VihSubscriptionUtils::calculateOptionUsageCount($shortCourse, $optionGroup, $option);
               $pending = VihSubscriptionUtils::calculateOptionUsageCount($shortCourse, $optionGroup, $option, 'pending');
+              $available_spots = $option->field_vih_option_stock_amount->value - $confirmed;
+              if ($available_spots > $available_spots_filter ) {
+                continue;
+              }
               $option_row[] = $option->field_vih_option_stock_amount->value - $confirmed;
               $option_row[] = $pending;
               $option_row[] = $confirmed;
