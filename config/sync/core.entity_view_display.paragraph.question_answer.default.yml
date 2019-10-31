@@ -22,13 +22,13 @@ content:
     type: string
     region: content
   field_edbbrugsen_field_name:
-    type: string
-    weight: 3
-    region: content
+    weight: 4
     label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
+    type: string
+    region: content
   field_question:
     weight: 0
     label: inline
