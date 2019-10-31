@@ -122,3 +122,4 @@ mailchimp.settings.yml
 !config/*/metatag.settings.yml
 !config/*/linkit.*
 !config/*/context.*
+!config/*/webform.webform.contact.*
