@@ -90,7 +90,7 @@ class ApplicationHandler {
   /**
    * Helper function to prepare data,.
    */
-  private function prepareData() {    
+  private function prepareData() {
     $course = Node::load($this->data['course']);
     $this->data['courseTitle'] = $course->getTitle();
 
@@ -112,7 +112,7 @@ class ApplicationHandler {
     }else{
       //Get birthdate from CPR
           // We need to convert 2 digit year to 4 digit year, not to get 2065 instead of 1965
-          $birthdate_year = \DateTime::createFromFormat('y', substr($this->data['cpr'], 4, 2));          
+          $birthdate_year = \DateTime::createFromFormat('y', substr($this->data['cpr'], 4, 2));
           if ($birthdate_year->format('Y') > date('Y')) {
             $birthdate_year = \DateTime::createFromFormat('Y', '19' . substr($this->data['cpr'], 4, 2));
           }
@@ -200,9 +200,25 @@ class ApplicationHandler {
       $password = $edb_brugsen_config->get('password');
       $school_code = $edb_brugsen_config->get('school_code');
       $book_number = $edb_brugsen_config->get('book_number');
-
+      if (!empty($this->data['municipality'])) {
+        $this->data['municipality'] = 'Vejle';
+      }
       $edb_brugsen_integration = new EDBBrugsenIntegration($username, $password, $school_code, $book_number);
       $registration = $edb_brugsen_integration->convertApplicationToRegistration($this->data);
+
+      $studentCpr = $this->data['cpr'];
+      // For foreign students with empty CPR we have to send birthday date.
+      // We using CPR field to send this data.
+      if (empty($studentCpr)) {
+        $studentCpr = date('dmy', strtotime($this->data['birthdate'])) . '-1111';
+      }
+
+      $gdpr_agr =$this->data['gdpr_accept'];
+      $private_car_accept = $this->data['driving_in_private_car_accept'];
+      $registration['EgneFelter.EgetFelt29'] = '[Forening4501]' . date('d.m.Y') . ' Web ' . $gdpr_agr;
+      $registration['EgneFelter.EgetFelt27'] = '[Forening4503]' . date('d.m.Y') . ' Web ' . $private_car_accept;
+      $registration['EgneFelter.EgetFelt28'] = '[Forening4502]' . date('d.m.Y') . ' Web ' . 'Ja';
+      $registration = $edb_brugsen_integration->addStudentCprNr($registration, $studentCpr);
 
       $synchReply = $edb_brugsen_integration->addRegistration($registration);
       $this->application->set('field_vies_edb_synched', $synchReply['status']);
@@ -237,12 +253,14 @@ class ApplicationHandler {
       'field_vies_newsletter' => $this->data['newsletter'],
       'field_vies_address' => $this->data['fullAddress'],
       'field_vies_city' => $this->data['city'],
-      'field_vies_municipality' => $this->data['municipality'],
+      'field_vies_municipality' => !empty($this->data['municipality']) ? $this->data['municipality'] : 'Vejle',
       'field_vies_zip' => $this->data['zip'],
       'field_vies_gender' => $this->data['gender'],
       'field_vies_country' => $this->data['country'],
       'field_vies_birthday' => $this->data['birthday'],
       'field_vies_no_cpr' => $this->data['nocpr'],
+      'field_vies_gdpr_agreement' => ($this->data['gdpr_accept'] == 'Ja')? 0 : 1,
+      'field_vies_private_car_accept' => ($this->data['driving_in_private_car_accept'] == 'Ja')? 0 : 1,
     ];
 
     // Parents information.
@@ -272,7 +290,7 @@ class ApplicationHandler {
         'field_parent_newsletter' => $parent_data['newsletter'],
         'field_parent_address' => $parent_data['fullAddress'],
         'field_parent_city' => $parent_data['city'],
-        'field_parent_municipality' => $parent_data['municipality'],
+        'field_parent_municipality' => !empty($parent_data['municipality']) ? $$parent_data['municipality'] : 'Vejle',
         'field_parent_zip' => $this->data['zip'],
         'field_parent_country' => $this->data['country'],
       ]);

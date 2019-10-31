@@ -1,0 +1,19 @@
+uuid: d72021de-e298-4a72-8532-06d57d1f49c5
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_vih_lc_add_txt_header
+    - node.type.vih_long_cource
+id: node.vih_long_cource.field_vih_lc_add_txt_header
+field_name: field_vih_lc_add_txt_header
+entity_type: node
+bundle: vih_long_cource
+label: 'Mersalg overskrift'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

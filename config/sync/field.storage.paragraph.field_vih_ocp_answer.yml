@@ -1,0 +1,20 @@
+uuid: 9cbd4f62-4c93-4221-9431-76f21de1e896
+langcode: da
+status: true
+dependencies:
+  module:
+    - entity_reference_revisions
+    - paragraphs
+id: paragraph.field_vih_ocp_answer
+field_name: field_vih_ocp_answer
+entity_type: paragraph
+type: entity_reference_revisions
+settings:
+  target_type: paragraph
+module: entity_reference_revisions
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

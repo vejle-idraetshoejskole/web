@@ -12,7 +12,7 @@
         "behat/mink-goutte-driver": "~1.2",
         "jcalderonzumba/gastonjs": "~1.0.2",
         "drupal/coder": "8.*",
-        "mikey179/vfsStream": "~1.2",
+        "mikey179/vfsstream": "~1.2",
         "phpunit/phpunit": "~4.8",
         "symfony/css-selector": "~2.8",
         "behat/behat": "^3.0",
@@ -28,7 +28,7 @@
         "drupal/bootstrap": "3.11",
         "drupal/paragraphs": "1.x-dev",
         "drupal/linkit": "5.0-beta7",
-        "acquia/lightning": "~3.1.5",
+        "acquia/lightning": "~4.0.0",
         "drupal/admin_toolbar": "^1.20",
         "drupal/twig_tweak": "2.x-dev",
         "drupal/eva": "^1.0@RC",
@@ -81,7 +81,9 @@
         "drupal/verf": "^1.0@beta",
         "drupal/views_conditional": "^1.0",
         "drupal/views_field_view": "^1.0@beta",
-        "drupal/roleassign": "^1.0@alpha"
+        "drupal/roleassign": "^1.0@alpha",
+        "zaporylie/composer-drupal-optimizations": "^1.1",
+        "drupal/lightning_layout": "2.0.0"
     },
     "repositories": [
         {
@@ -139,8 +141,8 @@
         "patches": {
             "drupal/core": {
                 "2868294 - Call to a member function getThirdPartySetting() on null in ContentTranslationManager": "https://www.drupal.org/files/issues/2868294-12.patch",
-                "2449895 - Imported PO files have no public URL but have a link at admin/content/files" : "https://www.drupal.org/files/issues/2449895-20.patch",
-                "2407761 - Add a way to edit block content on the block layout page" : "https://www.drupal.org/files/issues/add_edit_link_to_block_list-2407761-5.patch"
+                "2449895 - Imported PO files have no public URL but have a link at admin/content/files" : "https://www.drupal.org/files/issues/2018-07-03/2449895-42.patch",
+                "2407761 - Add a way to edit block content on the block layout page" : "https://www.drupal.org/files/issues/2019-06-13/add_edit_link_to_block_list-2407761-21.patch"
             },
             "drupal/photoswipe": {
                 "2921487 - Load PhotoSwipe on all non-admin pages" : "https://www.drupal.org/files/issues/edit_load_photoswipe_on-2921487-2.patch",
@@ -148,7 +150,7 @@
             },
             "drupal/eu_cookie_compliance": {
                 "2979295 - Add a option to open privacy policy link in a modal window" : "https://www.drupal.org/files/issues/2018-08-22/eu_cookie_compliance_privacy_policy_link_in_modal_window-3.patch.txt"
-            },            
+            },
             "drupal/linkit": {
                 "2946234 - Webform entity missing": "https://www.drupal.org/files/issues/2018-05-09/linkit--webform-matcher.patch"
             },
@@ -157,6 +159,9 @@
             },
             "drupal/verf": {
                 "2871758 - InvalidArgumentException": "https://www.drupal.org/files/issues/2871758-1.patch"
+            },
+            "drupal/paragraphs": {
+                "2907094 - Paragraphs field groups field layout": "https://www.drupal.org/files/issues/2019-08-04/2907094_76.patch"
             }
         }
     }

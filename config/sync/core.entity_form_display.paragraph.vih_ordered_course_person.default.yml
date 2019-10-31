@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.vih_ordered_course_person.field_vih_ocp_address
+    - field.field.paragraph.vih_ordered_course_person.field_vih_ocp_answer
     - field.field.paragraph.vih_ordered_course_person.field_vih_ocp_birthdate
     - field.field.paragraph.vih_ordered_course_person.field_vih_ocp_city
     - field.field.paragraph.vih_ordered_course_person.field_vih_ocp_comment
@@ -19,7 +20,6 @@ dependencies:
     - field.field.paragraph.vih_ordered_course_person.field_vih_ocp_zip
     - paragraphs.paragraphs_type.vih_ordered_course_person
   module:
-    - content_moderation
     - datetime
     - paragraphs
 id: paragraph.vih_ordered_course_person.default
@@ -34,6 +34,18 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
+    region: content
+  field_vih_ocp_answer:
+    type: entity_reference_paragraphs
+    weight: 103
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
     region: content
   field_vih_ocp_birthdate:
     weight: 4
@@ -134,12 +146,6 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
-  moderation_state:
-    type: moderation_state_default
-    weight: 100
-    settings: {  }
-    region: content
-    third_party_settings: {  }
 hidden:
   created: true
   field_vih_ocp_no_cpr: true

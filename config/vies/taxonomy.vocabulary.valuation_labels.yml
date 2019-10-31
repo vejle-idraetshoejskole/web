@@ -5,5 +5,4 @@ dependencies: {  }
 name: 'Valuation labels'
 vid: valuation_labels
 description: ''
-hierarchy: 0
 weight: 0

@@ -1,0 +1,21 @@
+uuid: e1573273-ac59-4413-bf49-23bd107b0a40
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_vih_lc_add_txt
+    - node.type.vih_long_cource
+  module:
+    - text
+id: node.vih_long_cource.field_vih_lc_add_txt
+field_name: field_vih_lc_add_txt
+entity_type: node
+bundle: vih_long_cource
+label: 'Mersalg tekst'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

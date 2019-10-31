@@ -1,0 +1,28 @@
+uuid: b52c13ea-ed57-4d72-a2f5-2e05bdd5cb13
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_vih_background_img
+    - media.type.image
+    - paragraphs.paragraphs_type.list_of_long_course_prices
+id: paragraph.list_of_long_course_prices.field_vih_background_img
+field_name: field_vih_background_img
+entity_type: paragraph
+bundle: list_of_long_course_prices
+label: Baggrundsbillede
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

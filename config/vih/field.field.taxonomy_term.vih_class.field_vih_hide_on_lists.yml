@@ -1,0 +1,23 @@
+uuid: 2c899767-5913-4d8c-bf31-484466146af3
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_vih_hide_on_lists
+    - taxonomy.vocabulary.vih_class
+id: taxonomy_term.vih_class.field_vih_hide_on_lists
+field_name: field_vih_hide_on_lists
+entity_type: taxonomy_term
+bundle: vih_class
+label: 'Hide on lists'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: '1'
+  off_label: '0'
+field_type: boolean

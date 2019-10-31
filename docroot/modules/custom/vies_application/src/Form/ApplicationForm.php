@@ -210,6 +210,31 @@ class ApplicationForm extends FormBase {
         '#required' => TRUE,
       );
     }
+    if (!empty($gdpr_page_id = $config->get('vih_subscription_application_gdpr_page'))) {
+      $gdpr_page_node = \Drupal::entityManager()->getStorage('node')->load($gdpr_page_id);
+      $gdprText = $gdpr_page_node->get('body')->summary;
+      $form['gdpr_agreement'] = array(
+        '#type' => 'container',
+         '#required' => TRUE,
+      );
+      $gdprTextLink = CommonFormUtils::getGdprReadMoreText($gdpr_page_id);
+      $form['gdpr_agreement']['gdpr_accept'] = array(
+        '#type' => 'radios',
+        '#prefix' => t($gdprText) . ' ' . $gdprTextLink,
+        '#options' => array('Ja' => $this->t('Yes'), 'Nej' => $this->t('No')),
+      );
+    }
+    $form['private_car_agreement'] = array(
+      '#type' => 'container',
+      '#required' => TRUE,
+    );
+
+    $form['private_car_agreement']['driving_in_private_car_accept'] = array(
+        '#type' => 'radios',
+        '#prefix' => $this->t('Skolen har af og til brug for at transportere elever i privatbiler. Vi har brug for en tilladelse til, at vi må køre jeres barn i privatbiler. Vi sørger naturligvis for, at der er en sele til hvert barn i bilen.'),
+        '#options' => array('Ja' => $this->t('Yes'), 'Nej' => $this->t('No')),
+      );
+
 
     $form['confirmOneParent'] = [
       '#type' => 'checkbox',
@@ -273,17 +298,23 @@ class ApplicationForm extends FormBase {
       }
     }
 
-    if (!empty($values['parents']['current'])) {
-      if (0 == $form_state->getValues()['parents']['current']['left']['nocpr'] and NULL == $form_state->getValues()['parents']['current']['left']['cpr']) {
+    if (!empty($values['parents']['currentWrapper']['current'])) {
+      if (0 == $form_state->getValues()['parents']['currentWrapper']['current']['left']['nocpr'] and NULL == $form_state->getValues()['parents']['currentWrapper']['current']['left']['cpr']) {
         $form_state->setErrorByName("parents][current][left][cpr", $this->t('Please add, CPR.'));
       }
-      if (0 <> $form_state->getValues()['parents']['current']['left']['nocpr'] and NULL == $form_state->getValues()['parents']['current']['left']['birthdate']) {
+      if (0 <> $form_state->getValues()['parents']['currentWrapper']['current']['left']['nocpr'] and NULL == $form_state->getValues()['parents']['currentWrapper']['current']['left']['birthdate']) {
         $form_state->setErrorByName("parents][current][left][birthdate", $this->t('Please provide birthdate.'));
       }
     }
+    if (!$form_state->getValue('gdpr_accept')) {
+      $form_state->setError($form['gdpr_agreement']['gdpr_accept'], $this->t('GDPR agreement field is required.'));
+    }
+    if (!$form_state->getValue('driving_in_private_car_accept')) {
+      $form_state->setError($form['private_car_agreement']['driving_in_private_car_accept'] , $this->t('"Consent to driving in private cars" field is required.'));
+    }
 
     $parents = $form_state->get('parents');
-    if (empty($values['parents']['current']) && empty($parents)) {
+    if (empty($values['parents']['currentWrapper']['current']) && empty($parents)) {
       $form_state->setErrorByName('parents', 'Du skal tilføje mindst en forælder.');
     }
   }
@@ -296,8 +327,8 @@ class ApplicationForm extends FormBase {
 
     // Collect parent data.
     $parents = $form_state->get('parents');
-    if (isset($values['parents']['current'])) {
-      $current_parent = $values['parents']['current'];
+    if (isset($values['parents']['currentWrapper']['current'])) {
+      $current_parent = $values['parents']['currentWrapper']['current'];
       $parents[] = $current_parent['left'] + $current_parent['right'];
     }
     $values['parents'] = $parents;
@@ -314,7 +345,7 @@ class ApplicationForm extends FormBase {
       return;
     }
 
-    $form_state->setRedirect('vies_application.application_form_error');
+   // $form_state->setRedirect('vies_application.application_form_error');
   }
 
   /**
@@ -324,7 +355,6 @@ class ApplicationForm extends FormBase {
     $response = new AjaxResponse();
     $submit_handlers = $form_state->getSubmitHandlers();
     $parents = $form_state->get('parents');
-
     if ($parents && (count($parents) >= 2 || (count($parents) === 1 && $form_state->get('parent_index')))) {
       $form['confirmOneParent']['#checked'] = TRUE;
       $response->addCommand(new ReplaceCommand('#js-confirm-one-parent', $form['confirmOneParent']));
@@ -361,7 +391,7 @@ class ApplicationForm extends FormBase {
     $parents = $form_state->get('parents');
     $parent_index = $form_state->get('parent_index');
     $values = $form_state->getValues();
-    $parent = $values['parents']['current'];
+    $parent = $values['parents']['currentWrapper']['current'];
     $parents[$parent_index] = $parent['left'] + $parent['right'];
     ksort($parents);
     $form_state->set('parents', $parents);
@@ -369,6 +399,8 @@ class ApplicationForm extends FormBase {
     $form_state->set('parent_current', NULL);
     $this->removeInputValue('parents', $form_state);
     $form_state->setRebuild();
+    $this->showParentForm($form, $form_state);
+
   }
 
   /**
@@ -408,10 +440,7 @@ class ApplicationForm extends FormBase {
         $parent_index = max(array_keys($parents)) + 1;
       }
 
-      $values = $form_state->getValues();
-      if (!empty($values['same_address'])) {
-        $form_state->set('parent_same_address', TRUE);
-      }
+      $form_state->set('parent_same_address', TRUE);
     }
     $form_state->set('parent_index', $parent_index);
     $form_state->setRebuild();
@@ -501,7 +530,6 @@ class ApplicationForm extends FormBase {
       '#prefix' => '<div id="parents-wrapper">',
       '#suffix' => '</div>',
     ];
-
     // Gather the number of parents in the form already.
     $parent_index = $form_state->get('parent_index');
 
@@ -578,45 +606,54 @@ class ApplicationForm extends FormBase {
     }
 
     if ($parent_index) {
-      $form['parentsWrapper']['parents']['current'] = $this->getPersonalDataForm($default_values) + [
-          '#attributes' => ['class' => ['clearfix']],
-          '#weight' => -1,
-        ];
-
-      $form['parentsWrapper']['parents']['current']['left']['cpr']['#states'] = array(
+      $form['parentsWrapper']['parents']['currentWrapper'] = [
+        '#type' => 'container',
+      ];
+      $form['parentsWrapper']['parents']['currentWrapper']['current'] = $this->getPersonalDataForm($default_values) + [
+        '#attributes' => ['class' => ['clearfix']],
+        '#weight' => -1,
+      ];
+      $form['parentsWrapper']['parents']['currentWrapper']['current']['left']['cpr']['#states'] = array(
         // Only show this field when the 'nocpr' checkbox is disabled.
         'visible' => array(
-          ':input[name="parents[current][left][nocpr]"]' => array(
+          ':input[name="parents[currentWrapper][current][left][nocpr]"]' => array(
             'checked' => FALSE,
           ),
         ),
         'required' => array(
-          ':input[name="parents[current][left][nocpr]"]' => array(
+          ':input[name="parents[currentWrapper][current][left][nocpr]"]' => array(
             'checked' => FALSE,
           ),
         ),
         'disabled' => array(
-          ':input[name="parents[current][left][nocpr]"]' => array(
+          ':input[name="parents[currentWrapper][current][left][nocpr]"]' => array(
             'checked' => TRUE,
           ),
         ),
       );
 
-      $form['parentsWrapper']['parents']['current']['left']['birthdate']['#states'] = array(
+      $form['parentsWrapper']['parents']['currentWrapper']['current']['left']['birthdate']['#states'] = array(
         // Only show this field when the 'nocpr' checkbox is disabled.
         'visible' => array(
-          ':input[name="parents[current][left][nocpr]"]' => array(
+          ':input[name="parents[currentWrapper][current][left][nocpr]"]' => array(
             'checked' => TRUE,
           ),
         ),
         'required' => array(
-          ':input[name="parents[current][left][nocpr]"]' => array(
+          ':input[name="parents[currentWrapper][current][left][nocpr]"]' => array(
             'checked' => TRUE,
           ),
         ),
       );
-
-      $form['parentsWrapper']['parents']['current']['left']['type'] = [
+      $form['parentsWrapper']['parents']['currentWrapper']['current']['right']['municipality']['#states'] = array(
+        'visible' => array (
+          ':input[name="parents[currentWrapper][current][right][country]"]' => array('value' => 'DK'),
+        ),
+        'required' => array(
+          ':input[name="parents[currentWrapper][current][right][country]"]' => array('value' => 'DK')
+        ),
+      );
+      $form['parentsWrapper']['parents']['currentWrapper']['current']['left']['type'] = [
         '#type' => 'radios',
         '#title' => $this->t('Type of adult'),
         '#options' => ApplicationHandler::$adultType,
@@ -639,6 +676,9 @@ class ApplicationForm extends FormBase {
             '#value' => $this->t('Cancel'),
             '#submit' => ['::hideParentForm'],
           ] + $ajax_parent_button;
+        $form['parentsWrapper']['parents']['currentWrapper']['#title'] = t('Add parent');
+        $form['parentsWrapper']['parents']['currentWrapper']['#prefix'] = "<div class='clearfix'></div>";
+        $form['parentsWrapper']['parents']['currentWrapper']['#theme'] = 'vies_application_section';
       }
     }
     else {
@@ -660,7 +700,7 @@ class ApplicationForm extends FormBase {
 
     $after_school_questions = ApplicationHandler::$afterSchool;
     $after_school = [];
-    foreach ($after_school_questions as $key => $question) {
+    foreach ($after_school_questions as $key => $qubestion) {
       $after_school[$key] = [
         '#type' => 'textarea',
         '#title' => $question,
@@ -712,7 +752,7 @@ class ApplicationForm extends FormBase {
       '#title' => $this->t('Jeg har ikke et dansk CPR nummer'),
       '#default_value' => isset($default_values['nocpr']) ? $default_values['nocpr'] : NULL,
     );
-    
+
     $personal_data['left']['birthdate'] = [
       '#type' => 'date',
       '#title' => $this->t('Birthdate'),
@@ -733,7 +773,7 @@ class ApplicationForm extends FormBase {
         ),
       ),
     ];
-    
+
     $personal_data['left']['cpr'] = [
       '#type' => 'textfield',
       '#title' => 'CPR',
@@ -831,8 +871,15 @@ class ApplicationForm extends FormBase {
       '#options' => CourseOrderOptionsList::getMunicipalityList(),
       '#title' => 'Kommune',
       '#placeholder' => 'Kommune',
-      '#required' => $required,
       '#default_value' => isset($default_values['municipality']) ? $default_values['municipality'] : NULL,
+      '#states' => [
+        'visible' => [
+          ':input[name="country"]' => ['value' => 'DK'],
+        ],
+        'required' => [
+          ':input[name="country"]' => ['value' => 'DK'],
+        ],
+      ],
     ];
     $personal_data['right']['zip'] = [
       '#type' => 'textfield',

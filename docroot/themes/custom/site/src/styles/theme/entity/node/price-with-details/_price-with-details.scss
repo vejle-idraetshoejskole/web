@@ -1,0 +1,123 @@
+// |--------------------------------------------------------------------------
+// | Price with details
+// |--------------------------------------------------------------------------
+// |
+// | This file contains styles for the following:
+// | - .price-with-details
+// |
+
+// --------------------------------------------------
+// Variables
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Styling
+// --------------------------------------------------
+
+// Price with details
+.price-with-details.vih-long-cource,
+.price.vih-long-cource {
+  .row {
+    align-items: center;
+  }
+
+  .cta-button {
+    margin-top: 30px;
+  }
+
+  .price-table {
+    border: 1px solid #ddd;
+    background: none;
+    padding: 0;
+    margin-top: 30px;
+    margin-right: -1px;
+    text-align: left;
+    margin-bottom: 30px;
+
+    .table-cell {
+      padding: 12px 10px;
+    }
+    .table-heading {
+      padding: 12px 10px;
+      text-transform: none;
+      background-color: rgb(238, 238, 238);
+      font-weight: bold;
+      &.total-price {
+        font-size: 18px;
+      }
+    }
+
+    table, tr {
+      border: none;
+      margin: 0;
+    }
+
+    th {
+      padding: 12px 10px;
+      background: $brand-primary;
+      text-transform: uppercase;
+      color: #fff;
+      font-size: 18px;
+      &.extra-option {
+        background-color: $button-primary-icon-background;
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+// --------------------------------------------------
+// Variants
+// --------------------------------------------------
+
+// --------------------------------------------------
+// Responsive
+// --------------------------------------------------
+
+// Mobile - and up
+@media #{$breakpoint-mobile-and-up} {
+ 
+}
+
+// Mobile - only
+@media #{$breakpoint-mobile-only} {
+  
+}
+
+// Tablet - and up
+@media #{$breakpoint-tablet-and-up} {}
+
+// Tablet - only
+@media #{$breakpoint-tablet-only} {}
+
+// Desktop - and up
+@media #{$breakpoint-desktop-and-up} {
+   .price.vih-long-cource,
+   .price-with-details.vih-long-cource {
+    .row {
+      display: flex;
+    }
+  }
+}
+
+// Desktop - only
+@media #{$breakpoint-desktop-only} {}
+
+// Large desktop - and up
+@media #{$breakpoint-large-desktop-and-up} {}
+
+// Print
+@media print {}
+
+// Touch
+.touchevents {}
+
+// No touch
+.no-touchevents {}
+
+// --------------------------------------------------
+// Mixins
+// --------------------------------------------------
+
+// Breadcrumb mixin
+@mixin breadcrumb-mixin() {}

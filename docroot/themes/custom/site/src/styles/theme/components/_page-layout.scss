@@ -299,6 +299,15 @@ html {
   .layout-navigation__link a:hover {
     color: #000 !important;
   }
+
+  .aligned-row {
+    display: flex;
+    flex-flow: row wrap;
+
+    &::before {
+      display: block;
+    }
+  }
 }
 
 // Desktop - only

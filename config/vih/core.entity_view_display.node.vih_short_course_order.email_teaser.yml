@@ -7,7 +7,10 @@ dependencies:
     - field.field.node.vih_short_course_order.body
     - field.field.node.vih_short_course_order.field_vih_sco_comment
     - field.field.node.vih_short_course_order.field_vih_sco_course
+    - field.field.node.vih_short_course_order.field_vih_sco_edb_synch_message
+    - field.field.node.vih_short_course_order.field_vih_sco_edb_synched
     - field.field.node.vih_short_course_order.field_vih_sco_persons
+    - field.field.node.vih_short_course_order.field_vih_sco_pic_mark_consent
     - field.field.node.vih_short_course_order.field_vih_sco_price
     - field.field.node.vih_short_course_order.field_vih_sco_status
     - node.type.vih_short_course_order
@@ -76,5 +79,8 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
+  field_vih_sco_edb_synch_message: true
+  field_vih_sco_edb_synched: true
+  field_vih_sco_pic_mark_consent: true
   field_vih_sco_status: true
   langcode: true

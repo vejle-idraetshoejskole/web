@@ -156,3 +156,37 @@ vih_subscription.vih_node_modal:
     _title: 'System'
   requirements:
     _permission: 'access content'
+
+vih_subscription.admin.orders:
+  path: '/admin/orders'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'Tilmeldinger'
+  requirements:
+    _permission: 'access administration pages'
+
+vih_subscription.admin.orders.available_spots:
+  path: '/admin/orders/available-spots'
+  defaults:
+    _controller: '\Drupal\vih_subscription\Controller\AvailableSpots::content'
+    _title: 'Available spots'
+  requirements:
+    _permission: 'access administration pages'
+
+vih_subscription.admin.orders.available_spots.events:
+  path: '/admin/orders/available-spots/events'
+  defaults:
+    _controller: '\Drupal\vih_subscription\Controller\AvailableSpots::events'
+    _title: 'Events'
+  requirements:
+    _permission: 'access administration pages'
+    _custom_access: '\Drupal\vih_subscription\Controller\AvailableSpots::checkAccessEvents'
+
+vih_subscription.admin.orders.available_spots.short_courses:
+  path: '/admin/orders/available-spots/short-courses'
+  defaults:
+    _controller: '\Drupal\vih_subscription\Controller\AvailableSpots::short_courses'
+    _title: 'Short courses'
+  requirements:
+    _permission: 'access administration pages'
+    _custom_access: '\Drupal\vih_subscription\Controller\AvailableSpots::checkAccessShortCourses'

@@ -12,13 +12,36 @@
         </h2>
       </div>
 
-      {{ form | without('actions') }}
+      {{ form | without('gdpr_agreement', 'submit', 'confirmOneParent', 'terms_and_conditions', 'private_car_agreement') }}
       <hr>
+      <div class="partial partial--form">
+        <div class="partial__heading">
+          <h3 class="partial__heading__title heading-h4">
+            <span class="fieldset-legend js-form-required form-required">
+              {{ 'Samtykke til billeder og markedsføring' | trans }}
+            </span>
+          </h3>
+        </div>
+       {{ form['gdpr_agreement'] }}
+      </div>
+      <div class="partial partial--form">
+        <div class="partial__heading">
+          <h3 class="partial__heading__title heading-h4">
+            <span class="fieldset-legend js-form-required form-required">
+              {{ 'Samtykke til kørsel i privatbiler' | trans }}
+            </span>
+          </h3>
+        </div>
+       {{ form['private_car_agreement'] }}
+      </div>
+      {{ form['terms_and_conditions'] }}
+      {{ form['confirmOneParent'] }}
+      {{ form['submit'] }}
       <!-- Begin - form controls -->
       <div class="partial partial--form-controls">
         <div class="partial__body">
           <div class="text-right">
-            {{ form['actions'] }}
+            {{ form['action'] }}
           </div>
         </div>
       </div>

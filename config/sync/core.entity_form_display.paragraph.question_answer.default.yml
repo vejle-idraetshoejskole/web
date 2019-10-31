@@ -1,0 +1,44 @@
+uuid: f73324e2-9564-4b67-8eb2-9e8472c0c7c7
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.question_answer.field_answer
+    - field.field.paragraph.question_answer.field_edbbrugsen_field_name
+    - field.field.paragraph.question_answer.field_question
+    - field.field.paragraph.question_answer.field_question_required
+    - paragraphs.paragraphs_type.question_answer
+id: paragraph.question_answer.default
+targetEntityType: paragraph
+bundle: question_answer
+mode: default
+content:
+  field_edbbrugsen_field_name:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_question:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_question_required:
+    weight: 2
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+hidden:
+  created: true
+  field_answer: true
+  moderation_state: true
+  status: true
+  uid: true

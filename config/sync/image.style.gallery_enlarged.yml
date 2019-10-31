@@ -2,6 +2,8 @@ uuid: a9183725-f220-45c4-a7ce-20a8e9c70088
 langcode: da
 status: true
 dependencies:
+  config:
+    - crop.type.freeform
   module:
     - crop
 name: gallery_enlarged
@@ -20,3 +22,4 @@ effects:
     data:
       width: 1100
       height: 800
+      anchor: center-center

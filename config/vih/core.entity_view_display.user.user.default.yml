@@ -17,6 +17,7 @@ dependencies:
     - field.field.user.user.field_vih_user_photo
     - field.field.user.user.field_vih_user_qualifications
     - field.field.user.user.field_vih_user_type_id
+    - field.field.user.user.vih_user_status
   module:
     - entity_reference_revisions
     - metatag
@@ -134,4 +135,5 @@ hidden:
   field_vih_user_type_id: true
   langcode: true
   member_for: true
+  name: true
   vih_user_status: true

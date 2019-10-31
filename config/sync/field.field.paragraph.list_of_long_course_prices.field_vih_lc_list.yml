@@ -1,0 +1,28 @@
+uuid: bd1a9a80-a1e0-49ab-90b4-f28a4e25902c
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_vih_lc_list
+    - node.type.vih_long_cource
+    - paragraphs.paragraphs_type.list_of_long_course_prices
+id: paragraph.list_of_long_course_prices.field_vih_lc_list
+field_name: field_vih_lc_list
+entity_type: paragraph
+bundle: list_of_long_course_prices
+label: 'Lange kurse'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      vih_long_cource: vih_long_cource
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

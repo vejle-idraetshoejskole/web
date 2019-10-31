@@ -15,9 +15,13 @@ dependencies:
     - field.field.node.vih_long_course_order.field_vih_lco_adult_newsletter
     - field.field.node.vih_long_course_order.field_vih_lco_adult_telefon
     - field.field.node.vih_long_course_order.field_vih_lco_adult_zip
+    - field.field.node.vih_long_course_order.field_vih_lco_birthdate
     - field.field.node.vih_long_course_order.field_vih_lco_city
+    - field.field.node.vih_long_course_order.field_vih_lco_country
     - field.field.node.vih_long_course_order.field_vih_lco_course
     - field.field.node.vih_long_course_order.field_vih_lco_cpr
+    - field.field.node.vih_long_course_order.field_vih_lco_edb_synch_message
+    - field.field.node.vih_long_course_order.field_vih_lco_edb_synched
     - field.field.node.vih_long_course_order.field_vih_lco_education
     - field.field.node.vih_long_course_order.field_vih_lco_email
     - field.field.node.vih_long_course_order.field_vih_lco_first_name
@@ -32,6 +36,7 @@ dependencies:
     - field.field.node.vih_long_course_order.field_vih_lco_status
     - field.field.node.vih_long_course_order.field_vih_lco_telefon
     - field.field.node.vih_long_course_order.field_vih_lco_zip
+    - field.field.node.vih_long_course_order.field_vih_no_cpr
     - node.type.vih_long_course_order
   module:
     - entity_reference_revisions
@@ -267,6 +272,11 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
+  field_vih_lco_birthdate: true
+  field_vih_lco_country: true
   field_vih_lco_cpr: true
+  field_vih_lco_edb_synch_message: true
+  field_vih_lco_edb_synched: true
   field_vih_lco_status: true
+  field_vih_no_cpr: true
   langcode: true

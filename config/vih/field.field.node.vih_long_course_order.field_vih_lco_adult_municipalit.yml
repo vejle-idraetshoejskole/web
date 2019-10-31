@@ -1,0 +1,19 @@
+uuid: 245c0d6a-a0b5-49de-b08e-6bd07f99debe
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_vih_lco_adult_municipalit
+    - node.type.vih_long_course_order
+id: node.vih_long_course_order.field_vih_lco_adult_municipalit
+field_name: field_vih_lco_adult_municipalit
+entity_type: node
+bundle: vih_long_course_order
+label: 'Adult municipality'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -162,6 +162,16 @@ class SubscriptionsGeneralSettingsForm extends ConfigFormBase {
         '#description' => $this->t('Provide a page, which allows international users to enquiry the price.'),
       ];
 
+      // Long course GDPR page.
+      $form['vih_subscription_settings_long_course_fs']['vih_subscription_long_course_gdpr_page'] = [
+        '#type' => 'entity_autocomplete',
+        '#target_type' => 'node',
+        '#selection_settings' => ['target_bundles' => ['page']],
+        '#title' => $this->t('GDPR page'),
+        '#default_value' => !empty($config->get('vih_subscription_long_course_redirection_page')) ? Node::load($config->get('vih_subscription_long_course_gdpr_page')) : NULL,
+        '#description' => $this->t("You can use any 'page' node as GDPR page"),
+      ];
+
       // Long course language specific START.
       $form['vih_subscription_settings_long_course_fs']['vih_subscription_long_course_language_specific'] = array(
         '#type' => 'vertical_tabs',
@@ -281,6 +291,16 @@ class SubscriptionsGeneralSettingsForm extends ConfigFormBase {
         '#title' => $this->t('Redirection page'),
         '#default_value' => !empty($config->get('vih_subscription_short_course_redirection_page')) ? Node::load($config->get('vih_subscription_short_course_redirection_page')) : NULL,
         '#description' => $this->t("You can use any 'page' node to redirect after order submitted successfully"),
+      ];
+
+      // Short course GDPR page.
+      $form['vih_subscription_settings_short_course_fs']['vih_subscription_short_course_gdpr_page'] = [
+        '#type' => 'entity_autocomplete',
+        '#target_type' => 'node',
+        '#selection_settings' => ['target_bundles' => ['page']],
+        '#title' => $this->t('GDPR page'),
+        '#default_value' => !empty($config->get('vih_subscription_short_course_redirection_page')) ? Node::load($config->get('vih_subscription_short_course_gdpr_page')) : NULL,
+        '#description' => $this->t("You can use any 'page' node as GDPR page"),
       ];
 
       // Short course language specific START.
@@ -524,6 +544,15 @@ class SubscriptionsGeneralSettingsForm extends ConfigFormBase {
         '#description' => t("You can use any 'page' node as '/ansogning/success' page"),
       ];
 
+      // vies_application GDPR page
+      $form['vih_subscription_settings_application_fs']['vih_subscription_application_gdpr_page'] = [
+        '#type' => 'entity_autocomplete',
+        '#target_type' => 'node',
+        '#selection_settings' => ['target_bundles' => ['page']],
+        '#title' => $this->t('GDPR page'),
+        '#default_value' => !empty($config->get('vih_subscription_application_gdpr_page')) ? Node::load($config->get('vih_subscription_application_gdpr_page')) : NULL,
+        '#description' => $this->t("You can use any 'page' node as GDPR page"),
+      ];
       $form['vih_subscription_settings_application_fs']['vih_subscription_application_language_specific'] = array(
         '#type' => 'vertical_tabs',
         '#default_tab' => 'edit-vih-subscription-application-da',

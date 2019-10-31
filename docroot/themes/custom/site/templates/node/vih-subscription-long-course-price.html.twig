@@ -1,0 +1,116 @@
+                <div class="price-table partial__body">
+                    <table>
+                        <tr>
+                            <th colspan="2">
+                                {{ content.course_title }}
+                            </th>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">
+                                {{ "Avg. weekly payment"|trans }}
+                            </td>
+                            <td class="table-cell">
+                                {{ content.field_vih_course_week_price }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="table-cell">
+                                {{ "Signup fee"|trans }}
+                            </td>
+                            <td class="table-cell">
+                                {{ content.field_vih_course_subsc_price }}
+                            </td>                        </tr>
+                        <tr>
+                            <td class="table-cell">
+                                {{ "Material fee"|trans }}
+                            </td>
+                            <td class="table-cell">
+                                {{ content.field_vih_course_price }}
+                            </td>
+                        </tr>
+                        {% if content.travel_price > 0 %}
+                            <tr>
+                                <td class="table-cell">
+                                    {{ "Travel payment"|trans }}
+                                </td>
+                                <td class="table-cell">
+                                    DKK {{ content.travel_price|number_format(0, ',', '.') }}
+                                </td>
+                            </tr>
+                        {% endif %}
+                        <tr>
+                            <td class="table-heading total-price">
+                                <strong>{{ "Total base price"|trans }}</strong>
+                            </td>
+                            <td class="table-heading">
+                                DKK {{ content.total_price|number_format(0, ',', '.') }}
+                            </td>
+                        </tr>
+                        {% if content.discount_amount > 0 %}
+                            <tr>
+                                <td class="table-cell">
+                                    {% if content.discount_label %}
+                                        {{ content.discount_label  }}
+                                    {% else %}
+                                        {{ "Discount"|trans }}
+                                    {% endif %}
+                                </td>
+                                <td class="table-cell">
+                                    DKK {{ content.discount_amount|number_format(0, ',', '.') }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="table-heading total-price">
+                                    <strong>{{ "Total price"|trans }}</strong>
+                                </td>
+                                <td class="table-heading">
+                                    <strong> DKK {{ content.final_price|number_format(0, ',', '.') }}</strong>
+                                </td>
+                            </tr>
+                        {% endif %}
+                        {% if view_mode == 'price' %}
+                        <tr>
+                            <td class="table-cell" colspan="2">
+                                <div class="text-center partial__body">
+                                    <a href="{{ url('vih_subscription.long_course_order_create', {'course': node.id}) }}"
+                                       class="btn btn-success">
+                                        {{ "Sign up and choose your subjects" | trans }}
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endif %}
+                        {% if content.extra_options %}                            
+                            {% for period_extra_options in content.extra_options %}
+                              {% if (period_extra_options|length >0 ) %}
+                              <tr>
+                                    <th colspan="2" class="extra-option">
+                                        {{ "Extra options"|trans }}
+                                    </th>
+                                </tr>
+                                {% endif %}
+                                {% for extra_option in period_extra_options %}
+                                  
+                                  
+                                    <tr>
+                                        <td class="table-heading" colspan="2">
+                                            <strong>{{ extra_option.title }}</strong>
+                                        </td>
+                                    </tr>
+                                    {% set options_prefix = extra_option.options|length > 1 ? ' - ' : '' %}
+                                    {% for option in extra_option.options %}
+                                        <tr>
+                                            <td class="table-cell">
+                                                {{ options_prefix }}{{ option.title }}
+                                            </td>
+                                            <td class="table-cell">
+                                                +{{ option.price|number_format(0, ',', '.') }}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                {% endfor %}
+                            {% endfor %}
+                        {% endif %}
+                    </table>
+                </div>
+

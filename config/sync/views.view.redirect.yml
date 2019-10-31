@@ -6,6 +6,7 @@ dependencies:
     - link
     - redirect
     - user
+    - views_autocomplete_filters
 _core:
   default_config_hash: nyKyD0xiKPzp-sRYnfEnHSMz29rdivJvMv2Qjnm5jvk
 id: redirect
@@ -41,7 +42,7 @@ display:
       exposed_form:
         type: basic
         options:
-          submit_button: Apply
+          submit_button: Filter
           reset_button: false
           reset_button_label: Reset
           exposed_sorts_label: 'Sort by'
@@ -56,10 +57,10 @@ display:
           id: 0
           total_pages: null
           tags:
-            previous: '‹ previous'
-            next: 'next ›'
-            first: '« first'
-            last: 'last »'
+            previous: '‹ forrige'
+            next: 'næste ›'
+            first: '« første'
+            last: 'sidste »'
           expose:
             items_per_page: false
             items_per_page_label: 'Items per page'
@@ -280,7 +281,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: Created
+          label: Oprettet
           exclude: false
           alter:
             alter_text: false

@@ -254,8 +254,24 @@ class ShortCourseOrderForm extends FormBase {
           $collapse_toggle_class = NULL;
           $collapsed_elements_class = 'class = "collapse"';
         }
+
+        foreach ($course->field_vih_sc_qa->referencedEntities() as $delta => $qa_paragraph) {
+          $form['newParticipantContainer']['newParticipantFieldset']['qa'][$delta] = [
+            'answer' => [
+              '#type' => 'textfield',
+              '#title' => $qa_paragraph->field_question->value,
+              '#placeholder' => $qa_paragraph->field_question->value,
+              '#required' => !empty($qa_paragraph->field_question_required->value),
+            ],
+            'qa_id' => [
+              '#type' => 'hidden',
+              '#value' => $qa_paragraph->id(),
+            ],
+          ];
+        }
+
         $form['newParticipantContainer']['newParticipantFieldset']['email'] = array(
-          '#type' => 'textfield',
+          '#type' => 'email',
           '#title' => $this->t('E-mail address'),
           '#placeholder' => $this->t('E-mail address'),
           '#required' => TRUE,
@@ -486,17 +502,23 @@ class ShortCourseOrderForm extends FormBase {
         ],
       );
     }
-
-    $form['picture_marketing_consent'] = array(
-      '#type' => 'radios',
-      '#options' => array(
-        1 => $this
-            ->t('Yes'),
-        0 => $this
-            ->t('No'),
-      ),
-      '#required' => TRUE,
-    );
+    if (!empty($gdpr_page_id = $config->get('vih_subscription_short_course_gdpr_page'))) {
+      $gdpr_page_node = \Drupal::entityManager()->getStorage('node')->load($gdpr_page_id);
+      if ($gdpr_page_node->hasTranslation($cur_language_code)) {
+        $gdpr_page_node = $gdpr_page_node->getTranslation($cur_language_code);
+      }
+      $gdprText = $gdpr_page_node->get('body')->summary;
+      $form['gdpr_agreement'] = array(
+        '#type' => 'container',
+         '#required' => TRUE,
+      );
+      $gdprTextLink = CommonFormUtils::getGdprReadMoreText($gdpr_page_id);
+      $form['gdpr_agreement']['gdpr_accept'] = array(
+        '#type' => 'radios',
+        '#prefix' => t($gdprText) . ' ' . $gdprTextLink,
+        '#options' => array(1 => $this->t('Yes'), 0 => $this->t('No')),
+      );
+    }
 
     // Making sure that default value stays if it's there
     if (!isset($form['order_comment'])) {
@@ -523,16 +545,17 @@ class ShortCourseOrderForm extends FormBase {
         ['newParticipantContainer', 'newParticipantFieldset', 'firstName'],
         ['newParticipantContainer', 'newParticipantFieldset', 'lastName'],
         ['newParticipantContainer', 'newParticipantFieldset', 'telephone'],
+        ['newParticipantContainer', 'newParticipantFieldset', 'qa'],
         ['newParticipantContainer', 'newParticipantFieldset', 'email'],
         ['newParticipantContainer', 'newParticipantFieldset', 'cpr'],
         ['newParticipantContainer', 'newParticipantFieldset', 'birthdate'],
         ['terms_and_conditions'],
-        ['picture_marketing_consent'],
+        ['gdpr_accept'],
         ['order_comment']
       ),
       '#submit' => array('::submitForm')
     );
-    
+
     // Disable submit button if no participants added.
     if(empty($addedParticipants)){
       $form['actions']['submit']['#attributes']['class'][] = 'disabled';
@@ -583,6 +606,7 @@ class ShortCourseOrderForm extends FormBase {
     $participant['birthdate'] = $userInput['newParticipantContainer']['newParticipantFieldset']['birthdate'];
     $participant['nocpr'] = $userInput['newParticipantContainer']['newParticipantFieldset']['nocpr'];
     $participant['telephone'] = $userInput['newParticipantContainer']['newParticipantFieldset']['telephone'];
+    $participant['qa'] = $userInput['newParticipantContainer']['newParticipantFieldset']['qa'];
     $participant['address'] = $userInput['newParticipantContainer']['newParticipantFieldset']['address'];
     $participant['house']['houseNumber'] = $userInput['newParticipantContainer']['newParticipantFieldset']['house']['houseNumber'];
     $participant['house']['houseLetter'] = $userInput['newParticipantContainer']['newParticipantFieldset']['house']['houseLetter'];
@@ -679,6 +703,7 @@ class ShortCourseOrderForm extends FormBase {
       $userInput['newParticipantContainer']['newParticipantFieldset']['nocpr'] = $participantToEdit['nocpr'];
       $userInput['newParticipantContainer']['newParticipantFieldset']['birthdate'] = $participantToEdit['birthdate'];
       $userInput['newParticipantContainer']['newParticipantFieldset']['telephone'] = $participantToEdit['telephone'];
+      $userInput['newParticipantContainer']['newParticipantFieldset']['qa'] = $participantToEdit['qa'];
       $userInput['newParticipantContainer']['newParticipantFieldset']['address'] = $participantToEdit['address'];
       $userInput['newParticipantContainer']['newParticipantFieldset']['house']['houseNumber'] = $participantToEdit['house']['houseNumber'];
       $userInput['newParticipantContainer']['newParticipantFieldset']['house']['houseLetter'] = $participantToEdit['house']['houseLetter'];
@@ -799,7 +824,7 @@ class ShortCourseOrderForm extends FormBase {
 
     //move suboptions containers to the right places in DOM
     $response->addCommand(new InvokeCommand(NULL, 'moveSuboptionsContainer'));
-    
+
     // Enable submit button if participants added.
     if (!empty($form['addedParticipantsContainer']['#addedParticipants'])) {
       $response->addCommand(new InvokeCommand('#vih-course-submit', 'removeClass', ['disabled']));
@@ -818,7 +843,7 @@ class ShortCourseOrderForm extends FormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    
+
     if (0 <> $form_state->getValues()['newParticipantContainer']['newParticipantFieldset']['nocpr']) {
       $form['newParticipantContainer']['newParticipantFieldset']['cpr']['#value'] = NULL;
       $form_errors = $form_state->getErrors();
@@ -855,7 +880,7 @@ class ShortCourseOrderForm extends FormBase {
     //submit button
     if ($triggeringElement['#id'] == 'vih-course-submit') {
       $form_state->clearErrors();
-     
+
       $addedParticipants = $form_state->get('addedParticipants');
       //not added participants
       if (!count($addedParticipants)) {
@@ -868,9 +893,9 @@ class ShortCourseOrderForm extends FormBase {
         $form_state->setError($form['terms_and_conditions'], $this->t('Before you can proceed you must accept the terms and conditions'));
       }
 
-      $pictures_marketing_consent = $form_state->getValue('picture_marketing_consent');
+      $pictures_marketing_consent = $form_state->getValue('gdpr_accept');
       if (!isset($pictures_marketing_consent)) {
-        $form_state->setError($form['picture_marketing_consent'], $this->t('Before you can proceed you must answer the pictures and marketing consent'));
+        $form_state->setError($form['gdpr_agreement']['gdpr_accept'], $this->t('Before you can proceed you must answer the pictures and marketing consent'));
       }
     }
   }
@@ -944,6 +969,20 @@ class ShortCourseOrderForm extends FormBase {
           }
         }
 
+        $qa_answers = [];
+        if (!empty($addedParticipant['qa'])) {
+          foreach ($addedParticipant['qa'] as $delta => $values) {
+            $qa_question = Paragraph::load($values['qa_id']);
+            if (empty($qa_question)) {
+              continue;
+            }
+            $qa_answer = $qa_question->createDuplicate();
+            $qa_answer->field_answer = $values['answer'];
+            $qa_answer->save();
+            $qa_answers[] = $qa_answer;
+          }
+        }
+
         //creating participant paragraph
         $subscribedParticipant = Paragraph::create([
           'type' => 'vih_ordered_course_person',
@@ -954,12 +993,15 @@ class ShortCourseOrderForm extends FormBase {
           'field_vih_ocp_no_cpr' => $addedParticipant['nocpr'],
           //CPR will be deleted from database immediately, after order is confirmed
           'field_vih_ocp_telephone' => $addedParticipant['telephone'],
+          'field_vih_ocp_answer' => $qa_answers,
           'field_vih_ocp_address' => implode('; ', $adress_arr),
           'field_vih_ocp_city' => $addedParticipant['city'],
           'field_vih_ocp_zip' => $addedParticipant['zip'],
           'field_vih_ocp_country' => $addedParticipant['country'],
           'field_vih_ocp_newsletter' => $addedParticipant['newsletter'],
           'field_vih_ocp_comment' => $addedParticipant['comment'],
+          // For foreigners birthdate will be send in CPR field.
+          // See SubscriptionSuccessfulController::registerOrder().
           'field_vih_ocp_birthdate' => $birthdate,
           'field_vih_ocp_ordered_options' => $orderedOptions
         ]);
@@ -989,7 +1031,7 @@ class ShortCourseOrderForm extends FormBase {
         'field_vih_sco_status' => 'pending',
         'field_vih_sco_price' => $orderPrice,
         'field_vih_sco_comment' => $form_state->getValue('order_comment'),
-        'field_vih_sco_pic_mark_consent' => $form_state->getValue('picture_marketing_consent')
+        'field_vih_sco_pic_mark_consent' => $form_state->getValue('gdpr_accept')
       ));
       $this->courseOrder->setPromoted(FALSE);
     }
@@ -1093,6 +1135,11 @@ class ShortCourseOrderForm extends FormBase {
       //filling personal information
       $address_parts = explode('; ', $subscribedPerson->field_vih_ocp_address->value);
 
+      $qa_answers = [];
+      foreach ($subscribedPerson->field_vih_ocp_answer->referencedEntities() as $delta => $qa_paragraph) {
+        $qa_answers[$delta]['answer'] = $qa_paragraph->field_answer->value;
+      }
+
       $participant = array();
       $participant['firstName'] = $subscribedPerson->field_vih_ocp_first_name->value;
       $participant['lastName'] = $subscribedPerson->field_vih_ocp_last_name->value;
@@ -1101,6 +1148,7 @@ class ShortCourseOrderForm extends FormBase {
       $participant['birthdate'] = $subscribedPerson->field_vih_ocp_birthdate->value;
       $participant['nocpr'] = $subscribedPerson->field_vih_ocp_no_cpr->value;
       $participant['telephone'] = $subscribedPerson->field_vih_ocp_telephone->value;
+      $participant['qa'] = $qa_answers;
       $participant['address'] = $address_parts[0];
       $participant['house']['houseNumber'] = !empty($address_parts[1]) ? $address_parts[1] : '';
       $participant['house']['houseLetter'] = !empty($address_parts[2]) ? $address_parts[2] : '';

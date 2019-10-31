@@ -22,6 +22,7 @@ dependencies:
     - field.field.node.vies_application_form.field_vies_last_name
     - field.field.node.vies_application_form.field_vies_municipality
     - field.field.node.vies_application_form.field_vies_newsletter
+    - field.field.node.vies_application_form.field_vies_no_cpr
     - field.field.node.vies_application_form.field_vies_parents
     - field.field.node.vies_application_form.field_vies_period
     - field.field.node.vies_application_form.field_vies_status
@@ -280,5 +281,6 @@ hidden:
   field_vies_edb_synch_message: true
   field_vies_edb_synched: true
   field_vies_newsletter: true
+  field_vies_no_cpr: true
   langcode: true
   links: true

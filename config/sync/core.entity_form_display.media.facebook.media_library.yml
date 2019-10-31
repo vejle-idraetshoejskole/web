@@ -1,0 +1,30 @@
+uuid: b4f4598d-edff-4570-8dfb-5d7803e2eb94
+langcode: da
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.media.media_library
+    - field.field.media.facebook.embed_code
+    - field.field.media.facebook.field_media_in_library
+    - media.type.facebook
+id: media.facebook.media_library
+targetEntityType: media
+bundle: facebook
+mode: media_library
+content:
+  name:
+    type: string_textfield
+    settings:
+      size: 60
+      placeholder: ''
+    weight: 0
+    third_party_settings: {  }
+    region: content
+hidden:
+  created: true
+  embed_code: true
+  field_media_in_library: true
+  langcode: true
+  path: true
+  status: true
+  uid: true

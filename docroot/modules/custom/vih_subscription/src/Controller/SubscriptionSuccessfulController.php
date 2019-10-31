@@ -321,6 +321,12 @@ class SubscriptionSuccessfulController extends ControllerBase {
 
         $studentCpr = $order->field_vih_lco_cpr->value;
 
+        // For foreign students with empty CPR we have to send birthday date.
+        // We using CPR field to send this data.
+        if (empty($studentCpr)) {
+          $studentCpr = date('dmy', strtotime($order->field_vih_lco_birthdate->value)) . '-1111';
+        }
+        
         $edbBrugsenIntegration = new EDBBrugsenIntegration($username, $password, $school_code, $book_number);
         $registration = $edbBrugsenIntegration->convertLongCourseToRegistration($order);
         $registration = $edbBrugsenIntegration->addStudentCprNr($registration, $studentCpr);
@@ -359,9 +365,14 @@ class SubscriptionSuccessfulController extends ControllerBase {
 
           $edbBrugsenIntegration = new EDBBrugsenIntegration($username, $password, $school_code, $book_number);
           $registration = $edbBrugsenIntegration->convertShortCourseOrderPersonToRegistration($order, $order_person);
-          if (!empty($order_person->field_vih_ocp_cpr->getValue()[0]['value'])) {
-            $registration = $edbBrugsenIntegration->addStudentCprNr($registration, $order_person->field_vih_ocp_cpr->getValue()[0]['value']);
+          $studentCpr = $order_person->field_vih_ocp_cpr->value;
+
+          // For foreign students with empty CPR we have to send birthday date.
+          // We using CPR field to send this data.
+          if (empty($studentCpr)) {
+            $studentCpr = date('dmy', strtotime($order_person->field_vih_ocp_birthdate->value)) . '-1111';
           }
+          $registration = $edbBrugsenIntegration->addStudentCprNr($registration, $studentCpr);
 
           $synchReply = $edbBrugsenIntegration->addRegistration($registration);
 

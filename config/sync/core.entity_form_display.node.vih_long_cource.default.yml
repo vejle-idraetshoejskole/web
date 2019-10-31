@@ -15,15 +15,19 @@ dependencies:
     - field.field.node.vih_long_cource.field_vih_course_subheading
     - field.field.node.vih_long_cource.field_vih_course_subsc_price
     - field.field.node.vih_long_cource.field_vih_course_week_price
+    - field.field.node.vih_long_cource.field_vih_lc_add_txt
+    - field.field.node.vih_long_cource.field_vih_lc_add_txt_header
+    - field.field.node.vih_long_cource.field_vih_lc_add_txt_link
     - field.field.node.vih_long_cource.field_vih_lc_end_date
+    - field.field.node.vih_long_cource.field_vih_lc_payment_terms
     - field.field.node.vih_long_cource.field_vih_lc_start_date
+    - field.field.node.vih_long_cource.field_vih_lc_weeks_quantity
     - field.field.node.vih_long_cource.field_vih_paragraphs
     - field.field.node.vih_long_cource.field_vih_top_banner
     - field.field.node.vih_long_cource.field_vih_top_banner_text
     - field.field.node.vih_long_cource.scheduled_update
     - node.type.vih_long_cource
   module:
-    - content_moderation
     - entity_browser
     - field_group
     - inline_entity_form
@@ -253,12 +257,6 @@ content:
       include_locked: true
     third_party_settings: {  }
     region: content
-  moderation_state:
-    type: moderation_state_default
-    weight: 6
-    settings: {  }
-    region: content
-    third_party_settings: {  }
   path:
     type: path
     weight: 32
@@ -323,6 +321,11 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
+  field_vih_lc_add_txt: true
+  field_vih_lc_add_txt_header: true
+  field_vih_lc_add_txt_link: true
   field_vih_lc_end_date: true
+  field_vih_lc_payment_terms: true
   field_vih_lc_start_date: true
+  field_vih_lc_weeks_quantity: true
   status: true

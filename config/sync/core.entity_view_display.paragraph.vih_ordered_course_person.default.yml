@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.vih_ordered_course_person.field_vih_ocp_address
+    - field.field.paragraph.vih_ordered_course_person.field_vih_ocp_answer
     - field.field.paragraph.vih_ordered_course_person.field_vih_ocp_birthdate
     - field.field.paragraph.vih_ordered_course_person.field_vih_ocp_city
     - field.field.paragraph.vih_ordered_course_person.field_vih_ocp_comment
@@ -33,6 +34,15 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+    region: content
+  field_vih_ocp_answer:
+    type: entity_reference_revisions_entity_view
+    weight: 16
+    label: hidden
+    settings:
+      view_mode: embedded
+      link: ''
+    third_party_settings: {  }
     region: content
   field_vih_ocp_birthdate:
     weight: 5

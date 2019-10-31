@@ -14,6 +14,7 @@ effects:
     data:
       width: 1920
       height: 600
+      anchor: center-center
   e7d8c97c-5b87-43e0-8ed5-03ab4e34fafb:
     uuid: e7d8c97c-5b87-43e0-8ed5-03ab4e34fafb
     id: focal_point_scale_and_crop

@@ -17,3 +17,9 @@ vih_subsciption.general.settings:
   route_name: vih_subscription.admin.subscriptions_general.settings_form
   parent: system.admin_config_vih_subscriptions
   weight: 97
+
+vih_subscription.admin.orders.available_spots:
+  title: 'Available spots'
+  route_name: vih_subscription.admin.orders.available_spots
+  parent: 'menu_link_content:066c53ba-8634-4ca5-bf97-4337b50ef8aa'
+  weight: 10
