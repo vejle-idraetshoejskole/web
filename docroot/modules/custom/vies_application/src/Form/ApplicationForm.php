@@ -700,7 +700,7 @@ class ApplicationForm extends FormBase {
 
     $after_school_questions = ApplicationHandler::$afterSchool;
     $after_school = [];
-    foreach ($after_school_questions as $key => $qubestion) {
+    foreach ($after_school_questions as $key => $question) {
       $after_school[$key] = [
         '#type' => 'textarea',
         '#title' => $question,
