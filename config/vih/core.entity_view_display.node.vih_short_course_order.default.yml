@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.vih_short_course_order.field_vih_sco_course
     - field.field.node.vih_short_course_order.field_vih_sco_edb_synch_message
     - field.field.node.vih_short_course_order.field_vih_sco_edb_synched
+    - field.field.node.vih_short_course_order.field_vih_sco_gdpr_agr
     - field.field.node.vih_short_course_order.field_vih_sco_persons
     - field.field.node.vih_short_course_order.field_vih_sco_pic_mark_consent
     - field.field.node.vih_short_course_order.field_vih_sco_price
@@ -68,6 +69,13 @@ content:
       format_custom_true: ''
     third_party_settings: {  }
     type: boolean
+    region: content
+  field_vih_sco_gdpr_agr:
+    weight: 11
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
     region: content
   field_vih_sco_persons:
     type: entity_reference_revisions_entity_view
