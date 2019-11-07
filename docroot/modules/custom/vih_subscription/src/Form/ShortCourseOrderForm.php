@@ -1031,7 +1031,8 @@ class ShortCourseOrderForm extends FormBase {
         'field_vih_sco_status' => 'pending',
         'field_vih_sco_price' => $orderPrice,
         'field_vih_sco_comment' => $form_state->getValue('order_comment'),
-        'field_vih_sco_pic_mark_consent' => $form_state->getValue('gdpr_accept')
+        'field_vih_sco_pic_mark_consent' => $form_state->getValue('terms_and_conditions') != nullbb ? 1 : 0,
+        'field_vih_sco_gdpr_agr' => $form_state->getValue('gdpr_accept')
       ));
       $this->courseOrder->setPromoted(FALSE);
     }
