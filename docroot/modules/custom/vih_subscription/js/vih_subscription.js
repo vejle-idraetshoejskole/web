@@ -118,9 +118,13 @@
               .addClass('active')
               .find('input[type=radio]')
               .prop('checked', true);
+          $('html, body').animate({
+            scrollTop: $('.boxy.boxy--course-periods.course-periods-accordion').last().offset().top
+          }, 10);
         }
 
         $element.find('input[type=radio]').change();
+
       });
     }
   };

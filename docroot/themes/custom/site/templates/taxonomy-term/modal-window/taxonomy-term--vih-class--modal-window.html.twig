@@ -37,11 +37,9 @@ view_mode ? view_mode|clean_class,
           <div class="partial__body">
 
             {# Begin - headings #}
-            {% if term.field_vih_subheading.value %}
-
-              <!-- Begin - heading -->
+            <!-- Begin - heading -->
               <div class="sectioned__heading">
-                <h2 class="sectioned__heading__title">{{ name }}</h2>
+                <h2 class="sectioned__heading__title">{{ name | raw }}</h2>
               </div>
               <!-- End - heading -->
 
@@ -53,7 +51,6 @@ view_mode ? view_mode|clean_class,
                 <!-- End - subheading -->
               {% endif %}
 
-            {% endif %}
             {# End - headings #}
 
             {{ content.description }}
