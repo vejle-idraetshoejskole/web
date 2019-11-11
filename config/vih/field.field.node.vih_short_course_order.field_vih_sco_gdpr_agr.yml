@@ -1,0 +1,21 @@
+uuid: 148442a1-3d1e-43d8-b568-6d9b1f8078f3
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_vih_sco_gdpr_agr
+    - node.type.vih_short_course_order
+  module:
+    - options
+id: node.vih_short_course_order.field_vih_sco_gdpr_agr
+field_name: field_vih_sco_gdpr_agr
+entity_type: node
+bundle: vih_short_course_order
+label: 'GDPR agreement'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_integer

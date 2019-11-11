@@ -156,6 +156,10 @@ class EDBBrugsenIntegration {
          $registration['EgneFelter.EgetFelt' . $field_nr ] = '[' . $qa_paragraph->field_edbbrugsen_field_name->value .']' . $qa_paragraph->field_answer->value;
         }
       }
+      $gdpr_agr =$shortCourseOrder->get('field_vih_sco_gdpr_agr')->value ? 'Ja' : 'Nej';
+      $registration['EgneFelter.EgetFelt29'] = '[Forening4501]' . date('d.m.Y') . ' Web ' . $gdpr_agr;
+      $registration['EgneFelter.EgetFelt28'] = '[Forening4502]' . date('d.m.Y') . ' Web ' . 'Ja';
+
       //using only Booking number/Kartotek from default values
       $defaultValues = $this->getDefaultRegistrationValues();
       $registration['Kartotek'] = $defaultValues['Kartotek'];

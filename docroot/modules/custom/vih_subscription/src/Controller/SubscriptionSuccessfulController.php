@@ -261,7 +261,7 @@ class SubscriptionSuccessfulController extends ControllerBase {
       }
       return new RedirectResponse('/node/' . $order->id() . '/short-course---order-page');
     }
-    
+
     if ('vih_event_order' == $order->getType()) {
       $allParticipants = $order->get('field_vih_eo_persons')->getValue();
       if (!empty($allParticipants)) {
@@ -326,7 +326,7 @@ class SubscriptionSuccessfulController extends ControllerBase {
         if (empty($studentCpr)) {
           $studentCpr = date('dmy', strtotime($order->field_vih_lco_birthdate->value)) . '-1111';
         }
-        
+
         $edbBrugsenIntegration = new EDBBrugsenIntegration($username, $password, $school_code, $book_number);
         $registration = $edbBrugsenIntegration->convertLongCourseToRegistration($order);
         $registration = $edbBrugsenIntegration->addStudentCprNr($registration, $studentCpr);
