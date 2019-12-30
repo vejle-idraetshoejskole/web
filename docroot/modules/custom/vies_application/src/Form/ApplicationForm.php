@@ -43,7 +43,9 @@ class ApplicationForm extends FormBase {
       $options[$node->id()] = $node->getTitle();
     }
 
-    $default_value = $form_state->getValue('course');
+    $user_input = $form_state->getUserInput();
+
+    $default_value = $user_input['course'] ?? NULL;
     if (empty($default_value)) {
       $default_value = empty($options) ? NULL : key($options);
     }
@@ -83,7 +85,7 @@ class ApplicationForm extends FormBase {
       $options[$period->id()] = $period->getTitle();
     }
 
-    $periods_default_value = $form_state->getValue('period');
+    $periods_default_value = $user_input['period'] ?? NULL;
     if (empty($periods_default_value)) {
       $periods_default_value = empty($options) ? NULL : key($options);
     }
@@ -180,13 +182,12 @@ class ApplicationForm extends FormBase {
       }
 
       // Load questions from classes terms.
-      $values = $form_state->getUserInput();
       $pattern = '/^course-period-(\d)-courseSlot-(\d)-availableClasses$/';
-      foreach (preg_grep($pattern, array_keys($values)) as $radio_key) {
-        if (empty($values[$radio_key])) {
+      foreach (preg_grep($pattern, array_keys($user_input)) as $radio_key) {
+        if (empty($user_input[$radio_key])) {
           continue;
         }
-        $class = Term::load($values[$radio_key]);
+        $class = Term::load($user_input[$radio_key]);
         $class_questions = $class->field_vies_questions->referencedEntities();
         $questions = $this->buildApplicationQuestions($class_questions);
         if (!empty($questions)) {
