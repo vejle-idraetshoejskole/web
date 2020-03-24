@@ -411,11 +411,20 @@ display:
       defaults:
         style: false
         row: false
+        query: false
       row:
         type: 'entity:node'
         options:
           relationship: none
           view_mode: teaser
+      query:
+        type: views_query
+        options:
+          disable_sql_rewrite: false
+          distinct: true
+          replica: false
+          query_comment: ''
+          query_tags: null
     cache_metadata:
       max-age: -1
       contexts:
