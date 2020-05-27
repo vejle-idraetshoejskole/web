@@ -139,7 +139,7 @@ $breadcrumb-active-background-color: $brand-primary;
           border-width: $breadcrumb-arrow-width;
           margin-top: -$breadcrumb-arrow-width;
           border-left-color: $breadcrumb-background-color;
-          z-index: 2;
+          z-index: 1;
         }
 
         &:after {
