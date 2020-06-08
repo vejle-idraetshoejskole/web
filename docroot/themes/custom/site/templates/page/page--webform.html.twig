@@ -1,83 +1,86 @@
 <!-- Begin - wrapper -->
 <div class="layout__wrapper layout--fixed-header" id="page-html">
 
-    {# Begin - header #}
-    {% include '@site/_partials/header.html.twig' %}
-    {# End - header #}
+  {# Begin - header #}
+  {% include '@site/_partials/header.html.twig' %}
+  {# End - header #}
 
-    <!-- Begin - document -->
-    <main class="layout__document" role="document">
+  <!-- Begin - document -->
+  <main class="layout__document" role="document">
 
-        <!-- Begin - content -->
-        <div class="layout__content">
+    <!-- Begin - content -->
+    <div class="layout__content">
 
-            {# Begin - notify #}
-            {% if page.notify is defined and page.notify | render | striptags | trim %}
-                {% block notify %}
-                    {{ page.notify }}
-                {% endblock %}
-            {% endif %}
-            {# End - notify #}
+      {# Begin - notify #}
+      {% if page.notify is defined and page.notify | render | striptags | trim %}
+        {% block notify %}
+          {{ page.notify }}
+        {% endblock %}
+      {% endif %}
+      {# End - notify #}
 
-            {# Begin - banner #}
-            {% if is_front %}
+      {# Begin - banner #}
+      {% if is_front %}
 
-                {% if page.banner %}
-                    {% block banner %}
-                        {{ page.banner }}
-                    {% endblock %}
-                {% endif %}
+        {% if page.banner %}
+          {% block banner %}
+            {{ page.banner }}
+          {% endblock %}
+        {% endif %}
 
-            {% else %}
-              {{ header_banner }}
-            {% endif %}
-            {# End - banner #}
-
+      {% else %}
+        {{ header_banner }}
+      {% endif %}
+      {# End - banner #}
+      <section class="sectioned sectioned--header sectioned--small-inner-spacing hidden-xs">
+        <div class="sectioned__inner">
+          <div class="container">
             {# Begin - header #}
             {% if page.header is defined and page.header | render | striptags | trim %}
-                {% block header %}
-                    <section class="sectioned sectioned--header sectioned--small-inner-spacing hidden-xs">
-                        <div class="sectioned__inner">
-                            <div class="container">
-                                {{ page.header }}
-                            </div>
-                        </div>
-                    </section>
-                {% endblock %}
+              {% block header %}
+
+                {{ page.header }}
+              {% endblock %}
             {% endif %}
-            {# End - header #}
-
-            <!-- Begin - content -->
             <div{{ content_attributes.addClass(content_classes) }}>
-                {% block content %}
-                    <!-- Begin - content -->
-                    <a id="main-content"></a>
 
+              {% block content %}
+                <!-- Begin - content -->
+                <a id="main-content"></a>
+
+                <div class="container">
+                  <h1>{{ page['#title'] | raw }}</h1>
+                </div>
+
+                <section class="sectioned sectioned--content">
+                  <div class="sectioned__inner">
                     <div class="container">
-                        <h1>{{ page['#title'] | raw }}</h1>
+                      {{ page.content }}
                     </div>
-
-                    <section class="sectioned sectioned--content">
-                        <div class="sectioned__inner">
-                            <div class="container">
-                                {{ page.content }}
-                            </div>
-                        </div>
-                    </section>
-                    <!-- End - content -->
-                {% endblock %}
+                  </div>
+                </section>
+                <!-- End - content -->
+              {% endblock %}
             </div>
-            <!-- End - content -->
-
+          </div>
         </div>
-        <!-- End - content -->
+      </section>
 
-        {# Begin - footer #}
-        {% include '@site/_partials/footer.html.twig' %}
-        {# End - footer #}
+      <!-- Begin - content -->
 
-    </main>
-    <!-- End - document -->
+      {# End - header #}
+
+
+
+    </div>
+    <!-- End - content -->
+
+    {# Begin - footer #}
+    {% include '@site/_partials/footer.html.twig' %}
+    {# End - footer #}
+
+  </main>
+  <!-- End - document -->
 
 </div>
 <!-- End - wrapper -->
