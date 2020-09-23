@@ -28,7 +28,7 @@
         "drupal/bootstrap": "3.11",
         "drupal/paragraphs": "1.x-dev",
         "drupal/linkit": "5.0-beta7",
-        "acquia/lightning": "~4.0.0",
+        "acquia/lightning": "~4.1.7",
         "drupal/admin_toolbar": "^1.20",
         "drupal/twig_tweak": "2.x-dev",
         "drupal/eva": "^1.0@RC",
@@ -83,7 +83,8 @@
         "drupal/views_field_view": "^1.0@beta",
         "drupal/roleassign": "^1.0@alpha",
         "zaporylie/composer-drupal-optimizations": "^1.1",
-        "drupal/lightning_layout": "2.0.0"
+        "drupal/lightning_layout": "^2.6",
+        "drupal/pathauto": "^1.6"
     },
     "repositories": [
         {
@@ -141,7 +142,7 @@
         "patches": {
             "drupal/core": {
                 "2868294 - Call to a member function getThirdPartySetting() on null in ContentTranslationManager": "https://www.drupal.org/files/issues/2868294-12.patch",
-                "2449895 - Imported PO files have no public URL but have a link at admin/content/files" : "https://www.drupal.org/files/issues/2018-07-03/2449895-42.patch",
+                "2449895 - Imported PO files have no public URL but have a link at admin/content/files" : "https://www.drupal.org/files/issues/2020-06-01/2449895-2-80.patch",
                 "2407761 - Add a way to edit block content on the block layout page" : "https://www.drupal.org/files/issues/2019-06-13/add_edit_link_to_block_list-2407761-21.patch"
             },
             "drupal/photoswipe": {
@@ -154,14 +155,8 @@
             "drupal/linkit": {
                 "2946234 - Webform entity missing": "https://www.drupal.org/files/issues/2018-05-09/linkit--webform-matcher.patch"
             },
-            "drupal/entity_clone": {
-                "2945192 - Fatal error: Maximum function nesting level of '256' reached, aborting! With Support for sub-entity cloning patch": "https://www.drupal.org/files/issues/2018-11-07/2945192_27.patch"
-            },
             "drupal/verf": {
                 "2871758 - InvalidArgumentException": "https://www.drupal.org/files/issues/2871758-1.patch"
-            },
-            "drupal/paragraphs": {
-                "2907094 - Paragraphs field groups field layout": "https://www.drupal.org/files/issues/2019-08-04/2907094_76.patch"
             }
         }
     }
