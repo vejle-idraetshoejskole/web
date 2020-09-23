@@ -73,6 +73,3 @@ display:
           content: 'No content available.'
   media_page_list:
     display_title: Media
-    display_options:
-      menu:
-        title: Media

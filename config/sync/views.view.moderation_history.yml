@@ -3,7 +3,6 @@ langcode: da
 status: true
 dependencies:
   module:
-    - content_moderation
     - node
     - user
 _core:
@@ -15,7 +14,6 @@ description: ''
 tag: ''
 base_table: node_field_revision
 base_field: vid
-core: 8.x
 display:
   default:
     display_plugin: default
@@ -199,9 +197,9 @@ display:
           plugin_id: field
         moderation_state:
           id: moderation_state
-          table: content_moderation_state_field_revision
+          table: node_field_revision
           field: moderation_state
-          relationship: moderation_state
+          relationship: none
           group_type: group
           admin_label: 'Moderation state'
           label: ''
@@ -258,9 +256,8 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: content_moderation_state
-          entity_field: moderation_state
-          plugin_id: field
+          entity_type: node
+          plugin_id: moderation_state_field
       filters: {  }
       sorts:
         changed:
@@ -282,17 +279,7 @@ display:
       header: {  }
       footer: {  }
       empty: {  }
-      relationships:
-        moderation_state:
-          id: moderation_state
-          table: node_field_revision
-          field: moderation_state
-          relationship: none
-          group_type: group
-          admin_label: 'Moderation state'
-          required: true
-          entity_type: node
-          plugin_id: standard
+      relationships: {  }
       arguments:
         nid:
           id: nid
