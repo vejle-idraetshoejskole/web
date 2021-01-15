@@ -37,7 +37,10 @@ class ApplicationForm extends FormBase {
 
     $config = $this->config(SubscriptionsGeneralSettingsForm::$configName);
 
-    $nids = \Drupal::entityQuery('node')->condition('type', 'vih_long_cource')->execute();
+    $nids = \Drupal::entityQuery('node')
+      ->condition('type', 'vih_long_cource')
+      ->condition('field_vih_course_status', 'active')
+      ->execute();
     $options = [];
     foreach (Node::loadMultiple($nids) as $node) {
       $options[$node->id()] = $node->getTitle();
