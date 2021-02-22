@@ -618,6 +618,24 @@ class LongCourseOrderForm extends FormBase {
       array_push($address_adult_array, $form_state->getValue('adultHouseFloor'));
       // We do not need empty elements on the array.
       $address_adult_array = array_diff($address_adult_array, array(''));
+      if ($form_state->getValue('nationality') != 'DK') {
+        $adultMunicipality = '';
+      }
+      elseif (!empty($form_state->getValue('adultMunicipality'))) {
+        $adultMunicipality = $form_state->getValue('adultMunicipality');
+      }
+      else {
+        $adultMunicipality = 'Vejle';
+      }
+      if($form_state->getValue('country') != 'DK') {
+        $municipality = '';
+      }
+      elseif (!empty($form_state->getValue('municipality'))) {
+        $municipality = $form_state->getValue('municipality');
+      }
+      else {
+        $municipality = 'Vejle';
+      }
       $this->courseOrder = Node::create(array(
         'type' => 'vih_long_course_order',
         'status' => 1, //We restrict direct access to the node in site_preprocess_node hook
@@ -638,7 +656,7 @@ class LongCourseOrderForm extends FormBase {
         'field_vih_lco_birthdate' => (1 == $form_state->getValue('nocpr'))? $form_state->getValue('birthdate') : NULL,
         'field_vih_lco_address' => implode('; ', $address_array),
         'field_vih_lco_city' => $form_state->getValue('city'),
-        'field_vih_lco_municipality' =>  !empty($form_state->getValue('municipality')) ? $form_state->getValue('municipality') : 'Vejle',
+        'field_vih_lco_municipality' =>  $municipality,
         'field_vih_lco_zip' => $form_state->getValue('zip'),
         'field_vih_lco_education' => CourseOrderOptionsList::getEducationList($form_state->getValue('education')),
         'field_vih_lco_payment' => CourseOrderOptionsList::getPaymentList($form_state->getValue('payment')),
@@ -655,7 +673,7 @@ class LongCourseOrderForm extends FormBase {
         'field_vih_lco_adult_address' => implode('; ', $address_adult_array),
         'field_vih_lco_adult_city' => $form_state->getValue('adultCity'),
         'field_vih_lco_adult_zip' => $form_state->getValue('adultZip'),
-        'field_vih_lco_adult_municipalit' =>  !empty($form_state->getValue('adultMunicipality')) ? $form_state->getValue('adultMunicipality') : 'Vejle',
+        'field_vih_lco_adult_municipalit' => $adultMunicipality,
         'field_vih_lco_adult_newsletter' => $form_state->getValue('adultNewsletter'),
         'field_vih_lco_gdpr_agr' => ($form_state->getValue('gdpr_accept') == 'Ja')? 0 : 1,
       ));
@@ -790,6 +808,7 @@ class LongCourseOrderForm extends FormBase {
     $form['personalDataRight']['house']['houseLetter']['#default_value'] = !empty($address_parts[2]) ? $address_parts[2] : NULL;
     $form['personalDataRight']['house']['houseFloor']['#default_value'] = !empty($address_parts[3]) ? $address_parts[3] : NULL;
 
+    $form['personalDataRight']['country']['#default_value'] = $courseOrder->field_vih_lco_country->value;
     $form['personalDataRight']['city']['#default_value'] = $courseOrder->field_vih_lco_city->value;
     $form['personalDataRight']['municipality']['#default_value'] = $courseOrder->field_vih_lco_municipality->value;
     $form['personalDataRight']['zip']['#default_value'] = $courseOrder->field_vih_lco_zip->value;
