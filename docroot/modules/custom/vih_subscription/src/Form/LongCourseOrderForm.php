@@ -618,7 +618,7 @@ class LongCourseOrderForm extends FormBase {
       array_push($address_adult_array, $form_state->getValue('adultHouseFloor'));
       // We do not need empty elements on the array.
       $address_adult_array = array_diff($address_adult_array, array(''));
-      if ($form_state->getValue('nationality') != 'DK') {
+      if ($form_state->getValue('adultNationality') != 'DK') {
         $adultMunicipality = '';
       }
       elseif (!empty($form_state->getValue('adultMunicipality'))) {
