@@ -207,7 +207,7 @@ class VihSubscriptionUtils {
    */
   public static function subscribeToMailchimp($firstName, $lastName, $email, $lang = 'da') {
     // Getting all lists.
-    $lists = mailchimp_get_lists(NULL, NULL);
+    $lists = mailchimp_get_lists();
 
     // List ID from config.
     $config = \Drupal::config(SubscriptionsGeneralSettingsForm::$configName);
@@ -232,7 +232,7 @@ class VihSubscriptionUtils {
           'FNAME' => $firstName,
           'LNAME' => $lastName
         );
-        mailchimp_subscribe($list_id, $merge_vars['EMAIL'], $merge_vars, FALSE, FALSE);
+        mailchimp_subscribe($list_id, $merge_vars['EMAIL'], $merge_vars);
       }
     } catch (\Exception $e) {
       \Drupal::logger('vih_subscription')->error($e->getMessage());
