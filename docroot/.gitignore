@@ -42,3 +42,6 @@ sites/simpletest
 # Ignore core phpcs.xml and phpunit.xml.
 core/phpcs.xml
 core/phpunit.xml
+/INSTALL.txt
+/README.txt
+/example.gitignore

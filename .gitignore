@@ -123,3 +123,5 @@ mailchimp.settings.yml
 !config/*/linkit.*
 !config/*/context.*
 !config/*/webform.webform.contact.*
+/.editorconfig
+/.gitattributes
