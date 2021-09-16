@@ -27,7 +27,7 @@
         "drupal/bootstrap": "3.11",
         "drupal/paragraphs": "1.x-dev",
         "drupal/linkit": "5.0-beta7",
-        "acquia/lightning": "~4.1.11",
+        "acquia/lightning": "~4.1.17",
         "drupal/admin_toolbar": "^2.4",
         "drupal/twig_tweak": "2.x-dev",
         "drupal/eva": "^2.1",
