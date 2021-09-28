@@ -117,10 +117,7 @@ $breakpoint-mobile-to-tablet: "screen and (max-width: #{$screen-sm-max})";
       padding-left: 0;
 
       @include layout-header-row-height(50px, 50px, 50px);
-
-      .region-header-navigation {
-        display: none;
-      }
+      
       .search-form-popover {
         height: 50px;
         form#search-form .form-group.add-on .form-submit.btn-search {
