@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "406b49b19fa64f5155775f4b006f4617",
+    "content-hash": "4649374ad2917ec1f7dfedb9d6f5164e",
     "packages": [
         {
             "name": "acquia/lightning",
@@ -11162,16 +11162,16 @@
         },
         {
             "name": "lsolesen/edbbrugs-php-sdk",
-            "version": "0.5.1",
+            "version": "0.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lsolesen/edbbrugs-php-sdk.git",
-                "reference": "5dd338f378e02240dfd70a33da15c04297464805"
+                "reference": "9b9129708cc3372cc040ef3219685521d97c73b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lsolesen/edbbrugs-php-sdk/zipball/5dd338f378e02240dfd70a33da15c04297464805",
-                "reference": "5dd338f378e02240dfd70a33da15c04297464805",
+                "url": "https://api.github.com/repos/lsolesen/edbbrugs-php-sdk/zipball/9b9129708cc3372cc040ef3219685521d97c73b0",
+                "reference": "9b9129708cc3372cc040ef3219685521d97c73b0",
                 "shasum": ""
             },
             "require": {
@@ -11208,9 +11208,25 @@
             ],
             "support": {
                 "issues": "https://github.com/lsolesen/edbbrugs-php-sdk/issues",
-                "source": "https://github.com/lsolesen/edbbrugs-php-sdk/tree/0.5.1"
+                "source": "https://github.com/lsolesen/edbbrugs-php-sdk/tree/0.5.2"
             },
-            "time": "2020-02-07T08:49:23+00:00"
+            "funding": [
+                {
+                    "type": "custom"
+                },
+                {
+                    "type": "custom"
+                },
+                {
+                    "url": "https://www.buymeacoffee.com/lsolesen",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://www.paypal.me/lsolesen'] # Replace with up to 4 custom sponsorship URLs e.g.",
+                    "type": "custom"
+                }
+            ],
+            "time": "2021-10-04T18:32:21+00:00"
         },
         {
             "name": "masterminds/html5",
