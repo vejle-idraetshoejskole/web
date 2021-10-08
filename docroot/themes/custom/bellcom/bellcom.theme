@@ -17,9 +17,3 @@ function bellcom_form_user_login_form_alter(&$form, \Drupal\Core\Form\FormStateI
     unset($form['name']['#attributes']['autofocus']);
   }
 }
-
-function site_form_user_login_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
-  if (isset($form['name']['#attributes']['autofocus'])) {
-    unset($form['name']['#attributes']['autofocus']);
-  }
-}
