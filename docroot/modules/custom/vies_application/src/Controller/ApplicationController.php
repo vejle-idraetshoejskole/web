@@ -80,6 +80,9 @@ class ApplicationController extends ControllerBase {
       VihSubscriptionUtils::makeReplacements($message, $token, $replacement);
       $result = VihSubscriptionUtils::sendMail($message);
 
+      // Unsetting Bcc, so that email is only sent once.
+      unset($message['Bcc']);
+
       foreach ($order->get('field_vies_parents')->referencedEntities() as $parent) {
         if (!empty($parent->field_parent_email->value)) {
           $message['to'] = $parent->field_parent_email->value;
