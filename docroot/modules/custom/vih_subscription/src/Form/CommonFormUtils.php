@@ -19,7 +19,7 @@ class CommonFormUtils {
    * @param string $text
    * @return string
    */
-  static function getTermsAndConditionsLink($nid, $text = 'terms, conditions and the processing of personal data') {
+  static function getTermsAndConditionsLink($nid, $text = 'terms and conditions') {
 
     $options = [
       'attributes' => [
