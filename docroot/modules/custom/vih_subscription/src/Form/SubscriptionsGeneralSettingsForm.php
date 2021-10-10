@@ -553,6 +553,15 @@ class SubscriptionsGeneralSettingsForm extends ConfigFormBase {
         '#default_value' => !empty($config->get('vih_subscription_application_terms_and_conditions_page')) ? Node::load($config->get('vih_subscription_application_terms_and_conditions_page')) : NULL,
         '#description' => $this->t("You can use any 'page' node as terms and conditions page"),
       ];
+      // Long course personal data page.
+      $form['vih_subscription_settings_application_fs']['vih_subscription_application_personal_information_page'] = [
+        '#type' => 'entity_autocomplete',
+        '#target_type' => 'node',
+        '#selection_settings' => ['target_bundles' => ['page']],
+        '#title' => $this->t('Personal information page'),
+        '#default_value' => !empty($config->get('vih_subscription_application_personal_information_page')) ? Node::load($config->get('vih_subscription_application_personal_information_page')) : NULL,
+        '#description' => $this->t("You can use any 'page' node as personal information page"),
+      ];
 
       // vies_application.application_form_success page.
       $form['vih_subscription_settings_application_fs']['vih_subscription_application_success_page'] = [
