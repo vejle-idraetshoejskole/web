@@ -142,6 +142,16 @@ class SubscriptionsGeneralSettingsForm extends ConfigFormBase {
         '#description' => $this->t("You can use any 'page' node as terms and conditions page"),
       ];
 
+      // Long course personal data page.
+      $form['vih_subscription_settings_long_course_fs']['vih_subscription_long_course_personal_information_page'] = [
+        '#type' => 'entity_autocomplete',
+        '#target_type' => 'node',
+        '#selection_settings' => ['target_bundles' => ['page']],
+        '#title' => $this->t('Personal information page'),
+        '#default_value' => !empty($config->get('vih_subscription_long_course_personal_information_page')) ? Node::load($config->get('vih_subscription_long_course_personal_information_page')) : NULL,
+        '#description' => $this->t("You can use any 'page' node as personal information page"),
+      ];
+
       // Long course redirection settings.
       $form['vih_subscription_settings_long_course_fs']['vih_subscription_long_course_redirection_page'] = [
         '#type' => 'entity_autocomplete',
@@ -281,6 +291,16 @@ class SubscriptionsGeneralSettingsForm extends ConfigFormBase {
         '#title' => $this->t('Terms and conditions page'),
         '#default_value' => !empty($config->get('vih_subscription_short_course_terms_and_conditions_page')) ? Node::load($config->get('vih_subscription_short_course_terms_and_conditions_page')) : NULL,
         '#description' => $this->t("You can use any 'page' node as terms and conditions page"),
+      ];
+
+      // Short course personal data page.
+      $form['vih_subscription_settings_short_course_fs']['vih_subscription_short_course_personal_information_page'] = [
+        '#type' => 'entity_autocomplete',
+        '#target_type' => 'node',
+        '#selection_settings' => ['target_bundles' => ['page']],
+        '#title' => $this->t('Personal information page'),
+        '#default_value' => !empty($config->get('vih_subscription_short_course_personal_information_page')) ? Node::load($config->get('vih_subscription_short_course_personal_information_page')) : NULL,
+        '#description' => $this->t("You can use any 'page' node as personal information page"),
       ];
 
       // Short course redirection page.

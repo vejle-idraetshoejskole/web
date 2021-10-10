@@ -39,6 +39,31 @@ class CommonFormUtils {
   }
 
   /**
+   * Return link to the personal information page by nid
+   *
+   * @param int $nid
+   * @param string $text
+   * @return string
+   */
+  static function getPersonalInformationLink($nid, $text = 'treatment of personal information') {
+    $options = [
+      'attributes' => [
+        'target' => '_blank',
+        'class' => ['use-ajax'],
+        'data-dialog-class' => 'terms-and-conditions-personal-information',
+        'data-dialog-type' => 'modal',
+      ]
+    ];
+
+    $personal_information_url = Url::fromRoute('vih_subscription.vih_node_modal', array('node' => $nid), $options);
+    $personal_information_link = Link::fromTextAndUrl(t($text), $personal_information_url);
+    $personal_information_link = $personal_information_link->toRenderable();
+    $personal_information_link = render($personal_information_link);
+
+    return $personal_information_link;
+  }
+
+  /**
    * Return link to the additional GDPR text
    *
    * @param string $text
