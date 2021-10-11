@@ -11162,16 +11162,16 @@
         },
         {
             "name": "lsolesen/edbbrugs-php-sdk",
-            "version": "0.5.2",
+            "version": "0.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lsolesen/edbbrugs-php-sdk.git",
-                "reference": "9b9129708cc3372cc040ef3219685521d97c73b0"
+                "reference": "0a5275b10d069cc70e006394d9e541230d28c6bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lsolesen/edbbrugs-php-sdk/zipball/9b9129708cc3372cc040ef3219685521d97c73b0",
-                "reference": "9b9129708cc3372cc040ef3219685521d97c73b0",
+                "url": "https://api.github.com/repos/lsolesen/edbbrugs-php-sdk/zipball/0a5275b10d069cc70e006394d9e541230d28c6bd",
+                "reference": "0a5275b10d069cc70e006394d9e541230d28c6bd",
                 "shasum": ""
             },
             "require": {
@@ -11208,25 +11208,19 @@
             ],
             "support": {
                 "issues": "https://github.com/lsolesen/edbbrugs-php-sdk/issues",
-                "source": "https://github.com/lsolesen/edbbrugs-php-sdk/tree/0.5.2"
+                "source": "https://github.com/lsolesen/edbbrugs-php-sdk/tree/0.5.3"
             },
             "funding": [
-                {
-                    "type": "custom"
-                },
-                {
-                    "type": "custom"
-                },
                 {
                     "url": "https://www.buymeacoffee.com/lsolesen",
                     "type": "custom"
                 },
                 {
-                    "url": "https://www.paypal.me/lsolesen'] # Replace with up to 4 custom sponsorship URLs e.g.",
+                    "url": "https://www.paypal.me/lsolesen",
                     "type": "custom"
                 }
             ],
-            "time": "2021-10-04T18:32:21+00:00"
+            "time": "2021-10-08T10:27:29+00:00"
         },
         {
             "name": "masterminds/html5",
