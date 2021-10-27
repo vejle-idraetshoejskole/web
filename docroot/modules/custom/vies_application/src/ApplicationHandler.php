@@ -405,6 +405,9 @@ class ApplicationHandler {
       VihSubscriptionUtils::makeReplacements($message, $token, $replacement);
       VihSubscriptionUtils::sendMail($message);
 
+      // Unsetting Bcc, so that email is only sent once.
+      unset($message['Bcc']);
+
       foreach ($this->data['parents'] as $parent) {
         $message['to'] = $parent['email'];
         VihSubscriptionUtils::sendMail($message);

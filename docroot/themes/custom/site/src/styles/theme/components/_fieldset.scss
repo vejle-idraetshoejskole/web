@@ -26,6 +26,9 @@
 fieldset {
   margin-bottom: $partial-bottom-spacing;
 
+  &.zero-margin {
+    margin-bottom: 0;
+  }
   + .vih-suboptions-container {
     margin-top: (0 - $partial-bottom-spacing);
   }

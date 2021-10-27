@@ -93,24 +93,18 @@
               .find('.panel-collapse')
               .collapse('hide');
 
-          // Next collection exists
+           // Next collection exists
           if ($next_class_collection.length) {
-            // There is classes inside the collection
-            if ($next_class_collection.find('.entity-list-advanced--class').length) {
-              $next_class_collection
-                  .find('.panel-collapse')
-                  .collapse('show');
-            }
+            $next_class_collection
+              .find('.panel-collapse')
+              .collapse('show');
           }
 
           // No more class collections inside this period (look inside the next period)
           else {
-            // There is classes inside the collection
-            if ($next_period_class_collection.find('.entity-list-advanced--class').length) {
-              $next_period_class_collection
-                  .find('.panel-collapse')
-                  .collapse('show');
-            }
+            $next_period_class_collection
+              .find('.panel-collapse')
+              .collapse('show');
           }
 
           // Button
@@ -118,13 +112,12 @@
               .addClass('active')
               .find('input[type=radio]')
               .prop('checked', true);
-          $('html, body').animate({
-            scrollTop: $('.boxy.boxy--course-periods.course-periods-accordion').last().offset().top
-          }, 10);
+          // $('html, body').animate({
+          //   scrollTop: $('.boxy.boxy--course-periods.course-periods-accordion').last().offset().top
+          // }, 10);
         }
 
         $element.find('input[type=radio]').change();
-
       });
     }
   };

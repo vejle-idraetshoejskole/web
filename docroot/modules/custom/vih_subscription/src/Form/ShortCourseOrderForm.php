@@ -492,16 +492,32 @@ class ShortCourseOrderForm extends FormBase {
 
     if (!empty($terms_and_conditions_page_id = $config->get('vih_subscription_short_course_terms_and_conditions_page'))) {
       $terms_and_conditions_link = CommonFormUtils::getTermsAndConditionsLink($terms_and_conditions_page_id, 'terms, conditions and treatment of personal information');
-      $form['terms_and_conditions'] = array(
+      $form['terms_and_conditions']['terms_and_conditions_accepted'] = array(
         '#type' => 'checkboxes',
         '#options' => array('accepted' => $this->t('I have read and accept the @terms_and_conditions', array('@terms_and_conditions' => $terms_and_conditions_link))),
-        '#title' => $this->t('Terms, conditions and treatment of personal information'),
+        '#title' => $this->t('Terms and conditions'),
+        '#title_display' => 'invisible',
         '#required' => TRUE,
         '#attributes' => [
-          'required' => ''
+          'required' => '',
+          'class' => ['zero-margin']
         ],
       );
     }
+    if (!empty($personal_information_page_id = $config->get('vih_subscription_short_course_personal_information_page'))) {
+      $personal_data_link = CommonFormUtils::getPersonalInformationLink($personal_information_page_id);
+      $form['terms_and_conditions']['personal_information_accepted'] = array(
+        '#type' => 'checkboxes',
+        '#options' => array('personal_information_accepted' => $this->t('I agree to the @personal_information', array('@personal_information' => $personal_data_link))),
+        '#title' => $this->t('treatment of personal information'),
+        '#title_display' => 'invisible',
+        '#required' => TRUE,
+        '#attributes' => [
+          'required' => '',
+        ],
+      );
+    }
+
     if (!empty($gdpr_page_id = $config->get('vih_subscription_short_course_gdpr_page'))) {
       $gdpr_page_node = \Drupal::entityManager()->getStorage('node')->load($gdpr_page_id);
       if ($gdpr_page_node->hasTranslation($cur_language_code)) {
@@ -549,7 +565,8 @@ class ShortCourseOrderForm extends FormBase {
         ['newParticipantContainer', 'newParticipantFieldset', 'email'],
         ['newParticipantContainer', 'newParticipantFieldset', 'cpr'],
         ['newParticipantContainer', 'newParticipantFieldset', 'birthdate'],
-        ['terms_and_conditions'],
+        ['terms_and_conditions_accepted'],
+        ['personal_information_accepted'],
         ['gdpr_accept'],
         ['order_comment']
       ),
@@ -888,9 +905,13 @@ class ShortCourseOrderForm extends FormBase {
         $form_state->setError($form['newParticipantContainer']['newParticipantFieldset']['lastName'], $this->t('Please add, at least, one participant'));
         $form_state->setError($form['newParticipantContainer']['newParticipantFieldset']['email'], $this->t('Please add, at least, one participant'));
       }
+
       $config = $this->config(SubscriptionsGeneralSettingsForm::$configName);
-      if (empty($form_state->getValue('terms_and_conditions')['accepted']) && !empty($config->get('vih_subscription_short_course_terms_and_conditions_page'))) {
-        $form_state->setError($form['terms_and_conditions'], $this->t('Before you can proceed you must accept the terms and conditions'));
+      if (empty($form_state->getValue('terms_and_conditions_accepted')['accepted']) && !empty($config->get('vih_subscription_short_course_terms_and_conditions_page'))) {
+        $form_state->setError($form['terms_and_conditions']['terms_and_conditions_accepted'], $this->t('Before you can proceed you must accept the terms and conditions'));
+      }
+      if (empty($form_state->getValue('personal_information_accepted')['personal_information_accepted']) && !empty($config->get('vih_subscription_short_course_personal_information_page'))) {
+        $form_state->setError($form['terms_and_conditions']['personal_information_accepted'], $this->t('Before you can proceed you must accept the treatment of personal information'));
       }
 
       $pictures_marketing_consent = $form_state->getValue('gdpr_accept');
@@ -1031,7 +1052,7 @@ class ShortCourseOrderForm extends FormBase {
         'field_vih_sco_status' => 'pending',
         'field_vih_sco_price' => $orderPrice,
         'field_vih_sco_comment' => $form_state->getValue('order_comment'),
-        'field_vih_sco_pic_mark_consent' => $form_state->getValue('terms_and_conditions') != nullbb ? 1 : 0,
+        'field_vih_sco_pic_mark_consent' => $form_state->getValue('terms_and_conditions_accepted')['accepted'] != null ? 1 : 0,
         'field_vih_sco_gdpr_agr' => $form_state->getValue('gdpr_accept')
       ));
       $this->courseOrder->setPromoted(FALSE);

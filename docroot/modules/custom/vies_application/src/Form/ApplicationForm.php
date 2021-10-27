@@ -37,7 +37,10 @@ class ApplicationForm extends FormBase {
 
     $config = $this->config(SubscriptionsGeneralSettingsForm::$configName);
 
-    $nids = \Drupal::entityQuery('node')->condition('type', 'vih_long_cource')->execute();
+    $nids = \Drupal::entityQuery('node')
+      ->condition('type', 'vih_long_cource')
+      ->condition('field_vih_course_status', 'active')
+      ->execute();
     $options = [];
     foreach (Node::loadMultiple($nids) as $node) {
       $options[$node->id()] = $node->getTitle();
@@ -208,6 +211,20 @@ class ApplicationForm extends FormBase {
         '#type' => 'checkboxes',
         '#options' => array('accepted' => $this->t('I agree to the @terms_and_conditions', array('@terms_and_conditions' => $terms_and_conditions_link))),
         '#title' => $this->t('Terms and conditions'),
+        '#title_display' => 'invisible',
+        '#attributes' => [
+          'class' => ['zero-margin']
+        ],
+        '#required' => TRUE,
+      );
+    }
+    if (!empty($personal_information_page_id = $config->get('vih_subscription_application_personal_information_page'))) {
+      $personal_data_link = CommonFormUtils::getPersonalInformationLink($personal_information_page_id);
+      $form['terms_and_conditions']['personal_information_accepted'] = array(
+        '#type' => 'checkboxes',
+        '#options' => array('personal_information_accepted' => $this->t('I agree to the @personal_information', array('@personal_information' => $personal_data_link))),
+        '#title' => $this->t('treatment of personal information'),
+        '#title_display' => 'invisible',
         '#required' => TRUE,
       );
     }
