@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "406b49b19fa64f5155775f4b006f4617",
+    "content-hash": "4649374ad2917ec1f7dfedb9d6f5164e",
     "packages": [
         {
             "name": "acquia/lightning",
@@ -2970,16 +2970,16 @@
         },
         {
             "name": "drupal/core",
-            "version": "8.9.19",
+            "version": "8.9.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core.git",
-                "reference": "96eb83b31d950f020cbc079ab960159c3735a033"
+                "reference": "39e2e1c32498338921923af66a90cb4a23a5b389"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drupal/core/zipball/96eb83b31d950f020cbc079ab960159c3735a033",
-                "reference": "96eb83b31d950f020cbc079ab960159c3735a033",
+                "url": "https://api.github.com/repos/drupal/core/zipball/39e2e1c32498338921923af66a90cb4a23a5b389",
+                "reference": "39e2e1c32498338921923af66a90cb4a23a5b389",
                 "shasum": ""
             },
             "require": {
@@ -3198,9 +3198,9 @@
             ],
             "description": "Drupal is an open source content management platform powering millions of websites and applications.",
             "support": {
-                "source": "https://github.com/drupal/core/tree/8.9.19"
+                "source": "https://github.com/drupal/core/tree/8.9.20"
             },
-            "time": "2021-09-14T22:08:18+00:00"
+            "time": "2021-11-17T21:24:28+00:00"
         },
         {
             "name": "drupal/core-composer-scaffold",
@@ -11162,16 +11162,16 @@
         },
         {
             "name": "lsolesen/edbbrugs-php-sdk",
-            "version": "0.5.1",
+            "version": "0.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lsolesen/edbbrugs-php-sdk.git",
-                "reference": "5dd338f378e02240dfd70a33da15c04297464805"
+                "reference": "0a5275b10d069cc70e006394d9e541230d28c6bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lsolesen/edbbrugs-php-sdk/zipball/5dd338f378e02240dfd70a33da15c04297464805",
-                "reference": "5dd338f378e02240dfd70a33da15c04297464805",
+                "url": "https://api.github.com/repos/lsolesen/edbbrugs-php-sdk/zipball/0a5275b10d069cc70e006394d9e541230d28c6bd",
+                "reference": "0a5275b10d069cc70e006394d9e541230d28c6bd",
                 "shasum": ""
             },
             "require": {
@@ -11208,9 +11208,19 @@
             ],
             "support": {
                 "issues": "https://github.com/lsolesen/edbbrugs-php-sdk/issues",
-                "source": "https://github.com/lsolesen/edbbrugs-php-sdk/tree/0.5.1"
+                "source": "https://github.com/lsolesen/edbbrugs-php-sdk/tree/0.5.3"
             },
-            "time": "2020-02-07T08:49:23+00:00"
+            "funding": [
+                {
+                    "url": "https://www.buymeacoffee.com/lsolesen",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://www.paypal.me/lsolesen",
+                    "type": "custom"
+                }
+            ],
+            "time": "2021-10-08T10:27:29+00:00"
         },
         {
             "name": "masterminds/html5",
